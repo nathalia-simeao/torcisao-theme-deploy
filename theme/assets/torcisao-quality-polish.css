@@ -90,6 +90,63 @@ body.home .tq-cert-copy h3{
   letter-spacing:-.02em!important;
 }
 
+/* Notebook: evita selo dominante e cards espremidos */
+@media (min-width:861px) and (max-width:1440px){
+  body.home .tq-bottom{
+    grid-template-columns:160px minmax(0,1fr)!important;
+    gap:20px!important;
+    align-items:center!important;
+  }
+  body.home .tq-medal{
+    width:160px!important;
+    height:184px!important;
+    margin-inline:0!important;
+  }
+  body.home .tq-pillars{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    min-width:0!important;
+  }
+  body.home .tq-pillar{
+    min-width:0!important;
+    min-height:82px!important;
+    padding:13px 14px!important;
+    gap:11px!important;
+  }
+  body.home .tq-pillar i{
+    width:36px!important;
+    height:36px!important;
+    border-radius:10px!important;
+    font-size:.94rem!important;
+  }
+  body.home .tq-pillar strong{
+    min-width:0!important;
+    font-size:.74rem!important;
+    line-height:1.22!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+    hyphens:none!important;
+  }
+}
+
+/* Notebook compacto: reorganiza antes de comprimir o texto */
+@media (min-width:861px) and (max-width:1080px){
+  body.home .tq-bottom{
+    grid-template-columns:140px minmax(0,1fr)!important;
+    gap:18px!important;
+  }
+  body.home .tq-medal{
+    width:140px!important;
+    height:162px!important;
+  }
+  body.home .tq-pillars{
+    grid-template-columns:1fr 1fr!important;
+  }
+  body.home .tq-pillar{
+    min-height:78px!important;
+  }
+}
+
 @media(max-width:640px){
   body.home .tq-copy h2{
     font-size:clamp(1.85rem,8.8vw,2.55rem)!important;
