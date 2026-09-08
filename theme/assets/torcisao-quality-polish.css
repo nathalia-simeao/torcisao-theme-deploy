@@ -91,16 +91,23 @@ body.home .tq-cert-copy h3{
 }
 
 /* Notebook: evita selo dominante e cards espremidos */
-@media (min-width:861px) and (max-width:1440px){
+@media (min-width:861px) and (max-width:1480px){
+  body.home .th-quality .th-container{
+    width:calc(100% - 48px)!important;
+  }
+  body.home .tq-grid{
+    grid-template-columns:1fr!important;
+    gap:34px!important;
+  }
   body.home .tq-bottom{
-    grid-template-columns:160px minmax(0,1fr)!important;
-    gap:20px!important;
+    grid-template-columns:170px minmax(0,1fr)!important;
+    gap:22px!important;
     align-items:center!important;
   }
   body.home .tq-medal{
-    width:160px!important;
-    height:184px!important;
-    margin-inline:0!important;
+    width:165px!important;
+    height:190px!important;
+    margin-inline:auto!important;
   }
   body.home .tq-pillars{
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
@@ -109,41 +116,56 @@ body.home .tq-cert-copy h3{
   }
   body.home .tq-pillar{
     min-width:0!important;
-    min-height:82px!important;
+    min-height:72px!important;
     padding:13px 14px!important;
-    gap:11px!important;
+    gap:10px!important;
   }
   body.home .tq-pillar i{
     width:36px!important;
     height:36px!important;
+    flex:0 0 36px!important;
     border-radius:10px!important;
     font-size:.94rem!important;
   }
   body.home .tq-pillar strong{
     min-width:0!important;
     font-size:.74rem!important;
-    line-height:1.22!important;
+    line-height:1.25!important;
+    white-space:normal!important;
     word-break:normal!important;
     overflow-wrap:normal!important;
     hyphens:none!important;
+  }
+  body.home .tq-cert-card{
+    width:100%!important;
+    max-width:none!important;
+    grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr)!important;
+    gap:26px!important;
   }
 }
 
 /* Notebook compacto: reorganiza antes de comprimir o texto */
 @media (min-width:861px) and (max-width:1080px){
   body.home .tq-bottom{
-    grid-template-columns:140px minmax(0,1fr)!important;
+    grid-template-columns:145px minmax(0,1fr)!important;
     gap:18px!important;
   }
   body.home .tq-medal{
-    width:140px!important;
-    height:162px!important;
-  }
-  body.home .tq-pillars{
-    grid-template-columns:1fr 1fr!important;
+    width:145px!important;
+    height:170px!important;
   }
   body.home .tq-pillar{
     min-height:78px!important;
+    padding:12px!important;
+  }
+  body.home .tq-pillar strong{
+    font-size:.7rem!important;
+  }
+  body.home .tq-cert-card{
+    grid-template-columns:1fr!important;
+  }
+  body.home .tq-cert-preview{
+    min-height:340px!important;
   }
 }
 
