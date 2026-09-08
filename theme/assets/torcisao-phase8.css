@@ -1,0 +1,60 @@
+/* Fase 8: menus customizados, toggle de tradução, CTA central e cards inteiros clicáveis */
+
+/* Tradução do navegador em formato de chave liga/desliga */
+.tor-browser-translate{cursor:pointer!important}
+.tor-browser-translate-status{position:relative!important;width:56px!important;height:32px!important;padding:0!important;border-radius:999px!important;background:#d9d9d9!important;color:transparent!important;font-size:0!important;transition:background .2s ease!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)!important}
+.tor-browser-translate-status:after{content:'';position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .2s ease}
+.tor-browser-translate.is-on .tor-browser-translate-status{background:#171717!important}
+.tor-browser-translate.is-on .tor-browser-translate-status:after{transform:translateX(24px)}
+html[data-bs-theme="dark"] .tor-browser-translate-status{background:#4a4a4d!important}
+html[data-bs-theme="dark"] .tor-browser-translate.is-on .tor-browser-translate-status{background:#ef7b30!important}
+.tor-browser-translate-hint{display:none!important}.tor-browser-translate-hint.is-visible{display:block!important}
+
+/* Selects customizados das ferramentas. O select nativo continua existindo para manter a lógica. */
+.torcisao-calc-modal select.tor-native-select,.th-modal select.tor-native-select,.hf-assistant select.tor-native-select{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.torcisao-calc-modal select.tor-native-select[hidden]+.tor-custom-select,.th-modal select.tor-native-select[hidden]+.tor-custom-select,.hf-assistant select.tor-native-select[hidden]+.tor-custom-select{display:none!important}
+.tor-custom-select{position:relative;width:100%;font-family:'Montserrat',sans-serif;z-index:3}
+.tor-custom-select.is-open{z-index:40}
+.tor-custom-select-button{width:100%;height:50px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 17px;border:1px solid var(--th-line,rgba(24,25,27,.11));border-radius:50px;background:var(--th-soft,#faf8f6);color:var(--th-ink,#17191c);font:700 .78rem/1 'Montserrat',sans-serif;text-align:left;cursor:pointer;transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}
+.tor-custom-select-button:hover,.tor-custom-select.is-open .tor-custom-select-button{border-color:rgba(239,123,48,.55);box-shadow:0 0 0 3px rgba(239,123,48,.07)}
+.tor-custom-select-button:after{content:'';width:8px;height:8px;flex:0 0 8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .18s ease}
+.tor-custom-select.is-open .tor-custom-select-button:after{transform:rotate(225deg) translate(-2px,-2px)}
+.tor-custom-select-menu{position:absolute;top:calc(100% + 7px);left:0;right:0;max-height:260px;overflow:auto;padding:8px;border:1px solid var(--th-line,rgba(24,25,27,.11));border-radius:26px;background:var(--th-card,#fff);box-shadow:0 20px 55px rgba(0,0,0,.18);opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .15s ease,transform .15s ease,visibility .15s ease;scrollbar-width:thin;scrollbar-color:#ef7b30 transparent}
+.tor-custom-select.is-open .tor-custom-select-menu{opacity:1;visibility:visible;transform:none}
+.tor-custom-select-option{width:100%;min-height:42px;display:flex;align-items:center;padding:9px 16px;border:0;border-radius:50px;background:transparent;color:var(--th-ink,#17191c);font:650 .74rem/1.3 'Montserrat',sans-serif;text-align:left;cursor:pointer;transition:background .16s ease,color .16s ease}
+.tor-custom-select-option:hover,.tor-custom-select-option.is-selected{background:rgba(239,123,48,.09);color:#ef7b30}
+html[data-bs-theme="dark"] .tor-custom-select-button{background:#151516;color:#f7f7f7;border-color:rgba(255,255,255,.11)}
+html[data-bs-theme="dark"] .tor-custom-select-menu{background:#1b1b1c;border-color:rgba(255,255,255,.11)}
+html[data-bs-theme="dark"] .tor-custom-select-option{color:#f7f7f7}
+html[data-bs-theme="dark"] .tor-custom-select-option:hover,html[data-bs-theme="dark"] .tor-custom-select-option.is-selected{color:#ff9b5a;background:rgba(239,123,48,.11)}
+.torcisao-calc-inline .tor-custom-select{width:86px;flex:0 0 86px}.torcisao-calc-inline .tor-custom-select-button{padding-inline:14px}
+
+/* Todos os campos da calculadora no mesmo padrão de pílula */
+.torcisao-calc-field input,.torcisao-calc-field .tor-custom-select-button{height:50px!important;border-radius:50px!important}
+.torcisao-calc-inline{align-items:center!important}
+.torcisao-calc-actions{justify-content:center!important}
+.torcisao-calc-button{min-width:220px!important}
+
+/* Botão da tolerância segue o padrão laranja do site, sem contorno preto do browser/theme */
+.th-modal-primary,#thToleranceRun{border:0!important;outline:0!important;box-shadow:0 10px 24px rgba(239,123,48,.20)!important;background:#ef7b30!important;color:#fff!important}
+.th-modal-primary:hover,#thToleranceRun:hover{border:0!important;outline:0!important;background:#c9611e!important}
+.th-modal-primary:focus,.th-modal-primary:focus-visible,#thToleranceRun:focus,#thToleranceRun:focus-visible{border:0!important;outline:0!important;box-shadow:0 0 0 3px rgba(239,123,48,.14),0 10px 24px rgba(239,123,48,.20)!important}
+
+/* Consulta de tolerância calibrada: tolerância + mínimo/máximo */
+.th-tolerance-values{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.th-tolerance-values>div{min-height:116px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+.th-tolerance-values .th-tol-value{margin-top:6px;font-size:.83rem;font-weight:850;color:var(--th-ink,#17191c)}
+.th-tolerance-values .th-tol-limits{margin-top:9px;padding-top:9px;border-top:1px solid var(--th-line,rgba(24,25,27,.11));display:grid;gap:4px}
+.th-tolerance-values .th-tol-limits span{display:flex;justify-content:space-between;gap:10px;color:var(--th-text,#676d73);font-size:.6rem;line-height:1.3}
+.th-tolerance-values .th-tol-limits b{color:var(--th-ink,#17191c);font-weight:750}
+.th-tolerance-values .th-tol-consult{margin-top:8px;color:#ef7b30;font-size:.59rem;font-weight:800;line-height:1.35}
+.th-tolerance-rule{display:none!important}
+html[data-bs-theme="dark"] .th-tolerance-values .th-tol-value,html[data-bs-theme="dark"] .th-tolerance-values .th-tol-limits b{color:#f7f7f7}
+
+/* Ferramentas: todo o card é área de clique */
+.th-tool-card{cursor:pointer!important;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important}
+.th-tool-card:hover,.th-tool-card:focus-visible{transform:translateY(-3px);border-color:rgba(239,123,48,.34)!important;box-shadow:0 24px 58px rgba(20,20,20,.11)!important;outline:none}
+.th-tool-card:focus-visible{box-shadow:0 0 0 3px rgba(239,123,48,.13),0 24px 58px rgba(20,20,20,.11)!important}
+.th-tool-card .th-text-link{font-size:.75rem!important;min-height:42px;display:inline-flex!important;align-items:center;gap:5px}
+
+@media(max-width:767.98px){.tor-custom-select-menu{max-height:220px}.torcisao-calc-inline .tor-custom-select{width:82px;flex-basis:82px}.th-tolerance-values{grid-template-columns:1fr!important}}

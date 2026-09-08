@@ -1,0 +1,186 @@
+/* Assistente de produto unificado: mesmo layout em Haste, Barra e Arame. */
+
+#hfAssistant .hf-assistant-dialog,
+#bfAssistant .hf-assistant-dialog,
+#afAssistant .hf-assistant-dialog{
+  width:min(940px,calc(100vw - 40px))!important;
+  max-height:88dvh!important;
+  border-radius:26px!important;
+}
+
+#hfAssistant .hf-assistant-head,
+#bfAssistant .hf-assistant-head,
+#afAssistant .hf-assistant-head{
+  padding:18px 26px!important;
+}
+
+#hfAssistant .hf-assistant-identity,
+#bfAssistant .hf-assistant-identity,
+#afAssistant .hf-assistant-identity{
+  gap:16px!important;
+  align-items:center!important;
+}
+
+/* Frame real para a foto do Theo. O recorte fica independente da imagem original. */
+.hf-assistant .tor-theo-avatar-frame{
+  position:relative!important;
+  width:68px!important;
+  height:68px!important;
+  min-width:68px!important;
+  flex:0 0 68px!important;
+  overflow:hidden!important;
+  border:2px solid var(--hf-orange,#ef7b30)!important;
+  border-radius:50%!important;
+  background:#171717!important;
+}
+
+.hf-assistant .tor-theo-avatar-frame > img{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:116%!important;
+  height:116%!important;
+  min-width:0!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  transform:translate(-48%,-51%)!important;
+}
+
+.hf-assistant .hf-theo-chat-title .tor-theo-avatar-frame{
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  flex-basis:42px!important;
+}
+
+/* Card do assistente na seção de aplicações da Haste usa o mesmo enquadramento. */
+#haste-aterramento .tor-product-tool-icon--theo{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:0!important;
+  border:2px solid var(--hf-orange,#ef7b30)!important;
+  background:#171717!important;
+}
+#haste-aterramento .tor-product-tool-icon--theo img{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:116%!important;
+  height:116%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border:0!important;
+  border-radius:0!important;
+  transform:translate(-48%,-51%)!important;
+}
+
+/* Escolha manual igual nas três páginas. */
+#hfAssistant .hf-manual-block,
+#bfAssistant .hf-manual-block,
+#afAssistant .hf-manual-block{
+  padding:22px!important;
+  border-radius:22px!important;
+}
+
+#hfAssistant .hf-manual-controls,
+#bfAssistant .hf-manual-controls,
+#afAssistant .hf-manual-controls{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:12px!important;
+  align-items:center!important;
+}
+
+#hfAssistant .hf-manual-select,
+#bfAssistant .hf-manual-select,
+#afAssistant .hf-manual-select{
+  min-height:62px!important;
+  padding:0 22px!important;
+  border-radius:999px!important;
+}
+
+#hfAssistant .hf-manual-action,
+#bfAssistant .hf-manual-action,
+#afAssistant .hf-manual-action{
+  min-width:150px!important;
+  min-height:62px!important;
+  padding:0 28px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:var(--hf-orange,#ef7b30)!important;
+  color:#fff!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+  box-shadow:none!important;
+  transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease!important;
+}
+
+#hfAssistant .hf-manual-action:hover,
+#bfAssistant .hf-manual-action:hover,
+#afAssistant .hf-manual-action:hover,
+#hfAssistant .hf-manual-action:focus-visible,
+#bfAssistant .hf-manual-action:focus-visible,
+#afAssistant .hf-manual-action:focus-visible{
+  background:var(--hf-orange-dark,#c9611e)!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 10px 24px rgba(239,123,48,.22)!important;
+  outline:none!important;
+}
+
+/* Ícone do card comercial realmente centralizado. */
+#haste-aterramento .hf-commercial-icon{
+  width:64px!important;
+  height:64px!important;
+  min-width:64px!important;
+  flex:0 0 64px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border:2px solid var(--hf-orange,#ef7b30)!important;
+  border-radius:50%!important;
+  background:rgba(239,123,48,.12)!important;
+  color:var(--hf-orange,#ef7b30)!important;
+  line-height:1!important;
+}
+#haste-aterramento .hf-commercial-icon i{
+  width:100%!important;
+  height:100%!important;
+  display:grid!important;
+  place-items:center!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1!important;
+  font-size:1.25rem!important;
+  transform:none!important;
+}
+
+@media(max-width:760px){
+  #hfAssistant .hf-assistant-dialog,
+  #bfAssistant .hf-assistant-dialog,
+  #afAssistant .hf-assistant-dialog{width:min(96vw,760px)!important}
+
+  .hf-assistant .tor-theo-avatar-frame{
+    width:58px!important;
+    height:58px!important;
+    min-width:58px!important;
+    flex-basis:58px!important;
+  }
+
+  #hfAssistant .hf-manual-controls,
+  #bfAssistant .hf-manual-controls,
+  #afAssistant .hf-manual-controls{
+    grid-template-columns:1fr!important;
+  }
+
+  #hfAssistant .hf-manual-action,
+  #bfAssistant .hf-manual-action,
+  #afAssistant .hf-manual-action{
+    width:100%!important;
+    min-width:0!important;
+  }
+}

@@ -1,0 +1,346 @@
+/* Ajustes globais de interação do header */
+
+/* Recupera o glass/blur do header durante o scroll.
+ * Em repouso ele permanece sólido; ao entrar em .is-compact fica translúcido
+ * para que o conteúdo passando por trás apareça suavemente desfocado.
+ */
+.tor-header{
+  -webkit-backdrop-filter:blur(0) saturate(100%);
+  backdrop-filter:blur(0) saturate(100%);
+  transition:height .32s cubic-bezier(.22,.61,.36,1),box-shadow .22s ease,background-color .24s ease,-webkit-backdrop-filter .24s ease,backdrop-filter .24s ease!important;
+}
+
+/*
+ * A logo clara e a logo escura precisam ocupar EXATAMENTE a mesma caixa visual.
+ * O par oficial usa o mesmo canvas no WordPress:
+ * 1.png = claro | 2.png = escuro.
+ */
+.tor-logo{
+  width:205px!important;
+  height:52px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex:0 0 205px!important;
+  overflow:visible!important;
+  background-image:url('https://torcisao.com.br/wp-content/uploads/2026/08/1.png')!important;
+  background-repeat:no-repeat!important;
+  background-position:left center!important;
+  background-size:contain!important;
+}
+html[data-bs-theme="dark"] .tor-logo{
+  background-image:url('https://torcisao.com.br/wp-content/uploads/2026/08/2.png')!important;
+}
+/* Evita qualquer segunda logo: o asset antigo do HTML e pseudo-elementos não renderizam. */
+.tor-logo>img,
+.tor-logo picture,
+.tor-logo picture img{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+.tor-logo::before,
+.tor-logo::after{
+  content:none!important;
+  display:none!important;
+}
+.tor-header.is-compact .tor-logo{
+  width:175px!important;
+  height:46px!important;
+  flex-basis:175px!important;
+}
+
+@media (min-width:992px){
+  .tor-header.is-compact{
+    background:rgba(244,242,239,.72)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(155%)!important;
+    backdrop-filter:blur(22px) saturate(155%)!important;
+    border-bottom-color:rgba(20,20,20,.07)!important;
+    box-shadow:0 10px 34px rgba(20,20,20,.10)!important;
+  }
+  html[data-bs-theme="dark"] .tor-header.is-compact{
+    background:rgba(18,18,19,.70)!important;
+    border-bottom-color:rgba(255,255,255,.08)!important;
+    box-shadow:0 12px 36px rgba(0,0,0,.34)!important;
+  }
+
+  .tor-header.is-compact .tor-calc-open{
+    background:rgba(255,255,255,.76)!important;
+    -webkit-backdrop-filter:blur(14px) saturate(145%)!important;
+    backdrop-filter:blur(14px) saturate(145%)!important;
+    border-color:rgba(20,20,20,.08)!important;
+  }
+  html[data-bs-theme="dark"] .tor-header.is-compact .tor-calc-open{
+    background:rgba(35,35,36,.74)!important;
+    border-color:rgba(255,255,255,.10)!important;
+  }
+  .tor-header.is-compact .tor-control-pill{
+    background:rgba(255,255,255,.50)!important;
+    -webkit-backdrop-filter:blur(12px) saturate(140%)!important;
+    backdrop-filter:blur(12px) saturate(140%)!important;
+  }
+  html[data-bs-theme="dark"] .tor-header.is-compact .tor-control-pill{
+    background:rgba(255,255,255,.055)!important;
+  }
+
+  .tor-nav a,.tor-blog{
+    padding:11px 16px!important;
+    border-radius:50px!important;
+    transition:background-color .18s ease,color .18s ease,transform .18s ease!important;
+  }
+  .tor-nav a:hover,.tor-blog:hover{
+    background:rgba(239,123,48,.08)!important;
+    color:var(--th-orange,#ef7b30)!important;
+    transform:translateY(-1px);
+  }
+  html[data-bs-theme="dark"] .tor-nav a:hover,html[data-bs-theme="dark"] .tor-blog:hover{
+    background:rgba(239,123,48,.12)!important;
+    color:#ff9854!important;
+  }
+}
+
+@media(max-width:1180px) and (min-width:992px){
+  .tor-logo{width:175px!important;height:46px!important;flex-basis:175px!important}
+  .tor-header.is-compact .tor-logo{width:165px!important;height:43px!important;flex-basis:165px!important}
+}
+
+@media(max-width:991.98px){
+  .tor-logo,.tor-header.is-compact .tor-logo{
+    width:145px!important;
+    height:40px!important;
+    flex:0 0 145px!important;
+  }
+}
+
+@media(max-width:520px){
+  .tor-logo,.tor-header.is-compact .tor-logo{
+    width:132px!important;
+    height:36px!important;
+    flex:0 0 132px!important;
+    max-width:38vw!important;
+  }
+}
+
+/* Movimento dos segmentos: mais calmo para leitura, sem perder continuidade. */
+body.home .ts-segments-track{
+  animation-duration:52s!important;
+}
+
+/* Scrollbars: finas e discretas em toda a experiência Torcisão. */
+html,
+body,
+*{
+  scrollbar-width:thin;
+  scrollbar-color:rgba(92,92,92,.52) transparent;
+}
+
+html[data-bs-theme="dark"],
+html[data-bs-theme="dark"] body,
+html[data-bs-theme="dark"] *{
+  scrollbar-color:rgba(190,190,190,.38) transparent;
+}
+
+::-webkit-scrollbar{
+  width:7px;
+  height:7px;
+}
+::-webkit-scrollbar-track{
+  background:transparent;
+}
+::-webkit-scrollbar-thumb{
+  background:rgba(92,92,92,.50);
+  border:2px solid transparent;
+  border-radius:999px;
+  background-clip:padding-box;
+}
+::-webkit-scrollbar-thumb:hover{
+  background:rgba(239,123,48,.72);
+  border:1px solid transparent;
+  background-clip:padding-box;
+}
+::-webkit-scrollbar-corner{
+  background:transparent;
+}
+::-webkit-scrollbar-button{
+  display:none;
+  width:0;
+  height:0;
+}
+html[data-bs-theme="dark"] ::-webkit-scrollbar-thumb{
+  background:rgba(190,190,190,.34);
+  border:2px solid transparent;
+  background-clip:padding-box;
+}
+html[data-bs-theme="dark"] ::-webkit-scrollbar-thumb:hover{
+  background:rgba(239,123,48,.72);
+  border:1px solid transparent;
+  background-clip:padding-box;
+}
+
+/* Seção obsoleta: removida da Home reconstruída. */
+body.home .th-differentials{
+  display:none!important;
+}
+
+/* Menu mobile consolidado em uma folha que já é carregada globalmente. */
+@media (max-width:991.98px){
+  .tor-mobile-panel{
+    width:min(368px,90vw)!important;
+    padding:16px 14px 22px!important;
+    background:color-mix(in srgb,var(--th-card,#fff) 96%,transparent)!important;
+    border-left:1px solid var(--th-line,rgba(24,25,27,.10))!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+    backdrop-filter:blur(18px)!important;
+    box-shadow:-24px 0 70px rgba(0,0,0,.18)!important;
+  }
+
+  .tor-mobile-panel-head{
+    min-height:70px!important;
+    padding:0 2px 14px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:14px!important;
+    border-bottom:1px solid var(--th-line,rgba(24,25,27,.10))!important;
+  }
+
+  .tor-mobile-brand{
+    position:relative!important;
+    display:flex!important;
+    align-items:center!important;
+    width:170px!important;
+    height:46px!important;
+    overflow:visible!important;
+    flex:0 0 170px!important;
+  }
+
+  .tor-mobile-brand img{
+    position:absolute!important;
+    top:50%!important;
+    left:0!important;
+    display:block!important;
+    margin:0!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+
+  /* A arte clara tem mais respiro transparente no arquivo. Compensamos apenas
+   * o canvas visual para que fique do mesmo tamanho percebido da versão dark. */
+  .tor-mobile-brand-light{
+    width:220px!important;
+    height:54px!important;
+    transform:translateY(-50%)!important;
+    transform-origin:left center!important;
+    filter:contrast(1.08) saturate(1.02)!important;
+  }
+  .tor-mobile-brand-dark{
+    width:170px!important;
+    height:46px!important;
+    transform:translateY(-50%)!important;
+    transform-origin:left center!important;
+    display:none!important;
+  }
+  html[data-bs-theme="dark"] .tor-mobile-brand-light{display:none!important}
+  html[data-bs-theme="dark"] .tor-mobile-brand-dark{display:block!important}
+
+  .tor-mobile-panel .tor-close{
+    width:40px!important;
+    height:40px!important;
+    flex:0 0 40px!important;
+    border-radius:50%!important;
+    background:rgba(127,127,127,.035)!important;
+  }
+
+  .tor-mobile-links{
+    display:grid!important;
+    gap:5px!important;
+    margin-top:16px!important;
+  }
+
+  .tor-mobile-links a{
+    min-height:54px!important;
+    display:grid!important;
+    grid-template-columns:36px minmax(0,1fr) 18px!important;
+    align-items:center!important;
+    gap:11px!important;
+    margin:0!important;
+    padding:7px 12px 7px 8px!important;
+    border:1px solid transparent!important;
+    border-radius:50px!important;
+    background:transparent!important;
+    color:var(--th-ink,#17191c)!important;
+    text-decoration:none!important;
+    font:750 .78rem/1.2 'Montserrat',sans-serif!important;
+    transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease!important;
+  }
+
+  .tor-mobile-link-icon{
+    width:36px!important;
+    height:36px!important;
+    display:grid!important;
+    place-items:center!important;
+    border-radius:50%!important;
+    background:rgba(239,123,48,.075)!important;
+    color:var(--th-orange,#ef7b30)!important;
+    transition:background-color .18s ease,color .18s ease,transform .18s ease!important;
+  }
+  .tor-mobile-link-icon svg{
+    width:18px!important;
+    height:18px!important;
+    display:block!important;
+  }
+  .tor-mobile-link-arrow{
+    display:grid!important;
+    place-items:center!important;
+    color:var(--th-orange,#ef7b30)!important;
+    font-size:.95rem!important;
+    line-height:1!important;
+    opacity:.58!important;
+    transform:translateX(-2px)!important;
+    transition:opacity .18s ease,transform .18s ease!important;
+  }
+
+  .tor-mobile-links a:hover,
+  .tor-mobile-links a:focus-visible{
+    border-color:rgba(239,123,48,.26)!important;
+    background:rgba(239,123,48,.085)!important;
+    color:var(--th-orange,#ef7b30)!important;
+    box-shadow:0 9px 22px rgba(20,20,20,.05)!important;
+    transform:translateX(2px)!important;
+    outline:none!important;
+  }
+  .tor-mobile-links a:hover .tor-mobile-link-icon,
+  .tor-mobile-links a:focus-visible .tor-mobile-link-icon{
+    background:var(--th-orange,#ef7b30)!important;
+    color:#fff!important;
+    transform:scale(1.03)!important;
+  }
+  .tor-mobile-links a:hover .tor-mobile-link-arrow,
+  .tor-mobile-links a:focus-visible .tor-mobile-link-arrow{
+    opacity:1!important;
+    transform:translateX(1px)!important;
+  }
+
+  html[data-bs-theme="dark"] .tor-mobile-panel{
+    background:rgba(24,24,25,.97)!important;
+    border-left-color:rgba(255,255,255,.09)!important;
+    box-shadow:-24px 0 70px rgba(0,0,0,.38)!important;
+  }
+  html[data-bs-theme="dark"] .tor-mobile-links a{color:#f4f4f4!important}
+  html[data-bs-theme="dark"] .tor-mobile-links a:hover,
+  html[data-bs-theme="dark"] .tor-mobile-links a:focus-visible{
+    color:#f28a46!important;
+    background:rgba(239,123,48,.105)!important;
+    border-color:rgba(239,123,48,.30)!important;
+    box-shadow:none!important;
+  }
+}
+
+@media (max-width:420px){
+  .tor-mobile-panel{width:min(352px,92vw)!important}
+  .tor-mobile-brand{width:162px!important;flex-basis:162px!important}
+  .tor-mobile-brand-light{width:208px!important;height:52px!important}
+  .tor-mobile-brand-dark{width:162px!important;height:44px!important}
+}

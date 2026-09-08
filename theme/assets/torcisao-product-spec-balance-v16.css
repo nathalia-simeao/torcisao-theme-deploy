@@ -1,0 +1,17 @@
+/* Consistência visual das especificações nas páginas de produto. */
+
+/* No desktop, os dois cards da grade técnica devem terminar na mesma linha.
+ * A quebra para uma coluna já acontece em 1100px no CSS base, por isso a
+ * equalização fica restrita à composição lado a lado. */
+@media (min-width:1101px){
+  .hf-page .hf-spec-grid{
+    align-items:stretch!important;
+  }
+
+  .hf-page .hf-spec-grid > .hf-spec-card,
+  .hf-page .hf-spec-grid > .hf-availability-card{
+    height:100%!important;
+    min-height:100%!important;
+    align-self:stretch!important;
+  }
+}

@@ -1,0 +1,268 @@
+/* Ajustes finais mobile da Home: hero, drawer de cotação e proporções do formulário */
+@media (max-width:767.98px){
+  /* HERO: centralização rígida e quebra controlada em exatamente duas linhas */
+  body.home .th-home .th-hero-content{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:100%!important;
+    margin:0!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+    box-sizing:border-box!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+  }
+
+  body.home .th-home .th-hero-content .th-eyebrow{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:auto!important;
+    max-width:none!important;
+    margin:0 auto 10px!important;
+    padding:0!important;
+    gap:0!important;
+    white-space:nowrap!important;
+    flex-wrap:nowrap!important;
+    font-size:clamp(.44rem,1.95vw,.56rem)!important;
+    line-height:1.1!important;
+    letter-spacing:.035em!important;
+    text-align:center!important;
+  }
+
+  body.home .th-home .th-hero-content .th-eyebrow::before,
+  body.home .th-home .th-hero-content .th-eyebrow::after{
+    display:none!important;
+    content:none!important;
+    width:0!important;
+    height:0!important;
+  }
+
+  body.home .th-home .th-hero-content h1{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    font-size:clamp(1.15rem,6.2vw,1.8rem)!important;
+    line-height:1.04!important;
+    letter-spacing:-.045em!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+    transform:none!important;
+  }
+
+  body.home .th-home .th-hero-content h1 strong{
+    display:block!important;
+    width:auto!important;
+    margin:0!important;
+    padding:0!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+  }
+
+  /* Contém as logos no mobile sem alterar a arte. */
+  body.home .tor-header .tor-logo{
+    overflow:hidden!important;
+    overflow:clip!important;
+    contain:paint!important;
+  }
+
+  body.home .tor-header .tor-logo img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+    transform:none!important;
+  }
+
+  body.home .tor-mobile-panel .tor-mobile-brand{
+    overflow:hidden!important;
+    overflow:clip!important;
+    contain:paint!important;
+    clip-path:inset(0)!important;
+  }
+
+  /* COTAÇÃO: drawer lateral de verdade, não uma coluna espremida */
+  .home-quote-drawer{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    overflow:hidden!important;
+    background:rgba(13,13,14,.38)!important;
+    -webkit-backdrop-filter:blur(5px)!important;
+    backdrop-filter:blur(5px)!important;
+  }
+  .home-quote-drawer.is-open{pointer-events:auto!important}
+  body.home-quote-open{overflow:hidden!important}
+  body.home-quote-open .home-quote-tab{
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  .home-quote-panel{
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:auto!important;
+    width:min(392px,calc(100vw - 20px))!important;
+    max-width:calc(100vw - 20px)!important;
+    min-width:0!important;
+    height:100dvh!important;
+    max-height:100dvh!important;
+    margin:0!important;
+    padding:20px 20px 30px!important;
+    border-radius:24px 0 0 24px!important;
+    background:#fff!important;
+    color:#17191c!important;
+    color-scheme:light!important;
+    box-shadow:-20px 0 58px rgba(0,0,0,.24)!important;
+    transform:translateX(104%)!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  .home-quote-drawer.is-open .home-quote-panel{
+    transform:translateX(0)!important;
+  }
+
+  /* O formulário usa exatamente a mesma linguagem visual nos dois temas. */
+  html[data-bs-theme="dark"] .home-quote-panel{
+    background:#fff!important;
+    color:#17191c!important;
+    color-scheme:light!important;
+  }
+  html[data-bs-theme="dark"] .home-quote-head,
+  html[data-bs-theme="dark"] .home-quote-head h2{
+    color:#17191c!important;
+  }
+  html[data-bs-theme="dark"] .home-quote-head p{color:#70757a!important}
+  html[data-bs-theme="dark"] .home-quote-close{
+    background:transparent!important;
+    border-color:#ddd!important;
+    color:#17191c!important;
+  }
+  html[data-bs-theme="dark"] .home-quote-form,
+  html[data-bs-theme="dark"] .home-quote-form form,
+  html[data-bs-theme="dark"] .home-quote-form .hs-form{
+    color:#2b2e31!important;
+    color-scheme:light!important;
+  }
+  html[data-bs-theme="dark"] .home-quote-form label,
+  html[data-bs-theme="dark"] .home-quote-form legend,
+  html[data-bs-theme="dark"] .home-quote-form .hs-form-field>label,
+  html[data-bs-theme="dark"] .home-quote-form .hs-richtext,
+  html[data-bs-theme="dark"] .home-quote-form .hs-richtext p,
+  html[data-bs-theme="dark"] .home-quote-form .hs-form-booleancheckbox-display,
+  html[data-bs-theme="dark"] .home-quote-form .hs-form-checkbox-display,
+  html[data-bs-theme="dark"] .home-quote-form .hs-form-radio-display{
+    color:#34373b!important;
+  }
+  html[data-bs-theme="dark"] .home-quote-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+  html[data-bs-theme="dark"] .home-quote-form select,
+  html[data-bs-theme="dark"] .home-quote-form textarea{
+    background:#f4f7f9!important;
+    border:1px solid #d8e0e6!important;
+    color:#202326!important;
+    box-shadow:none!important;
+  }
+  html[data-bs-theme="dark"] .home-quote-form input::placeholder,
+  html[data-bs-theme="dark"] .home-quote-form textarea::placeholder{color:#8a9096!important}
+  html[data-bs-theme="dark"] .home-quote-form input[type="checkbox"],
+  html[data-bs-theme="dark"] .home-quote-form input[type="radio"]{accent-color:#ef7b30!important}
+  html[data-bs-theme="dark"] .home-quote-form a{color:#d9631e!important}
+
+  .home-quote-head{
+    position:sticky!important;
+    top:-20px!important;
+    z-index:3!important;
+    margin:0 0 18px!important;
+    padding:20px 0 15px!important;
+    background:inherit!important;
+    border-bottom:1px solid rgba(127,127,127,.16)!important;
+  }
+  .home-quote-head>div{min-width:0!important;padding-right:6px!important}
+  .home-quote-head h2{font-size:1.34rem!important;line-height:1.08!important}
+  .home-quote-head p{font-size:.72rem!important;line-height:1.45!important}
+  .home-quote-close{margin-left:auto!important;flex:0 0 40px!important}
+
+  /* HubSpot: remove larguras internas que estavam espremendo o formulário */
+  .home-quote-form,
+  .home-quote-form>div,
+  .home-quote-form form,
+  .home-quote-form .hs-form,
+  .home-quote-form .hs-form-private,
+  .home-quote-form fieldset,
+  .home-quote-form .hs-form-field,
+  .home-quote-form .input{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  .home-quote-form fieldset.form-columns-1 .hs-form-field,
+  .home-quote-form fieldset.form-columns-2 .hs-form-field,
+  .home-quote-form fieldset.form-columns-3 .hs-form-field{
+    float:none!important;
+    width:100%!important;
+  }
+  .home-quote-form input:not([type="checkbox"]):not([type="radio"]),
+  .home-quote-form select,
+  .home-quote-form textarea{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+  .home-quote-form .hs-input{max-width:100%!important}
+  .home-quote-form .hs-form-checkbox-display,
+  .home-quote-form .hs-form-radio-display{
+    display:flex!important;
+    align-items:flex-start!important;
+    gap:8px!important;
+  }
+}
+
+@media (max-width:430px){
+  .home-quote-panel{
+    width:calc(100vw - 14px)!important;
+    max-width:calc(100vw - 14px)!important;
+    padding:18px 18px 28px!important;
+    border-radius:22px 0 0 22px!important;
+  }
+
+  body.home .th-home .th-hero-content h1{
+    font-size:clamp(1.12rem,6vw,1.55rem)!important;
+  }
+}
+
+@media (max-width:320px){
+  body.home .th-home .th-hero-content{
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+
+  body.home .th-home .th-hero-content .th-eyebrow{
+    font-size:.41rem!important;
+    letter-spacing:.025em!important;
+  }
+
+  body.home .th-home .th-hero-content h1{
+    font-size:1.04rem!important;
+  }
+}
+
+/* CTA final removido: a Home já oferece cotação e Theo em outros pontos da jornada. */
+body.home .th-final-cta{display:none!important}

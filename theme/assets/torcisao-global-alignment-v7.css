@@ -1,0 +1,132 @@
+/*
+ * Grade horizontal única Torcisão.
+ * Objetivo: header, todas as seções da Home, Blog reconstruído, Quem Somos,
+ * linha do tempo e footer passam a compartilhar exatamente o mesmo eixo.
+ * Não altera grids internos, alturas, tipografia ou comportamento dos componentes.
+ */
+
+:root{
+  --tor-layout-max:1580px;
+  --tor-layout-gutter:clamp(34px,4vw,72px);
+}
+
+@media (min-width:992px){
+  /* Header passa a usar a mesma caixa-mestre das seções e do footer. */
+  body .tor-header-row{
+    width:min(var(--tor-layout-max),calc(100% - (2 * var(--tor-layout-gutter))))!important;
+    max-width:var(--tor-layout-max)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Caixa-mestre de conteúdo, do Hero ao rodapé. */
+  body.home .th-home .th-container,
+  body.home .tor-about-container,
+  body.home .th-home .tb-blog-inner,
+  body .tor-footer-v2 .tor-footer-wrap{
+    width:min(var(--tor-layout-max),calc(100% - (2 * var(--tor-layout-gutter))))!important;
+    max-width:var(--tor-layout-max)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    box-sizing:border-box!important;
+  }
+
+  /* A zona segura da orelha continua existindo somente por dentro do eixo comum.
+   * Assim o lado esquerdo nunca muda de posição para escapar do CTA fixo. */
+  body.home .th-home .tb-blog-inner,
+  body.home .tor-footer-v2 .tor-footer-wrap{
+    padding-right:var(--tor-desktop-quote-ear-safe,112px)!important;
+  }
+
+  /* O título do Blog começa exatamente no mesmo eixo dos títulos anteriores. */
+  body.home .th-home .tb-blog-title{
+    padding-left:0!important;
+    margin-left:0!important;
+  }
+}
+
+@media (max-width:991.98px){
+  :root{
+    --tor-layout-gutter:20px;
+  }
+
+  /* Header mobile/tablet e conteúdo compartilham o mesmo início. */
+  body .tor-header-row{
+    padding-left:var(--tor-layout-gutter)!important;
+    padding-right:var(--tor-layout-gutter)!important;
+  }
+
+  /* Hero mobile permanece centralizado conforme o layout aprovado.
+   * Todas as demais seções usam a mesma régua lateral. */
+  body.home .th-home .th-container:not(.th-hero-content),
+  body.home .tor-about-container,
+  body.home .th-home .tb-blog-inner{
+    width:auto!important;
+    max-width:none!important;
+    margin-left:var(--tor-layout-gutter)!important;
+    margin-right:var(--tor-layout-gutter)!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Blog: remove os recuos internos que faziam o bloco começar mais à direita. */
+  body.home .th-home .tb-blog-title{
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    text-align:left!important;
+  }
+  body.home .th-home .tb-blog-viewport{
+    width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    scroll-padding-left:0!important;
+  }
+  body.home .th-home .tb-blog-track{
+    padding-left:0!important;
+  }
+
+  /* Até 760px a orelha fixa exige reserva à direita, mas o eixo esquerdo
+   * continua exatamente o mesmo usado por todas as outras seções. */
+  body .tor-footer-v2 .tor-footer-wrap{
+    width:auto!important;
+    max-width:none!important;
+    margin-left:var(--tor-layout-gutter)!important;
+    margin-right:var(--tor-layout-gutter)!important;
+    box-sizing:border-box!important;
+  }
+}
+
+@media (max-width:760px){
+  body.home .th-home .tb-blog-bottom{
+    margin-left:0!important;
+    margin-right:var(--tor-mobile-quote-ear-safe,80px)!important;
+  }
+
+  body .tor-footer-v2 .tor-footer-wrap{
+    margin-left:var(--tor-layout-gutter)!important;
+    margin-right:calc(var(--tor-layout-gutter) + var(--tor-mobile-quote-ear-safe,80px))!important;
+  }
+}
+
+@media (max-width:390px){
+  :root{
+    --tor-layout-gutter:16px;
+  }
+
+  body.home .th-home .tb-blog-bottom{
+    margin-left:0!important;
+    margin-right:var(--tor-mobile-quote-ear-safe,76px)!important;
+  }
+
+  body .tor-footer-v2 .tor-footer-wrap{
+    margin-left:var(--tor-layout-gutter)!important;
+    margin-right:calc(var(--tor-layout-gutter) + var(--tor-mobile-quote-ear-safe,76px))!important;
+  }
+}

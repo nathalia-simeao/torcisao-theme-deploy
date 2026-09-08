@@ -1,0 +1,63 @@
+/* Home desktop — zona segura para a orelha fixa de cotação.
+ * A orelha ocupa cerca de 58px na direita; reservamos 92px para manter
+ * conteúdo, setas, mapa e ações totalmente fora da área encoberta.
+ * Não afeta hero, modais, lightboxes, tablet ou mobile.
+ */
+
+@media (min-width: 992px){
+  body.home{
+    --tor-quote-safe-right:92px;
+  }
+
+  /* Containers principais das seções da Home. */
+  body.home main > section:not(.th-hero) .th-container,
+  body.home .tor-about-container{
+    box-sizing:border-box!important;
+    padding-right:var(--tor-quote-safe-right)!important;
+  }
+
+  /* Elementos largos que podem encostar diretamente na borda direita. */
+  body.home .tpe-line-menu,
+  body.home .tpe-shell,
+  body.home .tq-grid,
+  body.home .tq-cert-card,
+  body.home .ts-proof-grid,
+  body.home .ts-segments,
+  body.home .tor-about-top,
+  body.home .tor-timeline-shell,
+  body.home .th-final-cta-inner{
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  /* BLOG reconstruído: o carrossel usa um shell próprio e não passa pelo
+   * .th-container original. Por isso a área de progresso/CTA precisa da sua
+   * própria margem direita para a seta nunca entrar sob a orelha. */
+  body.home .th-home .tb-blog-viewport{
+    width:calc(100% - var(--tor-quote-safe-right))!important;
+  }
+  body.home .th-home .tb-blog-bottom{
+    margin-right:var(--tor-quote-safe-right)!important;
+  }
+
+  /* FOOTER: fica fora do <main>, portanto não recebia a zona segura acima.
+   * Reservamos o mesmo espaço no lado direito de todos os blocos do rodapé.
+   * Isso protege mapa, cards do grupo, copyright e demais ações. */
+  body.home .tor-footer-v2 .tor-footer-wrap{
+    box-sizing:border-box!important;
+    padding-right:var(--tor-quote-safe-right)!important;
+  }
+
+  /* Evita dupla redução no bloco MVV, já que agora a seção inteira possui zona segura. */
+  body.home .tor-mvv-list{
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
+
+@media (max-width: 991.98px){
+  body.home main > section .th-container,
+  body.home .tor-about-container{
+    padding-right:0!important;
+  }
+}

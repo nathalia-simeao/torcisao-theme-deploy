@@ -1,0 +1,52 @@
+/* Fechamento de acessibilidade/responsividade sem alterar o desenho aprovado. */
+
+.tor-skip-link{
+  position:fixed;
+  z-index:100000;
+  top:10px;
+  left:10px;
+  padding:11px 16px;
+  border-radius:999px;
+  background:#171717;
+  color:#fff;
+  font:800 .72rem/1.2 'Montserrat',Arial,sans-serif;
+  text-decoration:none;
+  transform:translateY(-160%);
+  transition:transform .18s ease;
+}
+.tor-skip-link:focus{transform:translateY(0);outline:3px solid #ef7b30;outline-offset:2px}
+
+/* Foco visível consistente para navegação por teclado. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid #ef7b30;
+  outline-offset:3px;
+}
+
+iframe,video{max-width:100%}
+
+/* Respeita a preferência do sistema e evita animações custosas quando o usuário pede redução de movimento. */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+/* Proteção final contra estouro horizontal em telas pequenas. */
+@media(max-width:767.98px){
+  html,body{max-width:100%;overflow-x:clip}
+  .tor-modal,
+  .th-modal,
+  .hf-assistant-dialog,
+  .home-quote-panel,
+  .tor-work-dialog,
+  .tor-a11y-dialog{max-width:calc(100vw - 16px)!important}
+}

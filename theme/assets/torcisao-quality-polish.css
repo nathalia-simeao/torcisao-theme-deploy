@@ -1,0 +1,101 @@
+/* Ajustes finos da seção Qualidade */
+
+/* Kicker no mesmo padrão das demais seções */
+body.home .tq-kicker::before{
+  content:'';
+  width:21px;
+  height:1px;
+  flex:0 0 21px;
+  background:currentColor;
+}
+
+/* Título principal mais elegante e menos pesado */
+body.home .tq-copy h2{
+  max-width:760px!important;
+  margin:14px 0 14px!important;
+  font-size:clamp(2rem,2.8vw,3.25rem)!important;
+  line-height:1.05!important;
+  font-weight:600!important;
+  letter-spacing:-.03em!important;
+}
+
+/* Selo ISO: usa diretamente a imagem aprovada hospedada no WordPress */
+body.home .tq-medal{
+  width:220px!important;
+  height:250px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:visible!important;
+}
+body.home .tq-medal-image{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.10));
+}
+html[data-bs-theme="dark"] body.home .tq-medal-image{
+  filter:drop-shadow(0 20px 34px rgba(0,0,0,.30));
+}
+
+/* Hover dos pilares, leve e coerente com o resto do site */
+body.home .tq-pillar{
+  transition:transform .18s ease,border-color .18s ease,background-color .18s ease,box-shadow .18s ease!important;
+}
+body.home .tq-pillar:hover{
+  transform:translateY(-2px);
+  border-color:rgba(239,123,48,.48)!important;
+  background:rgba(239,123,48,.045)!important;
+  box-shadow:0 14px 30px rgba(20,20,20,.07)!important;
+}
+body.home .tq-pillar:hover i{
+  background:rgba(239,123,48,.16)!important;
+}
+html[data-bs-theme="dark"] body.home .tq-pillar:hover{
+  background:rgba(239,123,48,.09)!important;
+  border-color:rgba(239,123,48,.42)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.20)!important;
+}
+
+/* Prévia real do certificado centralizada no quadro */
+body.home .tq-cert-preview{
+  min-height:410px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:24px!important;
+  overflow:hidden!important;
+}
+body.home .tq-cert-preview img{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:88%!important;
+  max-height:360px!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.08)!important;
+}
+
+/* Título do certificado menos pesado */
+body.home .tq-cert-copy h3{
+  font-size:clamp(1.45rem,1.7vw,1.9rem)!important;
+  line-height:1.1!important;
+  font-weight:600!important;
+  letter-spacing:-.02em!important;
+}
+
+@media(max-width:640px){
+  body.home .tq-copy h2{
+    font-size:clamp(1.85rem,8.8vw,2.55rem)!important;
+    line-height:1.07!important;
+  }
+  body.home .tq-medal{width:184px!important;height:210px!important}
+  body.home .tq-cert-preview{min-height:300px!important;padding:16px!important}
+  body.home .tq-cert-preview img{max-width:92%!important;max-height:270px!important}
+}

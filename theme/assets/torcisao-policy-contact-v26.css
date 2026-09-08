@@ -1,0 +1,45 @@
+/* Fechamento visual das políticas: contatos sempre contidos e responsivos. */
+.contact-card .contact-info-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch;
+}
+.contact-card .contact-info-item{
+  min-width:0!important;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+.contact-card .contact-info-item .label,
+.contact-card .contact-info-item .value,
+.contact-card .contact-info-item .value a{
+  max-width:100%;
+}
+.contact-card .contact-info-item .value{
+  display:block;
+  width:100%;
+  font-size:clamp(.88rem,1.08vw,1.08rem);
+  line-height:1.28;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.contact-card .contact-info-item .value a{
+  display:block;
+  width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  text-align:center;
+}
+
+@media(max-width:900px){
+  .contact-card .contact-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .contact-card .contact-info-item:last-child{grid-column:1/-1}
+}
+@media(max-width:640px){
+  .contact-card{padding:1.45rem!important}
+  .contact-card .contact-info-grid{grid-template-columns:1fr!important}
+  .contact-card .contact-info-item:last-child{grid-column:auto}
+  .contact-card .contact-info-item{padding:1rem .85rem!important}
+  .contact-card .contact-info-item .value{font-size:.92rem}
+}

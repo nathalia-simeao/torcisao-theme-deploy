@@ -1,0 +1,104 @@
+/* Barra: reutiliza o mesmo modal de Consulta de Tolerância Dimensional da Home. */
+#thToleranceModal{
+  --th-orange:#ef7b30;
+  --th-orange-dark:#c9611e;
+  --th-ink:#17191c;
+  --th-text:#676d73;
+  --th-card:#fff;
+  --th-line:rgba(24,25,27,.11);
+  --th-soft:#f9f7f5;
+  font-family:'Montserrat',sans-serif;
+}
+html[data-bs-theme="dark"] #thToleranceModal{
+  --th-ink:#f7f7f7;
+  --th-text:#bfc3c7;
+  --th-card:#1a1a1b;
+  --th-line:rgba(255,255,255,.11);
+  --th-soft:#151516;
+}
+
+#thToleranceModal.th-modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:1000020;
+  display:none;
+  place-items:center;
+  padding:16px!important;
+  background:rgba(7,8,9,.78)!important;
+  backdrop-filter:blur(10px)!important;
+}
+#thToleranceModal.th-modal-backdrop.is-open{display:grid}
+#thToleranceModal .th-modal{
+  width:min(720px,calc(100vw - 28px));
+  max-height:calc(100dvh - 28px);
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr);
+  overflow:hidden!important;
+  border:1px solid var(--th-line)!important;
+  border-radius:28px!important;
+  background:var(--th-card)!important;
+  color:var(--th-ink);
+  box-shadow:0 34px 110px rgba(0,0,0,.38)!important;
+}
+#thToleranceModal .th-tool-modal{width:min(680px,calc(100vw - 28px))!important}
+#thToleranceModal .th-modal-head{
+  position:relative;
+  padding:24px 26px 20px!important;
+  background:linear-gradient(180deg,rgba(239,123,48,.055),transparent)!important;
+  border-bottom:1px solid var(--th-line)!important;
+}
+#thToleranceModal .th-modal-head small{color:var(--th-orange)!important;font-size:.62rem!important;font-weight:850;letter-spacing:.13em!important}
+#thToleranceModal .th-modal-head h2{margin:6px 50px 3px 0;font-size:clamp(1.45rem,2vw,1.9rem)!important;line-height:1.12;letter-spacing:-.025em!important}
+#thToleranceModal .th-modal-head p{margin:6px 0 0!important;color:var(--th-text)!important;font-size:.7rem!important;line-height:1.5!important}
+#thToleranceModal .th-modal-close{
+  position:absolute;
+  top:15px;
+  right:15px;
+  width:42px!important;
+  height:42px!important;
+  border:1px solid var(--th-line)!important;
+  border-radius:50%!important;
+  background:rgba(127,127,127,.04)!important;
+  color:var(--th-ink)!important;
+  font-size:1.25rem;
+  transition:.18s ease!important;
+}
+#thToleranceModal .th-modal-close:hover{border-color:rgba(239,123,48,.5)!important;background:rgba(239,123,48,.08)!important;color:var(--th-orange)!important}
+#thToleranceModal .th-modal-body{overflow:auto;padding:22px 26px 26px!important}
+#thToleranceModal .th-tool-context{display:grid;grid-template-columns:52px minmax(0,1fr);gap:13px;align-items:center;padding:14px 15px;border:1px solid var(--th-line);border-radius:17px;background:var(--th-soft);margin-bottom:17px}
+#thToleranceModal .th-tool-context-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:15px;background:rgba(239,123,48,.1);color:var(--th-orange);font-size:1.25rem}
+#thToleranceModal .th-tool-context small,#thToleranceModal .th-tool-context strong,#thToleranceModal .th-tool-context p{display:block;margin:0}
+#thToleranceModal .th-tool-context small{color:var(--th-orange);font-size:.58rem;font-weight:850;letter-spacing:.1em}
+#thToleranceModal .th-tool-context strong{margin-top:2px;font-size:.8rem}
+#thToleranceModal .th-tool-context p{margin-top:3px;color:var(--th-text);font-size:.66rem}
+#thToleranceModal .th-tolerance-input-block label{display:block;margin:0 0 7px;color:var(--th-text);font-size:.61rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+#thToleranceModal .th-premium-input{display:flex;align-items:center;height:50px;border:1px solid var(--th-line);border-radius:15px;background:rgba(127,127,127,.04);overflow:hidden;transition:.18s ease}
+#thToleranceModal .th-premium-input:focus-within{border-color:rgba(239,123,48,.58);box-shadow:0 0 0 3px rgba(239,123,48,.08)}
+#thToleranceModal .th-premium-input input{width:100%;height:48px;padding:0 14px;border:0!important;background:transparent!important;color:var(--th-ink)!important;outline:none!important;font:700 .8rem/1 'Montserrat',sans-serif!important}
+#thToleranceModal .th-premium-input span{padding:0 14px;color:var(--th-text);font-size:.65rem;font-weight:800}
+#thToleranceModal .th-modal-primary{width:100%;min-height:48px;margin-top:13px;display:flex;align-items:center;justify-content:center;gap:9px;border:0!important;border-radius:999px;background:var(--th-orange)!important;color:#fff!important;font:850 .72rem/1 'Montserrat',sans-serif;box-shadow:0 10px 24px rgba(239,123,48,.2)!important;cursor:pointer}
+#thToleranceModal .th-modal-primary:hover{background:var(--th-orange-dark)!important}
+#thToleranceModal .th-tolerance-result{margin-top:14px!important;padding:15px!important;border:1px solid var(--th-line)!important;border-radius:17px!important;background:linear-gradient(145deg,var(--th-soft),transparent)!important}
+#thToleranceModal .th-empty-result{text-align:center;padding:15px 8px}
+#thToleranceModal .th-empty-result span{display:block;color:var(--th-orange);font-size:.66rem;font-weight:850;letter-spacing:.1em}
+#thToleranceModal .th-empty-result p{margin:5px 0 0!important;color:var(--th-text)!important;font-size:.68rem!important}
+#thToleranceModal .th-tolerance-values{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+#thToleranceModal .th-tolerance-values>div{min-height:116px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;padding:13px!important;border:1px solid var(--th-line)!important;border-radius:13px!important;background:var(--th-card)!important}
+#thToleranceModal .th-tolerance-values small{display:block!important;color:var(--th-text)!important;font-size:.58rem!important;text-transform:uppercase!important;letter-spacing:.08em!important}
+#thToleranceModal .th-tolerance-values .th-tol-value{margin-top:6px;font-size:.83rem;font-weight:850;color:var(--th-ink)}
+#thToleranceModal .th-tolerance-values .th-tol-limits{margin-top:9px;padding-top:9px;border-top:1px solid var(--th-line);display:grid;gap:4px}
+#thToleranceModal .th-tolerance-values .th-tol-limits span{display:flex;justify-content:space-between;gap:10px;color:var(--th-text);font-size:.6rem;line-height:1.3}
+#thToleranceModal .th-tolerance-values .th-tol-limits b{color:var(--th-ink);font-weight:750}
+#thToleranceModal .th-tolerance-values .th-tol-consult{margin-top:8px;color:var(--th-orange);font-size:.59rem;font-weight:800;line-height:1.35}
+#thToleranceModal .th-tolerance-range-note{margin:10px 0 0!important;color:var(--th-text)!important;font-size:.63rem!important;line-height:1.5!important}
+#thToleranceModal .th-modal-note{display:flex;align-items:flex-start;gap:7px;margin:12px 0 0!important;color:var(--th-text)!important;font-size:.63rem!important;line-height:1.45!important}
+
+/* A ferramenta antiga dentro do card não deve mais aparecer. */
+#barra-trefilada .tor-tolerance-panel{display:none!important}
+
+@media(max-width:767.98px){
+  #thToleranceModal.th-modal-backdrop{padding:8px!important}
+  #thToleranceModal .th-modal,#thToleranceModal .th-tool-modal{width:calc(100vw - 16px)!important;max-height:calc(100dvh - 16px)!important;border-radius:20px!important}
+  #thToleranceModal .th-modal-head,#thToleranceModal .th-modal-body{padding-left:16px!important;padding-right:16px!important}
+  #thToleranceModal .th-tolerance-values{grid-template-columns:1fr!important}
+}

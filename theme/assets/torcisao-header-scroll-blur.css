@@ -1,0 +1,61 @@
+/* Header theme contrast + scroll blur restoration */
+
+/* A marca tem uma versão branca própria para fundos escuros. Mantém o laranja original. */
+html[data-bs-theme="dark"] .tor-logo img{
+  content:url("lgcabecalhoclara400.png")!important;
+  filter:none!important;
+  opacity:1!important;
+}
+
+@media (min-width:992px){
+  .tor-header{
+    background:rgba(244,242,239,.98)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    transition:
+      height .32s cubic-bezier(.22,.61,.36,1),
+      background-color .24s ease,
+      border-color .24s ease,
+      box-shadow .24s ease,
+      -webkit-backdrop-filter .24s ease,
+      backdrop-filter .24s ease!important;
+  }
+  html[data-bs-theme="dark"] .tor-header{
+    background:rgba(18,18,19,.98)!important;
+  }
+
+  .tor-header.is-compact{
+    background:rgba(244,242,239,.84)!important;
+    border-bottom-color:rgba(20,20,20,.075)!important;
+    -webkit-backdrop-filter:blur(14px) saturate(135%)!important;
+    backdrop-filter:blur(14px) saturate(135%)!important;
+    box-shadow:0 10px 34px rgba(20,20,20,.085)!important;
+  }
+  html[data-bs-theme="dark"] .tor-header.is-compact{
+    background:rgba(18,18,19,.80)!important;
+    border-bottom-color:rgba(255,255,255,.08)!important;
+    box-shadow:0 12px 38px rgba(0,0,0,.28)!important;
+  }
+
+  /* A calculadora participa do mesmo efeito de vidro no estado compacto. */
+  .tor-header.is-compact .tor-calc-open{
+    background:rgba(255,255,255,.74)!important;
+    -webkit-backdrop-filter:blur(14px) saturate(135%)!important;
+    backdrop-filter:blur(14px) saturate(135%)!important;
+    box-shadow:0 10px 28px rgba(20,20,20,.08)!important;
+  }
+  html[data-bs-theme="dark"] .tor-header.is-compact .tor-calc-open{
+    background:rgba(36,36,37,.76)!important;
+    box-shadow:0 12px 30px rgba(0,0,0,.24)!important;
+  }
+
+  /* Mantém a pílula de tema/idioma legível sem perder transparência. */
+  .tor-header.is-compact .tor-control-pill{
+    background:rgba(255,255,255,.42)!important;
+    -webkit-backdrop-filter:blur(12px)!important;
+    backdrop-filter:blur(12px)!important;
+  }
+  html[data-bs-theme="dark"] .tor-header.is-compact .tor-control-pill{
+    background:rgba(255,255,255,.06)!important;
+  }
+}

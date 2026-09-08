@@ -1,0 +1,236 @@
+/* Ajustes pontuais do footer: pagamentos, horário e acessibilidade por áudio */
+
+/* Formas de pagamento: menores, com hover fino e zoom discreto. */
+.tor-footer-v2 .tor-footer-payments{
+  grid-template-columns:repeat(3,72px)!important;
+  gap:10px!important;
+}
+.tor-footer-v2 .tor-pay{
+  width:72px!important;
+  height:44px!important;
+  border:1px solid transparent!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
+  transform:translateZ(0) scale(1)!important;
+  transform-origin:center!important;
+  transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease!important;
+}
+.tor-footer-v2 .tor-pay:hover{
+  border-color:rgba(239,123,48,.95)!important;
+  transform:translateZ(0) scale(1.045)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.12)!important;
+}
+.tor-footer-v2 .tor-pay svg{max-width:56px!important;max-height:29px!important}
+.tor-footer-v2 .tor-pay-visa{font-size:.98rem!important}
+.tor-footer-v2 .tor-pay-elo{font-size:.96rem!important}
+.tor-footer-v2 .tor-pay-pix{font-size:.92rem!important}
+.tor-footer-v2 .tor-pay-bndes{font-size:.66rem!important}
+.tor-footer-v2 .tor-pay-boleto{font-size:.52rem!important}
+
+/* Horário de atendimento: mesmo padrão visual dos títulos das colunas. */
+.tor-footer-v2 .tor-footer-hours{
+  margin-top:24px!important;
+  padding-top:22px!important;
+}
+.tor-footer-v2 .tor-footer-hours strong{
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  margin:0 0 14px!important;
+  color:#fff!important;
+  font-size:clamp(1.05rem,1.25vw,1.38rem)!important;
+  line-height:1.15!important;
+  font-weight:750!important;
+  letter-spacing:-.02em!important;
+  text-transform:none!important;
+}
+.tor-footer-v2 .tor-footer-hours strong i{
+  color:#ef7b30!important;
+  font-size:.94rem!important;
+}
+.tor-footer-v2 .tor-footer-hours p{
+  margin:0!important;
+  color:#f1eeee!important;
+  font-size:.92rem!important;
+  line-height:1.55!important;
+}
+
+/* Bloco do leitor por áudio no assistente de acessibilidade. */
+.tor-a11y-audio{
+  margin-top:16px;
+  padding:16px;
+  border:1px solid #e0e2e4;
+  border-radius:16px;
+  background:#fafafa;
+}
+.tor-a11y-audio-head{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+}
+.tor-a11y-audio-icon{
+  width:42px;height:42px;flex:0 0 42px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  background:#fff2e9;
+  color:#ef7b30;
+  font-size:1.1rem;
+}
+.tor-a11y-audio-copy strong{
+  display:block;
+  color:#222;
+  font-size:.76rem;
+  line-height:1.25;
+}
+.tor-a11y-audio-copy small{
+  display:block;
+  margin-top:4px;
+  color:#6e7378;
+  font-size:.62rem;
+  line-height:1.45;
+}
+.tor-a11y-audio-controls{
+  display:grid;
+  grid-template-columns:1.25fr 1fr .8fr;
+  gap:8px;
+  margin-top:13px;
+}
+.tor-a11y-audio-btn{
+  min-height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:0 11px;
+  border:1px solid #d9dde1;
+  border-radius:999px;
+  background:#fff;
+  color:#27292c;
+  font-size:.64rem;
+  font-weight:800;
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease;
+}
+.tor-a11y-audio-btn:hover{border-color:#ef7b30;color:#c75d1f;transform:translateY(-1px)}
+.tor-a11y-audio-btn.is-primary{border-color:#ef7b30;background:#ef7b30;color:#fff}
+.tor-a11y-audio-btn.is-primary:hover{background:#d76621;color:#fff}
+.tor-a11y-audio-btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.tor-a11y-audio-status{
+  min-height:17px;
+  margin:10px 2px 0;
+  color:#74787c;
+  font-size:.61rem;
+  line-height:1.4;
+}
+.tor-a11y-audio-status.is-speaking{color:#c65e22}
+
+html[data-bs-theme="dark"] .tor-a11y-audio{
+  background:#252526;
+  border-color:#3a3a3c;
+}
+html[data-bs-theme="dark"] .tor-a11y-audio-copy strong{color:#f2f2f2}
+html[data-bs-theme="dark"] .tor-a11y-audio-copy small,
+html[data-bs-theme="dark"] .tor-a11y-audio-status{color:#b8b8ba}
+html[data-bs-theme="dark"] .tor-a11y-audio-btn{background:#202021;border-color:#424244;color:#f2f2f2}
+html[data-bs-theme="dark"] .tor-a11y-audio-icon{background:rgba(239,123,48,.13)}
+
+/* Trabalhe conosco: escopo estrito para não tocar em nenhum outro formulário do site. */
+#torWorkOverlay .tor-work-field input:not([type="hidden"]):not([type="file"]),
+#torWorkOverlay .tor-work-field textarea,
+#torWorkOverlay .tor-work-field select,
+#torWorkOverlay .tor-file-drop{
+  border-radius:50px!important;
+}
+#torWorkOverlay .tor-work-field textarea{
+  padding:18px 22px!important;
+}
+
+/* Telefone BR: +55 fixo, DDD selecionável e número fixo/móvel. */
+#torWorkOverlay .tor-phone-br{
+  display:grid!important;
+  grid-template-columns:84px 116px minmax(0,1fr)!important;
+  min-height:58px!important;
+  overflow:hidden!important;
+  border:1px solid #d9dde1!important;
+  border-radius:50px!important;
+  background:#f7f8f9!important;
+  transition:border-color .18s ease,box-shadow .18s ease,background .18s ease!important;
+}
+#torWorkOverlay .tor-phone-br:focus-within{
+  border-color:#ef7b30!important;
+  box-shadow:0 0 0 3px rgba(239,123,48,.10)!important;
+  background:#fff!important;
+}
+#torWorkOverlay .tor-phone-ddi{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  padding:0 10px!important;
+  border-right:1px solid #d9dde1!important;
+  color:#26292c!important;
+  font-size:.78rem!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+}
+#torWorkOverlay .tor-phone-ddd,
+#torWorkOverlay .tor-phone-local{
+  width:100%!important;
+  min-width:0!important;
+  min-height:56px!important;
+  height:56px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  color:#222!important;
+  font-size:.78rem!important;
+}
+#torWorkOverlay .tor-phone-ddd{
+  padding:0 30px 0 16px!important;
+  border-right:1px solid #d9dde1!important;
+  cursor:pointer!important;
+}
+#torWorkOverlay .tor-phone-local{
+  padding:0 18px!important;
+}
+#torWorkOverlay .tor-phone-local::placeholder{color:#8a8e92!important}
+#torWorkOverlay .tor-phone-helper{
+  display:block!important;
+  margin-top:6px!important;
+  color:#767b80!important;
+  font-size:.62rem!important;
+  line-height:1.35!important;
+}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-br{
+  border-color:#3a3a3c!important;
+  background:#252526!important;
+}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-br:focus-within{
+  border-color:#ef7b30!important;
+  background:#252526!important;
+}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddi,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-local{
+  color:#f2f2f2!important;
+}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddi,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd{
+  border-color:#3a3a3c!important;
+}
+
+@media(max-width:760px){
+  .tor-footer-v2 .tor-footer-payments{grid-template-columns:repeat(3,68px)!important}
+  .tor-footer-v2 .tor-pay{width:68px!important;height:42px!important}
+  .tor-a11y-audio-controls{grid-template-columns:1fr 1fr}
+  .tor-a11y-audio-btn[data-audio-stop]{grid-column:1/-1}
+}
+@media(max-width:560px){
+  #torWorkOverlay .tor-phone-br{grid-template-columns:72px 96px minmax(0,1fr)!important}
+  #torWorkOverlay .tor-phone-ddi{font-size:.71rem!important;padding:0 7px!important}
+  #torWorkOverlay .tor-phone-ddd{font-size:.71rem!important;padding-left:11px!important;padding-right:24px!important}
+  #torWorkOverlay .tor-phone-local{font-size:.71rem!important;padding:0 12px!important}
+}

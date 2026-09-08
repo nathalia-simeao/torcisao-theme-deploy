@@ -1,0 +1,58 @@
+/* Haste: seletor de conectores no mesmo idioma visual do explorador da Home. */
+#haste-aterramento #hfConnectorPicker{
+  display:none!important;
+  margin-top:20px!important;
+}
+#haste-aterramento #hfConnectorPicker.is-visible{
+  display:block!important;
+}
+#haste-aterramento #hfConnectorPicker .hf-picker-label{
+  display:block!important;
+  margin:0 0 8px!important;
+  color:var(--hf-text,#60666b)!important;
+  font-size:.6rem!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+#haste-aterramento #hfConnectorPicker .hf-connector-options{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:7px!important;
+}
+#haste-aterramento #hfConnectorPicker .hf-connector-btn{
+  width:100%!important;
+  min-height:44px!important;
+  padding:10px 14px!important;
+  border:1px solid var(--hf-line,#e4dfda)!important;
+  border-radius:999px!important;
+  background:rgba(127,127,127,.02)!important;
+  color:var(--hf-ink,#171717)!important;
+  font:750 .67rem/1.25 'Montserrat',sans-serif!important;
+  text-align:left!important;
+  cursor:pointer!important;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease!important;
+}
+#haste-aterramento #hfConnectorPicker .hf-connector-btn:hover,
+#haste-aterramento #hfConnectorPicker .hf-connector-btn:focus-visible{
+  border-color:rgba(239,123,48,.45)!important;
+  background:rgba(239,123,48,.07)!important;
+  color:var(--hf-orange,#ef7b30)!important;
+  transform:translateX(1px)!important;
+  outline:none!important;
+}
+#haste-aterramento #hfConnectorPicker .hf-connector-btn.is-active{
+  border-color:rgba(239,123,48,.68)!important;
+  background:rgba(239,123,48,.10)!important;
+  color:var(--hf-orange,#ef7b30)!important;
+  box-shadow:0 0 0 2px rgba(239,123,48,.045)!important;
+}
+#haste-aterramento #hfImage.is-connector{
+  max-width:82%!important;
+  max-height:82%!important;
+  object-fit:contain!important;
+}
+@media(max-width:760px){
+  #haste-aterramento #hfConnectorPicker{margin-top:16px!important}
+  #haste-aterramento #hfConnectorPicker .hf-connector-btn{min-height:42px!important;font-size:.64rem!important}
+}

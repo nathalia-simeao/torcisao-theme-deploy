@@ -1,0 +1,270 @@
+/* Timeline Quem Somos — versão limpa e definitiva
+ * Esta folha é carregada por último e neutraliza as tentativas anteriores.
+ * Sem posicionamento absoluto para selo/ano, para evitar reflow tardio.
+ */
+
+body.home .tor-timeline-shell{
+  height:58px!important;
+  min-height:58px!important;
+  overflow:hidden!important;
+  border:1px solid var(--th-orange,#ef7b30)!important;
+  border-radius:999px!important;
+  background:transparent!important;
+}
+
+body.home .tor-timeline{
+  display:grid!important;
+  grid-template-columns:repeat(15,minmax(0,1fr))!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:0!important;
+  align-items:stretch!important;
+  gap:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+body.home .tor-year-btn{
+  position:relative!important;
+  display:grid!important;
+  grid-template-rows:18px 16px!important;
+  align-content:center!important;
+  justify-items:center!important;
+  row-gap:3px!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:4px 7px!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-right:1px solid rgba(239,123,48,.42)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--th-orange,#ef7b30)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  cursor:pointer!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  transition:background-color .18s ease,box-shadow .18s ease,color .18s ease!important;
+}
+
+body.home .tor-year-btn:last-child{
+  border-right:0!important;
+}
+
+body.home .tor-year-btn::before,
+body.home .tor-year-btn::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Selo: ocupa a primeira linha do grid e fica centralizado de verdade. */
+body.home .tor-year-btn > .tor-year-medal{
+  position:static!important;
+  inset:auto!important;
+  display:grid!important;
+  place-items:center!important;
+  width:16px!important;
+  height:16px!important;
+  min-width:16px!important;
+  min-height:16px!important;
+  margin:0!important;
+  padding:0!important;
+  color:var(--th-orange,#ef7b30)!important;
+  line-height:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  z-index:auto!important;
+}
+
+body.home .tor-year-btn > .tor-year-medal svg{
+  display:block!important;
+  width:16px!important;
+  height:16px!important;
+  margin:0 auto!important;
+  overflow:visible!important;
+}
+
+body.home .tor-year-btn > .tor-year-medal-placeholder{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+/* Ano: fluxo normal. Não depende de altura calculada depois. */
+body.home .tor-year-btn > span:not(.tor-year-medal){
+  position:static!important;
+  inset:auto!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  clip:auto!important;
+  opacity:1!important;
+  visibility:visible!important;
+  color:inherit!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:.72rem!important;
+  font-weight:500!important;
+  line-height:16px!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  transform:none!important;
+  animation:none!important;
+  transition:none!important;
+  z-index:auto!important;
+}
+
+/* Hover aplicado à célula inteira. */
+body.home .tor-year-btn:hover,
+body.home .tor-year-btn:focus-visible{
+  background:rgba(239,123,48,.10)!important;
+  box-shadow:inset 0 0 0 1px rgba(239,123,48,.16)!important;
+  color:var(--th-orange,#ef7b30)!important;
+  outline:none!important;
+  transform:none!important;
+}
+
+body.home .tor-year-btn.is-current{
+  background:rgba(239,123,48,.14)!important;
+  box-shadow:inset 0 0 0 1px rgba(239,123,48,.22)!important;
+  color:var(--th-orange,#ef7b30)!important;
+  transform:none!important;
+}
+
+html[data-bs-theme="dark"] body.home .tor-year-btn:hover,
+html[data-bs-theme="dark"] body.home .tor-year-btn:focus-visible,
+html[data-bs-theme="dark"] body.home .tor-year-btn.is-current{
+  background:rgba(239,123,48,.14)!important;
+  box-shadow:inset 0 0 0 1px rgba(239,123,48,.20)!important;
+}
+
+/* Hover MVV aprovado: discreto, sem CTA chapado. */
+body.home .tor-mvv-btn{
+  position:relative!important;
+  overflow:hidden!important;
+}
+body.home .tor-mvv-btn::after{display:none!important}
+body.home .tor-mvv-btn::before{
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  display:block!important;
+  border-radius:inherit!important;
+  opacity:0!important;
+  background:linear-gradient(105deg,rgba(239,123,48,.075),rgba(239,123,48,.12) 52%,rgba(239,123,48,.065))!important;
+  transition:opacity .2s ease!important;
+  pointer-events:none!important;
+}
+body.home .tor-mvv-btn:hover,
+body.home .tor-mvv-btn:focus-visible{
+  transform:translateY(-1px)!important;
+  background:rgba(239,123,48,.075)!important;
+  color:var(--th-orange,#ef7b30)!important;
+  border-color:var(--th-orange,#ef7b30)!important;
+  box-shadow:0 9px 22px rgba(20,20,20,.055),inset 0 0 0 1px rgba(239,123,48,.06)!important;
+}
+body.home .tor-mvv-btn:hover::before,
+body.home .tor-mvv-btn:focus-visible::before{opacity:1!important}
+body.home .tor-mvv-btn:hover i,
+body.home .tor-mvv-btn:focus-visible i{
+  transform:none!important;
+  color:var(--th-orange,#ef7b30)!important;
+  background:rgba(239,123,48,.11)!important;
+  box-shadow:inset 0 0 0 1px rgba(239,123,48,.13)!important;
+}
+body.home .tor-mvv-btn:hover > span,
+body.home .tor-mvv-btn:focus-visible > span{
+  color:var(--th-orange,#ef7b30)!important;
+}
+body.home .tor-mvv-btn:active{
+  transform:none!important;
+  background:rgba(239,123,48,.095)!important;
+}
+
+html[data-bs-theme="dark"] body.home .tor-mvv-btn:hover,
+html[data-bs-theme="dark"] body.home .tor-mvv-btn:focus-visible{
+  background:rgba(239,123,48,.095)!important;
+  color:#f28a46!important;
+  border-color:rgba(242,138,70,.82)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.16),inset 0 0 0 1px rgba(242,138,70,.06)!important;
+}
+html[data-bs-theme="dark"] body.home .tor-mvv-btn::before{
+  background:linear-gradient(105deg,rgba(239,123,48,.065),rgba(239,123,48,.115) 52%,rgba(239,123,48,.055))!important;
+}
+html[data-bs-theme="dark"] body.home .tor-mvv-btn:hover i,
+html[data-bs-theme="dark"] body.home .tor-mvv-btn:focus-visible i{
+  color:#f28a46!important;
+  background:rgba(239,123,48,.13)!important;
+}
+html[data-bs-theme="dark"] body.home .tor-mvv-btn:hover > span,
+html[data-bs-theme="dark"] body.home .tor-mvv-btn:focus-visible > span{
+  color:#f28a46!important;
+}
+
+@media(max-width:760px){
+  body.home .tor-timeline-shell{
+    height:58px!important;
+    min-height:58px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    border-radius:16px!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  body.home .tor-timeline-shell::-webkit-scrollbar{display:none!important}
+  body.home .tor-timeline{
+    display:grid!important;
+    grid-template-columns:none!important;
+    grid-auto-flow:column!important;
+    grid-auto-columns:86px!important;
+    width:max-content!important;
+    min-width:max-content!important;
+  }
+  body.home .tor-year-btn{
+    width:86px!important;
+    min-width:86px!important;
+    grid-template-rows:17px 16px!important;
+    padding:4px 6px!important;
+  }
+  body.home .tor-year-btn > .tor-year-medal,
+  body.home .tor-year-btn > .tor-year-medal svg{
+    width:15px!important;
+    height:15px!important;
+    min-width:15px!important;
+    min-height:15px!important;
+  }
+  body.home .tor-year-btn > span:not(.tor-year-medal){
+    font-size:.7rem!important;
+  }
+}
+
+/* Ajuste fino desktop: a coluna de MVV acompanha a altura do texto e reserva
+ * uma faixa de segurança à direita para não entrar sob a orelha de cotação. */
+@media(min-width:1051px){
+  body.home .tor-about-top{
+    align-items:stretch!important;
+  }
+  body.home .tor-mvv-list{
+    height:100%!important;
+    min-height:100%!important;
+    width:calc(100% - 78px)!important;
+    max-width:calc(100% - 78px)!important;
+    justify-self:start!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+    align-self:stretch!important;
+  }
+  body.home .tor-mvv-btn{
+    width:100%!important;
+    height:100%!important;
+    min-height:82px!important;
+    align-self:stretch!important;
+  }
+}

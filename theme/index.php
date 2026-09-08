@@ -1,0 +1,3 @@
+<?php get_header(); ?>
+<main style="padding:64px 0 90px"><div class="tor-container"><span class="tor-kicker">Torcisão Trefilados</span><h1 class="tor-title"><?php echo is_home() ? 'Conteúdos Torcisão' : esc_html(get_the_title()); ?></h1><div style="margin-top:28px;display:grid;gap:18px"><?php if(have_posts()): while(have_posts()): the_post(); ?><article style="padding:24px;border:1px solid var(--tor-line);border-radius:20px;background:var(--tor-card)"><h2 style="margin:0 0 10px"><a href="<?php the_permalink(); ?>" style="text-decoration:none"><?php the_title(); ?></a></h2><div class="tor-copy"><?php the_excerpt(); ?></div></article><?php endwhile; else: ?><p class="tor-copy">Conteúdo ainda não disponível.</p><?php endif; ?></div></div></main>
+<?php get_footer(); ?>

@@ -1,0 +1,195 @@
+/*
+ * Explorador de Produtos — painel integrado + calibração visual
+ * Um único painel contém opções, palco e especificações.
+ * A mesma lógica de enquadramento é usada no painel e no lightbox.
+ */
+
+/* PAINEL ÚNICO */
+body.home .tpe-shell{
+  display:grid!important;
+  grid-template-columns:245px minmax(0,1fr) 330px!important;
+  gap:0!important;
+  align-items:stretch!important;
+  min-height:520px!important;
+  border:1px solid var(--th-line,rgba(24,25,27,.11))!important;
+  border-radius:30px!important;
+  background:var(--th-card,#fff)!important;
+  box-shadow:0 22px 62px rgba(20,20,20,.085)!important;
+  overflow:hidden!important;
+}
+html[data-bs-theme="dark"] body.home .tpe-shell{
+  background:#18191a!important;
+  border-color:rgba(255,255,255,.10)!important;
+  box-shadow:0 26px 70px rgba(0,0,0,.30)!important;
+}
+
+/* As três áreas deixam de parecer cards separados. */
+body.home .tpe-options,
+body.home .tpe-stage,
+body.home .tpe-info{
+  min-height:520px!important;
+  height:auto!important;
+  align-self:stretch!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+body.home .tpe-options{
+  padding:24px 22px!important;
+  border-right:1px solid var(--th-line,rgba(24,25,27,.11))!important;
+}
+body.home .tpe-info{
+  padding:24px 22px!important;
+  border-left:1px solid var(--th-line,rgba(24,25,27,.11))!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+body.home .tpe-stage{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:radial-gradient(circle at 50% 46%,rgba(255,255,255,.95) 0,rgba(248,246,244,.82) 56%,rgba(241,237,233,.55) 100%)!important;
+}
+html[data-bs-theme="dark"] body.home .tpe-options,
+html[data-bs-theme="dark"] body.home .tpe-info{
+  border-color:rgba(255,255,255,.09)!important;
+}
+html[data-bs-theme="dark"] body.home .tpe-stage{
+  background:radial-gradient(circle at 50% 45%,#262729 0,#1d1e20 58%,#18191a 100%)!important;
+}
+
+/* Mantém as opções compactas dentro do painel. */
+body.home .tpe-options-head strong{font-size:1.05rem!important}
+body.home .tpe-option-group{margin-top:17px!important}
+body.home .tpe-option-list{gap:8px!important}
+body.home .tpe-option{min-height:44px!important;padding:9px 15px!important}
+
+/* Especificações sem o ar de terceiro card independente. */
+body.home .tpe-info h3{font-size:clamp(1.45rem,1.72vw,1.9rem)!important;margin-top:8px!important}
+body.home .tpe-info>p{font-size:.68rem!important;line-height:1.5!important}
+body.home .tpe-specs{margin-top:14px!important}
+body.home .tpe-specs>div{padding:8px 0!important}
+body.home .tpe-actions{margin-top:auto!important;padding-top:16px!important}
+
+/* ENQUADRAMENTO DAS IMAGENS */
+body.home #tpeStage,
+body.home .tpe-lightbox{
+  --tpe-fit-w:82%;
+  --tpe-fit-h:76%;
+}
+body.home #tpeStage[data-line="arame"],
+body.home .tpe-lightbox[data-line="arame"]{
+  --tpe-fit-w:86%;
+  --tpe-fit-h:76%;
+}
+body.home #tpeStage[data-line="barra"],
+body.home .tpe-lightbox[data-line="barra"]{
+  --tpe-fit-w:84%;
+  --tpe-fit-h:74%;
+}
+body.home #tpeStage[data-line="haste"],
+body.home .tpe-lightbox[data-line="haste"]{
+  --tpe-fit-w:52%;
+  --tpe-fit-h:80%;
+}
+body.home #tpeStage[data-line="conectores"],
+body.home .tpe-lightbox[data-line="conectores"]{
+  --tpe-fit-w:72%;
+  --tpe-fit-h:72%;
+}
+
+body.home .tpe-image-wrap{
+  padding:18px 28px 24px!important;
+  overflow:visible!important;
+  place-items:center!important;
+}
+body.home .tpe-image-wrap img{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:var(--tpe-fit-w)!important;
+  max-height:var(--tpe-fit-h)!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform-origin:center center!important;
+  margin:auto!important;
+}
+body.home #tpeStage[data-line="haste"] .tpe-image-wrap{
+  padding-top:20px!important;
+  padding-bottom:24px!important;
+}
+
+/* Lupa: centralizada sobre o cursor e sem fundo branco no dark. */
+body.home .tpe-lens{
+  width:148px!important;
+  height:148px!important;
+  margin:0!important;
+  background-repeat:no-repeat!important;
+  background-origin:border-box!important;
+  background-clip:border-box!important;
+  transform:translate(-50%,-50%)!important;
+  transform-origin:center center!important;
+  will-change:left,top,background-position,background-size!important;
+  pointer-events:none!important;
+}
+html[data-bs-theme="dark"] body.home .tpe-lens{background-color:#1b1c1d!important}
+
+/* Lightbox: mantém o mesmo enquadramento relativo do palco, só em uma área maior. */
+body.home .tpe-lightbox-stage{
+  padding:70px 54px 60px!important;
+  box-sizing:border-box!important;
+}
+body.home .tpe-lightbox-image{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:var(--tpe-fit-w)!important;
+  max-height:var(--tpe-fit-h)!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform-origin:center center!important;
+  margin:auto!important;
+}
+
+@media(max-width:1220px){
+  body.home .tpe-shell{grid-template-columns:220px minmax(0,1fr) 300px!important}
+  body.home .tpe-options{padding:20px 18px!important}
+  body.home .tpe-info{padding:20px 18px!important}
+}
+
+@media(max-width:991.98px){
+  body.home .tpe-shell{
+    grid-template-columns:1fr!important;
+    min-height:0!important;
+    border-radius:26px!important;
+  }
+  body.home .tpe-options,
+  body.home .tpe-stage,
+  body.home .tpe-info{min-height:0!important;border:0!important}
+  body.home .tpe-options{padding:18px!important;border-bottom:1px solid var(--th-line,rgba(24,25,27,.11))!important}
+  body.home .tpe-stage{min-height:500px!important;border-bottom:1px solid var(--th-line,rgba(24,25,27,.11))!important}
+  body.home .tpe-info{padding:20px!important}
+  html[data-bs-theme="dark"] body.home .tpe-options,
+  html[data-bs-theme="dark"] body.home .tpe-stage{border-bottom-color:rgba(255,255,255,.09)!important}
+  body.home #tpeStage,
+  body.home .tpe-lightbox{--tpe-fit-w:86%;--tpe-fit-h:76%}
+  body.home #tpeStage[data-line="haste"],
+  body.home .tpe-lightbox[data-line="haste"]{--tpe-fit-w:58%;--tpe-fit-h:80%}
+  body.home #tpeStage[data-line="conectores"],
+  body.home .tpe-lightbox[data-line="conectores"]{--tpe-fit-w:76%;--tpe-fit-h:74%}
+  body.home .tpe-image-wrap{padding:16px 20px 22px!important}
+  body.home .tpe-lightbox-stage{padding:66px 24px 52px!important}
+}
+
+@media(max-width:767.98px){
+  body.home .tpe-stage{min-height:430px!important}
+  body.home #tpeStage,
+  body.home .tpe-lightbox{--tpe-fit-w:92%;--tpe-fit-h:74%}
+  body.home #tpeStage[data-line="haste"],
+  body.home .tpe-lightbox[data-line="haste"]{--tpe-fit-w:68%;--tpe-fit-h:78%}
+  body.home #tpeStage[data-line="conectores"],
+  body.home .tpe-lightbox[data-line="conectores"]{--tpe-fit-w:84%;--tpe-fit-h:72%}
+  body.home .tpe-image-wrap{padding:10px!important}
+  body.home .tpe-lightbox-stage{padding:62px 12px 44px!important}
+}

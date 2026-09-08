@@ -1,0 +1,106 @@
+/*
+ * Ritmo vertical unificado da Home Torcisão.
+ * Reduz os vazios excessivos entre blocos sem comprimir conteúdo interno,
+ * grids, cards, timeline ou componentes interativos.
+ */
+
+@media (min-width:992px){
+  body.home{
+    --tor-section-space-y:48px;
+  }
+
+  /* Seções padrão da Home: uma cadência única, mais compacta. */
+  body.home .th-home .th-section:not(.th-blog){
+    padding-top:var(--tor-section-space-y)!important;
+    padding-bottom:var(--tor-section-space-y)!important;
+  }
+
+  /* Blocos reconstruídos que possuem espaçamento próprio. */
+  body.home .th-home .th-quality,
+  body.home .th-home .th-numbers{
+    padding-top:var(--tor-section-space-y)!important;
+    padding-bottom:var(--tor-section-space-y)!important;
+  }
+
+  body.home .tor-about-history{
+    padding-top:var(--tor-section-space-y)!important;
+    padding-bottom:52px!important;
+  }
+
+  /* A linha do tempo estava somando margin-top + padding-top e criando um
+   * grande corredor vazio dentro da própria seção Quem Somos. */
+  body.home .tor-history{
+    margin-top:30px!important;
+    padding-top:26px!important;
+  }
+
+  body.home .tor-history-head{
+    margin-bottom:20px!important;
+  }
+
+  /* Blog reconstruído: aproxima o título da divisória superior mantendo os
+   * cards e o carrossel intactos. */
+  body.home .th-home .tb-blog-inner{
+    padding-top:48px!important;
+    padding-bottom:44px!important;
+  }
+  body.home .th-home .tb-blog-viewport{
+    margin-top:38px!important;
+  }
+}
+
+@media (min-width:761px) and (max-width:991.98px){
+  body.home .th-home .th-section:not(.th-blog),
+  body.home .th-home .th-quality,
+  body.home .th-home .th-numbers,
+  body.home .tor-about-history{
+    padding-top:44px!important;
+    padding-bottom:44px!important;
+  }
+  body.home .tor-history{
+    margin-top:28px!important;
+    padding-top:24px!important;
+  }
+  body.home .th-home .tb-blog-inner{
+    padding-top:44px!important;
+    padding-bottom:40px!important;
+  }
+}
+
+@media (max-width:760px){
+  body.home .th-home .th-section:not(.th-blog),
+  body.home .th-home .th-quality,
+  body.home .th-home .th-numbers,
+  body.home .tor-about-history{
+    padding-top:38px!important;
+    padding-bottom:38px!important;
+  }
+  body.home .tor-history{
+    margin-top:26px!important;
+    padding-top:22px!important;
+  }
+  body.home .th-home .tb-blog-inner{
+    padding-top:38px!important;
+    padding-bottom:36px!important;
+  }
+  body.home .th-home .tb-blog-viewport{
+    margin-top:30px!important;
+  }
+}
+
+/* MVV: o ícone deve permanecer limpo no hover, sem bloco/quadrado ao fundo. */
+body.home .tor-mvv-btn i,
+body.home .tor-mvv-btn:hover i,
+body.home .tor-mvv-btn:focus-visible i{
+  width:auto!important;
+  height:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:0!important;
+}

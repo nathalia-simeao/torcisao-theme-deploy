@@ -1,0 +1,21 @@
+/* Páginas de produto: a orelhinha acompanha o drawer de cotação, como na Home. */
+
+.btn-cta-mobile{
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),background-color .2s ease,color .2s ease,opacity .18s ease,visibility .18s ease!important;
+}
+
+@media (min-width:992px){
+  body.torcisao-form-drawer-open .btn-cta-mobile{
+    transform:translate(calc(-1 * var(--tor-product-drawer-width, min(460px,88vw))),-50%)!important;
+  }
+}
+
+/* No mobile segue a mesma regra da Home: o botão flutuante some enquanto o drawer está aberto. */
+@media (max-width:991.98px){
+  body.torcisao-form-drawer-open .btn-cta-mobile{
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transform:scale(.82)!important;
+  }
+}

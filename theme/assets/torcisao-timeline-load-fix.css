@@ -1,0 +1,57 @@
+/* Timeline — carregamento imediato dos anos e marcadores
+ * Mantém geometria/layout aprovados. Remove dependência visual do font-icon.
+ */
+body.home .tor-year-btn{
+  position:relative!important;
+  display:grid!important;
+  grid-template-rows:12px 14px!important;
+  align-content:center!important;
+  justify-items:center!important;
+  row-gap:2px!important;
+}
+
+/* O Bootstrap Icons pode terminar de carregar depois do restante da página.
+ * A timeline não depende mais dele para desenhar os marcos. */
+body.home .tor-year-btn > i{
+  display:none!important;
+}
+body.home .tor-year-btn::before{
+  content:'';
+  display:block;
+  width:7px;
+  height:7px;
+  margin:auto;
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+}
+body.home .tor-year-btn.is-milestone::before{
+  background:var(--th-orange,#ef7b30);
+  box-shadow:0 0 0 2px rgba(239,123,48,.12);
+}
+
+body.home .tor-year-btn > span{
+  display:block!important;
+  position:static!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  color:inherit!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:.72rem!important;
+  font-weight:500!important;
+  line-height:14px!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  animation:none!important;
+  transition:none!important;
+}
+
+@media(max-width:760px){
+  body.home .tor-year-btn{
+    grid-template-rows:12px 14px!important;
+  }
+}

@@ -1,0 +1,32 @@
+/* Haste: substitui a nuvem de aplicações por um acesso claro ao assistente. */
+#haste-aterramento #aplicacoes .hf-app-card.tor-haste-assistant-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:14px;
+  min-height:100%;
+  padding:28px;
+}
+#haste-aterramento .tor-haste-assistant-card h3{
+  margin:0;
+  font-size:1.02rem;
+  font-weight:760;
+}
+#haste-aterramento .tor-haste-assistant-copy{
+  max-width:620px;
+  margin:0;
+  color:var(--hf-text);
+  font-size:.76rem;
+  line-height:1.6;
+}
+#haste-aterramento .tor-haste-assistant-card .tor-product-tool{
+  margin-top:2px;
+  background:var(--hf-bg);
+}
+#haste-aterramento .tor-haste-assistant-card .tor-product-tool:hover,
+#haste-aterramento .tor-haste-assistant-card .tor-product-tool:focus-visible{
+  background:var(--hf-soft);
+}
+@media(max-width:760px){
+  #haste-aterramento #aplicacoes .hf-app-card.tor-haste-assistant-card{padding:22px}
+}

@@ -1,0 +1,426 @@
+/* Ajustes finais: equilíbrio das marcas + revisão mobile do Blog e do Footer */
+
+/* Torcisão Industrial: ligeiramente menor para equilibrar visualmente com Trefilados. */
+body .tor-footer-v2 .tor-footer-company-brand--industrial img{
+  width:160px!important;
+  max-height:54px!important;
+}
+body .tor-footer-v2 .tor-footer-industrial-label{
+  width:160px!important;
+  align-self:flex-start!important;
+  margin:-1px 0 0 0!important;
+  padding-right:3px!important;
+  text-align:right!important;
+  font-size:.47rem!important;
+}
+
+@media(max-width:760px){
+  /* BLOG MOBILE: faixa laranja no topo + cards horizontais com parte do próximo visível. */
+  body.home .th-home .th-blog{
+    overflow:hidden!important;
+  }
+  body.home .th-home .tb-blog-shell{
+    min-height:360px!important;
+    overflow:hidden!important;
+  }
+  body.home .th-home .tb-blog-orange{
+    inset:0 0 auto 0!important;
+    width:100%!important;
+    height:112px!important;
+  }
+  body.home .th-home .tb-blog-inner{
+    width:100%!important;
+    margin:0!important;
+    padding:31px 0 24px!important;
+  }
+  body.home .th-home .tb-blog-title{
+    margin:0!important;
+    padding:0 20px!important;
+    font-size:2rem!important;
+    line-height:1!important;
+    letter-spacing:-.04em!important;
+    text-align:left!important;
+  }
+  body.home .th-home .tb-blog-viewport{
+    width:100%!important;
+    margin-top:18px!important;
+    padding-left:20px!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    scroll-padding-left:20px!important;
+    scroll-snap-type:x mandatory!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  body.home .th-home .tb-blog-track{
+    gap:12px!important;
+    padding:6px 20px 15px 0!important;
+  }
+  body.home .th-home .tb-blog-card{
+    flex:0 0 min(70vw,286px)!important;
+    min-width:220px!important;
+    min-height:194px!important;
+    padding:16px 15px 15px!important;
+    border-radius:12px!important;
+    scroll-snap-align:start!important;
+    box-shadow:0 8px 22px rgba(20,20,20,.09)!important;
+  }
+  body.home .th-home .tb-blog-card:hover,
+  body.home .th-home .tb-blog-card:focus-visible{
+    transform:translateY(-3px)!important;
+  }
+  body.home .th-home .tb-blog-meta{gap:9px!important}
+  body.home .th-home .tb-blog-icon{
+    width:34px!important;
+    height:34px!important;
+    flex-basis:34px!important;
+    border-radius:9px!important;
+  }
+  body.home .th-home .tb-blog-icon svg{width:16px!important;height:16px!important}
+  body.home .th-home .tb-blog-date{
+    font-size:.56rem!important;
+    letter-spacing:.08em!important;
+  }
+  body.home .th-home .tb-blog-card h3{
+    margin:14px 0 12px!important;
+    font-size:.9rem!important;
+    line-height:1.25!important;
+    letter-spacing:-.02em!important;
+  }
+  body.home .th-home .tb-blog-tag{
+    min-height:22px!important;
+    padding:0 9px!important;
+    font-size:.45rem!important;
+    letter-spacing:.04em!important;
+  }
+  body.home .th-home .tb-blog-bottom{
+    grid-template-columns:minmax(72px,1fr) auto!important;
+    gap:12px!important;
+    margin:7px 20px 0!important;
+    align-items:center!important;
+  }
+  body.home .th-home .tb-blog-progress{
+    height:24px!important;
+    min-width:0!important;
+  }
+  body.home .th-home .tb-blog-all{
+    min-height:34px!important;
+    gap:5px!important;
+    font-size:.56rem!important;
+    white-space:nowrap!important;
+  }
+  body.home .th-home .tb-blog-all span{font-size:.88rem!important}
+
+  /* FOOTER MOBILE: segue a ordem visual do desktop da esquerda para a direita, tudo empilhado. */
+  body .tor-footer-v2{
+    overflow-x:hidden!important;
+  }
+  body .tor-footer-v2 .tor-footer-wrap{
+    width:calc(100% - 32px)!important;
+    margin:0 16px!important;
+  }
+  body .tor-footer-v2 .tor-footer-main{
+    padding:42px 0 34px!important;
+  }
+  body .tor-footer-v2 .tor-footer-data{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:36px!important;
+  }
+  body .tor-footer-v2 .tor-footer-data > section{
+    width:100%!important;
+    min-width:0!important;
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-title{
+    margin-bottom:17px!important;
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-links,
+  body .tor-footer-v2 .tor-footer-contact-list,
+  body .tor-footer-v2 .tor-footer-hours,
+  body .tor-footer-v2 .tor-footer-address,
+  body .tor-footer-v2 .tor-footer-map-hint{
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-social{
+    justify-content:flex-start!important;
+  }
+  body .tor-footer-v2 .tor-footer-payments{
+    justify-content:start!important;
+  }
+  body .tor-footer-v2 .tor-footer-action-stack{
+    width:100%!important;
+    max-width:none!important;
+  }
+  body .tor-footer-v2 .tor-footer-pill{
+    width:100%!important;
+    justify-content:flex-start!important;
+    padding-left:20px!important;
+  }
+  body .tor-footer-v2 .tor-footer-map{
+    width:100%!important;
+    height:236px!important;
+  }
+
+  /* Grupo Torcisão: introdução, Trefilados e Industrial, nessa ordem, todos empilhados. */
+  body .tor-footer-v2 .tor-footer-group{
+    padding:20px 0 24px!important;
+  }
+  body .tor-footer-v2 .tor-footer-group-shell{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:20px!important;
+    padding:18px 0!important;
+  }
+  body .tor-footer-v2 .tor-footer-group-intro{
+    width:100%!important;
+    align-items:flex-start!important;
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-group-tagline{
+    max-width:100%!important;
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-grid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:12px!important;
+    width:100%!important;
+  }
+  body .tor-footer-v2 .tor-footer-company{
+    width:100%!important;
+    grid-template-columns:minmax(120px,.82fr) minmax(0,1fr) 40px!important;
+    gap:10px!important;
+    min-height:102px!important;
+    padding:15px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand{
+    width:124px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand--trefilados img{
+    width:122px!important;
+    max-height:44px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand--industrial img{
+    width:112px!important;
+    max-height:42px!important;
+  }
+  body .tor-footer-v2 .tor-footer-industrial-label{
+    width:112px!important;
+    padding-right:2px!important;
+    font-size:.40rem!important;
+    margin-top:-1px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-copy{
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-arrow{
+    width:36px!important;
+    height:36px!important;
+  }
+
+  /* Faixa final também empilhada e alinhada à esquerda. */
+  body .tor-footer-v2 .tor-footer-bottom{
+    padding:22px 0 26px!important;
+  }
+  body .tor-footer-v2 .tor-footer-bottom-row{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:16px!important;
+    text-align:left!important;
+  }
+  body .tor-footer-v2 .tor-footer-ciesp,
+  body .tor-footer-v2 .tor-footer-copy{
+    width:100%!important;
+    text-align:left!important;
+    white-space:normal!important;
+  }
+  body .tor-footer-v2 .tor-accessibility-open{
+    align-self:flex-start!important;
+  }
+}
+
+@media(max-width:390px){
+  body.home .th-home .tb-blog-card{
+    flex-basis:72vw!important;
+    min-width:210px!important;
+  }
+  body .tor-footer-v2 .tor-footer-wrap{
+    width:calc(100% - 24px)!important;
+    margin:0 12px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company{
+    grid-template-columns:108px minmax(0,1fr) 36px!important;
+    padding:13px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand{width:108px!important}
+  body .tor-footer-v2 .tor-footer-company-brand--trefilados img{width:106px!important}
+  body .tor-footer-v2 .tor-footer-company-brand--industrial img{width:98px!important}
+  body .tor-footer-v2 .tor-footer-industrial-label{width:98px!important;font-size:.37rem!important}
+  body .tor-footer-v2 .tor-footer-company-copy strong{font-size:.73rem!important}
+  body .tor-footer-v2 .tor-footer-company-copy span{font-size:.60rem!important}
+}
+
+/* Trabalhe Conosco: telefone mais compacto e menu de DDD no mesmo padrão dos dropdowns do site. */
+#torWorkOverlay .tor-phone-br{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:74px 106px minmax(0,1fr)!important;
+  align-items:center!important;
+  width:100%!important;
+  min-height:50px!important;
+  border:1px solid #d9dde1!important;
+  border-radius:50px!important;
+  background:#f7f8f9!important;
+  overflow:visible!important;
+  transition:border-color .18s ease,box-shadow .18s ease,background .18s ease!important;
+}
+#torWorkOverlay .tor-phone-br:focus-within{
+  border-color:#ef7b30!important;
+  box-shadow:0 0 0 3px rgba(239,123,48,.10)!important;
+  background:#fff!important;
+}
+#torWorkOverlay .tor-phone-ddi{
+  height:48px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  padding:0 10px!important;
+  border-right:1px solid #e1e3e6!important;
+  color:#25282b!important;
+  font-size:.76rem!important;
+  white-space:nowrap!important;
+}
+#torWorkOverlay .tor-phone-ddi strong{font-weight:800!important}
+#torWorkOverlay .tor-phone-flag{font-size:.82rem!important;line-height:1!important}
+#torWorkOverlay .tor-phone-ddd-control{
+  position:relative!important;
+  z-index:8!important;
+  height:48px!important;
+  border-right:1px solid #e1e3e6!important;
+}
+#torWorkOverlay .tor-phone-ddd-trigger{
+  width:100%!important;
+  height:48px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+  padding:0 13px 0 15px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#2a2d30!important;
+  font-size:.75rem!important;
+  font-weight:650!important;
+  cursor:pointer!important;
+}
+#torWorkOverlay .tor-phone-ddd-trigger i{
+  font-size:.68rem!important;
+  transition:transform .18s ease!important;
+}
+#torWorkOverlay .tor-phone-ddd-control.is-open .tor-phone-ddd-trigger i{transform:rotate(180deg)!important}
+#torWorkOverlay .tor-phone-ddd-menu{
+  position:absolute!important;
+  left:0!important;
+  top:calc(100% + 8px)!important;
+  width:158px!important;
+  max-height:252px!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  padding:7px!important;
+  border:1px solid rgba(24,25,27,.12)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 18px 46px rgba(20,20,20,.16)!important;
+  scrollbar-width:thin!important;
+  z-index:999!important;
+}
+#torWorkOverlay .tor-phone-ddd-menu[hidden]{display:none!important}
+#torWorkOverlay .tor-phone-ddd-option{
+  width:100%!important;
+  min-height:38px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  padding:0 12px!important;
+  border:1px solid transparent!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  color:#25282b!important;
+  font-size:.72rem!important;
+  text-align:left!important;
+  cursor:pointer!important;
+  transition:background-color .16s ease,border-color .16s ease,color .16s ease!important;
+}
+#torWorkOverlay .tor-phone-ddd-option small{
+  color:#8a8e92!important;
+  font-size:.58rem!important;
+  font-weight:750!important;
+  letter-spacing:.04em!important;
+}
+#torWorkOverlay .tor-phone-ddd-option:hover,
+#torWorkOverlay .tor-phone-ddd-option:focus-visible{
+  border-color:rgba(239,123,48,.26)!important;
+  background:rgba(239,123,48,.08)!important;
+  color:#bf5c20!important;
+  outline:none!important;
+}
+#torWorkOverlay .tor-phone-ddd-option[aria-selected="true"]{
+  border-color:rgba(239,123,48,.46)!important;
+  background:rgba(239,123,48,.12)!important;
+  color:#b75117!important;
+}
+#torWorkOverlay .tor-phone-local{
+  width:100%!important;
+  min-width:0!important;
+  height:48px!important;
+  min-height:48px!important;
+  margin:0!important;
+  padding:0 15px!important;
+  border:0!important;
+  border-radius:0 50px 50px 0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  color:#25282b!important;
+  font-size:.75rem!important;
+}
+#torWorkOverlay .tor-phone-local::placeholder{color:#979ca1!important}
+#torWorkOverlay .tor-phone-helper{
+  display:block!important;
+  margin:6px 0 0!important;
+  color:#7a7f84!important;
+  font-size:.59rem!important;
+  line-height:1.35!important;
+}
+
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-br{
+  border-color:#3a3a3c!important;
+  background:#252526!important;
+}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-br:focus-within{border-color:#ef7b30!important;background:#252526!important}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddi,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-trigger,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-local{color:#f2f2f2!important}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddi,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-control{border-color:#3a3a3c!important}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-menu{background:#202021!important;border-color:#424244!important;box-shadow:0 18px 48px rgba(0,0,0,.42)!important}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-option{color:#f2f2f2!important}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-option small{color:#a9a9ad!important}
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-option:hover,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-option:focus-visible,
+html[data-bs-theme="dark"] #torWorkOverlay .tor-phone-ddd-option[aria-selected="true"]{background:rgba(239,123,48,.12)!important}
+
+@media(max-width:560px){
+  #torWorkOverlay .tor-phone-br{grid-template-columns:68px 94px minmax(0,1fr)!important}
+  #torWorkOverlay .tor-phone-ddi{padding:0 7px!important;font-size:.70rem!important}
+  #torWorkOverlay .tor-phone-ddd-trigger{padding:0 10px 0 12px!important;font-size:.70rem!important}
+  #torWorkOverlay .tor-phone-ddd-menu{width:150px!important;max-height:230px!important}
+  #torWorkOverlay .tor-phone-local{padding:0 11px!important;font-size:.69rem!important}
+}

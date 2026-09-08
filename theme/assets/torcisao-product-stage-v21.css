@@ -1,0 +1,91 @@
+/*
+ * Palco visual das páginas de produto — contraste e contenção do zoom.
+ * Aplica-se somente às páginas unificadas de Haste, Barra e Arame.
+ */
+
+/* O produto pode ampliar bastante, mas nunca invade legenda/textos do rodapé do palco. */
+.hf-page .hf-image-wrap{
+  overflow:hidden!important;
+  border-radius:20px!important;
+  padding:16px 18px 26px!important;
+  isolation:isolate!important;
+}
+.hf-page .hf-image{
+  transform-origin:center center!important;
+}
+
+/* Legenda permanece acima da área visual, sem a imagem passando por baixo. */
+.hf-page .hf-caption{
+  position:relative!important;
+  z-index:11!important;
+}
+.hf-page .hf-stage-note{
+  z-index:12!important;
+}
+
+/* Palco claro: contraste suave, sem perder a sensação de profundidade. */
+.hf-page .hf-stage{
+  background:radial-gradient(circle at 50% 38%,#ffffff 0%,#f5f4f2 54%,#ece9e5 100%)!important;
+  box-shadow:inset 0 0 0 1px rgba(23,23,23,.035)!important;
+}
+.hf-page .hf-stage:after{
+  opacity:.24!important;
+}
+
+/* No modo escuro elimina o halo branco que estava lavando o fundo do produto. */
+html[data-bs-theme="dark"] .hf-page .hf-stage{
+  background:radial-gradient(circle at 50% 40%,#28292b 0%,#1d1e20 54%,#151617 100%)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.055)!important;
+}
+html[data-bs-theme="dark"] .hf-page .hf-stage:after{
+  background:radial-gradient(ellipse,rgba(0,0,0,.58),transparent 68%)!important;
+  opacity:.22!important;
+}
+
+/* Controles de zoom precisam ter contraste real sobre qualquer fotografia/fundo. */
+.hf-page .hf-stage-toolbar .hf-tool{
+  background:rgba(255,255,255,.98)!important;
+  border-color:rgba(23,23,23,.24)!important;
+  color:#171717!important;
+  box-shadow:0 7px 18px rgba(23,23,23,.12)!important;
+  backdrop-filter:blur(8px)!important;
+}
+.hf-page .hf-stage-toolbar button.hf-tool:hover,
+.hf-page .hf-stage-toolbar button.hf-tool:focus-visible{
+  border-color:var(--hf-orange,#ef7b30)!important;
+  color:var(--hf-orange,#ef7b30)!important;
+  box-shadow:0 8px 20px rgba(23,23,23,.16)!important;
+  outline:none!important;
+}
+html[data-bs-theme="dark"] .hf-page .hf-stage-toolbar .hf-tool{
+  background:rgba(38,39,41,.96)!important;
+  border-color:rgba(255,255,255,.24)!important;
+  color:#fff!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.28)!important;
+}
+html[data-bs-theme="dark"] .hf-page .hf-stage-toolbar button.hf-tool:hover,
+html[data-bs-theme="dark"] .hf-page .hf-stage-toolbar button.hf-tool:focus-visible{
+  border-color:var(--hf-orange,#ef7b30)!important;
+  color:#ff9854!important;
+}
+
+/* A instrução inferior também não pode desaparecer no fundo claro/escuro. */
+.hf-page .hf-stage-note{
+  background:rgba(255,255,255,.94)!important;
+  border-color:rgba(23,23,23,.16)!important;
+  color:#686d72!important;
+  box-shadow:0 5px 14px rgba(23,23,23,.06)!important;
+}
+html[data-bs-theme="dark"] .hf-page .hf-stage-note{
+  background:rgba(35,36,38,.94)!important;
+  border-color:rgba(255,255,255,.18)!important;
+  color:#d5d7d9!important;
+  box-shadow:0 6px 16px rgba(0,0,0,.22)!important;
+}
+
+@media(max-width:760px){
+  .hf-page .hf-image-wrap{
+    border-radius:16px!important;
+    padding:12px 10px 20px!important;
+  }
+}

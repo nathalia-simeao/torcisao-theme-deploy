@@ -1,0 +1,131 @@
+/* Calculadora v40: controles numéricos limpos, stepper de quantidade + unidade sem alterar o layout original */
+
+/* Remove apenas os spinners nativos dos campos numéricos. */
+#torcisaoCalcOverlay input[type="number"]::-webkit-outer-spin-button,
+#torcisaoCalcOverlay input[type="number"]::-webkit-inner-spin-button,
+.th-modal input[type="number"]::-webkit-outer-spin-button,
+.th-modal input[type="number"]::-webkit-inner-spin-button,
+.tor-product-tol-dialog input[type="number"]::-webkit-outer-spin-button,
+.tor-product-tol-dialog input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance:none!important;
+  margin:0!important;
+}
+#torcisaoCalcOverlay input[type="number"],
+.th-modal input[type="number"],
+.tor-product-tol-dialog input[type="number"]{
+  -moz-appearance:textfield!important;
+  appearance:textfield!important;
+}
+
+/* Quantidade: único campo com stepper visual próprio. */
+#torcisaoCalcOverlay .tor-calc-qty-shell{
+  position:relative!important;
+  width:100%!important;
+}
+#torcisaoCalcOverlay .tor-calc-qty-shell #calcQtd{
+  width:100%!important;
+  padding-right:46px!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper{
+  position:absolute!important;
+  z-index:4!important;
+  top:50%!important;
+  right:10px!important;
+  transform:translateY(-50%)!important;
+  width:28px!important;
+  height:38px!important;
+  display:grid!important;
+  grid-template-rows:1fr 1fr!important;
+  overflow:hidden!important;
+  border:1px solid rgba(24,25,27,.12)!important;
+  border-radius:10px!important;
+  background:rgba(127,127,127,.045)!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper button{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  min-width:0!important;
+  height:18px!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--th-muted,#6f7479)!important;
+  cursor:pointer!important;
+  box-shadow:none!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper button+button{
+  border-top:1px solid rgba(24,25,27,.09)!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper button::before{
+  content:''!important;
+  width:6px!important;
+  height:6px!important;
+  border-left:1.7px solid currentColor!important;
+  border-top:1.7px solid currentColor!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper .tor-calc-step-up::before{
+  transform:rotate(45deg) translate(1px,1px)!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper .tor-calc-step-down::before{
+  transform:rotate(225deg) translate(1px,1px)!important;
+}
+#torcisaoCalcOverlay .tor-calc-stepper button:hover,
+#torcisaoCalcOverlay .tor-calc-stepper button:focus-visible{
+  color:#ef7b30!important;
+  background:rgba(239,123,48,.08)!important;
+  outline:none!important;
+}
+html[data-bs-theme="dark"] #torcisaoCalcOverlay .tor-calc-stepper{
+  border-color:rgba(255,255,255,.13)!important;
+  background:rgba(255,255,255,.035)!important;
+}
+html[data-bs-theme="dark"] #torcisaoCalcOverlay .tor-calc-stepper button{
+  color:#9ca1a6!important;
+}
+html[data-bs-theme="dark"] #torcisaoCalcOverlay .tor-calc-stepper button+button{
+  border-top-color:rgba(255,255,255,.09)!important;
+}
+html[data-bs-theme="dark"] #torcisaoCalcOverlay .tor-calc-stepper button:hover,
+html[data-bs-theme="dark"] #torcisaoCalcOverlay .tor-calc-stepper button:focus-visible{
+  color:#ff9b5a!important;
+  background:rgba(239,123,48,.1)!important;
+}
+
+/*
+ * A legenda UNIDADE fica somente sobre o seletor existente.
+ * Ela é absoluta e não participa do fluxo, portanto não desloca nenhum campo.
+ */
+#torcisaoCalcOverlay .torcisao-calc-inline{
+  position:relative!important;
+}
+#torcisaoCalcOverlay .tor-calc-unit-caption{
+  position:absolute!important;
+  z-index:5!important;
+  top:-15px!important;
+  right:0!important;
+  width:86px!important;
+  padding-left:10px!important;
+  box-sizing:border-box!important;
+  display:block!important;
+  margin:0!important;
+  color:var(--th-muted,#6f7479)!important;
+  font:800 .53rem/1 'Montserrat',sans-serif!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  pointer-events:none!important;
+}
+
+@media(max-width:767.98px){
+  #torcisaoCalcOverlay .tor-calc-unit-caption{
+    width:82px!important;
+  }
+}
+@media(max-width:640px){
+  #torcisaoCalcOverlay .tor-calc-stepper{
+    right:9px!important;
+  }
+}

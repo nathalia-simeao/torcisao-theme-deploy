@@ -1,0 +1,17 @@
+/* Ajustes finais do bloco superior da Home conforme referência do site anterior */
+body.home .th-home{padding-top:180px!important}
+.th-home .th-hero{height:50vh!important;min-height:390px!important;max-height:520px!important;margin:0!important}
+.th-home .th-hero-shade{background:rgba(0,0,0,.62)!important}
+.th-home .th-hero-content{height:100%!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important;padding:26px 32px 20px!important}
+.th-home .th-hero-content .th-eyebrow{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;margin:0 0 18px!important;color:#ccc!important;font-family:'Montserrat',sans-serif!important;font-size:1rem!important;font-weight:600!important;letter-spacing:.12em!important;text-transform:uppercase!important;white-space:nowrap!important;opacity:1!important}
+.th-home .th-hero-content .th-eyebrow:before{width:24px!important;height:1px!important;background:#ccc!important}
+.th-home .th-hero-content h1{max-width:1100px!important;margin:0!important;color:#fff!important;font-family:'Montserrat',sans-serif!important;font-size:clamp(2.4rem,4vw,3.8rem)!important;font-weight:800!important;line-height:1.15!important;letter-spacing:-.035em!important;white-space:normal!important;text-align:center!important}
+.th-home .th-hero-content h1 strong{display:block!important;color:var(--th-orange)!important;font:inherit!important}
+.th-home .th-hero-dots{left:50%!important;right:auto!important;bottom:18px!important;transform:translateX(-50%)!important}
+.th-home .th-hero-dots button{width:28px!important;height:4px!important;border-radius:4px!important}.th-home .th-hero-dots button.is-active{width:48px!important}
+
+/* Ferramentas começam logo após o banner, sem bloco textual adicional */
+.th-home .th-tools{padding-top:42px!important}.th-home .th-tools-label{margin-bottom:18px!important}
+
+@media(max-width:991.98px){body.home .th-home{padding-top:124px!important}.th-home .th-hero{height:48vh!important;min-height:350px!important;max-height:470px!important}.th-home .th-hero-content .th-eyebrow{font-size:.78rem!important;white-space:normal!important}.th-home .th-hero-content h1{font-size:clamp(2.05rem,7vw,3.3rem)!important}}
+@media(max-width:767.98px){.th-home .th-hero{height:46svh!important;min-height:330px!important;max-height:420px!important}.th-home .th-hero-content{padding:24px 18px 18px!important}.th-home .th-hero-content .th-eyebrow{font-size:.66rem!important;margin-bottom:12px!important}.th-home .th-hero-content h1{font-size:clamp(1.9rem,9vw,2.8rem)!important;line-height:1.08!important}.th-home .th-hero-dots{bottom:12px!important}}

@@ -1,0 +1,409 @@
+/* Footer Torcisão 2026 — reconstrução fiel do layout aprovado */
+.site-footer.tor-footer-v2{
+  position:relative;
+  width:100%;
+  padding:0;
+  overflow:hidden;
+  background:#2c292a;
+  color:#fff;
+  font-family:'Montserrat',Arial,sans-serif;
+}
+.tor-footer-v2 *{box-sizing:border-box}
+.tor-footer-v2 a{color:inherit;text-decoration:none}
+.tor-footer-v2 button,.tor-footer-v2 input,.tor-footer-v2 textarea{font:inherit}
+.tor-footer-wrap{width:min(1580px,calc(100% - 96px));margin:0 auto}
+
+/* bloco principal */
+.tor-footer-main{padding:66px 0 48px}
+.tor-footer-data{
+  display:grid;
+  grid-template-columns:.82fr 1.12fr .88fr 1.24fr;
+  gap:clamp(34px,4vw,76px);
+  align-items:start;
+}
+.tor-footer-title{
+  margin:0 0 22px;
+  color:#fff;
+  font-size:clamp(1.05rem,1.25vw,1.38rem);
+  line-height:1.15;
+  font-weight:750;
+  letter-spacing:-.02em;
+}
+.tor-footer-links{display:grid;gap:16px}
+.tor-footer-links a,
+.tor-footer-contact-link,
+.tor-footer-address{
+  color:#f1eeee;
+  font-size:.96rem;
+  line-height:1.45;
+  font-weight:450;
+  transition:color .18s ease,transform .18s ease;
+}
+.tor-footer-links a:hover,
+.tor-footer-contact-link:hover,
+.tor-footer-address:hover{color:#ef7b30}
+
+/* contato */
+.tor-footer-contact-list{display:grid;gap:12px}
+.tor-footer-contact-link{display:flex;align-items:center;gap:14px;min-width:0}
+.tor-footer-contact-link span:last-child{overflow-wrap:anywhere}
+.tor-footer-iconbox{
+  width:46px;height:46px;flex:0 0 46px;
+  display:grid;place-items:center;
+  border:1px solid rgba(239,123,48,.42);
+  border-radius:12px;
+  color:#ef7b30;
+  font-size:1.08rem;
+  background:rgba(239,123,48,.035);
+}
+.tor-footer-social{display:flex;gap:10px;margin-top:22px}
+.tor-footer-social a{
+  width:50px;height:50px;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:12px;
+  color:#fff;
+  font-size:1.18rem;
+  transition:border-color .2s ease,color .2s ease,transform .2s ease,background .2s ease;
+}
+.tor-footer-social a:hover{border-color:#ef7b30;color:#ef7b30;background:rgba(239,123,48,.05);transform:translateY(-2px)}
+.tor-footer-hours{
+  margin-top:24px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.tor-footer-hours strong{
+  display:flex;align-items:center;gap:10px;
+  color:#ef7b30;
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.tor-footer-hours p{margin:12px 0 0;color:#fff;font-size:.91rem;line-height:1.45}
+
+/* pagamentos */
+.tor-footer-payments{display:grid;grid-template-columns:repeat(3,80px);gap:11px}
+.tor-pay{
+  height:51px;
+  display:grid;place-items:center;
+  overflow:hidden;
+  border-radius:10px;
+  background:#fff;
+  color:#141414;
+  font-weight:850;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+.tor-pay svg{max-width:64px;max-height:34px}
+.tor-pay-text{font-size:.76rem;letter-spacing:.04em}
+.tor-pay-visa{color:#14359c;font-size:1.08rem;font-weight:900}
+.tor-pay-elo{font-size:1.05rem;font-weight:900}
+.tor-pay-pix{color:#13a997;font-size:1.05rem;font-weight:850}
+.tor-pay-bndes{color:#07589f;font-size:.72rem;font-weight:900;letter-spacing:.08em}
+.tor-pay-boleto{font-size:.56rem;font-weight:800;letter-spacing:.06em}
+.tor-footer-action-stack{display:grid;gap:12px;margin-top:24px;width:min(275px,100%)}
+.tor-footer-pill{
+  min-height:58px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:0 18px;
+  border:1px solid rgba(255,255,255,.38);
+  border-radius:999px;
+  background:transparent;
+  color:#fff;
+  font-size:.88rem;
+  font-weight:750;
+  cursor:pointer;
+  transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+.tor-footer-pill:hover{border-color:#ef7b30;background:rgba(239,123,48,.09);transform:translateY(-1px)}
+.tor-footer-pill i{font-size:1.02rem}
+
+/* mapa */
+.tor-footer-address{display:block;margin-bottom:18px;font-style:normal}
+.tor-footer-map{
+  width:100%;
+  height:274px;
+  overflow:hidden;
+  border-radius:17px;
+  background:#e8e4df;
+  border:1px solid rgba(255,255,255,.12);
+}
+.tor-footer-map iframe{display:block;width:100%;height:100%;border:0;background:#e8e4df}
+.tor-footer-map-hint{display:flex;align-items:center;gap:7px;margin-top:8px;color:#aaa;font-size:.65rem;line-height:1.35}
+
+/* grupo */
+.tor-footer-group{
+  padding:16px 0 26px;
+  border-top:1px solid rgba(255,255,255,.11);
+}
+.tor-footer-group-shell{
+  padding:18px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:16px;
+  background:rgba(255,255,255,.018);
+}
+.tor-footer-group-label{
+  margin:0 0 12px;
+  color:#c3bebe;
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.tor-footer-company-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tor-footer-company{
+  min-height:96px;
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  gap:18px;
+  align-items:center;
+  padding:17px 20px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(255,255,255,.018);
+}
+a.tor-footer-company{transition:border-color .2s ease,background .2s ease,transform .2s ease}
+a.tor-footer-company:hover{border-color:rgba(239,123,48,.65);background:rgba(239,123,48,.045);transform:translateY(-2px)}
+.tor-footer-company-brand{display:flex;align-items:center;min-width:0}
+.tor-footer-company-brand img{width:128px;max-height:46px;object-fit:contain;object-position:left center;filter:none}
+.tor-industrial-logo{display:flex;align-items:center;gap:10px;min-width:0}
+.tor-industrial-mark{
+  position:relative;width:42px;height:42px;flex:0 0 42px;
+  border-left:3px solid #fff;
+  border-top:3px solid #fff;
+}
+.tor-industrial-mark::after{content:'';position:absolute;left:9px;bottom:2px;width:15px;height:15px;border-radius:50%;background:#ef7b30;border:2px solid #fff}
+.tor-industrial-word strong{display:block;color:#fff;font-size:.96rem;line-height:1;font-weight:850;letter-spacing:.015em}
+.tor-industrial-word small{display:block;margin-top:5px;color:#ef7b30;font-size:.55rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+.tor-footer-company-copy strong{display:block;color:#fff;font-size:.8rem;font-weight:750}
+.tor-footer-company-copy span{display:block;margin-top:5px;color:#b8b3b3;font-size:.68rem;line-height:1.35}
+.tor-footer-company-arrow{color:#ef7b30;font-size:1.25rem}
+
+/* faixa final */
+.tor-footer-bottom{border-top:1px solid rgba(255,255,255,.11);padding:24px 0 26px}
+.tor-footer-bottom-row{display:grid;grid-template-columns:1fr auto auto;gap:28px;align-items:center}
+.tor-footer-ciesp{display:flex;align-items:center;gap:12px;color:#fff;font-size:.83rem;font-weight:700}
+.tor-ciesp-logo{display:inline-flex;align-items:center;justify-content:center;padding:2px 5px;background:#e94557;color:#fff;font-size:.8rem;font-weight:900;font-style:italic;line-height:1}
+.tor-footer-copy{color:#fff;font-size:.74rem;font-weight:700;white-space:nowrap}
+.tor-accessibility-open{
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.48);
+  border-radius:50%;
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  transition:border-color .2s ease,color .2s ease,background .2s ease,transform .2s ease;
+}
+.tor-accessibility-open:hover{border-color:#ef7b30;color:#ef7b30;background:rgba(239,123,48,.07);transform:translateY(-2px)}
+.tor-accessibility-open i{font-size:1.25rem}
+
+/* Modal Trabalhe conosco */
+.tor-work-overlay,
+.tor-a11y-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1000080;
+  display:none;
+  place-items:center;
+  padding:18px;
+  background:rgba(8,8,9,.78);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+.tor-work-overlay.is-open,.tor-a11y-overlay.is-open{display:grid}
+.tor-work-dialog{
+  position:relative;
+  width:min(720px,calc(100vw - 28px));
+  max-height:calc(100dvh - 28px);
+  overflow:auto;
+  border-radius:24px;
+  background:#fff;
+  color:#202224;
+  box-shadow:0 34px 120px rgba(0,0,0,.48);
+}
+.tor-work-head{padding:26px 30px 20px;background:#171717;color:#fff}
+.tor-work-head small{display:block;color:#ef7b30;font-size:.64rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+.tor-work-head h2{margin:7px 48px 0 0;font-size:clamp(1.55rem,2.2vw,2.2rem);line-height:1.05;letter-spacing:-.035em}
+.tor-work-head p{margin:8px 48px 0 0;color:#b9b9b9;font-size:.76rem;line-height:1.5}
+.tor-modal-x{
+  position:absolute;top:16px;right:16px;
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  font-size:1.25rem;
+  cursor:pointer;
+}
+.tor-work-body{padding:24px 30px 30px}
+.tor-work-channels{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.tor-work-channel{
+  display:flex;align-items:center;gap:11px;
+  padding:13px 14px;
+  border:1px solid #e4e4e4;
+  border-radius:14px;
+  background:#fafafa;
+  color:#242629;
+  font-size:.76rem;
+  line-height:1.35;
+}
+.tor-work-channel i{color:#ef7b30;font-size:1.05rem}
+.tor-work-channel strong{display:block;font-size:.67rem;text-transform:uppercase;letter-spacing:.06em}
+.tor-work-form{display:grid;gap:13px}
+.tor-work-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tor-work-field{display:grid;gap:6px}
+.tor-work-field label{color:#373a3d;font-size:.7rem;font-weight:750}
+.tor-work-field input,.tor-work-field textarea{
+  width:100%;
+  min-height:48px;
+  padding:11px 13px;
+  border:1px solid #d9dde1;
+  border-radius:12px;
+  background:#f7f8f9;
+  color:#222;
+  outline:none;
+}
+.tor-work-field textarea{min-height:88px;resize:vertical}
+.tor-work-field input:focus,.tor-work-field textarea:focus{border-color:#ef7b30;box-shadow:0 0 0 3px rgba(239,123,48,.1)}
+.tor-file-drop{
+  position:relative;
+  min-height:104px;
+  display:grid;place-items:center;
+  padding:17px;
+  border:1px dashed #c9cdd2;
+  border-radius:14px;
+  background:#fafafa;
+  text-align:center;
+  cursor:pointer;
+}
+.tor-file-drop:hover{border-color:#ef7b30;background:#fff8f3}
+.tor-file-drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.tor-file-drop i{display:block;margin-bottom:5px;color:#ef7b30;font-size:1.35rem}
+.tor-file-drop strong{display:block;color:#292b2e;font-size:.75rem}
+.tor-file-drop small{display:block;margin-top:4px;color:#777;font-size:.64rem}
+.tor-work-consent{display:flex;align-items:flex-start;gap:8px;color:#686d72;font-size:.65rem;line-height:1.45}
+.tor-work-consent input{margin-top:2px;accent-color:#ef7b30}
+.tor-work-consent a{color:#c85d1d;text-decoration:underline}
+.tor-work-submit-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px}
+.tor-work-submit,.tor-work-whatsapp{
+  min-height:50px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:999px;
+  font-size:.74rem;
+  font-weight:800;
+  text-align:center;
+}
+.tor-work-submit{border:0;background:#ef7b30;color:#fff;cursor:pointer}
+.tor-work-submit:hover{background:#d76621}
+.tor-work-submit[disabled]{opacity:.55;cursor:wait}
+.tor-work-whatsapp{border:1px solid #d5d7da;color:#222;background:#fff}
+.tor-work-whatsapp:hover{border-color:#25d366;color:#12883f}
+.tor-work-status{min-height:18px;margin:0;color:#6a6f73;font-size:.68rem;line-height:1.4}
+.tor-work-status.is-success{color:#168a47}.tor-work-status.is-error{color:#b3261e}
+
+/* Assistente de acessibilidade */
+.tor-a11y-dialog{
+  position:relative;
+  width:min(460px,calc(100vw - 28px));
+  max-height:calc(100dvh - 28px);
+  overflow:auto;
+  padding:26px;
+  border-radius:22px;
+  background:#fff;
+  color:#222;
+  box-shadow:0 30px 100px rgba(0,0,0,.46);
+}
+.tor-a11y-dialog .tor-modal-x{border-color:#ddd;background:#fff;color:#222;top:16px;right:16px}
+.tor-a11y-head small{display:block;color:#ef7b30;font-size:.62rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+.tor-a11y-head h2{margin:7px 48px 7px 0;font-size:1.45rem;line-height:1.05}
+.tor-a11y-head p{margin:0;color:#74787c;font-size:.72rem;line-height:1.5}
+.tor-a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.tor-a11y-action{
+  min-height:82px;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;
+  padding:14px;
+  border:1px solid #e0e2e4;
+  border-radius:14px;
+  background:#fafafa;
+  color:#222;
+  text-align:left;
+  cursor:pointer;
+}
+.tor-a11y-action i{color:#ef7b30;font-size:1.05rem}
+.tor-a11y-action strong{font-size:.72rem}.tor-a11y-action small{color:#777;font-size:.6rem;line-height:1.3}
+.tor-a11y-action[aria-pressed="true"]{border-color:#ef7b30;background:#fff4ec}
+.tor-a11y-reset{width:100%;min-height:46px;margin-top:12px;border:1px solid #ddd;border-radius:999px;background:#fff;color:#333;font-size:.7rem;font-weight:800;cursor:pointer}
+
+/* Estados de acessibilidade persistentes */
+html.tor-a11y-font-1{font-size:106%}
+html.tor-a11y-font-2{font-size:113%}
+html.tor-a11y-font-3{font-size:121%}
+html.tor-a11y-links a{text-decoration:underline!important;text-decoration-thickness:2px!important;text-underline-offset:3px!important}
+html.tor-a11y-contrast{filter:contrast(1.22)}
+html.tor-a11y-readable body{font-family:Arial,Helvetica,sans-serif!important;letter-spacing:.015em}
+html.tor-a11y-readable body *{font-family:inherit!important}
+html.tor-a11y-reduce-motion *,html.tor-a11y-reduce-motion *::before,html.tor-a11y-reduce-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+
+html[data-bs-theme="dark"] .tor-work-dialog,
+html[data-bs-theme="dark"] .tor-a11y-dialog{background:#1d1d1e;color:#f4f4f4}
+html[data-bs-theme="dark"] .tor-work-field label{color:#eee}
+html[data-bs-theme="dark"] .tor-work-field input,
+html[data-bs-theme="dark"] .tor-work-field textarea,
+html[data-bs-theme="dark"] .tor-file-drop,
+html[data-bs-theme="dark"] .tor-work-channel,
+html[data-bs-theme="dark"] .tor-a11y-action{background:#252526;border-color:#3a3a3c;color:#f1f1f1}
+html[data-bs-theme="dark"] .tor-file-drop strong,html[data-bs-theme="dark"] .tor-work-whatsapp{color:#f2f2f2}
+html[data-bs-theme="dark"] .tor-work-whatsapp{background:#202021;border-color:#424244}
+html[data-bs-theme="dark"] .tor-a11y-dialog .tor-modal-x,html[data-bs-theme="dark"] .tor-a11y-reset{background:#242425;border-color:#444;color:#fff}
+
+@media(max-width:1180px){
+  .tor-footer-wrap{width:calc(100% - 48px)}
+  .tor-footer-data{grid-template-columns:1fr 1fr;gap:46px 52px}
+  .tor-footer-company{grid-template-columns:150px 1fr auto}
+}
+@media(max-width:760px){
+  .tor-footer-wrap{width:calc(100% - 32px)}
+  .tor-footer-main{padding:46px 0 34px}
+  .tor-footer-data{grid-template-columns:1fr;gap:38px}
+  .tor-footer-title{margin-bottom:17px}
+  .tor-footer-links{gap:13px}
+  .tor-footer-payments{grid-template-columns:repeat(3,minmax(0,82px))}
+  .tor-footer-action-stack{width:100%}
+  .tor-footer-map{height:250px}
+  .tor-footer-company-grid{grid-template-columns:1fr}
+  .tor-footer-company{grid-template-columns:132px 1fr auto;gap:12px;padding:15px}
+  .tor-footer-company-brand img{width:110px}
+  .tor-footer-bottom-row{grid-template-columns:1fr auto;gap:18px}
+  .tor-footer-copy{grid-column:1/-1;grid-row:2;text-align:left;white-space:normal}
+  .tor-work-body{padding:20px}
+  .tor-work-head{padding:23px 20px 18px}
+  .tor-work-channels,.tor-work-form-grid,.tor-work-submit-row{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  .tor-footer-wrap{width:calc(100% - 24px)}
+  .tor-footer-company{grid-template-columns:1fr auto}
+  .tor-footer-company-brand{grid-column:1/-1}
+  .tor-footer-company-copy{grid-column:1}
+  .tor-footer-company-arrow{grid-column:2;grid-row:2}
+  .tor-footer-ciesp{font-size:.74rem}
+  .tor-a11y-grid{grid-template-columns:1fr}
+}
+
+/* Evita a quebra visual do e-mail do contato no footer. */
+.tor-footer-contact-link[href^="mailto:"] span:last-child{
+  white-space:nowrap;
+  overflow-wrap:normal;
+  word-break:normal;
+  font-size:clamp(.78rem,.88vw,.92rem);
+  letter-spacing:-.018em;
+}
+@media(max-width:1180px){
+  .tor-footer-contact-link[href^="mailto:"] span:last-child{font-size:.92rem}
+}
+@media(max-width:480px){
+  .tor-footer-contact-link[href^="mailto:"]{gap:10px}
+  .tor-footer-contact-link[href^="mailto:"] .tor-footer-iconbox{width:42px;height:42px;flex-basis:42px}
+  .tor-footer-contact-link[href^="mailto:"] span:last-child{font-size:clamp(.72rem,3.3vw,.86rem)}
+}

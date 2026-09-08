@@ -1,0 +1,27 @@
+body .tor-footer-v2 .tor-footer-company{
+  min-height:132px!important;
+}
+body .tor-footer-v2 .tor-footer-company-copy .tor-footer-company-segment{
+  display:block!important;
+  margin:0 0 7px!important;
+  font-size:.62rem!important;
+  line-height:1.28!important;
+  font-weight:750!important;
+  letter-spacing:.01em!important;
+}
+body .tor-footer-v2 .tor-footer-company--trefilados .tor-footer-company-segment{
+  color:#ef9a61!important;
+}
+body .tor-footer-v2 .tor-footer-company--industrial .tor-footer-company-segment{
+  color:#e87570!important;
+}
+@media(max-width:560px){
+  body .tor-footer-v2 .tor-footer-company{
+    min-height:122px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-copy .tor-footer-company-segment{
+    margin-bottom:5px!important;
+    font-size:.56rem!important;
+    line-height:1.22!important;
+  }
+}

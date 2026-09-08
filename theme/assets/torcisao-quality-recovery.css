@@ -1,0 +1,62 @@
+/* Home — reconstrução da seção Qualidade conforme layout aprovado */
+body.home .th-quality{padding:clamp(54px,5vw,78px) 0!important;background:var(--th-bg,#f2f0ee)!important;border-top:1px solid var(--th-line,rgba(24,25,27,.11))!important}
+body.home .th-quality .th-container{width:min(1480px,calc(100% - 64px))!important}
+body.home .tq-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(520px,.88fr);gap:46px;align-items:center}
+body.home .tq-copy{min-width:0}
+body.home .tq-kicker{display:inline-flex;align-items:center;gap:10px;color:var(--th-orange,#ef7b30);font-size:.72rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+body.home .tq-copy h2{max-width:840px;margin:15px 0 14px;color:var(--th-ink,#17191c);font-size:clamp(2.65rem,4.1vw,4.9rem);line-height:.98;font-weight:850;letter-spacing:-.05em}
+body.home .tq-copy>p{max-width:900px;margin:0;color:var(--th-text,#676d73);font-size:clamp(.92rem,1vw,1.08rem);line-height:1.65}
+body.home .tq-bottom{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:center;margin-top:34px}
+
+/* selo ISO */
+body.home .tq-medal{position:relative;width:200px;height:226px;display:grid;place-items:start center;margin-inline:auto}
+body.home .tq-medal-ribbon{position:absolute;left:50%;bottom:0;width:116px;height:92px;transform:translateX(-50%);background:linear-gradient(90deg,#c95f1c 0 45%,#f47a28 45% 55%,#bd5518 55%);clip-path:polygon(0 0,44% 0,50% 100%,61% 62%,100% 100%,100% 0)}
+body.home .tq-medal-ring{position:relative;z-index:2;width:174px;height:174px;display:grid;place-items:center;border-radius:50%;background:repeating-conic-gradient(from 0deg,#f47a28 0 7deg,#df651e 7deg 12deg);box-shadow:0 16px 34px rgba(239,123,48,.20)}
+body.home .tq-medal-ring:before{content:'';position:absolute;inset:14px;border-radius:50%;background:var(--th-card,#fff);border:7px solid rgba(239,123,48,.12);box-shadow:inset 0 0 0 1px rgba(239,123,48,.20)}
+body.home .tq-medal-core{position:relative;z-index:2;width:120px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:50%}
+body.home .tq-medal-core strong{color:var(--th-orange,#ef7b30);font-size:1.75rem;line-height:1;font-weight:850;letter-spacing:-.035em}
+body.home .tq-medal-core b{margin-top:8px;color:var(--th-ink,#17191c);font-size:1.45rem;line-height:1;font-weight:850;letter-spacing:.03em}
+body.home .tq-medal-core span{max-width:92px;margin-top:10px;color:var(--th-text,#676d73);font-size:.49rem;line-height:1.35;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+html[data-bs-theme="dark"] body.home .tq-medal-ring:before{background:#1b1c1d;border-color:#7c3716;box-shadow:inset 0 0 0 2px #0f1011}
+html[data-bs-theme="dark"] body.home .tq-medal-core b{color:#fff}
+html[data-bs-theme="dark"] body.home .tq-medal-core span{color:#d5d5d5}
+
+/* pilares */
+body.home .tq-pillars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+body.home .tq-pillar{min-height:76px;display:flex;align-items:center;gap:14px;padding:15px 18px;border:1px solid var(--th-line,rgba(24,25,27,.11));border-radius:15px;background:var(--th-card,#fff);color:var(--th-ink,#17191c);box-shadow:0 10px 28px rgba(20,20,20,.035)}
+body.home .tq-pillar i{flex:0 0 auto;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:rgba(239,123,48,.10);color:var(--th-orange,#ef7b30);font-size:1.02rem}
+body.home .tq-pillar strong{font-size:.78rem;line-height:1.3;font-weight:800}
+html[data-bs-theme="dark"] body.home .tq-pillar{background:#1a1b1c;border-color:rgba(255,255,255,.10);box-shadow:none}
+
+/* card do certificado */
+body.home .tq-cert-card{display:grid;grid-template-columns:minmax(230px,.84fr) minmax(0,1.16fr);gap:28px;align-items:center;padding:30px;border:1px solid var(--th-line,rgba(24,25,27,.11));border-radius:22px;background:var(--th-card,#fff);box-shadow:0 24px 64px rgba(20,20,20,.075)}
+body.home .tq-cert-preview{position:relative;min-height:410px;display:grid;place-items:center;padding:18px;border-radius:15px;background:linear-gradient(145deg,#f7f5f3,#ece8e4);overflow:hidden}
+body.home .tq-cert-preview img{display:block;width:100%;height:100%;max-height:382px;object-fit:contain;object-position:center;border-radius:10px;filter:drop-shadow(0 14px 18px rgba(0,0,0,.10))}
+html[data-bs-theme="dark"] body.home .tq-cert-card{background:#191a1b;border-color:rgba(255,255,255,.1);box-shadow:0 28px 72px rgba(0,0,0,.28)}
+html[data-bs-theme="dark"] body.home .tq-cert-preview{background:linear-gradient(145deg,#252628,#171819)}
+body.home .tq-cert-copy small{display:block;color:var(--th-orange,#ef7b30);font-size:.62rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+body.home .tq-cert-copy h3{margin:10px 0 9px;color:var(--th-ink,#17191c);font-size:clamp(1.5rem,2vw,2.15rem);line-height:1.08;font-weight:850;letter-spacing:-.03em}
+body.home .tq-cert-copy p{margin:0;color:var(--th-text,#676d73);font-size:.78rem;line-height:1.6}
+body.home .tq-cert-actions{display:grid;gap:9px;margin-top:20px}
+body.home .tq-cert-btn{min-height:48px;display:flex;align-items:center;justify-content:center;gap:9px;padding:0 18px;border-radius:999px;font:800 .7rem/1 'Montserrat',sans-serif;text-decoration:none;cursor:pointer;transition:transform .18s ease,background-color .18s ease,border-color .18s ease}
+body.home .tq-cert-btn:hover{transform:translateY(-1px)}
+body.home .tq-cert-btn-primary{border:0;background:var(--th-orange,#ef7b30);color:#fff}
+body.home .tq-cert-btn-primary:hover{background:var(--th-orange-dark,#c9611e)}
+body.home .tq-cert-btn-secondary{border:1px solid rgba(239,123,48,.55);background:transparent;color:var(--th-orange,#ef7b30)}
+body.home .tq-cert-btn-secondary:hover{background:rgba(239,123,48,.07)}
+body.home .tq-cert-file{display:block;margin-top:13px;color:var(--th-text,#676d73);font-size:.56rem;line-height:1.4}
+
+/* modal certificado */
+body.home .tq-modal{position:fixed;inset:0;z-index:1000060;display:none;place-items:center;padding:20px;background:rgba(7,8,9,.84);backdrop-filter:blur(12px)}
+body.home .tq-modal.is-open{display:grid}
+body.home .tq-modal-dialog{position:relative;width:min(980px,calc(100vw - 34px));height:min(820px,calc(100dvh - 34px));display:grid;grid-template-rows:auto minmax(0,1fr);gap:16px;padding:22px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:#171819;box-shadow:0 34px 120px rgba(0,0,0,.45)}
+body.home .tq-modal-head{padding-right:58px;color:#fff}
+body.home .tq-modal-head small{display:block;color:#ff9c5e;font-size:.62rem;font-weight:850;letter-spacing:.08em}
+body.home .tq-modal-head strong{display:block;margin-top:5px;font-size:1.1rem}
+body.home .tq-modal-close{position:absolute;top:18px;right:18px;width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);border-radius:50%;background:rgba(255,255,255,.04);color:#fff;font-size:1.2rem;cursor:pointer}
+body.home .tq-modal-body{min-height:0;display:grid;place-items:center;overflow:auto;border-radius:15px;background:#f3f1ef}
+body.home .tq-modal-body img{display:block;max-width:100%;height:auto;object-fit:contain}
+
+@media(max-width:1180px){body.home .tq-grid{grid-template-columns:1fr}.tq-cert-card{max-width:900px!important}}
+@media(max-width:860px){body.home .tq-bottom{grid-template-columns:1fr}.tq-medal{margin-inline:0}.tq-cert-card{grid-template-columns:1fr!important}.tq-cert-preview{min-height:360px!important}.tq-cert-preview img{max-height:330px!important}}
+@media(max-width:640px){body.home .th-quality .th-container{width:calc(100% - 28px)!important}.tq-copy h2{font-size:clamp(2.2rem,12vw,3.2rem)!important}.tq-pillars{grid-template-columns:1fr!important}.tq-medal{margin-inline:auto!important}.tq-cert-card{padding:18px!important}.tq-cert-preview{min-height:300px!important;padding:12px!important}.tq-cert-preview img{max-height:276px!important}.tq-modal{padding:6px!important}.tq-modal-dialog{width:calc(100vw - 12px)!important;height:calc(100dvh - 12px)!important;padding:16px!important;border-radius:20px!important}}

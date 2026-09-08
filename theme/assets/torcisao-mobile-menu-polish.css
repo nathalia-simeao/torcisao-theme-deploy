@@ -1,0 +1,193 @@
+/* Menu mobile Torcisão — logo correta, ícones por linha e hover em pílula */
+@media (max-width:991.98px){
+  .tor-mobile-panel{
+    width:min(368px,90vw)!important;
+    padding:16px 14px 22px!important;
+    background:color-mix(in srgb,var(--th-card,#fff) 96%,transparent)!important;
+    border-left:1px solid var(--th-line,rgba(24,25,27,.10))!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+    backdrop-filter:blur(18px)!important;
+    box-shadow:-24px 0 70px rgba(0,0,0,.18)!important;
+  }
+
+  .tor-mobile-panel-head{
+    min-height:66px!important;
+    padding:0 2px 14px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:14px!important;
+    border-bottom:1px solid var(--th-line,rgba(24,25,27,.10))!important;
+  }
+
+  /* Logo do drawer mobile sempre totalmente contida no box. */
+  .tor-mobile-brand{
+    position:relative!important;
+    display:block!important;
+    width:154px!important;
+    max-width:calc(100% - 54px)!important;
+    height:38px!important;
+    min-width:0!important;
+    overflow:hidden!important;
+    overflow:clip!important;
+    contain:paint!important;
+    isolation:isolate!important;
+    flex:0 1 154px!important;
+    box-sizing:border-box!important;
+    background-image:url('lgcabecalho400.png')!important;
+    background-repeat:no-repeat!important;
+    background-size:contain!important;
+    background-position:left center!important;
+    background-origin:content-box!important;
+    background-clip:content-box!important;
+    filter:none!important;
+    opacity:1!important;
+    clip-path:inset(0)!important;
+  }
+
+  /* Modo escuro: usa a arte escura sem crop negativo, evitando o vazamento lateral. */
+  html[data-bs-theme="dark"] .tor-mobile-brand{
+    background-image:url('https://torcisao.com.br/wp-content/uploads/2026/08/2.png')!important;
+    background-repeat:no-repeat!important;
+    background-size:contain!important;
+    background-position:left center!important;
+    background-origin:content-box!important;
+    background-clip:content-box!important;
+    overflow:hidden!important;
+    overflow:clip!important;
+    contain:paint!important;
+    clip-path:inset(0)!important;
+  }
+
+  .tor-mobile-brand img{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    max-width:100%!important;
+    max-height:100%!important;
+  }
+
+  .tor-mobile-panel .tor-close{
+    width:40px!important;
+    height:40px!important;
+    flex:0 0 40px!important;
+    border-radius:50%!important;
+    background:rgba(127,127,127,.035)!important;
+  }
+
+  .tor-mobile-links{
+    display:grid!important;
+    gap:5px!important;
+    margin-top:16px!important;
+  }
+
+  .tor-mobile-links a{
+    min-height:54px!important;
+    display:grid!important;
+    grid-template-columns:36px minmax(0,1fr) 18px!important;
+    align-items:center!important;
+    gap:11px!important;
+    margin:0!important;
+    padding:7px 12px 7px 8px!important;
+    border:1px solid transparent!important;
+    border-bottom:1px solid transparent!important;
+    border-radius:50px!important;
+    background:transparent!important;
+    color:var(--th-ink,#17191c)!important;
+    text-decoration:none!important;
+    font:750 .78rem/1.2 'Montserrat',sans-serif!important;
+    transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease!important;
+  }
+
+  .tor-mobile-link-icon{
+    width:36px!important;
+    height:36px!important;
+    display:grid!important;
+    place-items:center!important;
+    border-radius:50%!important;
+    background:rgba(239,123,48,.075)!important;
+    color:var(--th-orange,#ef7b30)!important;
+    transition:background-color .18s ease,color .18s ease,transform .18s ease!important;
+  }
+
+  .tor-mobile-link-icon svg{
+    width:18px!important;
+    height:18px!important;
+    display:block!important;
+  }
+
+  .tor-mobile-link-arrow{
+    display:grid!important;
+    place-items:center!important;
+    color:var(--th-orange,#ef7b30)!important;
+    font-size:.95rem!important;
+    line-height:1!important;
+    opacity:.58!important;
+    transform:translateX(-2px)!important;
+    transition:opacity .18s ease,transform .18s ease!important;
+  }
+
+  .tor-mobile-links a:hover,
+  .tor-mobile-links a:focus-visible{
+    border-color:rgba(239,123,48,.26)!important;
+    background:rgba(239,123,48,.085)!important;
+    color:var(--th-orange,#ef7b30)!important;
+    box-shadow:0 9px 22px rgba(20,20,20,.05)!important;
+    transform:translateX(2px)!important;
+    outline:none!important;
+  }
+
+  .tor-mobile-links a:hover .tor-mobile-link-icon,
+  .tor-mobile-links a:focus-visible .tor-mobile-link-icon{
+    background:var(--th-orange,#ef7b30)!important;
+    color:#fff!important;
+    transform:scale(1.03)!important;
+  }
+
+  .tor-mobile-links a:hover .tor-mobile-link-arrow,
+  .tor-mobile-links a:focus-visible .tor-mobile-link-arrow{
+    opacity:1!important;
+    transform:translateX(1px)!important;
+  }
+
+  html[data-bs-theme="dark"] .tor-mobile-panel{
+    background:rgba(24,24,25,.97)!important;
+    border-left-color:rgba(255,255,255,.09)!important;
+  }
+
+  html[data-bs-theme="dark"] .tor-mobile-links a{
+    color:#f4f4f4!important;
+  }
+
+  html[data-bs-theme="dark"] .tor-mobile-links a:hover,
+  html[data-bs-theme="dark"] .tor-mobile-links a:focus-visible{
+    color:#f28a46!important;
+    background:rgba(239,123,48,.105)!important;
+    border-color:rgba(239,123,48,.30)!important;
+    box-shadow:none!important;
+  }
+
+  /* Fecha visualmente toda a área atrás do drawer. Isso impede a logo do header de aparecer na fresta. */
+  .tor-mobile-panel.is-open{
+    box-shadow:-100vw 0 0 100vw rgba(244,242,239,.97),-24px 0 70px rgba(0,0,0,.18)!important;
+  }
+  html[data-bs-theme="dark"] .tor-mobile-panel.is-open{
+    box-shadow:-100vw 0 0 100vw rgba(16,16,17,.98),-24px 0 70px rgba(0,0,0,.42)!important;
+  }
+}
+
+@media (max-width:420px){
+  .tor-mobile-panel{width:min(352px,92vw)!important}
+  .tor-mobile-brand{
+    width:146px!important;
+    max-width:calc(100% - 52px)!important;
+    height:36px!important;
+    flex-basis:146px!important;
+    background-size:contain!important;
+    background-position:left center!important;
+  }
+  html[data-bs-theme="dark"] .tor-mobile-brand{
+    background-size:contain!important;
+    background-position:left center!important;
+  }
+}

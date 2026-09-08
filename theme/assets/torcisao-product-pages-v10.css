@@ -1,0 +1,119 @@
+/* Ajustes finos das páginas unificadas de produto. */
+
+.hf-page .hf-top{padding-top:22px!important;padding-bottom:30px!important}
+.hf-page .hf-title{font-size:clamp(2.6rem,4.6vw,4.9rem)!important;font-weight:760!important;letter-spacing:-.035em!important}
+.hf-page .hf-intro{font-size:clamp(.96rem,1.05vw,1.08rem)!important;font-weight:500!important;line-height:1.5!important}
+.hf-page .hf-product-title{font-size:clamp(1.72rem,2.15vw,2.55rem)!important;font-weight:720!important;letter-spacing:-.025em!important;line-height:1.08!important}
+.hf-page .hf-product-lead{font-size:.9rem!important;line-height:1.62!important}
+.hf-page .hf-section-title{font-size:clamp(1.95rem,2.55vw,2.8rem)!important;font-weight:720!important;letter-spacing:-.025em!important;line-height:1.08!important}
+.hf-page .hf-section-intro{font-size:.94rem!important;line-height:1.66!important}
+.hf-page .hf-section-kicker,.hf-page .hf-eyebrow{font-weight:760!important}
+.hf-page .hf-fact strong,.hf-page .hf-spec-row strong{font-weight:700!important}
+
+@media(min-width:1180px){
+  .hf-page .hf-intro{max-width:none!important;white-space:nowrap!important}
+}
+
+/* Ritmo mais próximo da Home. */
+.hf-page .hf-explorer-section{padding-bottom:38px!important}
+.hf-page .hf-section{padding-top:44px!important;padding-bottom:44px!important}
+.hf-page .hf-section-head{margin-bottom:24px!important;gap:9px!important}
+.hf-page .hf-quality-section{padding-top:28px!important;padding-bottom:24px!important}
+.hf-page .hf-cta{padding-top:18px!important;padding-bottom:44px!important}
+.hf-page .hf-quality-card{margin:0!important}
+.hf-page .hf-cta-box{margin-top:0!important}
+
+/* Hover do assistente, visível e no padrão Torcisão. */
+.hf-page .hf-btn-secondary{
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease!important;
+}
+.hf-page button.hf-btn-secondary:hover,
+.hf-page button.hf-btn-secondary:focus-visible{
+  background:var(--hf-orange,#ef7b30)!important;
+  border-color:var(--hf-orange,#ef7b30)!important;
+  color:#fff!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 10px 24px rgba(239,123,48,.20)!important;
+  outline:none!important;
+}
+.hf-page button.hf-btn-secondary:hover i,
+.hf-page button.hf-btn-secondary:focus-visible i{color:#fff!important}
+
+/* Palco com movimento 3D leve e sem trancos. */
+.hf-page .hf-image-wrap{perspective:1200px!important}
+.hf-page .hf-image{
+  transform:rotateX(var(--tor-tilt-x,0deg)) rotateY(var(--tor-tilt-y,0deg)) scale(var(--hf-zoom,1))!important;
+  transform-style:preserve-3d!important;
+  will-change:transform!important;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1),filter .18s ease!important;
+}
+.hf-page .hf-image-wrap:hover .hf-image{filter:drop-shadow(0 28px 24px rgba(0,0,0,.22))!important}
+.hf-page .hf-lens{width:132px!important;height:132px!important;border-width:1.5px!important;box-shadow:0 10px 28px rgba(0,0,0,.18)!important}
+
+/* Ferramentas que substituem o card genérico de aplicações em Barra e Arame. */
+.hf-page .tor-product-tools{display:grid;gap:12px}
+.hf-page .tor-product-tool{
+  display:grid;grid-template-columns:46px minmax(0,1fr) 34px;gap:14px;align-items:center;
+  width:100%;padding:16px;border:1px solid var(--hf-line);border-radius:18px;background:var(--hf-bg);color:var(--hf-ink);text-align:left;cursor:pointer;
+  transition:transform .18s ease,border-color .18s ease,background-color .18s ease,box-shadow .18s ease;
+}
+.hf-page .tor-product-tool:hover,.hf-page .tor-product-tool:focus-visible{transform:translateY(-2px);border-color:rgba(239,123,48,.55);background:var(--hf-soft);box-shadow:0 12px 28px rgba(20,20,20,.07);outline:none}
+.hf-page .tor-product-tool-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:rgba(239,123,48,.10);color:var(--hf-orange);font-size:1.05rem}
+.hf-page .tor-product-tool strong{display:block;font-size:.84rem;font-weight:760}
+.hf-page .tor-product-tool small{display:block;margin-top:4px;color:var(--hf-text);font-size:.67rem;line-height:1.45}
+.hf-page .tor-product-tool-arrow{
+  position:relative;
+  width:34px;height:34px;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 34px;
+  padding:0!important;
+  border:1px solid var(--hf-line);
+  border-radius:50%;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:1!important;
+  text-align:center!important;
+  overflow:hidden;
+}
+.hf-page .tor-product-tool-arrow::before{
+  content:'↗';
+  display:block;
+  color:var(--hf-orange);
+  font:700 13px/1 'Montserrat',sans-serif;
+  line-height:13px;
+  width:13px;
+  height:13px;
+  text-align:center;
+  transform:translate(0,0);
+}
+.hf-page .tor-tolerance-panel{display:none;margin-top:12px;padding:16px;border:1px solid var(--hf-line);border-radius:16px;background:var(--hf-bg)}
+.hf-page .tor-tolerance-panel.is-open{display:block}
+.hf-page .tor-tolerance-grid{display:grid;grid-template-columns:1fr .72fr auto;gap:9px;align-items:end}
+.hf-page .tor-tolerance-field label{display:block;margin-bottom:6px;color:var(--hf-text);font-size:.62rem;font-weight:750;text-transform:uppercase;letter-spacing:.07em}
+.hf-page .tor-tolerance-field input,.hf-page .tor-tolerance-field select{width:100%;min-height:42px;padding:0 13px;border:1px solid var(--hf-line);border-radius:999px;background:var(--hf-card);color:var(--hf-ink);font:650 .72rem/1 'Montserrat',sans-serif}
+.hf-page .tor-tolerance-calc{min-height:42px;padding:0 16px;border:0;border-radius:999px;background:var(--hf-orange);color:#fff;font:760 .69rem/1 'Montserrat',sans-serif;cursor:pointer}
+.hf-page .tor-tolerance-result{margin-top:12px;color:var(--hf-text);font-size:.69rem;line-height:1.55}
+.hf-page .tor-tolerance-result strong{color:var(--hf-ink)}
+
+/* Tabelas mais compactas e claras. */
+.hf-page .hf-spec-row{padding-top:14px!important;padding-bottom:14px!important}
+.hf-page .hf-availability-table th,.hf-page .hf-availability-table td{padding-top:10px!important;padding-bottom:10px!important}
+
+@media(max-width:991.98px){
+  .hf-page .hf-title{font-size:clamp(2.3rem,8vw,3.4rem)!important}
+  .hf-page .hf-product-title,.hf-page .hf-intro{white-space:normal!important}
+  .hf-page .hf-section{padding-top:38px!important;padding-bottom:38px!important}
+  .hf-page .hf-quality-section{padding-top:24px!important;padding-bottom:20px!important}
+  .hf-page .hf-cta{padding-top:14px!important;padding-bottom:36px!important}
+}
+@media(max-width:760px){
+  .hf-page .hf-top{padding-top:16px!important;padding-bottom:24px!important}
+  .hf-page .hf-title{font-size:clamp(2.15rem,11vw,3rem)!important;font-weight:740!important}
+  .hf-page .hf-product-title{font-size:clamp(1.55rem,7vw,2rem)!important;white-space:normal!important}
+  .hf-page .hf-section-title{font-size:clamp(1.75rem,8vw,2.25rem)!important}
+  .hf-page .hf-section{padding-top:32px!important;padding-bottom:32px!important}
+  .hf-page .tor-tolerance-grid{grid-template-columns:1fr 1fr}
+  .hf-page .tor-tolerance-calc{grid-column:1/-1}
+}

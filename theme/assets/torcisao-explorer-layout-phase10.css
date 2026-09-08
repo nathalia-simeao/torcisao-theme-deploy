@@ -1,0 +1,215 @@
+/* Phase 10 — Explorador: laterais mais úteis, palco compacto, peça realmente central e CTAs contidos */
+
+/* Desktop principal */
+body.home .tpe-shell{
+  --tpe-left-col:320px;
+  --tpe-right-col:390px;
+  position:relative!important;
+  width:min(1500px,calc(100% - 36px))!important;
+  margin-inline:auto!important;
+  grid-template-columns:var(--tpe-left-col) minmax(0,1fr) var(--tpe-right-col)!important;
+  min-height:540px!important;
+}
+body.home .tpe-options{
+  position:relative!important;
+  padding:24px 22px 150px!important;
+}
+body.home .tpe-info{
+  position:static!important;
+  padding:24px 26px!important;
+}
+
+/*
+ * Os CTAs continuam visualmente na coluna esquerda, mas agora ficam limitados
+ * à largura real dela. O erro anterior usava left + right no shell inteiro e
+ * fazia os botões atravessarem as três colunas.
+ */
+body.home .tpe-actions{
+  position:absolute!important;
+  left:22px!important;
+  right:auto!important;
+  bottom:20px!important;
+  width:calc(var(--tpe-left-col) - 44px)!important;
+  max-width:calc(var(--tpe-left-col) - 44px)!important;
+  margin:0!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:8px!important;
+  z-index:18!important;
+  box-sizing:border-box!important;
+}
+body.home .tpe-btn{
+  width:100%!important;
+  max-width:100%!important;
+  min-height:44px!important;
+  padding:0 14px!important;
+  font-size:.59rem!important;
+  line-height:1.2!important;
+  box-sizing:border-box!important;
+}
+
+/* Palco central: menor e geometricamente equilibrado. */
+body.home .tpe-stage{
+  min-width:0!important;
+}
+body.home .tpe-image-wrap{
+  inset:54px 14px 40px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+body.home .tpe-image-wrap img{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  translate:0 0!important;
+  width:auto!important;
+  height:auto!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform-origin:center center!important;
+  max-width:84%!important;
+  max-height:82%!important;
+}
+
+/* Sem deslocamentos artificiais por linha: o centro do palco é o centro da peça. */
+body.home #tpeStage[data-line="arame"],
+body.home #tpeStage[data-line="barra"],
+body.home #tpeStage[data-line="haste"],
+body.home #tpeStage[data-line="conectores"]{
+  --tpe-art-shift-x:0%!important;
+}
+
+body.home #tpeStage[data-line="arame"] .tpe-image-wrap img{
+  max-width:84%!important;
+  max-height:80%!important;
+}
+body.home #tpeStage[data-line="barra"] .tpe-image-wrap img{
+  max-width:86%!important;
+  max-height:82%!important;
+}
+body.home #tpeStage[data-line="haste"] .tpe-image-wrap img{
+  max-width:60%!important;
+  max-height:86%!important;
+}
+body.home #tpeStage[data-line="conectores"] .tpe-image-wrap img{
+  max-width:78%!important;
+  max-height:82%!important;
+}
+
+/* Sombra também fica no centro do palco. */
+body.home .tpe-stage:after{
+  left:32%!important;
+  right:32%!important;
+  bottom:54px!important;
+  opacity:.68!important;
+}
+
+/* Lightbox: centro real, sem offset manual por tipo de produto. */
+body.home .tpe-lightbox-stage{
+  position:relative!important;
+  padding:64px 54px 54px!important;
+}
+body.home .tpe-lightbox-image{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  max-width:84%!important;
+  max-height:84%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform-origin:center center!important;
+  translate:-50% -50%!important;
+}
+body.home .tpe-lightbox[data-line="arame"],
+body.home .tpe-lightbox[data-line="barra"],
+body.home .tpe-lightbox[data-line="haste"],
+body.home .tpe-lightbox[data-line="conectores"]{
+  --tpe-lb-shift-x:0%!important;
+}
+body.home .tpe-lightbox[data-line="arame"] .tpe-lightbox-image,
+body.home .tpe-lightbox[data-line="barra"] .tpe-lightbox-image{
+  max-width:86%!important;
+  max-height:84%!important;
+}
+body.home .tpe-lightbox[data-line="haste"] .tpe-lightbox-image{
+  max-width:62%!important;
+  max-height:88%!important;
+}
+body.home .tpe-lightbox[data-line="conectores"] .tpe-lightbox-image{
+  max-width:80%!important;
+  max-height:84%!important;
+}
+
+@media(max-width:1380px) and (min-width:1181px){
+  body.home .tpe-shell{
+    --tpe-left-col:280px;
+    --tpe-right-col:340px;
+    width:min(1320px,calc(100% - 28px))!important;
+  }
+  body.home .tpe-options{padding-left:19px!important;padding-right:19px!important}
+  body.home .tpe-info{padding-left:21px!important;padding-right:21px!important}
+  body.home .tpe-actions{
+    left:19px!important;
+    width:calc(var(--tpe-left-col) - 38px)!important;
+    max-width:calc(var(--tpe-left-col) - 38px)!important;
+  }
+}
+
+@media(max-width:1180px) and (min-width:992px){
+  body.home .tpe-shell{
+    --tpe-left-col:240px;
+    --tpe-right-col:300px;
+    width:100%!important;
+  }
+  body.home .tpe-options{padding-left:16px!important;padding-right:16px!important}
+  body.home .tpe-info{padding-left:18px!important;padding-right:18px!important}
+  body.home .tpe-actions{
+    left:16px!important;
+    width:calc(var(--tpe-left-col) - 32px)!important;
+    max-width:calc(var(--tpe-left-col) - 32px)!important;
+  }
+  body.home .tpe-image-wrap img{max-width:86%!important;max-height:82%!important}
+  body.home #tpeStage[data-line="haste"] .tpe-image-wrap img{max-width:64%!important;max-height:86%!important}
+  body.home #tpeStage[data-line="conectores"] .tpe-image-wrap img{max-width:82%!important;max-height:82%!important}
+}
+
+@media(max-width:991.98px){
+  body.home .tpe-shell{
+    width:100%!important;
+    grid-template-columns:1fr!important;
+  }
+  body.home .tpe-options{padding:18px!important}
+  body.home .tpe-info{position:relative!important;padding:20px!important}
+  body.home .tpe-actions{
+    position:static!important;
+    left:auto!important;
+    right:auto!important;
+    width:auto!important;
+    max-width:none!important;
+    margin-top:16px!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.home .tpe-image-wrap img{max-width:86%!important;max-height:82%!important}
+  body.home #tpeStage[data-line="haste"] .tpe-image-wrap img{max-width:66%!important;max-height:86%!important}
+  body.home #tpeStage[data-line="conectores"] .tpe-image-wrap img{max-width:82%!important;max-height:82%!important}
+}
+
+@media(max-width:767.98px){
+  body.home .tpe-actions{grid-template-columns:1fr!important}
+  body.home .tpe-image-wrap{inset:52px 8px 38px!important}
+  body.home .tpe-image-wrap img{max-width:90%!important;max-height:82%!important}
+  body.home #tpeStage[data-line="haste"] .tpe-image-wrap img{max-width:72%!important;max-height:86%!important}
+  body.home #tpeStage[data-line="conectores"] .tpe-image-wrap img{max-width:86%!important;max-height:82%!important}
+  body.home .tpe-lightbox-image{max-width:90%!important;max-height:82%!important}
+  body.home .tpe-lightbox[data-line="haste"] .tpe-lightbox-image{max-width:74%!important;max-height:86%!important}
+}

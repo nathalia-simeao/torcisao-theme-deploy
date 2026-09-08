@@ -1,0 +1,116 @@
+/* Calibração final das interações de produto: lupa exata + avatares. */
+
+/* Theo: o recorte vale somente para imagens, nunca para os ícones do CTA comercial. */
+.hf-page img.hf-assistant-avatar,
+.hf-assistant img.hf-assistant-avatar,
+.hf-page img.hf-theo-avatar{
+  display:block!important;
+  width:56px!important;
+  height:56px!important;
+  min-width:56px!important;
+  flex:0 0 56px!important;
+  aspect-ratio:1/1!important;
+  border:2px solid var(--hf-orange,#ef7b30)!important;
+  border-radius:50%!important;
+  object-fit:cover!important;
+  object-position:50% 50%!important;
+  overflow:hidden!important;
+  transform:none!important;
+  background:#f6efe9!important;
+}
+.hf-page img.hf-theo-avatar{width:52px!important;height:52px!important;min-width:52px!important;flex-basis:52px!important}
+
+/* Foto pequena dentro do cabeçalho da conversa com o Theo. */
+.hf-assistant .hf-theo-chat-title img{
+  display:block!important;
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  flex:0 0 38px!important;
+  aspect-ratio:1/1!important;
+  border:1.5px solid var(--hf-orange,#ef7b30)!important;
+  border-radius:50%!important;
+  object-fit:cover!important;
+  object-position:50% 50%!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+
+/* Card de Assistente de aplicação: usa a foto real do Theo dentro da bolinha. */
+#haste-aterramento .tor-product-tool-icon--theo{
+  width:58px!important;
+  height:58px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:2px solid var(--hf-orange,#ef7b30)!important;
+  border-radius:50%!important;
+  background:#f6efe9!important;
+}
+#haste-aterramento .tor-haste-assistant-avatar{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:100%!important;
+  object-fit:cover!important;
+  object-position:50% 50%!important;
+  border:0!important;
+  border-radius:50%!important;
+  transform:none!important;
+}
+
+/* CTA comercial: ícone independente e perfeitamente centralizado. */
+.hf-page .hf-commercial-icon{
+  width:56px!important;
+  height:56px!important;
+  min-width:56px!important;
+  flex:0 0 56px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border:2px solid var(--hf-orange,#ef7b30)!important;
+  border-radius:50%!important;
+  background:rgba(239,123,48,.12)!important;
+  color:var(--hf-orange,#ef7b30)!important;
+  overflow:hidden!important;
+  font-size:1.25rem!important;
+  line-height:1!important;
+}
+.hf-page .hf-commercial-icon i{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1!important;
+  transform:none!important;
+}
+
+/* Lupa limpa: a posição e o zoom são calculados pelo JS v12. */
+.hf-page .hf-lens{
+  width:136px!important;
+  height:136px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background-color:#fff!important;
+  background-repeat:no-repeat!important;
+  background-origin:border-box!important;
+  background-clip:padding-box!important;
+  border:1.5px solid var(--hf-orange,#ef7b30)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.18)!important;
+  pointer-events:none!important;
+}
+html[data-bs-theme="dark"] .hf-page .hf-lens{background-color:#171717!important}
+
+@media(max-width:760px){
+  .hf-page img.hf-assistant-avatar,
+  .hf-assistant img.hf-assistant-avatar{
+    width:50px!important;
+    height:50px!important;
+    min-width:50px!important;
+    flex-basis:50px!important;
+  }
+  #haste-aterramento .tor-product-tool-icon--theo{
+    width:52px!important;
+    height:52px!important;
+  }
+}

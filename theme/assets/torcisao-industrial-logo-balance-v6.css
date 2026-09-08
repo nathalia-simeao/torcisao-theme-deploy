@@ -1,0 +1,142 @@
+/* Ajuste óptico final da marca Torcisão Industrial no bloco Grupo Torcisão. */
+body .tor-footer-v2 .tor-footer-company-brand--industrial img{
+  width:145px!important;
+  max-height:48px!important;
+}
+body .tor-footer-v2 .tor-footer-industrial-label{
+  width:145px!important;
+}
+
+/*
+ * DESKTOP — zona segura final da orelha fixa “Faça uma cotação”.
+ * Esta folha é carregada por último entre os ajustes do footer, então ela
+ * prevalece sobre as regras anteriores e garante que Blog e Footer terminem
+ * antes da orelha, com respiro visual real.
+ */
+@media(min-width:992px){
+  body.home{
+    --tor-desktop-quote-ear-safe:112px;
+  }
+
+  /* Blog: o shell reconstruído não usa o container padrão da Home. */
+  body.home .th-home .tb-blog-inner{
+    box-sizing:border-box!important;
+    padding-right:var(--tor-desktop-quote-ear-safe)!important;
+  }
+  body.home .th-home .tb-blog-viewport{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  body.home .th-home .tb-blog-bottom{
+    margin-right:0!important;
+    max-width:100%!important;
+  }
+  body.home .th-home .tb-blog-all{
+    position:relative!important;
+    z-index:1!important;
+    padding-right:0!important;
+  }
+
+  /* Footer: o rodapé fica fora do <main>. A reserva é aplicada no wrapper
+   * inteiro para mapa, cards do grupo e faixa final nunca entrarem na área
+   * coberta pela orelha. */
+  body.home .tor-footer-v2 .tor-footer-wrap{
+    box-sizing:border-box!important;
+    padding-right:var(--tor-desktop-quote-ear-safe)!important;
+  }
+  body.home .tor-footer-v2 .tor-footer-data,
+  body.home .tor-footer-v2 .tor-footer-data > section,
+  body.home .tor-footer-v2 .tor-footer-map,
+  body.home .tor-footer-v2 .tor-footer-map iframe,
+  body.home .tor-footer-v2 .tor-footer-group-shell,
+  body.home .tor-footer-v2 .tor-footer-company-grid,
+  body.home .tor-footer-v2 .tor-footer-bottom-row{
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  body.home .tor-footer-v2 .tor-footer-map,
+  body.home .tor-footer-v2 .tor-footer-map iframe{
+    width:100%!important;
+  }
+}
+
+@media(max-width:760px){
+  body .tor-footer-v2 .tor-footer-company-brand--industrial img{
+    width:100px!important;
+    max-height:37px!important;
+  }
+  body .tor-footer-v2 .tor-footer-industrial-label{
+    width:100px!important;
+  }
+
+  /*
+   * Zona segura da orelha fixa “Faça uma cotação”.
+   * No mobile, nenhum conteúdo das últimas seções deve passar por baixo dela.
+   */
+  :root{
+    --tor-mobile-quote-ear-safe:80px;
+  }
+
+  /* Blog: preserva a barra de progresso e mantém CTA + seta totalmente à esquerda da orelha. */
+  body.home .th-home .tb-blog-bottom{
+    width:auto!important;
+    margin-left:20px!important;
+    margin-right:calc(20px + var(--tor-mobile-quote-ear-safe))!important;
+    grid-template-columns:minmax(42px,1fr) auto!important;
+    gap:10px!important;
+  }
+  body.home .th-home .tb-blog-all{
+    max-width:100%!important;
+    padding-right:0!important;
+  }
+  body.home .th-home .tb-blog-all span{
+    flex:0 0 auto!important;
+  }
+
+  /* Footer inteiro: mantém a leitura empilhada à esquerda e reserva a faixa da orelha à direita. */
+  body .tor-footer-v2 .tor-footer-wrap{
+    width:auto!important;
+    max-width:none!important;
+    margin-left:16px!important;
+    margin-right:calc(16px + var(--tor-mobile-quote-ear-safe))!important;
+  }
+  body .tor-footer-v2 .tor-footer-data,
+  body .tor-footer-v2 .tor-footer-data > section,
+  body .tor-footer-v2 .tor-footer-group-shell,
+  body .tor-footer-v2 .tor-footer-company-grid,
+  body .tor-footer-v2 .tor-footer-bottom-row{
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  body .tor-footer-v2 .tor-footer-map,
+  body .tor-footer-v2 .tor-footer-map iframe,
+  body .tor-footer-v2 .tor-footer-address,
+  body .tor-footer-v2 .tor-footer-map-hint{
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
+
+@media(max-width:390px){
+  body .tor-footer-v2 .tor-footer-company-brand--industrial img{
+    width:88px!important;
+    max-height:33px!important;
+  }
+  body .tor-footer-v2 .tor-footer-industrial-label{
+    width:88px!important;
+  }
+
+  :root{
+    --tor-mobile-quote-ear-safe:76px;
+  }
+  body.home .th-home .tb-blog-bottom{
+    margin-left:12px!important;
+    margin-right:calc(12px + var(--tor-mobile-quote-ear-safe))!important;
+    gap:8px!important;
+  }
+  body .tor-footer-v2 .tor-footer-wrap{
+    margin-left:12px!important;
+    margin-right:calc(12px + var(--tor-mobile-quote-ear-safe))!important;
+  }
+}
