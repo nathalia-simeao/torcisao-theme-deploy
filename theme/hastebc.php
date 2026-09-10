@@ -117,5 +117,8 @@ get_template_part('template-parts/haste-family');
 })();
 </script>
 <?php endif; ?>
+<?php if ($torcisao_haste_lang === 'es') : ?>
+<script defer src="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-haste-form-es-v43.js'); ?>?v=20260910-1"></script>
+<?php endif; ?>
 <?php
 get_footer();
