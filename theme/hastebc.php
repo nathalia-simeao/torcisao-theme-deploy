@@ -40,6 +40,7 @@ get_template_part('template-parts/haste-family');
   }
 })();
 </script>
+<script defer src="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-haste-form-router-v44.js'); ?>?v=20260910-1334"></script>
 <?php if (in_array($torcisao_haste_lang, ['en','es'], true)) : ?>
 <script defer src="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-haste-i18n-v42.js'); ?>?v=20260910-1"></script>
 <?php endif; ?>
