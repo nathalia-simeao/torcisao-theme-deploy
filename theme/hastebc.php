@@ -9,16 +9,35 @@ $torcisao_haste_lang = function_exists('torcisao_request_language') ? torcisao_r
 get_header();
 get_template_part('template-parts/haste-family');
 ?>
-<script id="torcisao-haste-hubspot-unified-20260910a">
+<script id="torcisao-haste-hubspot-unified-20260910b">
 (function(){
+  'use strict';
   const unifiedFormId = '8fdff701-c5a7-4684-9358-d557a70425a5';
-  window.TORCISAO_HASTE_PAGE = window.TORCISAO_HASTE_PAGE || {};
-  window.TORCISAO_HASTE_PAGE.formId = unifiedFormId;
-  window.TORCISAO_HASTE_PAGE.formIds = {
+  const unifiedFormIds = Object.freeze({
     baixa: unifiedFormId,
     alta: unifiedFormId,
     conectores: unifiedFormId
-  };
+  });
+  const cfg = window.TORCISAO_HASTE_PAGE = window.TORCISAO_HASTE_PAGE || {};
+  cfg.portalId = '50818463';
+
+  try {
+    Object.defineProperty(cfg, 'formId', {
+      configurable: false,
+      enumerable: true,
+      get: function(){ return unifiedFormId; },
+      set: function(){}
+    });
+    Object.defineProperty(cfg, 'formIds', {
+      configurable: false,
+      enumerable: true,
+      get: function(){ return unifiedFormIds; },
+      set: function(){}
+    });
+  } catch (e) {
+    cfg.formId = unifiedFormId;
+    cfg.formIds = unifiedFormIds;
+  }
 })();
 </script>
 <?php if (in_array($torcisao_haste_lang, ['en','es'], true)) : ?>
