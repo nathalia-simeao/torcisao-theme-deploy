@@ -5,7 +5,7 @@
  */
 $home_conversion_assets = get_template_directory_uri();
 ?>
-<link rel="stylesheet" href="<?php echo esc_url($home_conversion_assets . '/assets/torcisao-home-conversion.css'); ?>?v=20260907-3">
+<link rel="stylesheet" href="<?php echo esc_url($home_conversion_assets . '/assets/torcisao-home-conversion.css'); ?>?v=20260910-1">
 <link rel="stylesheet" href="<?php echo esc_url($home_conversion_assets . '/assets/torcisao-home-mobile-final.css'); ?>?v=20260907-2">
 
 <button type="button" class="home-quote-tab" id="homeQuoteTab" data-analytics-origin="home_aba_cotacao" aria-label="Faça uma cotação">
