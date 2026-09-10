@@ -6,6 +6,7 @@ $hf_initial = isset($torcisao_haste_initial) && in_array($torcisao_haste_initial
 $hf_assets = get_template_directory_uri();
 $hf_iso = 'https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf';
 $hf_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela página de Haste de Aterramento da Torcisão e gostaria de falar com a equipe comercial sobre uma cotação.');
+$hf_unified_form_id = '8fdff701-c5a7-4684-9358-d557a70425a5';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260905">
 <main class="hf-page" id="haste-aterramento" data-initial-kind="<?php echo esc_attr($hf_initial); ?>">
@@ -89,10 +90,8 @@ $hf_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela
   </section>
 </main>
 
-<!-- lightbox -->
 <div class="hf-lightbox" id="hfLightbox" aria-hidden="true"><button type="button" class="hf-lightbox-close" aria-label="Fechar">×</button><img id="hfLightboxImage" src="" alt=""></div>
 
-<!-- assistant: manual + Theo -->
 <div class="hf-assistant" id="hfAssistant" aria-hidden="true">
   <div class="hf-assistant-dialog" role="dialog" aria-modal="true" aria-labelledby="hfAssistantTitle">
     <div class="hf-assistant-head"><div class="hf-assistant-identity"><img class="hf-assistant-avatar" src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" alt="Theo"><div><small>Assistente de aplicação</small><h3 id="hfAssistantTitle">Theo</h3><p>Use a escolha rápida ou descreva a aplicação para eu organizar as opções Torcisão.</p></div></div><button type="button" class="hf-assistant-close" aria-label="Fechar">×</button></div>
@@ -106,8 +105,7 @@ $hf_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela
   </div>
 </div>
 
-<!-- fixed quote tab + drawer -->
 <button type="button" class="btn-cta-mobile" id="hfQuoteTab" data-analytics-origin="haste_aba_cotacao" data-analytics-product="haste_aterramento" aria-label="Solicitar cotação"><i class="bi bi-chat-dots-fill"></i><span class="btn-cta-mobile-label">Solicitar cotação</span></button>
 <div class="hf-quote-drawer" id="hfQuoteDrawer" aria-hidden="true"><div class="hf-quote-panel"><div class="hf-quote-head"><div><small>COTAÇÃO</small><h3>Solicite seu orçamento</h3></div><button type="button" class="hf-quote-close" aria-label="Fechar">×</button></div><div id="hfQuoteForm" data-analytics-origin="haste_aba_cotacao" data-analytics-product="haste_aterramento"></div></div></div>
-<script>window.TORCISAO_HASTE_PAGE=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'portalId'=>'50818463','formIds'=>['baixa'=>'8fdff701-c5a7-4684-9358-d557a70425a5','alta'=>'f836d957-0755-4223-a714-0f9f5cdb22f7','conectores'=>'8fdff701-c5a7-4684-9358-d557a70425a5']]); ?>;</script>
-<script defer src="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.js'); ?>?v=20260905"></script>
+<script>window.TORCISAO_HASTE_PAGE=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'portalId'=>'50818463','formId'=>$hf_unified_form_id,'formIds'=>['baixa'=>$hf_unified_form_id,'alta'=>$hf_unified_form_id,'conectores'=>$hf_unified_form_id]]); ?>;</script>
+<script defer src="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.js'); ?>?v=20260910-2"></script>
