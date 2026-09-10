@@ -101,3 +101,11 @@ html[data-bs-theme="dark"] .tor-pill-ghost{background:rgba(255,255,255,.05)}
 @media(max-width:991.98px){:root{--tor-header-height:124px}.tor-hero{min-height:640px}.tor-hero-inner{padding-top:150px}.tor-hero-dots{right:18px;bottom:24px}.tor-stats{grid-template-columns:1fr 1fr}}
 @media(max-width:767.98px){.tor-container{width:auto;margin-left:14px;margin-right:14px}.tor-hero{height:92svh;min-height:620px}.tor-hero-inner{padding:145px 0 46px;align-items:flex-end}.tor-hero h1{font-size:clamp(2.65rem,13vw,4.25rem)}.tor-hero p{font-size:.9rem}.tor-section{padding:48px 0}.tor-product-grid{grid-template-columns:1fr}.tor-product-card,.tor-product-card:last-child{grid-column:auto;min-height:430px}.tor-stats{grid-template-columns:1fr 1fr}.tor-about-media{min-height:420px}.tor-quality-strip{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column}.tor-product-card-content{padding:22px}}
 @media(max-width:380px){.tor-container{margin-left:11px;margin-right:11px}.tor-stats{grid-template-columns:1fr}.tor-hero-actions{display:grid}.tor-pill{width:100%}}
+
+/* Global quote tab */
+.btn-cta-mobile,
+#hfQuoteTab,
+#afQuoteTab,
+#bfQuoteTab{
+  border:1px solid var(--tor-orange,#ef7b30) !important;
+}
