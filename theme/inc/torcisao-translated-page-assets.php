@@ -196,6 +196,7 @@ if (!function_exists('torcisao_translated_page_assets')) {
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-whatsapp-i18n-v36.js?v=20260907-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-product-form-i18n-v41.js?v=20260911-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-product-page-i18n-v42.js?v=20260911-2').'"></script>';
+        echo '<script defer src="'.esc_url($uri.'/assets/torcisao-product-page-i18n-v43.js?v=20260911-1').'"></script>';
     }
     add_action('wp_footer','torcisao_translated_page_assets',100);
 }
