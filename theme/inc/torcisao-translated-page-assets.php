@@ -29,7 +29,7 @@ if (!function_exists('torcisao_product_url')) {
         $slugs=[
             'pt'=>['arame'=>'arame-trefilado','barra'=>'barra-trefilada','haste'=>'haste-de-aterramento'],
             'en'=>['arame'=>'drawn-wire','barra'=>'drawn-bar','haste'=>'grounding-rod'],
-            'es'=>['arame'=>'alambre-trefilado','barra'=>'barra-trefilada','haste'=>'varilla-de-puesta-a-tierra'],
+            'es'=>['arame'=>'alambre-trefilado','barra'=>'barra-de-acero-trefilada','haste'=>'varilla-de-puesta-a-tierra'],
         ];
         if (!isset($slugs[$lang][$product])) return home_url('/');
         $base='';
@@ -194,6 +194,7 @@ if (!function_exists('torcisao_translated_page_assets')) {
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-i18n-fixes-v36.js?v=20260907-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-product-application-i18n-v37.js?v=20260907-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-whatsapp-i18n-v36.js?v=20260907-1').'"></script>';
+        echo '<script defer src="'.esc_url($uri.'/assets/torcisao-product-form-i18n-v41.js?v=20260911-1').'"></script>';
     }
     add_action('wp_footer','torcisao_translated_page_assets',100);
 }
