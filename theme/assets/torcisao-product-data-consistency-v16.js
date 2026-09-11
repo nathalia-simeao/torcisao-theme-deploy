@@ -1,6 +1,21 @@
 (function(){
 'use strict';
 
+/* Carrega a camada global de atribuição para formulários HubSpot. */
+(function loadHubSpotAttribution(){
+  if(window.TorcisaoHubSpotAttribution)return;
+  if(document.querySelector('script[data-torcisao-hubspot-attribution]'))return;
+  const current=document.currentScript?.src||'';
+  const src=current
+    ? current.replace(/torcisao-product-data-consistency-v16\.js(?:\?.*)?$/,'torcisao-hubspot-attribution-v1.js?v=20260911-1')
+    : '/wp-content/themes/theme/assets/torcisao-hubspot-attribution-v1.js?v=20260911-1';
+  const script=document.createElement('script');
+  script.src=src;
+  script.defer=true;
+  script.dataset.torcisaoHubspotAttribution='1';
+  document.head.appendChild(script);
+})();
+
 /* A fonte técnica usada pelo Theo já trabalha com 1004 a 1020 para BTC.
  * Esta camada mantém Barra e Arame visualmente consistentes com essa referência,
  * inclusive quando outros scripts re-renderizam títulos, tabelas ou o seletor manual. */
