@@ -18,7 +18,6 @@ body .tor-footer-v2 .tor-footer-industrial-label{
     --tor-desktop-quote-ear-safe:112px;
   }
 
-  /* Blog: o shell reconstruído não usa o container padrão da Home. */
   body.home .th-home .tb-blog-inner{
     box-sizing:border-box!important;
     padding-right:var(--tor-desktop-quote-ear-safe)!important;
@@ -37,9 +36,6 @@ body .tor-footer-v2 .tor-footer-industrial-label{
     padding-right:0!important;
   }
 
-  /* Footer: o rodapé fica fora do <main>. A reserva é aplicada no wrapper
-   * inteiro para mapa, cards do grupo e faixa final nunca entrarem na área
-   * coberta pela orelha. */
   body.home .tor-footer-v2 .tor-footer-wrap{
     box-sizing:border-box!important;
     padding-right:var(--tor-desktop-quote-ear-safe)!important;
@@ -61,6 +57,46 @@ body .tor-footer-v2 .tor-footer-industrial-label{
   }
 }
 
+/* Notebook e desktop menor: os cards deixam de disputar meia largura.
+ * A versão anterior só empilhava abaixo de 920px, por isso ainda ficavam
+ * espremidos em notebooks e janelas menores de desktop. */
+@media(min-width:761px) and (max-width:1500px){
+  body .tor-footer-v2 .tor-footer-company-grid{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    width:100%!important;
+  }
+  body .tor-footer-v2 .tor-footer-company{
+    width:100%!important;
+    max-width:none!important;
+    min-height:104px!important;
+    grid-template-columns:minmax(180px,220px) minmax(0,1fr) 48px!important;
+    gap:22px!important;
+    padding:18px 24px!important;
+    box-sizing:border-box!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand{
+    width:190px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand--trefilados img{
+    width:184px!important;
+    max-height:56px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-brand--industrial img{
+    width:170px!important;
+    max-height:52px!important;
+  }
+  body .tor-footer-v2 .tor-footer-industrial-label{
+    width:170px!important;
+  }
+  body .tor-footer-v2 .tor-footer-company-arrow{
+    width:40px!important;
+    height:40px!important;
+    justify-self:end!important;
+    margin-right:2px!important;
+  }
+}
+
 @media(max-width:760px){
   body .tor-footer-v2 .tor-footer-company-brand--industrial img{
     width:100px!important;
@@ -70,15 +106,10 @@ body .tor-footer-v2 .tor-footer-industrial-label{
     width:100px!important;
   }
 
-  /*
-   * Zona segura da orelha fixa “Faça uma cotação”.
-   * No mobile, nenhum conteúdo das últimas seções deve passar por baixo dela.
-   */
   :root{
     --tor-mobile-quote-ear-safe:80px;
   }
 
-  /* Blog: preserva a barra de progresso e mantém CTA + seta totalmente à esquerda da orelha. */
   body.home .th-home .tb-blog-bottom{
     width:auto!important;
     margin-left:20px!important;
@@ -94,7 +125,6 @@ body .tor-footer-v2 .tor-footer-industrial-label{
     flex:0 0 auto!important;
   }
 
-  /* Footer inteiro: mantém a leitura empilhada à esquerda e reserva a faixa da orelha à direita. */
   body .tor-footer-v2 .tor-footer-wrap{
     width:auto!important;
     max-width:none!important;
