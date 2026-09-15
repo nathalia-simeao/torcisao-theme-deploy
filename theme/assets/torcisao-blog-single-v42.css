@@ -1,21 +1,25 @@
 /* Gutenberg article body alignment overrides.
- * Keeps the article body on the exact same outer axis as the hero/title.
+ * Body is nested inside the exact same .tor-article-shell used by the hero.
  */
 body.single-post .tor-article--gutenberg .tor-gutenberg-body{
-  width:min(1160px,calc(100% - 48px))!important;
-  max-width:1160px!important;
-  margin:0 auto!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
   padding:0 0 78px!important;
   position:relative!important;
   display:block!important;
 }
 
 body.single-post .tor-article--gutenberg .tor-gutenberg-content{
+  display:block!important;
   width:100%!important;
   max-width:none!important;
   min-width:0!important;
   margin:0!important;
   padding:0!important;
+  float:none!important;
+  grid-column:1 / -1!important;
+  justify-self:stretch!important;
   text-align:left!important;
   font-size:1.04rem;
   line-height:1.9;
@@ -23,16 +27,34 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-content{
 
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > *{
   box-sizing:border-box!important;
-  max-width:100%!important;
+  width:100%!important;
+  max-width:none!important;
   margin-left:0!important;
   margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  transform:none!important;
+  float:none!important;
+  grid-column:1 / -1!important;
+  justify-self:stretch!important;
   text-align:left!important;
+}
+
+body.single-post .tor-article--gutenberg .tor-gutenberg-content > .wp-block-heading,
+body.single-post .tor-article--gutenberg .tor-gutenberg-content > .wp-block-paragraph,
+body.single-post .tor-article--gutenberg .tor-gutenberg-content > .wp-block-image,
+body.single-post .tor-article--gutenberg .tor-gutenberg-content > .wp-block-list,
+body.single-post .tor-article--gutenberg .tor-gutenberg-content > .wp-block-table,
+body.single-post .tor-article--gutenberg .tor-gutenberg-content > .wp-block-quote{
+  margin-inline:0!important;
+  padding-inline:0!important;
+  max-width:none!important;
+  width:100%!important;
 }
 
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > h2,
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > h3,
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > h4{
-  width:100%!important;
   line-height:1.15;
   letter-spacing:-.025em;
   font-weight:820;
@@ -57,7 +79,6 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-content > h4{
 }
 
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > p{
-  width:100%!important;
   margin-top:0!important;
   margin-bottom:1.55em!important;
 }
@@ -70,7 +91,6 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-content > p:first-of-typ
 
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > ul,
 body.single-post .tor-article--gutenberg .tor-gutenberg-content > ol{
-  width:100%!important;
   margin-top:0!important;
   margin-bottom:1.65em!important;
   padding-left:1.25em!important;
@@ -107,7 +127,6 @@ html[data-bs-theme="dark"] body.single-post .tor-article--gutenberg .tor-gutenbe
 
 @media(max-width:760px){
   body.single-post .tor-article--gutenberg .tor-gutenberg-body{
-    width:min(100% - 28px,1160px)!important;
     padding-bottom:54px!important;
   }
   body.single-post .tor-article--gutenberg .tor-gutenberg-content{
@@ -119,11 +138,5 @@ html[data-bs-theme="dark"] body.single-post .tor-article--gutenberg .tor-gutenbe
   }
   body.single-post .tor-article--gutenberg .tor-gutenberg-content > p:first-of-type{
     font-size:1.07rem;
-  }
-}
-
-@media(max-width:420px){
-  body.single-post .tor-article--gutenberg .tor-gutenberg-body{
-    width:min(100% - 22px,1160px)!important;
   }
 }
