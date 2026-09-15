@@ -40,7 +40,7 @@ while (have_posts()) : the_post();
     $share_title = rawurlencode($title);
     $whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode(sprintf($t['wa'], $title));
 ?>
-<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260908-2">
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-3">
 <main class="tor-article" id="conteudo">
     <header class="tor-article-head">
         <div class="tor-article-shell">
