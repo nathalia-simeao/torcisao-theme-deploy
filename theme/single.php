@@ -29,7 +29,7 @@ while (have_posts()) : the_post();
     $is_elementor = ($elementor_mode === 'builder') || !empty($elementor_data);
 ?>
 <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-8">
-<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v42.css'); ?>?v=20260915-1">
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v42.css'); ?>?v=20260915-2">
 
 <?php if ($is_elementor) : ?>
     <main class="tor-elementor-legacy" id="conteudo">
@@ -86,24 +86,26 @@ while (have_posts()) : the_post();
         </div>
     </header>
 
-    <div class="tor-gutenberg-body">
-        <aside class="tor-article-rail" aria-label="<?php echo esc_attr($t['share_aria']); ?>">
-            <div class="tor-article-sticky">
-                <div class="tor-article-share">
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_attr($share_url); ?>" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    <a href="https://wa.me/?text=<?php echo esc_attr($share_title . '%20' . $share_url); ?>" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                    <button type="button" id="torCopyArticleLink" data-url="<?php echo esc_url($permalink); ?>" aria-label="<?php echo esc_attr($t['copy_link']); ?>"><i class="bi bi-link-45deg"></i></button>
+    <div class="tor-article-shell">
+        <div class="tor-gutenberg-body">
+            <aside class="tor-article-rail" aria-label="<?php echo esc_attr($t['share_aria']); ?>">
+                <div class="tor-article-sticky">
+                    <div class="tor-article-share">
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_attr($share_url); ?>" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://wa.me/?text=<?php echo esc_attr($share_title . '%20' . $share_url); ?>" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                        <button type="button" id="torCopyArticleLink" data-url="<?php echo esc_url($permalink); ?>" aria-label="<?php echo esc_attr($t['copy_link']); ?>"><i class="bi bi-link-45deg"></i></button>
+                    </div>
+                    <div class="tor-article-progress" aria-hidden="true"><span id="torArticleProgress"></span></div>
                 </div>
-                <div class="tor-article-progress" aria-hidden="true"><span id="torArticleProgress"></span></div>
-            </div>
-        </aside>
+            </aside>
 
-        <article class="tor-gutenberg-content" id="torArticleBody">
-            <?php the_content(); ?>
-            <?php if (get_the_tags()) : ?>
-                <div class="tor-article-tags" aria-label="<?php echo esc_attr($t['tags']); ?>"><?php the_tags('', '', ''); ?></div>
-            <?php endif; ?>
-        </article>
+            <div class="tor-gutenberg-content" id="torArticleBody">
+                <?php the_content(); ?>
+                <?php if (get_the_tags()) : ?>
+                    <div class="tor-article-tags" aria-label="<?php echo esc_attr($t['tags']); ?>"><?php the_tags('', '', ''); ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 
     <section class="tor-article-after">
