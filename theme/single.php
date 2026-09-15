@@ -28,7 +28,7 @@ while (have_posts()) : the_post();
     $elementor_data = get_post_meta($post_id, '_elementor_data', true);
     $is_elementor = ($elementor_mode === 'builder') || !empty($elementor_data);
 ?>
-<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-7">
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-8">
 
 <?php if ($is_elementor) : ?>
     <main class="tor-elementor-legacy" id="conteudo">
