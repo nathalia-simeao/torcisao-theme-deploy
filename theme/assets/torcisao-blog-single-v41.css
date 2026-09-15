@@ -13,3 +13,26 @@ html[data-bs-theme="dark"] .tor-article{--tor-article-bg:#101112;--tor-article-i
 @media(max-width:980px){.tor-article-hero-grid{grid-template-columns:1fr;gap:28px}.tor-article-head h1{max-width:760px}.tor-article-dek{max-width:760px}.tor-article-cover{max-width:760px;aspect-ratio:16/9}.tor-article-layout{display:block}.tor-article-rail{display:none}}
 @media(max-width:760px){.tor-article{padding-top:82px}.tor-article-shell,.tor-article-after-inner{width:min(100% - 28px,1160px)}.tor-article-head{padding:26px 0 36px}.tor-article-back{margin-bottom:22px}.tor-article-head h1{font-size:clamp(2rem,9.5vw,3.05rem);line-height:1.03}.tor-article-dek{margin-top:14px;font-size:.98rem;line-height:1.66}.tor-article-meta{gap:10px 14px;margin-top:17px}.tor-article-cover{border-radius:20px}.tor-article-layout{display:block;padding-bottom:54px}.tor-article-content{font-size:1rem;line-height:1.82}.tor-article-content>p:first-of-type{font-size:1.07rem}.tor-article-content h2{font-size:1.72rem}.tor-article-content blockquote{padding:20px 18px;font-size:1.06rem}.tor-article-content img{border-radius:16px}.tor-article-content .alignwide,.tor-article-content .alignfull{width:100%;margin-left:0;transform:none}.tor-article-nav{grid-template-columns:1fr}.tor-article-related-head{align-items:flex-start;flex-direction:column}.tor-article-related-grid{grid-template-columns:1fr}.tor-related-card{display:grid;grid-template-columns:126px minmax(0,1fr)}.tor-related-card>a{display:contents}.tor-related-card img,.tor-related-placeholder{width:126px;height:100%;min-height:126px}.tor-related-card-body{padding:15px}.tor-article-cta{align-items:flex-start;flex-direction:column;padding:22px;border-radius:22px}.tor-article-cta a{width:100%}}
 @media(max-width:420px){.tor-article-shell,.tor-article-after-inner{width:min(100% - 22px,1160px)}.tor-article-head h1{font-size:2.12rem}.tor-article-badge{font-size:.63rem}.tor-related-card{grid-template-columns:104px minmax(0,1fr)}.tor-related-card img,.tor-related-placeholder{width:104px}.tor-article-nav a{min-height:122px;padding:18px}}
+
+/* Strong alignment lock for Gutenberg posts: keeps hero and body on the same outer grid. */
+body.single-post .tor-article--gutenberg .tor-article-intro,
+body.single-post .tor-article--gutenberg .tor-article-intro p,
+body.single-post .tor-article--gutenberg .tor-article-intro h1,
+body.single-post .tor-article--gutenberg .tor-article-kicker{ text-align:left!important; }
+body.single-post .tor-article--gutenberg .tor-article-dek{margin:18px 0 0!important;margin-left:0!important;margin-right:0!important;max-width:660px!important;text-align:left!important;}
+body.single-post .tor-article--gutenberg .tor-article-meta{justify-content:flex-start!important;margin-left:0!important;margin-right:0!important;text-align:left!important;}
+body.single-post .tor-article--gutenberg .tor-article-layout{width:min(1160px,calc(100% - 48px))!important;max-width:1160px!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important;display:block!important;position:relative!important;}
+body.single-post .tor-article--gutenberg .tor-article-content{width:100%!important;max-width:none!important;margin:0!important;padding-left:0!important;padding-right:0!important;text-align:left!important;}
+body.single-post .tor-article--gutenberg .tor-article-content>h2,
+body.single-post .tor-article--gutenberg .tor-article-content>h3,
+body.single-post .tor-article--gutenberg .tor-article-content>h4,
+body.single-post .tor-article--gutenberg .tor-article-content>p,
+body.single-post .tor-article--gutenberg .tor-article-content>ul,
+body.single-post .tor-article--gutenberg .tor-article-content>ol,
+body.single-post .tor-article--gutenberg .tor-article-content>blockquote,
+body.single-post .tor-article--gutenberg .tor-article-content>figure,
+body.single-post .tor-article--gutenberg .tor-article-content>table,
+body.single-post .tor-article--gutenberg .tor-article-content>pre,
+body.single-post .tor-article--gutenberg .tor-article-content>hr{max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;text-align:left!important;}
+@media(max-width:760px){body.single-post .tor-article--gutenberg .tor-article-layout{width:min(100% - 28px,1160px)!important}body.single-post .tor-article--gutenberg .tor-article-dek{max-width:none!important;margin-top:14px!important}}
+@media(max-width:420px){body.single-post .tor-article--gutenberg .tor-article-layout{width:min(100% - 22px,1160px)!important}}
