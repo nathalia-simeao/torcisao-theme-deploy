@@ -28,7 +28,7 @@ while (have_posts()) : the_post();
     $elementor_data = get_post_meta($post_id, '_elementor_data', true);
     $is_elementor = ($elementor_mode === 'builder') || !empty($elementor_data);
 ?>
-<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-5">
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-6">
 
 <?php if ($is_elementor) : ?>
     <main class="tor-elementor-legacy" id="conteudo">
@@ -54,35 +54,36 @@ while (have_posts()) : the_post();
 ?>
 <main class="tor-article tor-article--gutenberg" id="conteudo">
     <header class="tor-article-head">
-        <div class="tor-article-shell tor-article-head-grid">
-            <div class="tor-article-head-side">
-                <a class="tor-article-back" href="<?php echo esc_url(home_url('/blog/')); ?>"><i class="bi bi-arrow-left"></i> <?php echo esc_html($t['back']); ?></a>
-                <div class="tor-article-kicker">
-                    <?php if ($primary_category) : ?>
-                        <a class="tor-article-badge" href="<?php echo esc_url(get_category_link($primary_category->term_id)); ?>"><?php echo esc_html($primary_category->name); ?></a>
-                    <?php else : ?>
-                        <span class="tor-article-badge"><?php echo esc_html($t['fallback_badge']); ?></span>
-                    <?php endif; ?>
+        <div class="tor-article-shell">
+            <a class="tor-article-back" href="<?php echo esc_url(home_url('/blog/')); ?>"><i class="bi bi-arrow-left"></i> <?php echo esc_html($t['back']); ?></a>
+
+            <div class="tor-article-hero-grid<?php echo has_post_thumbnail() ? '' : ' tor-article-hero-grid--no-image'; ?>">
+                <div class="tor-article-intro">
+                    <div class="tor-article-kicker">
+                        <?php if ($primary_category) : ?>
+                            <a class="tor-article-badge" href="<?php echo esc_url(get_category_link($primary_category->term_id)); ?>"><?php echo esc_html($primary_category->name); ?></a>
+                        <?php else : ?>
+                            <span class="tor-article-badge"><?php echo esc_html($t['fallback_badge']); ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <h1><?php echo esc_html($title); ?></h1>
+                    <?php if ($excerpt) : ?><p class="tor-article-dek"><?php echo esc_html($excerpt); ?></p><?php endif; ?>
+                    <div class="tor-article-meta">
+                        <span class="tor-article-author"><i class="bi bi-person-circle"></i> <?php echo esc_html(get_the_author()); ?></span>
+                        <span><i class="bi bi-calendar3"></i> <?php echo esc_html(get_the_date('d/m/Y')); ?></span>
+                        <span><i class="bi bi-clock"></i> <?php echo esc_html($reading_minutes . ' ' . $t['reading']); ?></span>
+                    </div>
                 </div>
-            </div>
-            <div class="tor-article-head-main">
-                <h1><?php echo esc_html($title); ?></h1>
-                <?php if ($excerpt) : ?><p class="tor-article-dek"><?php echo esc_html($excerpt); ?></p><?php endif; ?>
-                <div class="tor-article-meta">
-                    <span class="tor-article-author"><i class="bi bi-person-circle"></i> <?php echo esc_html(get_the_author()); ?></span>
-                    <span><i class="bi bi-calendar3"></i> <?php echo esc_html(get_the_date('d/m/Y')); ?></span>
-                    <span><i class="bi bi-clock"></i> <?php echo esc_html($reading_minutes . ' ' . $t['reading']); ?></span>
-                </div>
+
+                <?php if (has_post_thumbnail()) : ?>
+                    <figure class="tor-article-cover">
+                        <?php the_post_thumbnail('full', ['loading'=>'eager','decoding'=>'async']); ?>
+                        <?php if ($thumb_caption) : ?><figcaption><?php echo esc_html($thumb_caption); ?></figcaption><?php endif; ?>
+                    </figure>
+                <?php endif; ?>
             </div>
         </div>
     </header>
-
-    <?php if (has_post_thumbnail()) : ?>
-        <figure class="tor-article-hero">
-            <div class="tor-article-hero-frame"><?php the_post_thumbnail('full', ['loading'=>'eager','decoding'=>'async']); ?></div>
-            <?php if ($thumb_caption) : ?><figcaption><?php echo esc_html($thumb_caption); ?></figcaption><?php endif; ?>
-        </figure>
-    <?php endif; ?>
 
     <div class="tor-article-shell tor-article-layout">
         <aside class="tor-article-rail" aria-label="<?php echo esc_attr($t['share_aria']); ?>">
