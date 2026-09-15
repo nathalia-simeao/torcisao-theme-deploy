@@ -1,7 +1,8 @@
 <?php
 /**
- * Template editorial para matérias do Blog Torcisão.
- * Mantém o conteúdo 100% editável pelo editor padrão do WordPress.
+ * Template de matérias do Blog Torcisão.
+ * Gutenberg é o padrão editorial. Posts antigos feitos no Elementor
+ * continuam renderizando o próprio conteúdo sem duplicar o topo do tema.
  *
  * @package Torcisao_Trefilados
  */
@@ -10,26 +11,37 @@ get_header();
 $lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
 $copy = [
     'pt' => [
-        'back'=>'Voltar para o blog','fallback_badge'=>'Conteúdo Torcisão','reading'=>'min de leitura','share'=>'Compartilhar','share_aria'=>'Compartilhar matéria','copy_link'=>'Copiar link','tags'=>'Tags da matéria','technical'=>'Conteúdo técnico','validate'=>'Precisa validar uma aplicação ou especificação?','specialist'=>'Falar com especialista','nav'=>'Navegação entre matérias','prev'=>'Matéria anterior','next'=>'Próxima matéria','keep'=>'Continue lendo','more'=>'Mais conteúdos Torcisão','all'=>'Ver todos','step'=>'Próximo passo','cta_title'=>'Do conteúdo para a especificação certa.','cta_text'=>'Converse com a equipe Torcisão para organizar aplicação, bitola, aço e demais requisitos do seu projeto.','wa'=>'Olá! Li a matéria “%s” no Blog da Torcisão e gostaria de falar com um especialista.'
+        'back'=>'Voltar para o blog','fallback_badge'=>'Conteúdo Torcisão','reading'=>'min de leitura','share_aria'=>'Compartilhar matéria','copy_link'=>'Copiar link','tags'=>'Tags da matéria','nav'=>'Navegação entre matérias','prev'=>'Matéria anterior','next'=>'Próxima matéria','keep'=>'Continue lendo','more'=>'Mais conteúdos Torcisão','all'=>'Ver todos','step'=>'Próximo passo','cta_title'=>'Do conteúdo para a especificação certa.','cta_text'=>'Converse com a equipe Torcisão para organizar aplicação, bitola, aço e demais requisitos do seu projeto.','specialist'=>'Falar com especialista','wa'=>'Olá! Li a matéria “%s” no Blog da Torcisão e gostaria de falar com um especialista.'
     ],
     'en' => [
-        'back'=>'Back to the blog','fallback_badge'=>'Torcisão Content','reading'=>'min read','share'=>'Share','share_aria'=>'Share article','copy_link'=>'Copy link','tags'=>'Article tags','technical'=>'Technical content','validate'=>'Need to validate an application or specification?','specialist'=>'Talk to a specialist','nav'=>'Article navigation','prev'=>'Previous article','next'=>'Next article','keep'=>'Keep reading','more'=>'More Torcisão content','all'=>'View all','step'=>'Next step','cta_title'=>'From content to the right specification.','cta_text'=>'Talk to the Torcisão team to organize application, diameter, steel grade, and other project requirements.','wa'=>'Hello! I read the article “%s” on the Torcisão Blog and would like to speak with a specialist.'
+        'back'=>'Back to the blog','fallback_badge'=>'Torcisão Content','reading'=>'min read','share_aria'=>'Share article','copy_link'=>'Copy link','tags'=>'Article tags','nav'=>'Article navigation','prev'=>'Previous article','next'=>'Next article','keep'=>'Keep reading','more'=>'More Torcisão content','all'=>'View all','step'=>'Next step','cta_title'=>'From content to the right specification.','cta_text'=>'Talk to the Torcisão team to organize application, diameter, steel grade, and other project requirements.','specialist'=>'Talk to a specialist','wa'=>'Hello! I read the article “%s” on the Torcisão Blog and would like to speak with a specialist.'
     ],
     'es' => [
-        'back'=>'Volver al blog','fallback_badge'=>'Contenido Torcisão','reading'=>'min de lectura','share'=>'Compartir','share_aria'=>'Compartir artículo','copy_link'=>'Copiar enlace','tags'=>'Etiquetas del artículo','technical'=>'Contenido técnico','validate'=>'¿Necesitas validar una aplicación o especificación?','specialist'=>'Hablar con un especialista','nav'=>'Navegación entre artículos','prev'=>'Artículo anterior','next'=>'Siguiente artículo','keep'=>'Sigue leyendo','more'=>'Más contenidos Torcisão','all'=>'Ver todos','step'=>'Siguiente paso','cta_title'=>'Del contenido a la especificación correcta.','cta_text'=>'Habla con el equipo Torcisão para organizar aplicación, diámetro, acero y demás requisitos del proyecto.','wa'=>'¡Hola! Leí el artículo “%s” en el Blog de Torcisão y me gustaría hablar con un especialista.'
+        'back'=>'Volver al blog','fallback_badge'=>'Contenido Torcisão','reading'=>'min de lectura','share_aria'=>'Compartir artículo','copy_link'=>'Copiar enlace','tags'=>'Etiquetas del artículo','nav'=>'Navegación entre artículos','prev'=>'Artículo anterior','next'=>'Siguiente artículo','keep'=>'Sigue leyendo','more'=>'Más contenidos Torcisão','all'=>'Ver todos','step'=>'Siguiente paso','cta_title'=>'Del contenido a la especificación correcta.','cta_text'=>'Habla con el equipo Torcisão para organizar aplicación, diámetro, acero y demás requisitos del proyecto.','specialist'=>'Hablar con un especialista','wa'=>'¡Hola! Leí el artículo “%s” en el Blog de Torcisão y me gustaría hablar con un especialista.'
     ],
 ];
 $t = $copy[$lang] ?? $copy['pt'];
 
 while (have_posts()) : the_post();
-    $post_id   = get_the_ID();
-    $title     = get_the_title();
+    $post_id = get_the_ID();
+    $elementor_mode = get_post_meta($post_id, '_elementor_edit_mode', true);
+    $elementor_data = get_post_meta($post_id, '_elementor_data', true);
+    $is_elementor = ($elementor_mode === 'builder') || !empty($elementor_data);
+?>
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-5">
+
+<?php if ($is_elementor) : ?>
+    <main class="tor-elementor-legacy" id="conteudo">
+        <?php the_content(); ?>
+    </main>
+<?php else :
+    $title = get_the_title();
     $permalink = get_permalink();
     $categories = get_the_category();
     $primary_category = !empty($categories) ? $categories[0] : null;
     $excerpt = trim((string) get_the_excerpt());
     if ($excerpt === '') {
-        $excerpt = wp_trim_words(wp_strip_all_tags(strip_shortcodes(get_the_content())), 34, '…');
+        $excerpt = wp_trim_words(wp_strip_all_tags(strip_shortcodes(get_the_content())), 38, '…');
     }
     $plain_content = wp_strip_all_tags(strip_shortcodes(get_the_content()));
     $word_count = str_word_count(remove_accents($plain_content));
@@ -40,12 +52,11 @@ while (have_posts()) : the_post();
     $share_title = rawurlencode($title);
     $whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode(sprintf($t['wa'], $title));
 ?>
-<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-4">
-<main class="tor-article" id="conteudo">
+<main class="tor-article tor-article--gutenberg" id="conteudo">
     <header class="tor-article-head">
-        <div class="tor-article-shell">
-            <a class="tor-article-back" href="<?php echo esc_url(home_url('/blog/')); ?>"><i class="bi bi-arrow-left"></i> <?php echo esc_html($t['back']); ?></a>
-            <div class="tor-article-head-inner">
+        <div class="tor-article-shell tor-article-head-grid">
+            <div class="tor-article-head-side">
+                <a class="tor-article-back" href="<?php echo esc_url(home_url('/blog/')); ?>"><i class="bi bi-arrow-left"></i> <?php echo esc_html($t['back']); ?></a>
                 <div class="tor-article-kicker">
                     <?php if ($primary_category) : ?>
                         <a class="tor-article-badge" href="<?php echo esc_url(get_category_link($primary_category->term_id)); ?>"><?php echo esc_html($primary_category->name); ?></a>
@@ -53,6 +64,8 @@ while (have_posts()) : the_post();
                         <span class="tor-article-badge"><?php echo esc_html($t['fallback_badge']); ?></span>
                     <?php endif; ?>
                 </div>
+            </div>
+            <div class="tor-article-head-main">
                 <h1><?php echo esc_html($title); ?></h1>
                 <?php if ($excerpt) : ?><p class="tor-article-dek"><?php echo esc_html($excerpt); ?></p><?php endif; ?>
                 <div class="tor-article-meta">
@@ -72,9 +85,8 @@ while (have_posts()) : the_post();
     <?php endif; ?>
 
     <div class="tor-article-shell tor-article-layout">
-        <aside class="tor-article-rail tor-article-rail--left" aria-label="<?php echo esc_attr($t['share_aria']); ?>">
+        <aside class="tor-article-rail" aria-label="<?php echo esc_attr($t['share_aria']); ?>">
             <div class="tor-article-sticky">
-                <span class="tor-article-rail-label"><?php echo esc_html($t['share']); ?></span>
                 <div class="tor-article-share">
                     <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_attr($share_url); ?>" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
                     <a href="https://wa.me/?text=<?php echo esc_attr($share_title . '%20' . $share_url); ?>" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
@@ -90,20 +102,10 @@ while (have_posts()) : the_post();
                 <div class="tor-article-tags" aria-label="<?php echo esc_attr($t['tags']); ?>"><?php the_tags('', '', ''); ?></div>
             <?php endif; ?>
         </article>
-
-        <aside class="tor-article-rail tor-article-rail--right">
-            <div class="tor-article-sticky">
-                <div class="tor-article-aside-card">
-                    <small><?php echo esc_html($t['technical']); ?></small>
-                    <strong><?php echo esc_html($t['validate']); ?></strong>
-                    <a href="<?php echo esc_url($whatsapp); ?>" target="_blank" rel="noopener"><?php echo esc_html($t['specialist']); ?> <i class="bi bi-arrow-up-right"></i></a>
-                </div>
-            </div>
-        </aside>
     </div>
 
     <section class="tor-article-after">
-        <div class="tor-article-shell">
+        <div class="tor-article-shell tor-article-after-inner">
             <?php
             $prev = get_previous_post();
             $next = get_next_post();
@@ -117,10 +119,10 @@ while (have_posts()) : the_post();
 
             <?php
             $related_args = [
-                'post_type'           => 'post',
-                'post_status'         => 'publish',
-                'posts_per_page'      => 3,
-                'post__not_in'        => [$post_id],
+                'post_type' => 'post',
+                'post_status' => 'publish',
+                'posts_per_page' => 3,
+                'post__not_in' => [$post_id],
                 'ignore_sticky_posts' => true,
             ];
             if ($primary_category) $related_args['cat'] = $primary_category->term_id;
@@ -135,7 +137,7 @@ while (have_posts()) : the_post();
                 <div class="tor-article-related-grid">
                     <?php while ($related->have_posts()) : $related->the_post(); ?>
                         <article class="tor-related-card"><a href="<?php the_permalink(); ?>">
-                            <?php if (has_post_thumbnail()) : the_post_thumbnail('medium_large', ['loading'=>'lazy','decoding'=>'async']); else : ?><span></span><?php endif; ?>
+                            <?php if (has_post_thumbnail()) : the_post_thumbnail('medium_large', ['loading'=>'lazy','decoding'=>'async']); else : ?><span class="tor-related-placeholder"></span><?php endif; ?>
                             <div class="tor-related-card-body"><small><?php echo esc_html(get_the_date('d.m.Y')); ?></small><h3><?php the_title(); ?></h3></div>
                         </a></article>
                     <?php endwhile; wp_reset_postdata(); ?>
@@ -157,4 +159,5 @@ while (have_posts()) : the_post();
   copy?.addEventListener('click',async function(){try{await navigator.clipboard.writeText(this.dataset.url||location.href);const icon=this.querySelector('i');if(icon){icon.className='bi bi-check2';setTimeout(()=>icon.className='bi bi-link-45deg',1600)}}catch(e){}}
 })();
 </script>
+<?php endif; ?>
 <?php endwhile; get_footer(); ?>
