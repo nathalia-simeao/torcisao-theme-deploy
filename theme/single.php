@@ -29,6 +29,7 @@ while (have_posts()) : the_post();
     $is_elementor = ($elementor_mode === 'builder') || !empty($elementor_data);
 ?>
 <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-8">
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v42.css'); ?>?v=20260915-1">
 
 <?php if ($is_elementor) : ?>
     <main class="tor-elementor-legacy" id="conteudo">
@@ -85,7 +86,7 @@ while (have_posts()) : the_post();
         </div>
     </header>
 
-    <div class="tor-article-shell tor-article-layout">
+    <div class="tor-gutenberg-body">
         <aside class="tor-article-rail" aria-label="<?php echo esc_attr($t['share_aria']); ?>">
             <div class="tor-article-sticky">
                 <div class="tor-article-share">
@@ -97,7 +98,7 @@ while (have_posts()) : the_post();
             </div>
         </aside>
 
-        <article class="tor-article-content" id="torArticleBody">
+        <article class="tor-gutenberg-content" id="torArticleBody">
             <?php the_content(); ?>
             <?php if (get_the_tags()) : ?>
                 <div class="tor-article-tags" aria-label="<?php echo esc_attr($t['tags']); ?>"><?php the_tags('', '', ''); ?></div>
