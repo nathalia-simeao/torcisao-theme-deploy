@@ -1,16 +1,18 @@
-/* Gutenberg article body alignment overrides.
- * Body is nested inside the exact same .tor-article-shell used by the hero.
- */
+/* Gutenberg article body alignment + sticky share rail */
 body.single-post .tor-article--gutenberg .tor-gutenberg-body{
   width:100%!important;
   max-width:none!important;
   margin:0!important;
   padding:0 0 78px!important;
+  display:grid!important;
+  grid-template-columns:0 minmax(0,1fr)!important;
+  column-gap:0!important;
+  align-items:stretch!important;
   position:relative!important;
-  display:block!important;
 }
 
 body.single-post .tor-article--gutenberg .tor-gutenberg-content{
+  grid-column:2!important;
   display:block!important;
   width:100%!important;
   max-width:none!important;
@@ -18,7 +20,6 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-content{
   margin:0!important;
   padding:0!important;
   float:none!important;
-  grid-column:1 / -1!important;
   justify-self:stretch!important;
   text-align:left!important;
   font-size:1.04rem;
@@ -35,7 +36,6 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-content > *{
   padding-right:0!important;
   transform:none!important;
   float:none!important;
-  grid-column:1 / -1!important;
   justify-self:stretch!important;
   text-align:left!important;
 }
@@ -110,11 +110,26 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-content figure img{
   height:auto;
 }
 
+/* Zero-width grid rail keeps the icons outside the text axis without pushing content. */
 body.single-post .tor-article--gutenberg .tor-gutenberg-body .tor-article-rail{
-  position:absolute!important;
-  left:-58px!important;
-  top:0!important;
+  grid-column:1!important;
+  position:relative!important;
+  left:auto!important;
+  top:auto!important;
+  width:0!important;
+  min-width:0!important;
+  align-self:stretch!important;
+  overflow:visible!important;
+  z-index:6!important;
+}
+
+/* Sticky child now uses the full article height as its scroll area. */
+body.single-post .tor-article--gutenberg .tor-gutenberg-body .tor-article-sticky{
+  position:sticky!important;
+  top:112px!important;
   width:44px!important;
+  margin-left:-58px!important;
+  margin-right:0!important;
 }
 
 html[data-bs-theme="dark"] body.single-post .tor-article--gutenberg .tor-gutenberg-content > p:first-of-type{
@@ -128,6 +143,7 @@ html[data-bs-theme="dark"] body.single-post .tor-article--gutenberg .tor-gutenbe
 @media(max-width:760px){
   body.single-post .tor-article--gutenberg .tor-gutenberg-body{
     padding-bottom:54px!important;
+    display:block!important;
   }
   body.single-post .tor-article--gutenberg .tor-gutenberg-content{
     font-size:1rem;
