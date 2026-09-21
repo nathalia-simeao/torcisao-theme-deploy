@@ -13,6 +13,10 @@ if (file_exists($i18n_file)) require_once $i18n_file;
 $translated_assets_file = get_template_directory().'/inc/torcisao-translated-page-assets.php';
 if (file_exists($translated_assets_file)) require_once $translated_assets_file;
 
+/* Schema FAQ das páginas principais de produto em PT-BR. */
+$faq_schema_file = get_template_directory().'/inc/torcisao-faq-schema.php';
+if (file_exists($faq_schema_file)) require_once $faq_schema_file;
+
 /*
  * Fonte de verdade do idioma da interface: a própria URL.
  * PT-BR é a rota sem prefixo; EN usa /en/; ES usa /es/.
