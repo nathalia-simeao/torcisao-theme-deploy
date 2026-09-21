@@ -244,7 +244,7 @@ function torcisao_output_product_faq_schema(){
     $faqs = [
         1623 => [
             ['Qual a diferença entre baixa e alta camada?','A Torcisão trabalha com opções de baixa camada, de até 20 mícrons, e alta camada, de 254 mícrons. A escolha deve seguir a especificação técnica e a condição de instalação do projeto; em aplicações de SPDA, confirme a exigência normativa com o responsável técnico.'],
-            ['Quais normas consultar em projetos de SPDA?','A ABNT NBR 5419:2026 trata da proteção contra descargas atmosféricas. Para hastes de aço cobreado e acessórios, verifique também a ABNT NBR 13571 e os requisitos definidos no memorial do projeto.'],
+            ['Quais normas consultar em projetos de SPDA?','A ABNT NBR 5419:2026 trata da proteção contra descargas atmosféricas. Para hastes de aço cobreado, consulte também a ABNT NBR 13571. Para os conectores da linha Torcisão, a referência publicada é a ABNT NBR 5370. O memorial e o responsável técnico devem definir os requisitos aplicáveis ao projeto.'],
             ['O que informar para solicitar cotação?','Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.'],
         ],
         1622 => [
