@@ -7,8 +7,10 @@ $hf_assets = get_template_directory_uri();
 $hf_iso = 'https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf';
 $hf_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela página de Haste de Aterramento da Torcisão e gostaria de falar com a equipe comercial sobre uma cotação.');
 $hf_unified_form_id = '8fdff701-c5a7-4684-9358-d557a70425a5';
+$hf_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260905">
+<link rel="stylesheet" href="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-1">
 <main class="hf-page" id="haste-aterramento" data-initial-kind="<?php echo esc_attr($hf_initial); ?>">
   <section class="hf-top">
     <div class="hf-wrap">
@@ -68,6 +70,14 @@ $hf_unified_form_id = '8fdff701-c5a7-4684-9358-d557a70425a5';
         <div class="hf-spec-card" id="hfSpecs"></div>
         <div class="hf-availability-card"><div class="hf-availability-head"><strong id="hfAvailabilityTitle">Medidas disponíveis</strong><small id="hfAvailabilitySubtitle">Referências da opção selecionada</small></div><div id="hfAvailability"></div></div>
       </div>
+      <?php if ($hf_lang === 'pt') : ?>
+      <div class="hf-aeo-quick" aria-label="Comparação rápida entre baixa e alta camada">
+        <div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>Baixa camada x alta camada</strong></div>
+        <div class="hf-aeo-quick-item"><span>Baixa camada</span><strong>até 20 µm</strong><p>Opção com menor espessura de cobre. A escolha depende da aplicação e da especificação técnica do projeto.</p></div>
+        <div class="hf-aeo-quick-item"><span>Alta camada</span><strong>254 µm</strong><p>Camada nominal mais espessa de cobre, indicada quando essa condição é exigida na especificação do sistema.</p></div>
+        <div class="hf-aeo-quick-note"><strong>Referências técnicas</strong><p>Para SPDA, consulte a ABNT NBR 5419:2026. Para hastes de aço cobreado, verifique também a ABNT NBR 13571. Nos conectores da linha Torcisão, a referência publicada é a ABNT NBR 5370.</p></div>
+      </div>
+      <?php endif; ?>
     </div>
   </section>
 
@@ -78,6 +88,25 @@ $hf_unified_form_id = '8fdff701-c5a7-4684-9358-d557a70425a5';
         <article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="hfApplications"></ul></article>
         <article class="hf-app-card"><h3>O que validar no projeto</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Dimensão</strong><p>Bitola e comprimento compatíveis com o desenho ou memorial.</p></div><div class="hf-variant-box"><strong>Requisito técnico</strong><p>Norma, camada, material e condição de instalação exigidos.</p></div><div class="hf-variant-box"><strong>Conexão</strong><p>Modelo de conector e cabo previstos no sistema de aterramento.</p></div></div></article>
       </div>
+      <?php if ($hf_lang === 'pt') : ?>
+      <div class="hf-mini-faq" id="faq">
+        <div class="hf-mini-faq-head"><span class="hf-section-kicker">Dúvidas rápidas</span><h3>Perguntas frequentes sobre hastes de aterramento</h3></div>
+        <div class="hf-mini-faq-grid">
+          <details>
+            <summary>Qual a diferença entre baixa e alta camada?</summary>
+            <p>A Torcisão trabalha com opções de baixa camada, de até 20 mícrons, e alta camada, de 254 mícrons. A escolha deve seguir a especificação técnica e a condição de instalação do projeto; em aplicações de SPDA, confirme a exigência normativa com o responsável técnico.</p>
+          </details>
+          <details>
+            <summary>Quais normas consultar em projetos de SPDA?</summary>
+            <p>A ABNT NBR 5419:2026 trata da proteção contra descargas atmosféricas. Para hastes de aço cobreado, consulte também a ABNT NBR 13571. Para os conectores da linha Torcisão, a referência publicada é a ABNT NBR 5370. O memorial e o responsável técnico devem definir os requisitos aplicáveis ao projeto.</p>
+          </details>
+          <details>
+            <summary>O que informar para solicitar cotação?</summary>
+            <p>Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.</p>
+          </details>
+        </div>
+      </div>
+      <?php endif; ?>
     </div>
   </section>
 
