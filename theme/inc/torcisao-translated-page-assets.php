@@ -8,11 +8,12 @@ if (!defined('ABSPATH')) exit;
 if (!function_exists('torcisao_brand_output_guard')) {
     function torcisao_brand_output_guard($html){
         if (!$html) return $html;
-        return str_replace(
-            ['Torcisão Drawns','Torcisão Drawn','Torcisão Trefilado'],
-            ['Torcisão Trefilados','Torcisão Trefilados','Torcisão Trefilados'],
+        $html = str_replace(
+            ['Torcisão Drawns','Torcisão Drawn'],
+            ['Torcisão Trefilados','Torcisão Trefilados'],
             $html
         );
+        return preg_replace('/Torcisão Trefilado(?!s)/u','Torcisão Trefilados',$html);
     }
     function torcisao_start_brand_output_guard(){
         $lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
