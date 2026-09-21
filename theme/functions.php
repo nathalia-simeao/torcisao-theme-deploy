@@ -236,10 +236,10 @@ function torcisao_policy_contact_assets(){
 }
 add_action('wp_enqueue_scripts','torcisao_policy_contact_assets',120);
 
-/* FAQPage JSON-LD das páginas principais de produto em PT-BR. */
-/* Deploy conjunto AEO Arame + Barra: 2026.09.21.11 */
+/* FAQPage JSON-LD das páginas principais de produto e guias técnicos em PT-BR. */
+/* Inclui Guia Técnico de Hastes (post 1674): 2026.09.21.12 */
 function torcisao_output_product_faq_schema(){
-    if (!is_page([1621,1622,1623])) return;
+    if (!is_page([1621,1622,1623]) && !is_single(1674)) return;
     if (function_exists('torcisao_request_language') && torcisao_request_language() !== 'pt') return;
 
     $faqs = [
@@ -257,6 +257,12 @@ function torcisao_output_product_faq_schema(){
             ['Qual a diferença entre arame BTC, MTC e ATC?','As siglas indicam faixas de baixo, médio e alto teor de carbono. Essa variação altera o equilíbrio entre conformabilidade, resistência e dureza, por isso a classe de aço deve ser escolhida conforme a peça e o processo de fabricação.'],
             ['Quando avaliar rolo ou spider?','Rolo e spider são formas de fornecimento diferentes. A escolha depende de manuseio, armazenamento, alimentação da linha e continuidade do processo. A disponibilidade e a condição de fornecimento devem ser confirmadas na cotação.'],
             ['O que informar para cotar arame trefilado?','Informe aplicação, classe ou faixa de aço, bitola, forma de fornecimento, quantidade e qualquer requisito de resistência, dureza, acabamento ou tolerância previsto na especificação.'],
+        ],
+        1674 => [
+            ['Haste de 254 µm é sempre a melhor escolha?','Não existe uma resposta universal. A alta camada possui uma camada nominal de cobre mais espessa, mas a escolha deve seguir a especificação, as condições de instalação e os critérios do responsável técnico.'],
+            ['Haste de 20 µm pode ser usada em SPDA?','A aplicação em um sistema de SPDA não deve ser definida apenas pela espessura da camada. É necessário verificar o projeto, a ABNT NBR 5419 e os demais requisitos aplicáveis à instalação.'],
+            ['Como saber qual bitola e comprimento comprar?','Bitola e comprimento devem seguir o desenho, memorial ou especificação do projeto. Quando essa informação não estiver definida, ela deve ser validada com o responsável técnico antes da compra.'],
+            ['A Torcisão trabalha com conectores para haste?','Sim. A linha contempla Olhal Simples, Olhal Reforçado, Grampo U Simples e Grampo U Reforçado. A combinação adequada deve ser confirmada de acordo com haste, condutor e projeto.'],
         ],
     ];
 
