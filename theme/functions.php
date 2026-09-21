@@ -296,22 +296,33 @@ add_action('wp_head','torcisao_output_product_faq_schema',30);
 
 /* Enriquecimento da entidade Organization gerada pelo Yoast SEO. */
 function torcisao_enrich_organization_schema($data, $context){
-    $linkedin = 'https://www.linkedin.com/company/torcisaotrefilados';
+    $official_socials = [
+        'facebook'  => 'https://www.facebook.com/torcisaotrefilados/',
+        'instagram' => 'https://www.instagram.com/torcisaotrefilados/',
+        'linkedin'  => 'https://www.linkedin.com/company/torcisaotrefilados/',
+    ];
 
     $same_as = isset($data['sameAs']) && is_array($data['sameAs']) ? $data['sameAs'] : [];
     $normalized_same_as = [];
 
     foreach ($same_as as $url) {
         if (!is_string($url) || $url === '') continue;
-        if (stripos($url, 'linkedin.com/') !== false) {
-            $normalized_same_as[] = $linkedin;
+
+        if (stripos($url, 'facebook.com/') !== false) {
+            $normalized_same_as[] = $official_socials['facebook'];
+        } elseif (stripos($url, 'instagram.com/') !== false) {
+            $normalized_same_as[] = $official_socials['instagram'];
+        } elseif (stripos($url, 'linkedin.com/') !== false) {
+            $normalized_same_as[] = $official_socials['linkedin'];
         } else {
             $normalized_same_as[] = $url;
         }
     }
 
-    if (!in_array($linkedin, $normalized_same_as, true)) {
-        $normalized_same_as[] = $linkedin;
+    foreach ($official_socials as $official_url) {
+        if (!in_array($official_url, $normalized_same_as, true)) {
+            $normalized_same_as[] = $official_url;
+        }
     }
 
     $data['sameAs'] = array_values(array_unique($normalized_same_as));

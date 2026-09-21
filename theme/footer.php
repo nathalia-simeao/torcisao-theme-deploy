@@ -74,9 +74,9 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
             <a class="tor-footer-contact-link" href="mailto:contatotrefilados@torcisao.com.br"><span class="tor-footer-iconbox"><i class="bi bi-envelope"></i></span><span>contatotrefilados@torcisao.com.br</span></a>
           </div>
           <div class="tor-footer-social" aria-label="Redes sociais Torcisão">
-            <a href="https://www.instagram.com/torcisao/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.instagram.com/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
             <a href="https://www.linkedin.com/company/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="https://www.facebook.com/torcisao" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.facebook.com/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
           </div>
           <div class="tor-footer-hours">
             <strong><i class="bi bi-clock"></i><?php echo esc_html($t['hours']); ?></strong>
