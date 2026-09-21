@@ -13,7 +13,8 @@ if (!function_exists('torcisao_brand_output_guard')) {
             ['Torcisão Trefilados','Torcisão Trefilados'],
             $html
         );
-        return preg_replace('/Torcisão Trefilado(?!s)/u','Torcisão Trefilados',$html);
+        $html = preg_replace('/Torcisão Trefilado(?!s)/u','Torcisão Trefilados',$html);
+        return str_replace('Torcisão Trefiladoss','Torcisão Trefilados',$html);
     }
     function torcisao_start_brand_output_guard(){
         $lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
