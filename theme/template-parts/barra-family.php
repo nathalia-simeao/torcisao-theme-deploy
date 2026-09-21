@@ -8,7 +8,7 @@ $bf_iso = 'https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf'
 $bf_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($bf_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
-<link rel="stylesheet" href="<?php echo esc_url($bf_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-1">
+<link rel="stylesheet" href="<?php echo esc_url($bf_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
 <main class="hf-page bf-page" id="barra-trefilada" data-initial-kind="<?php echo esc_attr($bf_initial); ?>">
   <section class="hf-top"><div class="hf-wrap">
     <span class="hf-eyebrow">Linha Torcisão Trefilados</span>

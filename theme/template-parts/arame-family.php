@@ -9,7 +9,7 @@ $af_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela
 $af_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($af_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
-<link rel="stylesheet" href="<?php echo esc_url($af_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-1">
+<link rel="stylesheet" href="<?php echo esc_url($af_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
 <link rel="stylesheet" href="<?php echo esc_url($af_assets . '/assets/torcisao-arame-commercial-v19.css'); ?>?v=20260907-1">
 <main class="hf-page af-page" id="arame-trefilado" data-initial-kind="<?php echo esc_attr($af_initial); ?>">
   <section class="hf-top"><div class="hf-wrap">

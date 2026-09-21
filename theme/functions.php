@@ -237,6 +237,7 @@ function torcisao_policy_contact_assets(){
 add_action('wp_enqueue_scripts','torcisao_policy_contact_assets',120);
 
 /* FAQPage JSON-LD das páginas principais de produto em PT-BR. */
+/* Deploy conjunto AEO Arame + Barra: 2026.09.21.11 */
 function torcisao_output_product_faq_schema(){
     if (!is_page([1621,1622,1623])) return;
     if (function_exists('torcisao_request_language') && torcisao_request_language() !== 'pt') return;
