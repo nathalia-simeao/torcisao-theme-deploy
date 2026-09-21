@@ -340,3 +340,107 @@ function torcisao_enrich_organization_schema($data, $context){
 }
 add_filter('wpseo_schema_organization','torcisao_enrich_organization_schema',11,2);
 
+
+
+/* Product JSON-LD das páginas principais de produto em PT-BR.
+ * Estrutura sem Offer: a Torcisão trabalha com cotação consultiva e não publica
+ * preço, estoque ou SKU comercial no site.
+ */
+function torcisao_output_product_schema(){
+    if (!is_page([1621,1622,1623])) return;
+    if (function_exists('torcisao_request_language') && torcisao_request_language() !== 'pt') return;
+
+    $products = [
+        1623 => [
+            'name' => 'Haste de Aterramento',
+            'description' => 'Fabricante de hastes de aterramento de baixa e alta camada, com opções de 20 e 254 mícrons, medidas, conectores e suporte técnico para cotação.',
+            'image' => [
+                get_template_directory_uri().'/assets/hastebaixa.webp',
+                get_template_directory_uri().'/assets/hastealta.png',
+            ],
+            'category' => 'Hastes de aterramento',
+            'material' => ['Aço-carbono SAE 1010/1020','Cobre'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Camadas disponíveis','value'=>'20 µm e 254 µm'],
+                ['@type'=>'PropertyValue','name'=>'Núcleo','value'=>'Aço-carbono SAE 1010/1020'],
+                ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
+                ['@type'=>'PropertyValue','name'=>'Faixa de diâmetros','value'=>'9,00 mm a 17,30 mm, conforme camada e especificação'],
+                ['@type'=>'PropertyValue','name'=>'Comprimentos','value'=>'Até 3.000 mm, conforme combinação e especificação'],
+                ['@type'=>'PropertyValue','name'=>'Alta camada','value'=>'254 µm de cobre eletrolítico, conforme ABNT NBR 13571'],
+            ],
+        ],
+        1622 => [
+            'name' => 'Barra Trefilada de Aço',
+            'description' => 'Conheça barras trefiladas BTC, MTC, ATC e aço ressulfurado 11SMn37 da Torcisão, com precisão dimensional, acabamento e suporte técnico para cotação.',
+            'image' => [
+                get_template_directory_uri().'/assets/barra1.webp',
+                get_template_directory_uri().'/assets/barra2.webp',
+                get_template_directory_uri().'/assets/barra3.jpg',
+                get_template_directory_uri().'/assets/barra4.jpg',
+            ],
+            'category' => 'Barras trefiladas de aço',
+            'material' => ['Aço carbono','Aço ressulfurado 11SMn37'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Classes de aço','value'=>'BTC 1006 a 1020; MTC 1035 a 1045; ATC 1050; aço ressulfurado 11SMn37'],
+                ['@type'=>'PropertyValue','name'=>'Faixa de bitolas','value'=>'2,00 mm a 15,88 mm, conforme classe de aço'],
+                ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
+                ['@type'=>'PropertyValue','name'=>'Acabamento','value'=>'Trefilado ou trefilado polido, conforme especificação'],
+                ['@type'=>'PropertyValue','name'=>'Tolerância','value'=>'Conforme classe, aplicação e especificação comercial'],
+                ['@type'=>'PropertyValue','name'=>'Comprimento','value'=>'Conforme especificação do pedido'],
+            ],
+        ],
+        1621 => [
+            'name' => 'Arame Trefilado de Aço',
+            'description' => 'Conheça arames trefilados BTC, MTC e ATC da Torcisão, em rolos ou spiders, com opções de bitola e suporte técnico para aplicações industriais e cotação.',
+            'image' => [
+                'https://torcisao.com.br/wp-content/uploads/2026/09/arametrefiladorolo.png',
+            ],
+            'category' => 'Arames trefilados de aço',
+            'material' => ['Aço carbono'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Classes de aço','value'=>'BTC 1004 a 1020; MTC 1035 a 1050; ATC 1060 a 1090'],
+                ['@type'=>'PropertyValue','name'=>'Faixa de bitolas','value'=>'2,00 mm a 15,88 mm, conforme classe de aço'],
+                ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
+                ['@type'=>'PropertyValue','name'=>'Forma de fornecimento','value'=>'Rolos ou spiders'],
+                ['@type'=>'PropertyValue','name'=>'Acabamento','value'=>'Trefilado'],
+                ['@type'=>'PropertyValue','name'=>'Tolerância','value'=>'Sob consulta conforme especificação do pedido'],
+            ],
+        ],
+    ];
+
+    $page_id = get_queried_object_id();
+    if (empty($products[$page_id])) return;
+
+    $url = get_permalink($page_id);
+    if (!$url) return;
+
+    $data = $products[$page_id];
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        '@id' => $url.'#product',
+        'url' => $url,
+        'name' => $data['name'],
+        'description' => $data['description'],
+        'image' => $data['image'],
+        'category' => $data['category'],
+        'material' => $data['material'],
+        'brand' => [
+            '@type' => 'Brand',
+            'name' => 'Torcisão Trefilados',
+        ],
+        'manufacturer' => [
+            '@id' => 'https://torcisao.com.br/#organization',
+        ],
+        'mainEntityOfPage' => [
+            '@id' => $url,
+        ],
+        'additionalProperty' => $data['additionalProperty'],
+    ];
+
+    echo "\n<script type=\"application/ld+json\" id=\"torcisao-product-schema\">";
+    echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    echo "</script>\n";
+}
+add_action('wp_head','torcisao_output_product_schema',31);
+
