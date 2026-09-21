@@ -292,3 +292,51 @@ function torcisao_output_product_faq_schema(){
 }
 add_action('wp_head','torcisao_output_product_faq_schema',30);
 
+
+
+/* Enriquecimento da entidade Organization gerada pelo Yoast SEO. */
+function torcisao_enrich_organization_schema($data, $context){
+    $linkedin = 'https://www.linkedin.com/company/torcisaotrefilados';
+
+    $same_as = isset($data['sameAs']) && is_array($data['sameAs']) ? $data['sameAs'] : [];
+    $normalized_same_as = [];
+
+    foreach ($same_as as $url) {
+        if (!is_string($url) || $url === '') continue;
+        if (stripos($url, 'linkedin.com/') !== false) {
+            $normalized_same_as[] = $linkedin;
+        } else {
+            $normalized_same_as[] = $url;
+        }
+    }
+
+    if (!in_array($linkedin, $normalized_same_as, true)) {
+        $normalized_same_as[] = $linkedin;
+    }
+
+    $data['sameAs'] = array_values(array_unique($normalized_same_as));
+    $data['alternateName'] = 'Torcisão';
+    $data['taxID'] = '62.147.178/0001-17';
+    $data['telephone'] = '+55 11 2334-9989';
+    $data['email'] = 'contatotrefilados@torcisao.com.br';
+    $data['address'] = [
+        '@type' => 'PostalAddress',
+        'streetAddress' => 'Rua Francisco Pedroso de Toledo, 138/166',
+        'addressLocality' => 'São Paulo',
+        'addressRegion' => 'SP',
+        'postalCode' => '04185-150',
+        'addressCountry' => 'BR',
+    ];
+    $data['contactPoint'] = [
+        [
+            '@type' => 'ContactPoint',
+            'contactType' => 'sales',
+            'telephone' => '+55 11 2334-9989',
+            'email' => 'contatotrefilados@torcisao.com.br',
+        ],
+    ];
+
+    return $data;
+}
+add_filter('wpseo_schema_organization','torcisao_enrich_organization_schema',11,2);
+
