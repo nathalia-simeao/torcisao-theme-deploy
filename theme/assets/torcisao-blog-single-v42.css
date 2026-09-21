@@ -1,12 +1,14 @@
 /* Gutenberg article body alignment + sticky share rail */
 body.single-post .tor-article--gutenberg .tor-gutenberg-body{
-  width:100%!important;
+  --tor-share-offset:clamp(0px,calc((100vw - 1160px) / 2 - 12px),58px);
+  width:calc(100% + var(--tor-share-offset))!important;
   max-width:none!important;
-  margin:0!important;
+  margin-left:calc(-1 * var(--tor-share-offset))!important;
+  margin-right:0!important;
   padding:0 0 78px!important;
   display:grid!important;
-  grid-template-columns:0 minmax(0,1fr)!important;
-  column-gap:0!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+  column-gap:14px!important;
   align-items:stretch!important;
   position:relative!important;
 }
@@ -128,7 +130,7 @@ body.single-post .tor-article--gutenberg .tor-gutenberg-body .tor-article-sticky
   position:sticky!important;
   top:112px!important;
   width:44px!important;
-  margin-left:-58px!important;
+  margin-left:0!important;
   margin-right:0!important;
 }
 

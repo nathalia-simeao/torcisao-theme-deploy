@@ -29,7 +29,7 @@ while (have_posts()) : the_post();
     $is_elementor = ($elementor_mode === 'builder') || !empty($elementor_data);
 ?>
 <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v41.css'); ?>?v=20260915-8">
-<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v42.css'); ?>?v=20260916-3">
+<link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri() . '/assets/torcisao-blog-single-v42.css'); ?>?v=20260921-4">
 
 <?php if ($is_elementor) : ?>
     <main class="tor-elementor-legacy" id="conteudo">
