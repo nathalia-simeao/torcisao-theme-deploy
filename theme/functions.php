@@ -13,9 +13,6 @@ if (file_exists($i18n_file)) require_once $i18n_file;
 $translated_assets_file = get_template_directory().'/inc/torcisao-translated-page-assets.php';
 if (file_exists($translated_assets_file)) require_once $translated_assets_file;
 
-/* Schema FAQ das páginas principais de produto em PT-BR. */
-$faq_schema_file = get_template_directory().'/inc/torcisao-faq-schema.php';
-if (file_exists($faq_schema_file)) require_once $faq_schema_file;
 
 /*
  * Fonte de verdade do idioma da interface: a própria URL.
@@ -238,3 +235,60 @@ function torcisao_policy_contact_assets(){
     wp_enqueue_script('torcisao-policy-contact-v26',$uri.'/assets/torcisao-policy-contact-v26.js',[],'20260907-1',true);
 }
 add_action('wp_enqueue_scripts','torcisao_policy_contact_assets',120);
+
+/* FAQPage JSON-LD das páginas principais de produto em PT-BR. */
+function torcisao_output_product_faq_schema(){
+    if (!is_page([1621,1622,1623])) return;
+    if (function_exists('torcisao_request_language') && torcisao_request_language() !== 'pt') return;
+
+    $faqs = [
+        1623 => [
+            ['Qual a diferença entre baixa e alta camada?','A Torcisão trabalha com opções de baixa camada, de até 20 mícrons, e alta camada, de 254 mícrons. A escolha deve seguir a especificação técnica e a condição de instalação do projeto; em aplicações de SPDA, confirme a exigência normativa com o responsável técnico.'],
+            ['Quais normas consultar em projetos de SPDA?','A ABNT NBR 5419:2026 trata da proteção contra descargas atmosféricas. Para hastes de aço cobreado e acessórios, verifique também a ABNT NBR 13571 e os requisitos definidos no memorial do projeto.'],
+            ['O que informar para solicitar cotação?','Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.'],
+        ],
+        1622 => [
+            ['Por que o 11SMn37 é usado em usinagem seriada?','O 11SMn37 é um aço de usinabilidade melhorada. Seu teor controlado de enxofre favorece inclusões que ajudam na formação e na quebra do cavaco, característica útil em operações contínuas e peças torneadas em série.'],
+            ['O 11SMn37 pode ajudar na vida da ferramenta?','A melhor usinabilidade pode contribuir para menor esforço de corte e menor desgaste em determinadas condições, mas não existe um ganho fixo. Velocidade, avanço, ferramenta, refrigeração e rigidez do processo continuam determinantes.'],
+            ['O que informar ao solicitar barra 11SMn37?','Informe bitola, comprimento, tolerância, acabamento desejado, quantidade, aplicação e qualquer requisito de laudo ou especificação. Para barra polida ou reendireitada, sinalize essa necessidade já na cotação.'],
+        ],
+        1621 => [
+            ['Qual a diferença entre arame BTC, MTC e ATC?','As siglas indicam faixas de baixo, médio e alto teor de carbono. Essa variação altera o equilíbrio entre conformabilidade, resistência e dureza, por isso a classe de aço deve ser escolhida conforme a peça e o processo de fabricação.'],
+            ['Quando avaliar rolo ou spider?','Rolo e spider são formas de fornecimento diferentes. A escolha depende de manuseio, armazenamento, alimentação da linha e continuidade do processo. A disponibilidade e a condição de fornecimento devem ser confirmadas na cotação.'],
+            ['O que informar para cotar arame trefilado?','Informe aplicação, classe ou faixa de aço, bitola, forma de fornecimento, quantidade e qualquer requisito de resistência, dureza, acabamento ou tolerância previsto na especificação.'],
+        ],
+    ];
+
+    $page_id = get_queried_object_id();
+    if (empty($faqs[$page_id])) return;
+
+    $main_entity = [];
+    foreach ($faqs[$page_id] as $faq) {
+        $main_entity[] = [
+            '@type' => 'Question',
+            'name' => $faq[0],
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => $faq[1],
+            ],
+        ];
+    }
+
+    $url = get_permalink($page_id);
+    if (!$url) return;
+
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        '@id' => $url . '#faq',
+        'url' => $url,
+        'inLanguage' => 'pt-BR',
+        'mainEntity' => $main_entity,
+    ];
+
+    echo "\n<script type=\"application/ld+json\" id=\"torcisao-faq-schema\">";
+    echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    echo "</script>\n";
+}
+add_action('wp_head','torcisao_output_product_faq_schema',30);
+
