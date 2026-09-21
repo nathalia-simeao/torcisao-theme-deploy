@@ -249,7 +249,7 @@ function torcisao_output_product_faq_schema(){
         ],
         1622 => [
             ['Por que o 11SMn37 é usado em usinagem seriada?','O 11SMn37 é um aço de usinabilidade melhorada. Seu teor controlado de enxofre favorece inclusões que ajudam na formação e na quebra do cavaco, característica útil em operações contínuas e peças torneadas em série.'],
-            ['O 11SMn37 pode ajudar na vida da ferramenta?','A melhor usinabilidade pode contribuir para menor esforço de corte e menor desgaste em determinadas condições, mas não existe um ganho fixo. Velocidade, avanço, ferramenta, refrigeração e rigidez do processo continuam determinantes.'],
+            ['Qual a diferença entre barra trefilada e barra polida ou reendireitada?','A barra trefilada já recebe ganho de precisão dimensional e acabamento pelo trabalho a frio. Quando o projeto exige condição adicional de superfície ou retilineidade, pode ser avaliada uma barra polida ou reendireitada. A tolerância final deve ser confirmada conforme desenho, aplicação e especificação do pedido.'],
             ['O que informar ao solicitar barra 11SMn37?','Informe bitola, comprimento, tolerância, acabamento desejado, quantidade, aplicação e qualquer requisito de laudo ou especificação. Para barra polida ou reendireitada, sinalize essa necessidade já na cotação.'],
         ],
         1621 => [
