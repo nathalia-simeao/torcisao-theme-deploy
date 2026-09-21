@@ -20,7 +20,7 @@ if (!function_exists('torcisao_brand_output_guard')) {
         $lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
         if (in_array($lang,['en','es'],true)) ob_start('torcisao_brand_output_guard');
     }
-    add_action('template_redirect','torcisao_start_brand_output_guard',-1000);
+    add_action('template_redirect','torcisao_start_brand_output_guard',-99999);
 }
 
 /* URLs públicas das páginas unificadas de produto. */
