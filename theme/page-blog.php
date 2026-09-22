@@ -7,8 +7,10 @@
 get_header();
 
 $search_query = isset($_GET['s']) ? sanitize_text_field($_GET['s']) : '';
+$blog_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : (function_exists('pll_current_language') ? pll_current_language('slug') : 'pt');
+if (!in_array($blog_lang, ['pt','en','es'], true)) $blog_lang = 'pt';
 $paged = get_query_var('paged') ? get_query_var('paged') : (get_query_var('page') ? get_query_var('page') : 1);
-$args = ['post_type' => 'post', 'posts_per_page' => 6, 'paged' => $paged];
+$args = ['post_type' => 'post', 'posts_per_page' => 6, 'paged' => $paged, 'lang' => $blog_lang];
 if ($search_query !== '') $args['s'] = $search_query;
 $blog_query = new WP_Query($args);
 
@@ -26,6 +28,7 @@ if ($is_preview && !$blog_query->have_posts()) {
         'per_page' => 20,
         'status'   => 'publish',
         '_embed'   => 1,
+        'lang'     => $blog_lang,
     ];
     if ($search_query !== '') $remote_args['search'] = $search_query;
 
@@ -36,20 +39,14 @@ if ($is_preview && !$blog_query->have_posts()) {
         if (is_array($decoded)) $remote_posts = $decoded;
     }
 
-    $cat_response = wp_remote_get(
-        'https://torcisao.com.br/wp-json/wp/v2/categories?per_page=100&hide_empty=false',
-        ['timeout' => 10]
+    $cat_url = add_query_arg(
+        ['per_page' => 100, 'hide_empty' => 'false', 'lang' => $blog_lang],
+        'https://torcisao.com.br/wp-json/wp/v2/categories'
     );
+    $cat_response = wp_remote_get($cat_url, ['timeout' => 10]);
     if (!is_wp_error($cat_response) && wp_remote_retrieve_response_code($cat_response) === 200) {
         $decoded_cats = json_decode(wp_remote_retrieve_body($cat_response), true);
-        if (is_array($decoded_cats)) {
-            foreach ($decoded_cats as $category) {
-                $link = $category['link'] ?? '';
-                if ($link && strpos($link, '/en/') === false && strpos($link, '/es/') === false) {
-                    $remote_categories[] = $category;
-                }
-            }
-        }
+        if (is_array($decoded_cats)) $remote_categories = $decoded_cats;
     }
 }
 
@@ -81,17 +78,17 @@ html[data-bs-theme="dark"] .tor-blog-page{background:#101112;color:#f7f7f7}html[
 @media(max-width:900px){.tor-blog-page{padding-top:28px}.tor-blog-grid{grid-template-columns:1fr}.tor-blog-card--compact{grid-template-columns:160px minmax(0,1fr)}.tor-blog-hero h1{white-space:normal}}@media(max-width:620px){.tor-blog-container{width:min(100% - 28px,1180px)}.tor-blog-hero{padding:38px 0 30px}.tor-blog-search{margin-top:22px}.tor-blog-search button{padding:13px 18px}.tor-blog-card--featured img{height:220px}.tor-blog-card--compact{grid-template-columns:1fr}.tor-blog-card--compact img{height:190px}.tor-blog-card-body{padding:21px}.tor-blog-content{padding-top:34px}}
 </style>
 <main class="tor-blog-page">
-<section class="tor-blog-hero"><div class="tor-blog-container"><h1>Blog Torcisão - Inovação e Qualidade</h1><p>Acompanhe as últimas tendências e novidades do setor.</p><form class="tor-blog-search" role="search" method="get" action="<?php echo esc_url(home_url('/blog/')); ?>"><input type="text" name="s" placeholder="Buscar por palavra-chave..." aria-label="Buscar" value="<?php echo esc_attr($search_query); ?>"><button type="submit">Buscar</button></form></div></section>
+<section class="tor-blog-hero"><div class="tor-blog-container"><h1>Blog Torcisão - Inovação e Qualidade</h1><p>Acompanhe as últimas tendências e novidades do setor.</p><form class="tor-blog-search" role="search" method="get" action="<?php echo esc_url(function_exists('torcisao_page_url') ? torcisao_page_url('blog', $blog_lang) : home_url('/blog/')); ?>"><input type="text" name="s" placeholder="Buscar por palavra-chave..." aria-label="Buscar" value="<?php echo esc_attr($search_query); ?>"><button type="submit">Buscar</button></form></div></section>
 <section class="tor-blog-content"><div class="tor-blog-container"><div class="tor-blog-grid"><div class="tor-blog-main"><h2><?php echo $search_query!==''?'Resultados para: “'.esc_html($search_query).'”':'Artigos Mais Recentes'; ?></h2>
 <?php if($blog_query->have_posts()): $post_index=0; while($blog_query->have_posts()): $blog_query->the_post(); $categories=get_the_category();$cat_name=!empty($categories)?$categories[0]->name:'';$thumb=get_the_post_thumbnail_url(get_the_ID(),'large');$fallback=get_template_directory_uri().'/assets/barra2.webp'; if($post_index===0&&$search_query===''): ?>
-<article class="tor-blog-card tor-blog-card--featured"><img src="<?php echo esc_url($thumb?:$fallback); ?>" alt="<?php the_title_attribute(); ?>"><div class="tor-blog-card-body"><?php if($cat_name): ?><span class="tor-blog-badge"><?php echo esc_html(mb_strtoupper($cat_name)); ?></span><?php endif; ?><h3><?php the_title(); ?></h3><p class="tor-blog-meta">Publicado em <?php echo get_the_date('d/m/Y'); ?> por <?php the_author(); ?></p><p class="tor-blog-summary"><?php echo esc_html(wp_trim_words(get_the_excerpt(),30)); ?></p><a class="tor-blog-read" href="<?php the_permalink(); ?>">Leia o Artigo Completo</a></div></article>
-<?php else: ?><article class="tor-blog-card tor-blog-card--compact"><img src="<?php echo esc_url($thumb?:$fallback); ?>" alt="<?php the_title_attribute(); ?>"><div class="tor-blog-card-body"><?php if($cat_name): ?><span class="tor-blog-badge"><?php echo esc_html(mb_strtoupper($cat_name)); ?></span><?php endif; ?><h3><?php the_title(); ?></h3><p class="tor-blog-meta">Publicado em <?php echo get_the_date('d/m/Y'); ?> por <?php the_author(); ?></p><p class="tor-blog-summary"><?php echo esc_html(wp_trim_words(get_the_excerpt(),20)); ?></p><a class="tor-blog-link" href="<?php the_permalink(); ?>">Continuar Lendo →</a></div></article><?php endif; $post_index++; endwhile; ?>
+<article class="tor-blog-card tor-blog-card--featured"><img src="<?php echo esc_url($thumb?:$fallback); ?>" alt="<?php the_title_attribute(); ?>"><div class="tor-blog-card-body"><?php if($cat_name): ?><span class="tor-blog-badge"><?php echo esc_html(mb_strtoupper($cat_name)); ?></span><?php endif; ?><h3><?php the_title(); ?></h3><p class="tor-blog-meta"><?php echo esc_html($blog_lang==='en'?'Published on':($blog_lang==='es'?'Publicado el':'Publicado em')); ?> <?php echo get_the_date('d/m/Y'); ?> <?php echo esc_html($blog_lang==='en'?'by':'por'); ?> <?php the_author(); ?></p><p class="tor-blog-summary"><?php echo esc_html(wp_trim_words(get_the_excerpt(),30)); ?></p><a class="tor-blog-read" href="<?php the_permalink(); ?>">Leia o Artigo Completo</a></div></article>
+<?php else: ?><article class="tor-blog-card tor-blog-card--compact"><img src="<?php echo esc_url($thumb?:$fallback); ?>" alt="<?php the_title_attribute(); ?>"><div class="tor-blog-card-body"><?php if($cat_name): ?><span class="tor-blog-badge"><?php echo esc_html(mb_strtoupper($cat_name)); ?></span><?php endif; ?><h3><?php the_title(); ?></h3><p class="tor-blog-meta"><?php echo esc_html($blog_lang==='en'?'Published on':($blog_lang==='es'?'Publicado el':'Publicado em')); ?> <?php echo get_the_date('d/m/Y'); ?> <?php echo esc_html($blog_lang==='en'?'by':'por'); ?> <?php the_author(); ?></p><p class="tor-blog-summary"><?php echo esc_html(wp_trim_words(get_the_excerpt(),20)); ?></p><a class="tor-blog-link" href="<?php the_permalink(); ?>">Continuar Lendo →</a></div></article><?php endif; $post_index++; endwhile; ?>
 <nav class="tor-blog-pagination" aria-label="Navegação de páginas do blog"><?php echo paginate_links(['total'=>$blog_query->max_num_pages,'current'=>$paged,'prev_text'=>'← Anterior','next_text'=>'Próxima →','type'=>'list']); ?></nav>
 <?php elseif($remote_posts): $fallback=get_template_directory_uri().'/assets/barra2.webp'; foreach($remote_posts as $post_index=>$remote): $m=tor_blog_remote_meta($remote); $featured=$post_index===0&&$search_query===''; ?>
-<article class="tor-blog-card <?php echo $featured?'tor-blog-card--featured':'tor-blog-card--compact'; ?>"><img src="<?php echo esc_url($m['thumb']?:$fallback); ?>" alt="<?php echo esc_attr($m['title']); ?>"><div class="tor-blog-card-body"><?php if($m['cat']): ?><span class="tor-blog-badge"><?php echo esc_html(mb_strtoupper($m['cat'])); ?></span><?php endif; ?><h3><?php echo esc_html($m['title']); ?></h3><p class="tor-blog-meta">Publicado em <?php echo esc_html($m['date']); ?> por <?php echo esc_html($m['author']); ?></p><p class="tor-blog-summary"><?php echo esc_html(wp_trim_words($m['excerpt'],$featured?30:20)); ?></p><a class="<?php echo $featured?'tor-blog-read':'tor-blog-link'; ?>" href="<?php echo esc_url($m['link']); ?>" target="_blank" rel="noopener"><?php echo $featured?'Leia o Artigo Completo':'Continuar Lendo →'; ?></a></div></article>
+<article class="tor-blog-card <?php echo $featured?'tor-blog-card--featured':'tor-blog-card--compact'; ?>"><img src="<?php echo esc_url($m['thumb']?:$fallback); ?>" alt="<?php echo esc_attr($m['title']); ?>"><div class="tor-blog-card-body"><?php if($m['cat']): ?><span class="tor-blog-badge"><?php echo esc_html(mb_strtoupper($m['cat'])); ?></span><?php endif; ?><h3><?php echo esc_html($m['title']); ?></h3><p class="tor-blog-meta"><?php echo esc_html($blog_lang==='en'?'Published on':($blog_lang==='es'?'Publicado el':'Publicado em')); ?> <?php echo esc_html($m['date']); ?> <?php echo esc_html($blog_lang==='en'?'by':'por'); ?> <?php echo esc_html($m['author']); ?></p><p class="tor-blog-summary"><?php echo esc_html(wp_trim_words($m['excerpt'],$featured?30:20)); ?></p><a class="<?php echo $featured?'tor-blog-read':'tor-blog-link'; ?>" href="<?php echo esc_url($m['link']); ?>" target="_blank" rel="noopener"><?php echo $featured?'Leia o Artigo Completo':'Continuar Lendo →'; ?></a></div></article>
 <?php endforeach; else: ?><p>Nenhum artigo encontrado<?php echo $search_query!==''?' para “'.esc_html($search_query).'”':''; ?>.</p><?php endif; wp_reset_postdata(); ?></div>
 <aside class="tor-blog-sidebar"><div class="tor-blog-sidebox"><h4>Categorias</h4><ul>
-<?php if($is_preview && $remote_categories): foreach($remote_categories as $category): ?><li><a href="<?php echo esc_url($category['link'] ?? 'https://torcisao.com.br/blog/'); ?>" target="_blank" rel="noopener"><?php echo esc_html($category['name'] ?? ''); ?> (<?php echo intval($category['count'] ?? 0); ?>)</a></li><?php endforeach; else: $cats=get_categories(['orderby'=>'count','order'=>'DESC','hide_empty'=>false]); foreach($cats as $category): ?><li><a href="<?php echo esc_url(get_category_link($category->term_id)); ?>"><?php echo esc_html($category->name); ?> (<?php echo intval($category->count); ?>)</a></li><?php endforeach; endif; ?>
-</ul></div><div class="tor-blog-sidebox"><h4>Mais Lidos</h4><ul><?php $popular=new WP_Query(['post_type'=>'post','posts_per_page'=>3,'orderby'=>'comment_count','order'=>'DESC']);if($popular->have_posts()){while($popular->have_posts()):$popular->the_post();?><li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li><?php endwhile;wp_reset_postdata();}elseif($remote_posts){foreach(array_slice($remote_posts,0,3) as $remote){$m=tor_blog_remote_meta($remote);echo '<li><a href="'.esc_url($m['link']).'" target="_blank" rel="noopener">'.esc_html($m['title']).'</a></li>';}} ?></ul></div></aside>
+<?php if($is_preview && $remote_categories): foreach($remote_categories as $category): ?><li><a href="<?php echo esc_url($category['link'] ?? 'https://torcisao.com.br/blog/'); ?>" target="_blank" rel="noopener"><?php echo esc_html($category['name'] ?? ''); ?> (<?php echo intval($category['count'] ?? 0); ?>)</a></li><?php endforeach; else: $cats=get_categories(['orderby'=>'count','order'=>'DESC','hide_empty'=>false,'lang'=>$blog_lang]); foreach($cats as $category): ?><li><a href="<?php echo esc_url(get_category_link($category->term_id)); ?>"><?php echo esc_html($category->name); ?> (<?php echo intval($category->count); ?>)</a></li><?php endforeach; endif; ?>
+</ul></div><div class="tor-blog-sidebox"><h4>Mais Lidos</h4><ul><?php $popular=new WP_Query(['post_type'=>'post','posts_per_page'=>3,'orderby'=>'comment_count','order'=>'DESC','lang'=>$blog_lang]);if($popular->have_posts()){while($popular->have_posts()):$popular->the_post();?><li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li><?php endwhile;wp_reset_postdata();}elseif($remote_posts){foreach(array_slice($remote_posts,0,3) as $remote){$m=tor_blog_remote_meta($remote);echo '<li><a href="'.esc_url($m['link']).'" target="_blank" rel="noopener">'.esc_html($m['title']).'</a></li>';}} ?></ul></div></aside>
 </div></div></section></main>
 <?php get_footer(); ?>
