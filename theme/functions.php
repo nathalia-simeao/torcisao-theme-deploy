@@ -236,11 +236,15 @@ function torcisao_policy_contact_assets(){
 }
 add_action('wp_enqueue_scripts','torcisao_policy_contact_assets',120);
 
-/* FAQPage JSON-LD das páginas principais de produto e guias técnicos em PT-BR. */
-/* Inclui Guia Técnico de Hastes (post 1674): 2026.09.21.12 */
+/* FAQPage JSON-LD das páginas principais de produto e guias técnicos. */
+/* Guias de Hastes: PT 1674 | EN 1736 | ES 1737 */
 function torcisao_output_product_faq_schema(){
-    if (!is_page([1621,1622,1623]) && !is_single(1674)) return;
-    if (function_exists('torcisao_request_language') && torcisao_request_language() !== 'pt') return;
+    $lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
+    $page_id = get_queried_object_id();
+    $is_pt_product = is_page([1621,1622,1623]) && $lang === 'pt';
+    $is_grounding_guide = is_single([1674,1736,1737]);
+
+    if (!$is_pt_product && !$is_grounding_guide) return;
 
     $faqs = [
         1623 => [
@@ -264,9 +268,19 @@ function torcisao_output_product_faq_schema(){
             ['Como saber qual bitola e comprimento comprar?','Bitola e comprimento devem seguir o desenho, memorial ou especificação do projeto. Quando essa informação não estiver definida, ela deve ser validada com o responsável técnico antes da compra.'],
             ['A Torcisão trabalha com conectores para haste?','Sim. A linha contempla Olhal Simples, Olhal Reforçado, Grampo U Simples e Grampo U Reforçado. A combinação adequada deve ser confirmada de acordo com haste, condutor e projeto.'],
         ],
+        1736 => [
+            ['Is a 254 µm grounding rod always the best choice?','There is no universal answer. The high-layer option has a thicker nominal copper layer. However, the choice should follow the specification, installation conditions and the responsible engineer\'s criteria.'],
+            ['Can a 20 µm grounding rod be used in an LPS?','The use of a rod in a lightning protection system should not be defined only by layer thickness. First, check the project and ABNT NBR 5419. Then verify the other requirements applicable to the installation.'],
+            ['How do I know which diameter and length to buy?','Diameter and length should follow the drawing, technical specification or project requirements. Otherwise, validate this information with the responsible engineer before purchase.'],
+            ['Does Torcisão supply grounding rod connectors?','Yes. The line includes Standard Eye Connector, Reinforced Eye Connector, Standard U-Clamp and Reinforced U-Clamp. The appropriate combination must be confirmed according to the rod, conductor and project.'],
+        ],
+        1737 => [
+            ['¿Una varilla de 254 µm es siempre la mejor opción?','No existe una respuesta universal. La opción de alta capa tiene una capa nominal de cobre más gruesa. Sin embargo, la elección debe seguir la especificación, las condiciones de instalación y los criterios del responsable técnico.'],
+            ['¿Se puede usar una varilla de 20 µm en un SPDA?','El uso de una varilla en un sistema de protección contra descargas atmosféricas no debe definirse solo por el espesor de la capa. Primero, revise el proyecto y la ABNT NBR 5419. Después, compruebe los demás requisitos aplicables a la instalación.'],
+            ['¿Cómo saber qué diámetro y longitud comprar?','El diámetro y la longitud deben seguir el plano, la memoria técnica o la especificación del proyecto. De lo contrario, valide esta información con el responsable técnico antes de la compra.'],
+            ['¿Torcisão suministra conectores para varillas?','Sí. La línea incluye Conector de Ojal Simple, Conector de Ojal Reforzado, Abrazadera U Simple y Abrazadera U Reforzada. La combinación adecuada debe confirmarse según la varilla, el conductor y el proyecto.'],
+        ],
     ];
-
-    $page_id = get_queried_object_id();
     if (empty($faqs[$page_id])) return;
 
     $main_entity = [];
@@ -289,7 +303,7 @@ function torcisao_output_product_faq_schema(){
         '@type' => 'FAQPage',
         '@id' => $url . '#faq',
         'url' => $url,
-        'inLanguage' => 'pt-BR',
+        'inLanguage' => ['pt'=>'pt-BR','en'=>'en-US','es'=>'es-ES'][$lang] ?? 'pt-BR',
         'mainEntity' => $main_entity,
     ];
 

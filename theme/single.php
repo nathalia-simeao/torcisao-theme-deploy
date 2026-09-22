@@ -21,6 +21,12 @@ $copy = [
     ],
 ];
 $t = $copy[$lang] ?? $copy['pt'];
+$blog_urls = [
+    'pt' => $blog_url,
+    'en' => home_url('/en/torcisao-trefilados-blog/'),
+    'es' => home_url('/es/blog-de-torcisao-trefilados/'),
+];
+$blog_url = $blog_urls[$lang] ?? $blog_urls['pt'];
 
 while (have_posts()) : the_post();
     $post_id = get_the_ID();
@@ -56,7 +62,7 @@ while (have_posts()) : the_post();
 <main class="tor-article tor-article--gutenberg" id="conteudo">
     <header class="tor-article-head">
         <div class="tor-article-shell">
-            <a class="tor-article-back" href="<?php echo esc_url(home_url('/blog/')); ?>"><i class="bi bi-arrow-left"></i> <?php echo esc_html($t['back']); ?></a>
+            <a class="tor-article-back" href="<?php echo esc_url($blog_url); ?>"><i class="bi bi-arrow-left"></i> <?php echo esc_html($t['back']); ?></a>
 
             <div class="tor-article-hero-grid<?php echo has_post_thumbnail() ? '' : ' tor-article-hero-grid--no-image'; ?>">
                 <div class="tor-article-intro">
@@ -128,6 +134,7 @@ while (have_posts()) : the_post();
                 'posts_per_page' => 3,
                 'post__not_in' => [$post_id],
                 'ignore_sticky_posts' => true,
+                'lang' => $lang,
             ];
             if ($primary_category) $related_args['cat'] = $primary_category->term_id;
             $related = new WP_Query($related_args);
@@ -137,7 +144,7 @@ while (have_posts()) : the_post();
             }
             if ($related->have_posts()) :
             ?>
-                <div class="tor-article-related-head"><div><span><?php echo esc_html($t['keep']); ?></span><h2><?php echo esc_html($t['more']); ?></h2></div><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php echo esc_html($t['all']); ?> <i class="bi bi-arrow-right"></i></a></div>
+                <div class="tor-article-related-head"><div><span><?php echo esc_html($t['keep']); ?></span><h2><?php echo esc_html($t['more']); ?></h2></div><a href="<?php echo esc_url($blog_url); ?>"><?php echo esc_html($t['all']); ?> <i class="bi bi-arrow-right"></i></a></div>
                 <div class="tor-article-related-grid">
                     <?php while ($related->have_posts()) : $related->the_post(); ?>
                         <article class="tor-related-card"><a href="<?php the_permalink(); ?>">
