@@ -188,6 +188,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 const monthNames=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 const LIVE_SITE='https://torcisao.com.br';
 
+function currentBlogLanguage(){
+  const forced=new URLSearchParams(window.location.search).get('lang');
+  if(['pt','en','es'].includes(forced))return forced;
+
+  const path=String(window.location.pathname||'/').toLowerCase();
+  if(/^\/en(?:\/|$)/.test(path))return 'en';
+  if(/^\/es(?:\/|$)/.test(path))return 'es';
+
+  const htmlLang=String(document.documentElement.lang||'').toLowerCase();
+  if(htmlLang.startsWith('en'))return 'en';
+  if(htmlLang.startsWith('es'))return 'es';
+  return 'pt';
+}
+
 function isPreviewHost(){
   const host=String(window.location.hostname||'').toLowerCase();
   return host==='localhost'||host==='127.0.0.1'||host.endsWith('.app.github.dev')||host.endsWith('.githubpreview.dev');
@@ -346,8 +360,14 @@ async function initBlog(){
   if(!section)return;
 
   const preview=isPreviewHost();
+  const lang=currentBlogLanguage();
   const localBlogLink=section.querySelector('.th-blog-all')?.href||new URL('/blog/',window.location.origin).href;
-  const blogUrl=preview?LIVE_SITE+'/blog/':localBlogLink;
+  const liveBlogUrls={
+    pt:LIVE_SITE+'/blog/',
+    en:LIVE_SITE+'/en/torcisao-trefilados-blog/',
+    es:LIVE_SITE+'/es/blog-de-torcisao-trefilados/'
+  };
+  const blogUrl=preview?(liveBlogUrls[lang]||liveBlogUrls.pt):localBlogLink;
   const fallback=serverFallback(section);
 
   render(section,fallback.length?fallback:[{
@@ -365,6 +385,7 @@ async function initBlog(){
     endpoint.searchParams.set('orderby','date');
     endpoint.searchParams.set('order','desc');
     endpoint.searchParams.set('_embed','1');
+    endpoint.searchParams.set('lang',lang);
 
     const posts=await fetchPosts(endpoint,preview);
     if(!posts.length)return;
