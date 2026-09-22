@@ -49,9 +49,9 @@ function torcisao_page_url($key, $lang=null){
         'quality'=>18,
         'privacy'=>17,
         'cookies'=>16,
-        'arame'=>11,
-        'barra'=>7,
-        'haste'=>14,
+        'arame'=>1621,
+        'barra'=>1622,
+        'haste'=>1623,
     ];
     if (function_exists('pll_get_post') && isset($base_ids[$key])) {
         $translated = pll_get_post($base_ids[$key], $lang);
@@ -66,9 +66,9 @@ function torcisao_page_url($key, $lang=null){
         'quality'=>'/politicadequalidade/',
         'privacy'=>'/politicadeprivacidade/',
         'cookies'=>'/politicadecookies/',
-        'arame'=>'/aramebtc/',
-        'barra'=>'/barrabtc/',
-        'haste'=>'/hastebc/',
+        'arame'=>'/arame-trefilado/',
+        'barra'=>'/barra-trefilada/',
+        'haste'=>'/haste-de-aterramento/',
     ];
     $url = home_url($paths[$key] ?? '/');
     return $lang === 'pt' ? $url : add_query_arg('lang', $lang, $url);
