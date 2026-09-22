@@ -71,6 +71,34 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
     </div>
   </section>
 
+  <?php if ($home_lang === 'pt') : ?>
+  <section class="th-section th-differentials" id="fornecimento-b2b">
+    <div class="th-container">
+      <div class="th-section-head th-section-head-split">
+        <div><span class="th-kicker">Fornecimento B2B</span><h2>Fabricante de barras e arames trefilados com atendimento comercial direto</h2></div>
+        <p>A Torcisão atende compras industriais de barras e arames trefilados. A especificação do material orienta a análise de disponibilidade, prazo e condição comercial.</p>
+      </div>
+      <div class="th-diff-grid">
+        <article>
+          <i class="bi bi-building-check"></i>
+          <h3>Venda direta para empresas</h3>
+          <p>A Torcisão fabrica e fornece barras e arames trefilados para clientes B2B. A equipe comercial valida produto, bitola, quantidade, aplicação e requisitos do pedido antes da proposta.</p>
+        </article>
+        <article>
+          <i class="bi bi-lightning-charge"></i>
+          <h3>Como agilizar uma cotação</h3>
+          <p>Informe aço, perfil ou bitola, quantidade, acabamento, aplicação e local de entrega. Quando houver tolerância, propriedade mecânica, laudo ou outro requisito, envie a informação já no primeiro contato.</p>
+        </article>
+        <article>
+          <i class="bi bi-clipboard-check"></i>
+          <h3>Contratos e fornecimento recorrente</h3>
+          <p>Para compras de longo prazo, compare qualidade, repetibilidade dimensional, rastreabilidade, capacidade produtiva, histórico de entrega, contingência, suporte e custo total. O menor preço isolado não resume o risco do fornecimento.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+
   <section class="th-section th-applications" id="aplicacoes">
     <div class="th-container">
       <div class="th-section-head"><span class="th-kicker">Aplicações e segmentos</span><h2>Presença em diferentes cadeias industriais</h2><p>A Torcisão atende aplicações associadas a indústria, construção, energia, máquinas, mobilidade e bens de consumo</p></div>
