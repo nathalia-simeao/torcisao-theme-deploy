@@ -202,6 +202,17 @@ function currentBlogLanguage(){
   return 'pt';
 }
 
+function postMatchesLanguage(post,lang){
+  try{
+    const path=new URL(String(post?.link||''),window.location.origin).pathname.toLowerCase();
+    if(lang==='en')return /^\/en(?:\/|$)/.test(path);
+    if(lang==='es')return /^\/es(?:\/|$)/.test(path);
+    return !/^\/(?:en|es)(?:\/|$)/.test(path);
+  }catch(e){
+    return false;
+  }
+}
+
 function isPreviewHost(){
   const host=String(window.location.hostname||'').toLowerCase();
   return host==='localhost'||host==='127.0.0.1'||host.endsWith('.app.github.dev')||host.endsWith('.githubpreview.dev');
@@ -380,7 +391,7 @@ async function initBlog(){
   try{
     const apiBase=preview?LIVE_SITE:window.location.origin;
     const endpoint=new URL('/wp-json/wp/v2/posts',apiBase);
-    endpoint.searchParams.set('per_page','8');
+    endpoint.searchParams.set('per_page','30');
     endpoint.searchParams.set('status','publish');
     endpoint.searchParams.set('orderby','date');
     endpoint.searchParams.set('order','desc');
@@ -390,7 +401,12 @@ async function initBlog(){
     const posts=await fetchPosts(endpoint,preview);
     if(!posts.length)return;
 
-    const items=posts.map(function(post){
+    const languagePosts=posts.filter(function(post){
+      return postMatchesLanguage(post,lang);
+    }).slice(0,8);
+    if(!languagePosts.length)return;
+
+    const items=languagePosts.map(function(post){
       return {
         title:stripHtml(post?.title?.rendered||''),
         date:formatDate(post?.date||''),
