@@ -4,6 +4,9 @@
  * Separada das páginas de produto. Haste aparece aqui apenas como uma das linhas do portfólio.
  */
 get_header();
+$home_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : (function_exists('pll_current_language') ? pll_current_language('slug') : 'pt');
+if (!in_array($home_lang, ['pt','en','es'], true)) $home_lang = 'pt';
+$home_blog_url = function_exists('torcisao_page_url') ? torcisao_page_url('blog', $home_lang) : home_url('/blog/');
 $home_assets = get_template_directory_uri();
 $hero_barra = wp_get_attachment_image_url(1556, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Barras.png';
 $hero_haste = wp_get_attachment_image_url(1557, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Hastes.png';
@@ -104,12 +107,12 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
 
   <section class="th-section th-blog" id="blog">
     <div class="th-container">
-      <div class="th-section-head th-section-head-split"><div><span class="th-kicker">Conteúdo Técnico</span><h2>Informação para continuar a conversa</h2></div><a class="th-text-link th-blog-all" href="<?php echo esc_url(home_url('/blog/')); ?>">Ver blog <span>→</span></a></div>
+      <div class="th-section-head th-section-head-split"><div><span class="th-kicker">Conteúdo Técnico</span><h2>Informação para continuar a conversa</h2></div><a class="th-text-link th-blog-all" href="<?php echo esc_url($home_blog_url); ?>">Ver blog <span>→</span></a></div>
       <div class="th-blog-grid">
-        <?php $home_posts = get_posts(['numberposts'=>3,'post_status'=>'publish']); if ($home_posts) : foreach ($home_posts as $post) : setup_postdata($post); ?>
+        <?php $home_posts = get_posts(['numberposts'=>3,'post_status'=>'publish','lang'=>$home_lang]); if ($home_posts) : foreach ($home_posts as $post) : setup_postdata($post); ?>
           <article class="th-blog-card"><small><?php echo esc_html(get_the_date('d.m.Y')); ?></small><h3><?php the_title(); ?></h3><p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 20)); ?></p><a href="<?php the_permalink(); ?>">Ler conteúdo <span>→</span></a></article>
         <?php endforeach; wp_reset_postdata(); else: ?>
-          <article class="th-blog-card th-blog-empty"><small>Blog Torcisão</small><h3>Conteúdos técnicos em atualização</h3><p>Use o Blog no menu para acessar os conteúdos publicados pela Torcisão</p><a href="<?php echo esc_url(home_url('/blog/')); ?>">Ir para o blog <span>→</span></a></article>
+          <article class="th-blog-card th-blog-empty"><small>Blog Torcisão</small><h3>Conteúdos técnicos em atualização</h3><p>Use o Blog no menu para acessar os conteúdos publicados pela Torcisão</p><a href="<?php echo esc_url($home_blog_url); ?>">Ir para o blog <span>→</span></a></article>
         <?php endif; ?>
       </div>
     </div>
