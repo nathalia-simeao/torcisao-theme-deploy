@@ -13,6 +13,9 @@ if (file_exists($i18n_file)) require_once $i18n_file;
 $translated_assets_file = get_template_directory().'/inc/torcisao-translated-page-assets.php';
 if (file_exists($translated_assets_file)) require_once $translated_assets_file;
 
+$server_i18n_hotfix_file = get_template_directory().'/inc/torcisao-server-i18n-hotfix.php';
+if (file_exists($server_i18n_hotfix_file)) require_once $server_i18n_hotfix_file;
+
 
 /*
  * Fonte de verdade do idioma da interface: a própria URL.
