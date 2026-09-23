@@ -7,11 +7,11 @@ const $=id=>document.getElementById(id);
 
 const data={
   btc:{
-    title:'Baixo Teor de Carbono · 1006 a 1020',
+    title:'Baixo Teor de Carbono · 1004 a 1020',
     lead:'Barra trefilada de baixo teor de carbono, em perfil redondo, disponível nos acabamentos trefilado e polido. Consulte a combinação de bitola, tolerância e comprimento para o seu pedido.',
-    facts:[['Faixa de aço','1006 a 1020'],['Bitola','2,00 a 15,88 mm'],['Perfil','Redondo'],['Tolerância','Sob consulta']],
+    facts:[['Faixa de aço','1004 a 1020'],['Bitola','2,00 a 15,88 mm'],['Perfil','Redondo'],['Tolerância','Sob consulta']],
     specs:[['Bitola / diâmetro','2,00 a 15,88 mm'],['Tolerância','Sob consulta'],['Acondicionamento','Feixes embalados'],['Perfil','Redondo'],['Acabamento','Trefilada ou polida']],
-    availability:[['Faixa de aço','1006 a 1020'],['Bitola','2,00 a 15,88 mm'],['Acondicionamento','Feixes embalados'],['Comprimento','Conforme especificação · sob consulta']]
+    availability:[['Faixa de aço','1004 a 1020'],['Bitola','2,00 a 15,88 mm'],['Acondicionamento','Feixes embalados'],['Comprimento','Conforme especificação · sob consulta']]
   },
   mtc:{
     title:'Médio Teor de Carbono · 1035 a 1050',
@@ -148,7 +148,7 @@ function reviseTools(){
 function reviseManualAssistant(){
   const select=$('bfManualSelect');
   if(select){
-    const labels={btc:'Baixo Carbono · 1006 a 1020',mtc:'Médio Carbono · 1035 a 1050',atc:'Alto Carbono · 1060 a 1090',ressulfurado:'Aço Ressulfurado · 11SMn37'};
+    const labels={btc:'Baixo Carbono · 1004 a 1020',mtc:'Médio Carbono · 1035 a 1050',atc:'Alto Carbono · 1060 a 1090',ressulfurado:'Aço Ressulfurado · 11SMn37'};
     Array.from(select.options).forEach(o=>{if(labels[o.value])o.textContent=labels[o.value];});
   }
   const action=$('bfManualAction');
