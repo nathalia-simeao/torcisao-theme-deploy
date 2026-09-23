@@ -42,71 +42,55 @@ $bf_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
   <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Dados técnicos para avaliar a aplicação</h2><p class="hf-section-intro">As referências abaixo reproduzem as informações publicadas pela Torcisão. Tolerâncias, composição, tratamento e demais requisitos devem ser confirmados conforme o desenho ou memorial do projeto.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="bfSpecs"></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="bfAvailability"></div></div></div><?php if ($bf_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida de acabamento e usinagem em barras trefiladas"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>Acabamento e usinagem</strong></div><div class="hf-aeo-quick-item"><span>Barra trefilada</span><strong>Precisão dimensional</strong><p>O trabalho a frio melhora acabamento e controle dimensional. A tolerância final deve seguir o desenho e a especificação do pedido.</p></div><div class="hf-aeo-quick-item"><span>Polida / reendireitada</span><strong>Etapa adicional</strong><p>Pode ser avaliada quando o projeto exige condição adicional de superfície ou retilineidade. Confirme acabamento e tolerância na cotação.</p></div><div class="hf-aeo-quick-item"><span>11SMn37</span><strong>Usinabilidade melhorada</strong><p>O aço ressulfurado favorece a formação e a quebra do cavaco em usinagem seriada. Bitola, tolerância e acabamento continuam sendo especificados separadamente.</p></div></div><?php endif; ?></div></section>
 
   <section class="hf-section" id="aplicacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Aplicações</span><h2 class="hf-section-title">Onde cada linha pode ser avaliada</h2><p class="hf-section-intro">A aplicação indica um ponto de partida. A seleção do aço depende dos requisitos mecânicos, dimensionais e do processo de fabricação.</p></div><div class="hf-app-grid"><article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="bfApplications"></ul></article><article class="hf-app-card"><h3>O que validar no projeto</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Aço / teor de carbono</strong><p>Confirme a classificação do material prevista no desenho ou especificação.</p></div><div class="hf-variant-box"><strong>Dimensão e tolerância</strong><p>Bitola, comprimento e tolerância devem acompanhar a necessidade da peça.</p></div><div class="hf-variant-box"><strong>Processo</strong><p>Usinagem, conformação, soldagem, tratamento ou acabamento podem alterar a seleção final.</p></div></div></article></div><?php if ($bf_lang === 'pt') : ?>
-<div class="hf-section-head" id="guia-tecnico-barras" style="margin-top:clamp(30px,5vw,56px)">
-  <span class="hf-section-kicker">Guia técnico</span>
-  <h2 class="hf-section-title">Como especificar barras trefiladas para usinagem e aplicações industriais</h2>
-  <p class="hf-section-intro">A escolha entre aço de baixo, médio ou alto teor de carbono, 11SMn37 e diferentes condições de acabamento deve partir da aplicação, do processo de fabricação e dos requisitos do desenho. Os pontos abaixo ajudam a estruturar essa avaliação antes da cotação.</p>
-</div>
-<div class="hf-app-grid">
-  <article class="hf-app-card">
-    <h3>Quais as vantagens do aço 11SMn37 na usinagem?</h3>
-    <p>O 11SMn37 é um aço ressulfurado de usinabilidade melhorada. O enxofre controlado favorece a formação de inclusões de sulfeto de manganês, que ajudam na formação e na quebra do cavaco durante operações de corte.</p>
-    <p>Em usinagem seriada, essa característica pode contribuir para maior estabilidade do processo e produtividade. O efeito sobre velocidade de corte, acabamento e vida útil da ferramenta depende também da geometria da peça, ferramenta, lubrificação, parâmetros de usinagem e condição de fornecimento.</p>
-    <p>Por isso, a especificação deve considerar em conjunto aço, bitola, tolerância, acabamento, propriedades exigidas e aplicação final.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Qual a diferença entre barra trefilada, polida e reendireitada?</h3>
-    <p>A barra trefilada passa por trabalho a frio para obter melhor controle dimensional e condição superficial em relação ao material de origem. Quando o projeto exige requisitos adicionais de retilineidade ou superfície, podem ser avaliadas etapas complementares de reendireitamento e polimento.</p>
-    <p>Polimento ou reendireitamento não substituem a especificação dimensional do desenho. Diâmetro, ovalização, retilineidade, rugosidade, comprimento e tolerância devem ser definidos conforme a função da peça e confirmados no fornecimento.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Como escolher entre barras BTC, MTC e ATC?</h3>
-    <p>O teor de carbono é um dos fatores de seleção, mas não deve ser usado sozinho. Aços de baixo teor de carbono costumam ser avaliados quando conformabilidade, ductilidade ou soldabilidade têm maior peso. Faixas intermediárias podem atender aplicações que exigem equilíbrio entre resistência e processamento. Aços de maior teor de carbono entram em avaliações em que dureza, resistência ao desgaste ou resposta a tratamento térmico são relevantes.</p>
-    <p>Para autopeças, pinos, hastes, componentes de amortecedores e outras peças críticas, a definição deve considerar desenho, carregamento, fadiga, tratamento térmico, usinagem, acabamento e propriedades mecânicas finais. A equipe Torcisão avalia a opção de fornecimento a partir desses requisitos, sem substituir a especificação técnica do projeto.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>O que enviar para uma cotação técnica de barras trefiladas?</h3>
-    <p>Informe o grau ou especificação do aço, perfil, bitola, comprimento, quantidade, tolerâncias, acabamento desejado, aplicação, condição de tratamento quando aplicável e requisitos de documentação ou ensaio.</p>
-    <p>Quanto mais completa a especificação, mais objetiva fica a análise de viabilidade, disponibilidade e condição comercial. Para aço ressulfurado, veja também o <a href="<?php echo esc_url(home_url('/2026/09/15/7-criterios-para-escolher-fabricante-de-barras-trefiladas-em-aco-11smn37/')); ?>">guia de compra de barras 11SMn37</a>.</p>
-  </article>
-</div>
-<div class="hf-section-head" id="compra-barras" style="margin-top:clamp(30px,5vw,56px)">
-  <span class="hf-section-kicker">Compra industrial</span>
-  <h2 class="hf-section-title">Como comprar barras trefiladas com mais segurança</h2>
-  <p class="hf-section-intro">Além da especificação técnica, a compra deve considerar aplicação, disponibilidade real, localização, prazo e custo total do fornecimento.</p>
-</div>
-<div class="hf-app-grid">
-  <article class="hf-app-card">
-    <h3>Onde comprar barra trefilada 11SMn37 no Brasil?</h3>
-    <p>A Torcisão fabrica e fornece barras trefiladas em aço ressulfurado 11SMn37 para clientes industriais. A empresa está localizada em São Paulo e atende demandas B2B em diferentes regiões.</p>
-    <p>Na linha 11SMn37, a Torcisão trabalha com perfil redondo e bitolas de 4,76 mm a 15,88 mm. Tolerância, acabamento, quantidade, disponibilidade e prazo são confirmados em cada cotação.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Existe barra 11SMn37 a pronta entrega?</h3>
-    <p>Estoque industrial é dinâmico. Por isso, a Torcisão não trata pronta entrega como promessa permanente. A equipe comercial verifica a disponibilidade real da bitola, acabamento e quantidade no momento da consulta.</p>
-    <p>Quando o prazo é crítico, informe isso já na cotação para que a condição de atendimento seja avaliada junto com a especificação.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Quais aplicações usam barras trefiladas?</h3>
-    <p>Barras trefiladas podem ser avaliadas para peças que exigem controle dimensional e acabamento, incluindo pinos, pistões, bujões, válvulas, porcas, componentes automotivos e itens de sistemas hidráulicos e pneumáticos.</p>
-    <p>O aço e a condição de fornecimento devem acompanhar os requisitos mecânicos, de usinagem e de acabamento definidos para a peça.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Como comparar custo-benefício entre fabricantes?</h3>
-    <p>Preço por quilograma é apenas uma parte da análise. Compare também tolerância, repetibilidade dimensional, acabamento, usinabilidade, prazo, logística, suporte e risco de retrabalho.</p>
-    <p>Para contratos recorrentes, a estabilidade do fornecimento pode ter impacto maior no custo total do que uma diferença pequena no preço unitário.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Como solicitar uma cotação rápida de barras trefiladas?</h3>
-    <p>Informe aço, perfil, bitola, comprimento, quantidade, tolerância, acabamento, aplicação e local de entrega. Se houver necessidade de laudo, ensaio ou tratamento específico, inclua o requisito desde o início.</p>
-    <p>Com a especificação completa, a equipe consegue avaliar disponibilidade, prazo e condição comercial com menos etapas de ida e volta.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Fornecedor direto ou distribuidor: o que avaliar?</h3>
-    <p>Na compra direta de fabricante, confirme capacidade de atender a especificação, estabilidade do processo, documentação, prazo e suporte pós-venda. Para fornecimentos recorrentes, considere também continuidade, logística e tratamento de não conformidades.</p>
-  </article>
-</div>
-<div class="hf-mini-faq" id="faq"><div class="hf-mini-faq-head"><span class="hf-section-kicker">Dúvidas rápidas</span><h3>Perguntas frequentes sobre barra trefilada</h3></div><div class="hf-mini-faq-grid"><details><summary>Por que o 11SMn37 é usado em usinagem seriada?</summary><p>O 11SMn37 é um aço de usinabilidade melhorada. Seu teor controlado de enxofre favorece inclusões que ajudam na formação e na quebra do cavaco, característica útil em operações contínuas e peças torneadas em série.</p></details><details><summary>Qual a diferença entre barra trefilada e barra polida ou reendireitada?</summary><p>A barra trefilada já recebe ganho de precisão dimensional e acabamento pelo trabalho a frio. Quando o projeto exige condição adicional de superfície ou retilineidade, pode ser avaliada uma barra polida ou reendireitada. A tolerância final deve ser confirmada conforme desenho, aplicação e especificação do pedido.</p></details><details><summary>O que informar ao solicitar barra 11SMn37?</summary><p>Informe bitola, comprimento, tolerância, acabamento desejado, quantidade, aplicação e qualquer requisito de laudo ou especificação. Para barra polida ou reendireitada, sinalize essa necessidade já na cotação.</p></details></div></div><?php endif; ?></div></section>
+<div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
+  <div class="hf-mini-faq-head">
+    <span class="hf-section-kicker">Dúvidas frequentes</span>
+    <h3>Perguntas frequentes sobre barra trefilada</h3>
+    <p class="hf-section-intro">Abra apenas o assunto que fizer sentido para o seu projeto. As respostas reúnem os principais pontos técnicos e comerciais antes da cotação.</p>
+  </div>
+  <div class="hf-mini-faq-grid">
+    <details>
+      <summary>Quais as vantagens do aço 11SMn37 na usinagem?</summary>
+      <p>O 11SMn37 é um aço ressulfurado de usinabilidade melhorada. O enxofre controlado favorece inclusões de sulfeto de manganês, que ajudam na formação e na quebra do cavaco durante operações de corte. Em usinagem seriada, isso pode contribuir para maior estabilidade do processo e produtividade. O resultado final também depende da peça, ferramenta, lubrificação, parâmetros de usinagem e condição de fornecimento.</p>
+    </details>
+    <details>
+      <summary>Qual a diferença entre barra trefilada, polida e reendireitada?</summary>
+      <p>A barra trefilada passa por trabalho a frio para melhorar controle dimensional e condição superficial. Quando o projeto exige requisitos adicionais de retilineidade ou superfície, podem ser avaliadas etapas de reendireitamento e polimento. Diâmetro, ovalização, retilineidade, rugosidade, comprimento e tolerância devem seguir o desenho e a especificação do pedido.</p>
+    </details>
+    <details>
+      <summary>Como escolher entre barras BTC, MTC e ATC?</summary>
+      <p>O teor de carbono é um dos fatores de seleção. Aços de baixo teor de carbono costumam ser avaliados quando conformabilidade, ductilidade ou soldabilidade têm maior peso. Faixas intermediárias podem equilibrar resistência e processamento. Aços de maior teor de carbono entram em aplicações que exigem maior dureza, resistência ao desgaste ou resposta a tratamento térmico. Para peças críticas, considere também fadiga, usinagem, acabamento e propriedades finais.</p>
+    </details>
+    <details>
+      <summary>O que enviar para uma cotação técnica de barras trefiladas?</summary>
+      <p>Informe grau ou especificação do aço, perfil, bitola, comprimento, quantidade, tolerâncias, acabamento, aplicação e requisitos de documentação ou ensaio. Para aço ressulfurado, consulte também o <a href="<?php echo esc_url(home_url('/2026/09/15/7-criterios-para-escolher-fabricante-de-barras-trefiladas-em-aco-11smn37/')); ?>">guia de compra de barras 11SMn37</a>.</p>
+    </details>
+    <details>
+      <summary>Onde comprar barra trefilada 11SMn37 no Brasil?</summary>
+      <p>A Torcisão fabrica e fornece barras trefiladas em aço ressulfurado 11SMn37 para clientes industriais. A empresa está localizada em São Paulo e atende demandas B2B em diferentes regiões. Na linha 11SMn37, trabalha com perfil redondo e bitolas de 4,76 mm a 15,88 mm. Tolerância, acabamento, quantidade, disponibilidade e prazo são confirmados em cada cotação.</p>
+    </details>
+    <details>
+      <summary>Existe barra 11SMn37 a pronta entrega?</summary>
+      <p>Estoque industrial é dinâmico. Por isso, a Torcisão verifica a disponibilidade real da bitola, acabamento e quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.</p>
+    </details>
+    <details>
+      <summary>Quais aplicações usam barras trefiladas?</summary>
+      <p>Barras trefiladas podem ser avaliadas para pinos, pistões, bujões, válvulas, porcas, componentes automotivos e itens de sistemas hidráulicos e pneumáticos. O aço e a condição de fornecimento devem acompanhar os requisitos mecânicos, de usinagem e acabamento da peça.</p>
+    </details>
+    <details>
+      <summary>Como comparar custo-benefício entre fabricantes?</summary>
+      <p>Além do preço por quilograma, compare tolerância, repetibilidade dimensional, acabamento, usinabilidade, prazo, logística, suporte e risco de retrabalho. Em contratos recorrentes, estabilidade de fornecimento pode ter impacto maior no custo total do que uma pequena diferença no preço unitário.</p>
+    </details>
+    <details>
+      <summary>Como solicitar uma cotação rápida de barras trefiladas?</summary>
+      <p>Informe aço, perfil, bitola, comprimento, quantidade, tolerância, acabamento, aplicação e local de entrega. Se houver laudo, ensaio ou tratamento específico, inclua o requisito desde o início.</p>
+    </details>
+    <details>
+      <summary>Fornecedor direto ou distribuidor: o que avaliar?</summary>
+      <p>Na compra direta de fabricante, confirme capacidade de atender à especificação, estabilidade do processo, documentação, prazo e suporte pós-venda. Para fornecimentos recorrentes, considere também continuidade, logística e tratamento de não conformidades.</p>
+    </details>
+  </div>
+</div><?php endif; ?></div></section>
 
   <section class="hf-section hf-quality-section"><div class="hf-wrap"><div class="hf-quality-card"><div class="hf-quality-copy"><div class="hf-quality-icon"><i class="bi bi-patch-check-fill"></i></div><div><h3>Qualidade Torcisão</h3><p>Consulte o certificado de qualidade e valide com nossa equipe qualquer requisito específico do seu projeto.</p></div></div><div class="hf-quality-actions"><a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($bf_iso); ?>" target="_blank" rel="noopener">Ver certificado ISO</a></div></div></div></section>
 
