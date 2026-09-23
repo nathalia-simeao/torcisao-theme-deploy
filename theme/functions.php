@@ -205,6 +205,27 @@ function torcisao_preload_barra_lcp_image(){
 }
 add_action('wp_head','torcisao_preload_barra_lcp_image',2);
 
+/*
+ * Site Kit: preserva o Sign in with Google no wp-login/profile,
+ * mas evita carregar a biblioteca de autenticação na página pública de Barra,
+ * onde não há botão nem One Tap ativo.
+ */
+function torcisao_disable_public_siwg_on_barra(){
+    if (!is_page(1622)) return;
+    global $wp_filter;
+    if (empty($wp_filter['template_redirect']) || empty($wp_filter['template_redirect']->callbacks)) return;
+
+    foreach ($wp_filter['template_redirect']->callbacks as $priority => $callbacks) {
+        foreach ($callbacks as $callback) {
+            $fn = $callback['function'] ?? null;
+            if (!is_array($fn) || !is_object($fn[0] ?? null) || ($fn[1] ?? '') !== 'register_tag') continue;
+            if (get_class($fn[0]) !== 'Google\\Site_Kit\\Modules\\Sign_In_With_Google') continue;
+            remove_action('template_redirect', $fn, $priority);
+        }
+    }
+}
+add_action('template_redirect','torcisao_disable_public_siwg_on_barra',1);
+
 function torcisao_asset($path){
     return esc_url(get_template_directory_uri().'/'.ltrim($path,'/'));
 }
