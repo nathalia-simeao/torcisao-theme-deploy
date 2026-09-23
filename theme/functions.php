@@ -144,6 +144,10 @@ function torcisao_theme_assets(){
     wp_enqueue_style('torcisao-barra-commercial-v14',$uri.'/assets/torcisao-barra-commercial-v14.css',['torcisao-product-assistant-v13'],'20260907-1');
     wp_enqueue_style('torcisao-product-spec-balance-v16',$uri.'/assets/torcisao-product-spec-balance-v16.css',['torcisao-barra-commercial-v14'],'20260907-1');
     wp_enqueue_style('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.css',['torcisao-product-spec-balance-v16'],'20260907-1');
+    if (is_page(1622)) {
+        wp_enqueue_style('torcisao-btc-gallery-v20',$uri.'/assets/torcisao-btc-gallery-v20.css',['torcisao-product-quote-tab-v17'],'20260907-2');
+        wp_enqueue_style('torcisao-product-stage-v21',$uri.'/assets/torcisao-product-stage-v21.css',['torcisao-btc-gallery-v20'],'20260907-1');
+    }
     wp_enqueue_script('torcisao-header',$uri.'/assets/torcisao-header-recovery.js',[], $ver, true);
     wp_enqueue_script('torcisao-phase8',$uri.'/assets/torcisao-phase8.js',['torcisao-header'], $ver, true);
     if ($is_home) {
@@ -157,22 +161,20 @@ function torcisao_theme_assets(){
     }
     wp_enqueue_script('torcisao-lens-wheel-zoom',$uri.'/assets/torcisao-lens-wheel-zoom.js',$is_home?['torcisao-social-proof']:['torcisao-phase8'], $ver, true);
     wp_enqueue_script('torcisao-commercial-handoff',$uri.'/assets/torcisao-commercial-handoff.js',['torcisao-lens-wheel-zoom'], $ver, true);
-    wp_enqueue_script('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.js',['torcisao-phase8'],'20260907-1',true);
-    wp_enqueue_script('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.js',['torcisao-product-pages-v9'],'20260907-1',true);
-    if (is_page(1623)) {
-        wp_enqueue_script('torcisao-haste-application-v11',$uri.'/assets/torcisao-haste-application-v11.js',['torcisao-product-pages-v10'],'20260907-2',true);
-    }
     $is_barra_page = is_page(1622);
     if (!$is_barra_page) {
+        wp_enqueue_script('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.js',['torcisao-phase8'],'20260907-1',true);
+        wp_enqueue_script('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.js',['torcisao-product-pages-v9'],'20260907-1',true);
+        if (is_page(1623)) {
+            wp_enqueue_script('torcisao-haste-application-v11',$uri.'/assets/torcisao-haste-application-v11.js',['torcisao-product-pages-v10'],'20260907-2',true);
+        }
         $interaction_dep = is_page(1623) ? ['torcisao-haste-application-v11'] : ['torcisao-product-pages-v10'];
         wp_enqueue_script('torcisao-product-interaction-v12',$uri.'/assets/torcisao-product-interaction-v12.js',$interaction_dep,'20260907-2',true);
-    }
-    wp_enqueue_script('torcisao-product-assistant-v13',$uri.'/assets/torcisao-product-assistant-v13.js',$is_barra_page?['torcisao-product-pages-v10']:['torcisao-product-interaction-v12'],'20260907-3',true);
-    wp_enqueue_script('torcisao-barra-commercial-v14',$uri.'/assets/torcisao-barra-commercial-v14.js',['torcisao-product-assistant-v13'],'20260907-1',true);
-    if (!$is_barra_page) {
+        wp_enqueue_script('torcisao-product-assistant-v13',$uri.'/assets/torcisao-product-assistant-v13.js',['torcisao-product-interaction-v12'],'20260907-3',true);
+        wp_enqueue_script('torcisao-barra-commercial-v14',$uri.'/assets/torcisao-barra-commercial-v14.js',['torcisao-product-assistant-v13'],'20260907-1',true);
         wp_enqueue_script('torcisao-product-data-consistency-v16',$uri.'/assets/torcisao-product-data-consistency-v16.js',['torcisao-barra-commercial-v14'],'20260907-1',true);
+        wp_enqueue_script('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.js',['torcisao-product-data-consistency-v16'],'20260907-1',true);
     }
-    wp_enqueue_script('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.js',$is_barra_page?['torcisao-barra-commercial-v14']:['torcisao-product-data-consistency-v16'],'20260907-1',true);
     wp_enqueue_script('torcisao-footer-recovery',$uri.'/assets/torcisao-footer-recovery.js',['torcisao-commercial-handoff'], '20260907-3', true);
     wp_enqueue_script('torcisao-footer-group-v2',$uri.'/assets/torcisao-footer-group-v2.js',['torcisao-footer-recovery'], '20260907-2', true);
 
