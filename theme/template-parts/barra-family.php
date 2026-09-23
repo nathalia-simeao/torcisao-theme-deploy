@@ -6,6 +6,49 @@ $bf_initial = isset($torcisao_barra_initial) && in_array($torcisao_barra_initial
 $bf_assets = get_template_directory_uri();
 $bf_iso = 'https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf';
 $bf_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
+
+/*
+ * Conteúdo crítico renderizado no servidor para a rota canônica.
+ * O JS continua responsável pela troca entre BTC/MTC/ATC/ressulfurado,
+ * mas a primeira dobra não depende mais de JavaScript para existir.
+ */
+$bf_ssr = null;
+if ($bf_lang === 'pt' && $bf_initial === 'btc') {
+    $bf_ssr = [
+        'title' => 'Baixo Teor de Carbono · 1004 a 1020',
+        'lead' => 'Barra trefilada de baixo teor de carbono, em perfil redondo, com controle dimensional e acabamento obtidos por processo a frio.',
+        'image' => 'assets/barra1.webp',
+        'facts' => [
+            ['Faixa de aço','1004 a 1020'],
+            ['Bitola','2,00 a 15,88 mm'],
+            ['Perfil','Redondo'],
+            ['Tolerância','Sob consulta'],
+        ],
+        'specs' => [
+            ['Bitola / diâmetro','2,00 a 15,88 mm'],
+            ['Tolerância','Sob consulta'],
+            ['Acondicionamento','Feixes embalados'],
+            ['Perfil','Redondo'],
+            ['Acabamento','Trefilado ou trefilado polido'],
+        ],
+        'availability' => [
+            ['Faixa de aço','1004 a 1020'],
+            ['Bitola','2,00 a 15,88 mm'],
+            ['Tolerância','Sob consulta'],
+            ['Comprimento','Conforme especificação / consulta'],
+        ],
+        'apps' => ['Fixadores','Autopeças','Cesto metálico','Rack metálico','Molas helicoidais','Amortecedores'],
+    ];
+}
+$bf_ssr_image_url = $bf_ssr ? $bf_assets . '/' . $bf_ssr['image'] : '';
+$bf_ssr_dims = [0,0];
+if ($bf_ssr) {
+    $bf_ssr_image_file = get_template_directory() . '/' . $bf_ssr['image'];
+    if (is_readable($bf_ssr_image_file)) {
+        $bf_size = @getimagesize($bf_ssr_image_file);
+        if (is_array($bf_size)) $bf_ssr_dims = [(int)$bf_size[0], (int)$bf_size[1]];
+    }
+}
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($bf_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
 <link rel="stylesheet" href="<?php echo esc_url($bf_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
@@ -13,7 +56,7 @@ $bf_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
   <section class="hf-top"><div class="hf-wrap">
     <span class="hf-eyebrow">Linha Torcisão Trefilados</span>
     <h1 class="hf-title">Barra Trefilada</h1>
-    <p class="hf-intro">Soluções em barras trefiladas para aplicações que exigem precisão dimensional, acabamento e desempenho mecânico.</p>
+    <p class="hf-intro">Barra trefilada é um perfil de aço conformado a frio para obter maior controle dimensional e acabamento superficial. A Torcisão fornece opções BTC, MTC, ATC e aço ressulfurado 11SMn37 para aplicações industriais.</p>
     <div class="hf-family-tabs" style="--hf-tab-count:4" role="tablist" aria-label="Opções de Barra Trefilada">
       <button type="button" class="hf-family-tab" data-bf-kind="btc" role="tab">Baixo Carbono</button>
       <button type="button" class="hf-family-tab" data-bf-kind="mtc" role="tab">Médio Carbono</button>
@@ -25,28 +68,32 @@ $bf_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
   <section class="hf-explorer-section"><div class="hf-wrap"><div class="hf-explorer">
     <div class="hf-copy">
       <span class="hf-product-kicker">Barra trefilada</span>
-      <h2 class="hf-product-title" id="bfProductTitle"></h2>
-      <p class="hf-product-lead" id="bfProductLead"></p>
-      <div class="hf-facts" id="bfFacts"></div>
+      <h2 class="hf-product-title" id="bfProductTitle"><?php echo $bf_ssr ? esc_html($bf_ssr['title']) : ''; ?></h2>
+      <p class="hf-product-lead" id="bfProductLead"><?php echo $bf_ssr ? esc_html($bf_ssr['lead']) : ''; ?></p>
+      <div class="hf-facts" id="bfFacts"><?php if ($bf_ssr) : foreach ($bf_ssr['facts'] as $bf_fact) : ?><div class="hf-fact"><small><?php echo esc_html($bf_fact[0]); ?></small><strong><?php echo esc_html($bf_fact[1]); ?></strong></div><?php endforeach; endif; ?></div>
       <div class="hf-actions">
         <button type="button" class="hf-btn hf-btn-primary js-bf-quote" data-analytics-origin="barra_produto_principal" data-analytics-product="barra_trefilada"><i class="bi bi-whatsapp"></i> Solicitar cotação</button>
         <button type="button" class="hf-btn hf-btn-secondary" id="bfAssistantOpen"><i class="bi bi-stars"></i> Não sabe qual avaliar? Use o assistente</button>
       </div>
     </div>
     <div class="hf-stage"><div class="hf-stage-toolbar"><button type="button" class="hf-tool" id="bfZoomOut" aria-label="Diminuir zoom">−</button><span class="hf-tool hf-zoom-label" id="bfZoomLabel">1,0×</span><button type="button" class="hf-tool" id="bfZoomIn" aria-label="Aumentar zoom">+</button></div>
-      <div class="hf-viewer"><div class="hf-image-wrap" id="bfImageWrap" tabindex="0" role="button" aria-label="Abrir imagem ampliada"><img class="hf-image" id="bfImage" src="" alt="" loading="eager" decoding="async"><div class="hf-lens" id="bfLens" aria-hidden="true"></div></div><div class="hf-caption"><div><small>Barra Trefilada</small><strong id="bfCaptionTitle"></strong></div><span id="bfCaptionMeta"></span></div></div>
+      <div class="hf-viewer"><div class="hf-image-wrap" id="bfImageWrap" tabindex="0" role="button" aria-label="Abrir imagem ampliada"><img class="hf-image skip-lazy" id="bfImage" src="<?php echo esc_url($bf_ssr_image_url); ?>" alt="<?php echo $bf_ssr ? esc_attr($bf_ssr['title']) : ''; ?>" loading="eager" fetchpriority="high" decoding="async"<?php if ($bf_ssr_dims[0] && $bf_ssr_dims[1]) : ?> width="<?php echo (int)$bf_ssr_dims[0]; ?>" height="<?php echo (int)$bf_ssr_dims[1]; ?>"<?php endif; ?>><div class="hf-lens" id="bfLens" aria-hidden="true"></div></div><div class="hf-caption"><div><small>Barra Trefilada</small><strong id="bfCaptionTitle"><?php echo $bf_ssr ? esc_html($bf_ssr['title']) : ''; ?></strong></div><span id="bfCaptionMeta"><?php echo $bf_ssr ? 'Produto Torcisão' : ''; ?></span></div></div>
       <span class="hf-stage-note">Passe o cursor para ampliar os detalhes</span>
     </div>
   </div></div></section>
 
-  <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Dados técnicos para avaliar a aplicação</h2><p class="hf-section-intro">As referências abaixo reproduzem as informações publicadas pela Torcisão. Tolerâncias, composição, tratamento e demais requisitos devem ser confirmados conforme o desenho ou memorial do projeto.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="bfSpecs"></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="bfAvailability"></div></div></div><?php if ($bf_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida de acabamento e usinagem em barras trefiladas"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>Acabamento e usinagem</strong></div><div class="hf-aeo-quick-item"><span>Barra trefilada</span><strong>Precisão dimensional</strong><p>O trabalho a frio melhora acabamento e controle dimensional. A tolerância final deve seguir o desenho e a especificação do pedido.</p></div><div class="hf-aeo-quick-item"><span>Polida / reendireitada</span><strong>Etapa adicional</strong><p>Pode ser avaliada quando o projeto exige condição adicional de superfície ou retilineidade. Confirme acabamento e tolerância na cotação.</p></div><div class="hf-aeo-quick-item"><span>11SMn37</span><strong>Usinabilidade melhorada</strong><p>O aço ressulfurado favorece a formação e a quebra do cavaco em usinagem seriada. Bitola, tolerância e acabamento continuam sendo especificados separadamente.</p></div></div><?php endif; ?></div></section>
+  <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Dados técnicos para avaliar a aplicação</h2><p class="hf-section-intro">As referências abaixo reproduzem as informações publicadas pela Torcisão. Tolerâncias, composição, tratamento e demais requisitos devem ser confirmados conforme o desenho ou memorial do projeto.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="bfSpecs"><?php if ($bf_ssr) : foreach ($bf_ssr['specs'] as $bf_spec) : ?><div class="hf-spec-row"><small><?php echo esc_html($bf_spec[0]); ?></small><strong><?php echo esc_html($bf_spec[1]); ?></strong></div><?php endforeach; endif; ?></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="bfAvailability"><?php if ($bf_ssr) : ?><table class="hf-availability-table"><thead><tr><th>Referência</th><th>Informação</th></tr></thead><tbody><?php foreach ($bf_ssr['availability'] as $bf_row) : ?><tr><td><?php echo esc_html($bf_row[0]); ?></td><td><?php echo esc_html($bf_row[1]); ?></td></tr><?php endforeach; ?></tbody></table><?php endif; ?></div></div></div><?php if ($bf_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida de acabamento e usinagem em barras trefiladas"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>Acabamento e usinagem</strong></div><div class="hf-aeo-quick-item"><span>Barra trefilada</span><strong>Precisão dimensional</strong><p>O trabalho a frio melhora acabamento e controle dimensional. A tolerância final deve seguir o desenho e a especificação do pedido.</p></div><div class="hf-aeo-quick-item"><span>Polida / reendireitada</span><strong>Etapa adicional</strong><p>Pode ser avaliada quando o projeto exige condição adicional de superfície ou retilineidade. Confirme acabamento e tolerância na cotação.</p></div><div class="hf-aeo-quick-item"><span>11SMn37</span><strong>Usinabilidade melhorada</strong><p>O aço ressulfurado favorece a formação e a quebra do cavaco em usinagem seriada. Bitola, tolerância e acabamento continuam sendo especificados separadamente.</p></div></div><?php endif; ?></div></section>
 
-  <section class="hf-section" id="aplicacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Aplicações</span><h2 class="hf-section-title">Onde cada linha pode ser avaliada</h2><p class="hf-section-intro">A aplicação indica um ponto de partida. A seleção do aço depende dos requisitos mecânicos, dimensionais e do processo de fabricação.</p></div><div class="hf-app-grid"><article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="bfApplications"></ul></article><article class="hf-app-card"><h3>O que validar no projeto</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Aço / teor de carbono</strong><p>Confirme a classificação do material prevista no desenho ou especificação.</p></div><div class="hf-variant-box"><strong>Dimensão e tolerância</strong><p>Bitola, comprimento e tolerância devem acompanhar a necessidade da peça.</p></div><div class="hf-variant-box"><strong>Processo</strong><p>Usinagem, conformação, soldagem, tratamento ou acabamento podem alterar a seleção final.</p></div></div></article></div><?php if ($bf_lang === 'pt') : ?>
+  <section class="hf-section" id="aplicacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Aplicações</span><h2 class="hf-section-title">Onde cada linha pode ser avaliada</h2><p class="hf-section-intro">A aplicação indica um ponto de partida. A seleção do aço depende dos requisitos mecânicos, dimensionais e do processo de fabricação.</p></div><div class="hf-app-grid"><article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="bfApplications"><?php if ($bf_ssr) : foreach ($bf_ssr['apps'] as $bf_app) : ?><li><?php echo esc_html($bf_app); ?></li><?php endforeach; endif; ?></ul></article><article class="hf-app-card"><h3>O que validar no projeto</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Aço / teor de carbono</strong><p>Confirme a classificação do material prevista no desenho ou especificação.</p></div><div class="hf-variant-box"><strong>Dimensão e tolerância</strong><p>Bitola, comprimento e tolerância devem acompanhar a necessidade da peça.</p></div><div class="hf-variant-box"><strong>Processo</strong><p>Usinagem, conformação, soldagem, tratamento ou acabamento podem alterar a seleção final.</p></div></div></article></div><?php if ($bf_lang === 'pt') : ?>
 <div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
   <div class="hf-mini-faq-head">
     <span class="hf-section-kicker">Dúvidas frequentes</span>
   </div>
   <div class="hf-mini-faq-grid">
+    <details>
+      <summary>O que é barra trefilada e como ela é produzida?</summary>
+      <p>Barra trefilada é um perfil de aço obtido por trefilação a frio. Nesse processo, o material passa por uma matriz para reduzir e controlar sua seção, melhorando precisão dimensional e acabamento superficial. A escolha do aço, da bitola, da tolerância e do acabamento deve seguir a aplicação da peça.</p>
+    </details>
     <details>
       <summary>Quais as vantagens do aço 11SMn37 na usinagem?</summary>
       <p>O 11SMn37 é um aço ressulfurado de usinabilidade melhorada. O enxofre controlado favorece inclusões de sulfeto de manganês, que ajudam na formação e na quebra do cavaco durante operações de corte. Em usinagem seriada, isso pode contribuir para maior estabilidade do processo e produtividade. O resultado final também depende da peça, ferramenta, lubrificação, parâmetros de usinagem e condição de fornecimento.</p>
