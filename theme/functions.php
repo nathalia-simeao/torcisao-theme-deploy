@@ -104,7 +104,7 @@ function torcisao_theme_assets(){
     $ver = wp_get_theme()->get('Version') ?: '2026.09.06';
     $is_home = torcisao_is_home_experience();
     $is_product_page = is_page([1621,1622,1623,1627,1628,1629,1630,1631,1632]);
-    $is_barra_page = is_page([1622,1631,1632]);
+    $is_barra_page = is_page(1622);
     wp_enqueue_style('torcisao-fonts','https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap',[],null);
     wp_enqueue_style('bootstrap-icons','https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',[],null);
     wp_enqueue_style('torcisao-style',get_stylesheet_uri(),[],$ver);
