@@ -46,8 +46,6 @@ $af_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
 <div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
   <div class="hf-mini-faq-head">
     <span class="hf-section-kicker">Dúvidas frequentes</span>
-    <h3>Perguntas frequentes sobre arame trefilado</h3>
-    <p class="hf-section-intro">Abra apenas o tema que quiser consultar. As respostas ajudam a organizar a especificação e a cotação do arame.</p>
   </div>
   <div class="hf-mini-faq-grid">
     <details>
