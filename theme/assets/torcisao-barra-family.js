@@ -10,8 +10,16 @@ const data={
  atc:{title:'Alto Teor de Carbono · 1050',lead:'Barra trefilada de alto carbono da linha Torcisão para aplicações mecânicas que exigem validação de aço, resistência, tolerância e processo.',image:'assets/barra3.jpg',facts:[['Aço','1050'],['Bitola','2,00 a 15,88 mm'],['Tolerância','h9 · h10 · h11'],['Perfil','Redondo']],specs:[['Bitola / diâmetro','2,00 a 15,88 mm'],['Tolerância','h9 · h10 · h11'],['Comprimento','Conforme especificação'],['Perfil','Redondo'],['Acabamento','Trefilado ou trefilado polido']],availability:[['Aço','1050'],['Bitola','2,00 a 15,88 mm'],['Comprimento','Conforme especificação']],apps:['Eixos','Engrenagens','Bielas','Cubos de roda','Trilhos','Parafusos','Porcas','Pinos','Hastes de amortecedor','Sapatas de trator','Peças forjadas','Ferramentas manuais']},
  ressulfurado:{title:'Aço Ressulfurado',lead:'Barra trefilada para aplicações em que usinabilidade, precisão dimensional e acabamento são critérios importantes.',image:'assets/barra4.jpg',facts:[['Linha','Aço ressulfurado'],['Bitola','2,00 a 15,88 mm'],['Perfil','Redondo'],['Tolerância','h9 · h10 · h11']],specs:[['Bitola / diâmetro','2,00 a 15,88 mm'],['Tolerância','h9 · h10 · h11'],['Perfil','Redondo'],['Acabamento','Trefilado'],['Observação','A classificação do aço deve ser confirmada na especificação comercial']],availability:[['Bitola','2,00 a 15,88 mm'],['Aplicação','Usinagem e componentes seriados'],['Fornecimento','Conforme especificação']],apps:['Setor automotivo','Pinos','Pistões','Bujões','Válvulas','Porcas','Sistemas hidráulicos','Sistemas pneumáticos']}
 };
+const MEDIA='https://torcisao.com.br/wp-content/uploads/2026/09/';
+const galleries={
+ btc:{label:'BTC',trefilada:[MEDIA+'barratrefiladabtca1.png',MEDIA+'barratrefiladabtca2.png',MEDIA+'barratrefiladabtca3.png'],polida:[MEDIA+'barrapolidabtca1.png',MEDIA+'barrapolidabtca2.png',MEDIA+'barrapolidabtca3.png']},
+ mtc:{label:'MTC',trefilada:[MEDIA+'barratrefiladamtca1.png',MEDIA+'barratrefiladamtca2.png',MEDIA+'barratrefiladamtca3.png'],polida:[MEDIA+'barrapolidamtca1.png',MEDIA+'barrapolidamtca2.png',MEDIA+'barrapolidamtca3.png']},
+ atc:{label:'ATC',trefilada:[MEDIA+'barratrefiladaatca1.png',MEDIA+'barratrefiladaatca2.png',MEDIA+'barratrefiladaatca3.png'],polida:[MEDIA+'barrapolidaatca1.png',MEDIA+'barrapolidaatca2.png',MEDIA+'barrapolidaatca3.png']},
+ ressulfurado:{label:'Ressulfurado',trefilada:[MEDIA+'barratrefiladaressulfuradoa1.png',MEDIA+'barratrefiladaressulfuradoa2.png',MEDIA+'barratrefiladaressulfuradoa3.png'],polida:[MEDIA+'barrapolidaressulfuradoa1.png',MEDIA+'barrapolidaressulfuradoa2.png',MEDIA+'barrapolidaressulfuradoa3.png']}
+};
+let finish='trefilada',angle=0;
 const formVariantMap={
- btc:{barra_trefilada:'Barra Redonda - BTC - 1006 a 1020',especificacao_do_aco:'Baixo Teor de Carbono (1004 a 1020)',origin:'LP Barra | Baixo Carbono'},
+ btc:{barra_trefilada:'Barra Redonda - BTC - 1004 a 1020',especificacao_do_aco:'Baixo Teor de Carbono (1004 a 1020)',origin:'LP Barra | Baixo Carbono'},
  mtc:{barra_trefilada:'Barra Redonda - MTC - 1035 a 1045',especificacao_do_aco:'Médio Teor de Carbono (1035 a 1050)',origin:'LP Barra | Médio Carbono'},
  atc:{barra_trefilada:'Barra Redonda - ATC - 1050 a 1090',especificacao_do_aco:'Alto Teor de Carbono (1060 a 1090)',origin:'LP Barra | Alto Carbono'},
  ressulfurado:{barra_trefilada:'Barra Trefilada - Aço Ressulfurado - 11SMn37',especificacao_do_aco:'Aço Ressulfurado (11SMn37)',origin:'LP Barra | Aço Ressulfurado'}
@@ -37,12 +45,51 @@ function syncBarQuoteForm(formNode){
  setHubSpotField(form,'especificacao_do_aco',selected.especificacao_do_aco);
  setHubSpotField(form,'pagina_de_origem_do_lead',selected.origin);
 }
-const image=$('bfImage'),wrap=$('bfImageWrap'),lens=$('bfLens');
-function themeAsset(path){const href=qa('link[href*="torcisao-haste-family.css"]')[0]?.href||'';return (href.split('/assets/')[0]||'')+'/'+path;}
+const image=$('bfImage'),wrap=$('bfImageWrap'),lens=$('bfLens'),stage=q('.hf-stage',root);
 function rows(items){return items.map(([a,b])=>`<div class="hf-spec-row"><small>${a}</small><strong>${b}</strong></div>`).join('')}
-function render(){const d=data[kind];qa('[data-bf-kind]').forEach(b=>{const on=b.dataset.bfKind===kind;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false')});$('bfProductTitle').textContent=d.title;$('bfProductLead').textContent=d.lead;$('bfFacts').innerHTML=d.facts.map(([a,b])=>`<div class="hf-fact"><small>${a}</small><strong>${b}</strong></div>`).join('');$('bfSpecs').innerHTML=rows(d.specs);$('bfAvailability').innerHTML=`<table class="hf-availability-table"><thead><tr><th>Referência</th><th>Informação</th></tr></thead><tbody>${d.availability.map(([a,b])=>`<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</tbody></table>`;$('bfApplications').innerHTML=d.apps.map(x=>`<li>${x}</li>`).join('');image.src=themeAsset(d.image);image.alt=d.title;$('bfCaptionTitle').textContent=d.title;$('bfCaptionMeta').textContent='Produto Torcisão';zoom=1;updateZoom();}
+function ensureFinishPicker(){
+ let picker=$('bfImageVariants');
+ if(picker)return picker;
+ picker=document.createElement('div');picker.id='bfImageVariants';picker.className='hf-image-variants';picker.setAttribute('role','group');picker.setAttribute('aria-label','Acabamento da barra');
+ stage?.prepend(picker);
+ return picker;
+}
+function ensureAnglePicker(){
+ let picker=$('bfBtcAnglePicker');
+ if(picker)return picker;
+ picker=document.createElement('div');picker.id='bfBtcAnglePicker';picker.className='tor-btc-angle-picker';picker.setAttribute('role','group');
+ stage?.appendChild(picker);
+ return picker;
+}
+function renderGallery(){
+ const g=galleries[kind]||galleries.btc;
+ const urls=g[finish]||g.trefilada;
+ if(angle>=urls.length)angle=0;
+ const finishPicker=ensureFinishPicker();
+ finishPicker.innerHTML='';
+ [['trefilada','Trefilada'],['polida','Polida']].forEach(([key,label])=>{
+   const btn=document.createElement('button');btn.type='button';btn.className='hf-image-variant'+(finish===key?' is-active':'');btn.textContent=label;btn.setAttribute('aria-pressed',finish===key?'true':'false');
+   btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();finish=key;angle=0;renderGallery();track('product_finish_select',{product:'barra_trefilada',variant:kind,finish:key});});
+   finishPicker.appendChild(btn);
+ });
+ const anglePicker=ensureAnglePicker();anglePicker.setAttribute('aria-label','Ângulos da barra '+g.label);anglePicker.innerHTML='<small>Ângulos</small>';
+ urls.forEach((src,index)=>{
+   const btn=document.createElement('button');btn.type='button';btn.className='tor-btc-angle-btn'+(index===angle?' is-active':'');btn.setAttribute('aria-label','Ver ângulo '+(index+1));btn.setAttribute('aria-pressed',index===angle?'true':'false');
+   const thumb=document.createElement('img');thumb.src=src;thumb.alt='';thumb.loading='lazy';thumb.decoding='async';thumb.width=180;thumb.height=120;btn.appendChild(thumb);
+   btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();angle=index;renderGallery();});
+   anglePicker.appendChild(btn);
+ });
+ const src=urls[angle];image.src=src;image.removeAttribute('srcset');image.alt='Barra '+g.label+' '+(finish==='polida'?'polida':'trefilada')+' · ângulo '+(angle+1);$('bfCaptionMeta').textContent=(finish==='polida'?'Polida':'Trefilada')+' · ângulo '+(angle+1);
+}
+function render(){
+ const d=data[kind];
+ qa('[data-bf-kind]').forEach(b=>{const on=b.dataset.bfKind===kind;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false')});
+ $('bfProductTitle').textContent=d.title;$('bfProductLead').textContent=d.lead;$('bfFacts').innerHTML=d.facts.map(([a,b])=>`<div class="hf-fact"><small>${a}</small><strong>${b}</strong></div>`).join('');
+ $('bfSpecs').innerHTML=rows(d.specs);$('bfAvailability').innerHTML=`<table class="hf-availability-table"><thead><tr><th>Referência</th><th>Informação</th></tr></thead><tbody>${d.availability.map(([a,b])=>`<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</tbody></table>`;
+ $('bfApplications').innerHTML=d.apps.map(x=>`<li>${x}</li>`).join('');$('bfCaptionTitle').textContent=d.title;renderGallery();zoom=1;updateZoom();
+}
 function updateZoom(){image.style.setProperty('--hf-zoom',zoom);$('bfZoomLabel').textContent=zoom.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'×'}
-qa('[data-bf-kind]').forEach(b=>b.addEventListener('click',()=>{kind=b.dataset.bfKind;render();syncBarQuoteForm();track('product_variant_select',{product:'barra_trefilada',variant:kind})}));$('bfZoomIn').addEventListener('click',()=>{zoom=Math.min(2.6,zoom+.2);updateZoom()});$('bfZoomOut').addEventListener('click',()=>{zoom=Math.max(.8,zoom-.2);updateZoom()});
+qa('[data-bf-kind]').forEach(b=>b.addEventListener('click',()=>{kind=b.dataset.bfKind;finish='trefilada';angle=0;render();syncBarQuoteForm();track('product_variant_select',{product:'barra_trefilada',variant:kind})}));$('bfZoomIn').addEventListener('click',()=>{zoom=Math.min(2.6,zoom+.2);updateZoom()});$('bfZoomOut').addEventListener('click',()=>{zoom=Math.max(.8,zoom-.2);updateZoom()});
 wrap.addEventListener('mousemove',e=>{if(innerWidth<768)return;const r=wrap.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;wrap.style.setProperty('--tilt-y',((x/r.width-.5)*5)+'deg');wrap.style.setProperty('--tilt-x',((.5-y/r.height)*5)+'deg');lens.style.left=x+'px';lens.style.top=y+'px';lens.style.backgroundImage=`url("${image.currentSrc||image.src}")`;lens.style.backgroundSize=`${image.clientWidth*2.3}px ${image.clientHeight*2.3}px`;lens.style.backgroundPosition=`${-(x-r.width/2)*2+lens.clientWidth/2}px ${-(y-r.height/2)*2+lens.clientHeight/2}px`;lens.classList.add('is-visible')});wrap.addEventListener('mouseleave',()=>{wrap.style.setProperty('--tilt-x','0deg');wrap.style.setProperty('--tilt-y','0deg');lens.classList.remove('is-visible')});
 const light=$('bfLightbox');function openLight(){const li=$('bfLightboxImage');li.src=image.currentSrc||image.src;li.alt=image.alt;light.classList.add('is-open');light.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function closeLight(){light.classList.remove('is-open');light.setAttribute('aria-hidden','true');document.body.style.overflow=''}wrap.addEventListener('click',openLight);q('.hf-lightbox-close',light)?.addEventListener('click',closeLight);light.addEventListener('click',e=>{if(e.target===light)closeLight()});
 const assistant=$('bfAssistant'),chat=$('bfChat'),input=$('bfAssistantInput');function addMsg(role,text,loading=false){const d=document.createElement('div');d.className='hf-msg '+role+(loading?' is-loading':'');d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}function openAssistant(){assistant.classList.add('is-open');assistant.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>input.focus(),100)}function closeAssistant(){assistant.classList.remove('is-open');assistant.setAttribute('aria-hidden','true');document.body.style.overflow=''}$('bfAssistantOpen')?.addEventListener('click',openAssistant);$('bfAssistantOpenBottom')?.addEventListener('click',openAssistant);q('.hf-assistant-close',assistant)?.addEventListener('click',closeAssistant);assistant.addEventListener('click',e=>{if(e.target===assistant)closeAssistant()});$('bfManualAction').addEventListener('click',()=>{const k=$('bfManualSelect').value,d=data[k],res=$('bfManualResult');res.innerHTML=`<strong>${d.title}</strong><small>${d.lead}</small><div class="hf-manual-tags">${d.facts.slice(0,3).map(x=>`<span>${x[0]}: ${x[1]}</span>`).join('')}</div>`;res.classList.add('is-visible')});
