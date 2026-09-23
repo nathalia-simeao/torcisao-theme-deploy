@@ -45,8 +45,6 @@ $bf_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
 <div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
   <div class="hf-mini-faq-head">
     <span class="hf-section-kicker">Dúvidas frequentes</span>
-    <h3>Perguntas frequentes sobre barra trefilada</h3>
-    <p class="hf-section-intro">Abra apenas o assunto que fizer sentido para o seu projeto. As respostas reúnem os principais pontos técnicos e comerciais antes da cotação.</p>
   </div>
   <div class="hf-mini-faq-grid">
     <details>
