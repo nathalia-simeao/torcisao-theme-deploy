@@ -43,8 +43,8 @@
 <aside class="tor-mobile-panel" id="torMobilePanel" aria-label="Menu móvel">
   <div class="tor-mobile-panel-head">
     <a class="tor-mobile-brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Torcisão Trefilados - início">
-      <img class="tor-mobile-brand-light" src="https://torcisao.com.br/wp-content/uploads/2026/08/1.png" alt="Torcisão Trefilados">
-      <img class="tor-mobile-brand-dark" src="https://torcisao.com.br/wp-content/uploads/2026/08/2.png" alt="Torcisão Trefilados">
+      <img class="tor-mobile-brand-light" src="https://torcisao.com.br/wp-content/uploads/2026/08/1.png" alt="Torcisão Trefilados" width="1000" height="250">
+      <img class="tor-mobile-brand-dark" src="https://torcisao.com.br/wp-content/uploads/2026/08/2.png" alt="Torcisão Trefilados" width="1000" height="250">
     </a>
     <button class="tor-close" type="button" data-menu-close aria-label="Fechar menu">×</button>
   </div>
