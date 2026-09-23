@@ -103,6 +103,8 @@ function torcisao_theme_assets(){
     $uri = get_template_directory_uri();
     $ver = wp_get_theme()->get('Version') ?: '2026.09.06';
     $is_home = torcisao_is_home_experience();
+    $is_product_page = is_page([1621,1622,1623,1627,1628,1629,1630,1631,1632]);
+    $is_barra_page = is_page([1622,1631,1632]);
     wp_enqueue_style('torcisao-fonts','https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap',[],null);
     wp_enqueue_style('bootstrap-icons','https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',[],null);
     wp_enqueue_style('torcisao-style',get_stylesheet_uri(),[],$ver);
@@ -136,17 +138,19 @@ function torcisao_theme_assets(){
     wp_enqueue_style('torcisao-industrial-logo-balance-v6',$uri.'/assets/torcisao-industrial-logo-balance-v6.css',['torcisao-mobile-blog-footer-v5'],'20260907-2');
     wp_enqueue_style('torcisao-global-alignment-v7',$uri.'/assets/torcisao-global-alignment-v7.css',['torcisao-industrial-logo-balance-v6'],'20260907-1');
     wp_enqueue_style('torcisao-section-rhythm-v8',$uri.'/assets/torcisao-section-rhythm-v8.css',['torcisao-global-alignment-v7'],'20260907-1');
-    wp_enqueue_style('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.css',['torcisao-section-rhythm-v8'],'20260907-1');
-    wp_enqueue_style('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.css',['torcisao-product-pages-v9'],'20260907-2');
-    wp_enqueue_style('torcisao-haste-application-v11',$uri.'/assets/torcisao-haste-application-v11.css',['torcisao-product-pages-v10'],'20260907-1');
-    wp_enqueue_style('torcisao-product-interaction-v12',$uri.'/assets/torcisao-product-interaction-v12.css',['torcisao-haste-application-v11'],'20260907-3');
-    wp_enqueue_style('torcisao-product-assistant-v13',$uri.'/assets/torcisao-product-assistant-v13.css',['torcisao-product-interaction-v12'],'20260907-1');
-    wp_enqueue_style('torcisao-barra-commercial-v14',$uri.'/assets/torcisao-barra-commercial-v14.css',['torcisao-product-assistant-v13'],'20260907-1');
-    wp_enqueue_style('torcisao-product-spec-balance-v16',$uri.'/assets/torcisao-product-spec-balance-v16.css',['torcisao-barra-commercial-v14'],'20260907-1');
-    wp_enqueue_style('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.css',['torcisao-product-spec-balance-v16'],'20260907-1');
-    if (is_page(1622)) {
-        wp_enqueue_style('torcisao-btc-gallery-v20',$uri.'/assets/torcisao-btc-gallery-v20.css',['torcisao-product-quote-tab-v17'],'20260907-2');
-        wp_enqueue_style('torcisao-product-stage-v21',$uri.'/assets/torcisao-product-stage-v21.css',['torcisao-btc-gallery-v20'],'20260907-1');
+    if ($is_product_page) {
+        wp_enqueue_style('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.css',['torcisao-section-rhythm-v8'],'20260907-1');
+        wp_enqueue_style('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.css',['torcisao-product-pages-v9'],'20260907-2');
+        wp_enqueue_style('torcisao-haste-application-v11',$uri.'/assets/torcisao-haste-application-v11.css',['torcisao-product-pages-v10'],'20260907-1');
+        wp_enqueue_style('torcisao-product-interaction-v12',$uri.'/assets/torcisao-product-interaction-v12.css',['torcisao-haste-application-v11'],'20260907-3');
+        wp_enqueue_style('torcisao-product-assistant-v13',$uri.'/assets/torcisao-product-assistant-v13.css',['torcisao-product-interaction-v12'],'20260907-1');
+        wp_enqueue_style('torcisao-barra-commercial-v14',$uri.'/assets/torcisao-barra-commercial-v14.css',['torcisao-product-assistant-v13'],'20260907-1');
+        wp_enqueue_style('torcisao-product-spec-balance-v16',$uri.'/assets/torcisao-product-spec-balance-v16.css',['torcisao-barra-commercial-v14'],'20260907-1');
+        wp_enqueue_style('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.css',['torcisao-product-spec-balance-v16'],'20260907-1');
+        if (is_page(1622)) {
+            wp_enqueue_style('torcisao-btc-gallery-v20',$uri.'/assets/torcisao-btc-gallery-v20.css',['torcisao-product-quote-tab-v17'],'20260907-2');
+            wp_enqueue_style('torcisao-product-stage-v21',$uri.'/assets/torcisao-product-stage-v21.css',['torcisao-btc-gallery-v20'],'20260907-1');
+        }
     }
     wp_enqueue_script('torcisao-header',$uri.'/assets/torcisao-header-recovery.js',[], $ver, true);
     wp_enqueue_script('torcisao-phase8',$uri.'/assets/torcisao-phase8.js',['torcisao-header'], $ver, true);
@@ -158,11 +162,11 @@ function torcisao_theme_assets(){
         wp_enqueue_script('torcisao-social-proof',$uri.'/assets/torcisao-social-proof.js',['torcisao-quality-recovery'], '20260922-2', true);
         wp_enqueue_script('torcisao-about-history',$uri.'/assets/torcisao-about-history.js',['torcisao-phase8'], '20260906-2200', true);
         wp_enqueue_script('torcisao-timeline-mobile',$uri.'/assets/torcisao-timeline-mobile.js',['torcisao-about-history'], '20260906-2112', true);
+        wp_enqueue_script('torcisao-home-product-gallery-v24',$uri.'/assets/torcisao-home-product-gallery-v24.js',['torcisao-products-explorer'],'20260907-1',true);
     }
     wp_enqueue_script('torcisao-lens-wheel-zoom',$uri.'/assets/torcisao-lens-wheel-zoom.js',$is_home?['torcisao-social-proof']:['torcisao-phase8'], $ver, true);
     wp_enqueue_script('torcisao-commercial-handoff',$uri.'/assets/torcisao-commercial-handoff.js',['torcisao-lens-wheel-zoom'], $ver, true);
-    $is_barra_page = is_page(1622);
-    if (!$is_barra_page) {
+    if ($is_product_page && !$is_barra_page) {
         wp_enqueue_script('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.js',['torcisao-phase8'],'20260907-1',true);
         wp_enqueue_script('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.js',['torcisao-product-pages-v9'],'20260907-1',true);
         if (is_page(1623)) {
