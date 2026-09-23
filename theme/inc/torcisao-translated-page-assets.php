@@ -112,6 +112,7 @@ if (!function_exists('torcisao_redirect_legacy_product_urls')) {
 /* A tolerância de Arame/Barra usa o mesmo padrão de modal técnico da Home em todos os idiomas. */
 if (!function_exists('torcisao_product_tolerance_modal_assets')) {
     function torcisao_product_tolerance_modal_assets(){
+        if (!is_page([1621,1622,1629,1630,1631,1632])) return;
         $uri = get_template_directory_uri();
         wp_enqueue_style('torcisao-product-tolerance-modal-v36',$uri.'/assets/torcisao-product-tolerance-modal-v36.css',[],'20260907-1');
         wp_enqueue_script('torcisao-product-tolerance-modal-v36',$uri.'/assets/torcisao-product-tolerance-modal-v36.js',[],'20260907-1',true);
