@@ -43,44 +43,39 @@ $af_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
   <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Características da opção selecionada</h2><p class="hf-section-intro">Consulte faixa de aço, bitola, perfil, acabamento e forma de fornecimento. A tolerância deve ser confirmada conforme a especificação do pedido.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="afSpecs"></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="afAvailability"></div></div></div><?php if ($af_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida entre arames BTC, MTC e ATC"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>BTC x MTC x ATC</strong></div><div class="hf-aeo-quick-item"><span>BTC</span><strong>SAE 1004 a 1020</strong><p>Faixa de baixo teor de carbono, usualmente avaliada quando a conformabilidade é relevante, como em displays, utilidades, linha branca e racks.</p></div><div class="hf-aeo-quick-item"><span>MTC</span><strong>SAE 1035 a 1050</strong><p>Faixa intermediária de carbono, indicada para aplicações que exigem equilíbrio entre conformação e maior resistência mecânica.</p></div><div class="hf-aeo-quick-item"><span>ATC</span><strong>SAE 1060 a 1090</strong><p>Faixa de alto teor de carbono, usada em aplicações que exigem maior resistência, como molas, cabos de aço e componentes industriais.</p></div></div><?php endif; ?></div></section>
 
   <section class="hf-section" id="aplicacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Aplicação e consulta</span><h2 class="hf-section-title">Organize os requisitos antes da cotação</h2><p class="hf-section-intro">Informe aplicação, faixa de aço, bitola, propriedades requeridas e forma de fornecimento para direcionar a consulta à opção adequada.</p></div><div class="hf-app-grid"><article class="hf-app-card"><h3>Ferramentas para avançar</h3><ul class="hf-chip-list" id="afApplications"></ul></article><article class="hf-app-card"><h3>O que informar na consulta</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Aço e bitola</strong><p>Informe a faixa de aço e o diâmetro nominal previstos no desenho ou na especificação.</p></div><div class="hf-variant-box"><strong>Requisito mecânico</strong><p>Quando houver requisito de resistência, dureza ou outra propriedade, informe a referência prevista para a peça.</p></div><div class="hf-variant-box"><strong>Forma de fornecimento</strong><p>Indique rolo ou spider e as demais condições do pedido. A disponibilidade é confirmada durante a cotação.</p></div></div></article></div><?php if ($af_lang === 'pt') : ?>
-<div class="hf-section-head" id="guia-tecnico-arames" style="margin-top:clamp(30px,5vw,56px)">
-  <span class="hf-section-kicker">Guia técnico e comercial</span>
-  <h2 class="hf-section-title">Como escolher e comprar arame trefilado industrial</h2>
-  <p class="hf-section-intro">A especificação do arame precisa combinar classe do aço, bitola, propriedades mecânicas, aplicação e forma de fornecimento. Estes pontos ajudam a organizar a compra antes da cotação.</p>
-</div>
-<div class="hf-app-grid">
-  <article class="hf-app-card">
-    <h3>Qual a diferença entre arame BTC, MTC e ATC?</h3>
-    <p>BTC, MTC e ATC representam faixas de baixo, médio e alto teor de carbono. Em termos práticos, o aumento do teor de carbono altera o equilíbrio entre conformabilidade, resistência e dureza.</p>
-    <p>O BTC SAE 1004 a 1020 costuma ser avaliado em aplicações que valorizam conformação e ductilidade. O MTC SAE 1035 a 1050 atende situações intermediárias. Já o ATC SAE 1060 a 1090 entra em aplicações que exigem maior resistência, como molas, cabos de aço e componentes industriais.</p>
-    <p>A seleção final deve seguir o desenho, o processo e as propriedades exigidas para a peça.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Rolo ou spider: qual acondicionamento escolher?</h3>
-    <p>Rolo e spider são formas diferentes de acondicionar o arame. A escolha depende do sistema de alimentação da linha, do manuseio, do espaço de armazenamento e da necessidade de continuidade do processo.</p>
-    <p>Para produção seriada, vale informar como o material entra no equipamento e qual formato facilita a operação. A Torcisão confirma a forma de fornecimento disponível para a especificação cotada.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Qual é o lote mínimo de arame trefilado?</h3>
-    <p>O lote mínimo não deve ser tratado como um número único para toda a linha. Ele pode variar conforme classe do aço, bitola, condição de produção, acondicionamento e quantidade solicitada.</p>
-    <p>Por isso, a Torcisão confirma a condição comercial e o lote aplicável durante a cotação. Para uma resposta objetiva, informe aço, bitola, rolo ou spider, quantidade e aplicação.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Onde comprar arame trefilado MTC e ATC direto de fabricante?</h3>
-    <p>A Torcisão fabrica e fornece arames trefilados para clientes industriais no Brasil. A linha inclui opções de médio e alto teor de carbono para aplicações como molas, telas, cabos de aço e componentes industriais.</p>
-    <p>O atendimento é B2B e a equipe comercial valida bitola, aço, acondicionamento, quantidade, disponibilidade e prazo antes de fechar o pedido.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>Como solicitar cotação de arame trefilado?</h3>
-    <p>Envie classe ou grau do aço, bitola, quantidade, aplicação e forma de fornecimento. Quando houver exigência de resistência, dureza, acabamento, tolerância ou documentação, inclua esses dados na consulta.</p>
-    <p>Essas informações reduzem idas e vindas e permitem que a equipe comercial avalie a condição do pedido com mais precisão.</p>
-  </article>
-  <article class="hf-app-card">
-    <h3>O que avaliar além do preço?</h3>
-    <p>Em compras recorrentes, compare também consistência dimensional, adequação do acondicionamento, prazo, suporte técnico e estabilidade do fornecimento. O menor preço unitário pode perder vantagem quando há dificuldade de alimentação da linha, perdas ou retrabalho.</p>
-  </article>
-</div>
-<div class="hf-mini-faq" id="faq"><div class="hf-mini-faq-head"><span class="hf-section-kicker">Dúvidas rápidas</span><h3>Perguntas frequentes sobre arame trefilado</h3></div><div class="hf-mini-faq-grid"><details><summary>Qual a diferença entre arame BTC, MTC e ATC?</summary><p>As siglas indicam faixas de baixo, médio e alto teor de carbono. Essa variação altera o equilíbrio entre conformabilidade, resistência e dureza, por isso a classe de aço deve ser escolhida conforme a peça e o processo de fabricação.</p></details><details><summary>Quando avaliar rolo ou spider?</summary><p>Rolo e spider são formas de fornecimento diferentes. A escolha depende de manuseio, armazenamento, alimentação da linha e continuidade do processo. A disponibilidade e a condição de fornecimento devem ser confirmadas na cotação.</p></details><details><summary>O que informar para cotar arame trefilado?</summary><p>Informe aplicação, classe ou faixa de aço, bitola, forma de fornecimento, quantidade e qualquer requisito de resistência, dureza, acabamento ou tolerância previsto na especificação.</p></details></div></div><?php endif; ?></div></section>
+<div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
+  <div class="hf-mini-faq-head">
+    <span class="hf-section-kicker">Dúvidas frequentes</span>
+    <h3>Perguntas frequentes sobre arame trefilado</h3>
+    <p class="hf-section-intro">Abra apenas o tema que quiser consultar. As respostas ajudam a organizar a especificação e a cotação do arame.</p>
+  </div>
+  <div class="hf-mini-faq-grid">
+    <details>
+      <summary>Qual a diferença entre arame BTC, MTC e ATC?</summary>
+      <p>BTC, MTC e ATC representam faixas de baixo, médio e alto teor de carbono. O BTC SAE 1004 a 1020 costuma ser avaliado quando conformação e ductilidade têm maior peso. O MTC SAE 1035 a 1050 atende situações intermediárias. Já o ATC SAE 1060 a 1090 entra em aplicações que exigem maior resistência, como molas, cabos de aço e componentes industriais. A seleção final deve seguir o desenho, o processo e as propriedades exigidas para a peça.</p>
+    </details>
+    <details>
+      <summary>Rolo ou spider: qual acondicionamento escolher?</summary>
+      <p>Rolo e spider são formas diferentes de acondicionar o arame. A escolha depende do sistema de alimentação da linha, manuseio, armazenamento e continuidade do processo. A Torcisão confirma a forma de fornecimento disponível para a especificação cotada.</p>
+    </details>
+    <details>
+      <summary>Qual é o lote mínimo de arame trefilado?</summary>
+      <p>O lote mínimo pode variar conforme classe do aço, bitola, condição de produção, acondicionamento e quantidade solicitada. Por isso, a Torcisão confirma a condição comercial durante a cotação. Para uma resposta objetiva, informe aço, bitola, rolo ou spider, quantidade e aplicação.</p>
+    </details>
+    <details>
+      <summary>Onde comprar arame trefilado MTC e ATC direto de fabricante?</summary>
+      <p>A Torcisão fabrica e fornece arames trefilados para clientes industriais no Brasil. A linha inclui opções de médio e alto teor de carbono para aplicações como molas, telas, cabos de aço e componentes industriais. A equipe comercial valida bitola, aço, acondicionamento, quantidade, disponibilidade e prazo antes do pedido.</p>
+    </details>
+    <details>
+      <summary>Como solicitar cotação de arame trefilado?</summary>
+      <p>Envie classe ou grau do aço, bitola, quantidade, aplicação e forma de fornecimento. Quando houver exigência de resistência, dureza, acabamento, tolerância ou documentação, inclua esses dados na consulta.</p>
+    </details>
+    <details>
+      <summary>O que avaliar além do preço?</summary>
+      <p>Em compras recorrentes, compare também consistência dimensional, acondicionamento, prazo, suporte técnico e estabilidade do fornecimento. O menor preço unitário pode perder vantagem quando há dificuldade de alimentação da linha, perdas ou retrabalho.</p>
+    </details>
+  </div>
+</div><?php endif; ?></div></section>
 
   <section class="hf-section hf-quality-section"><div class="hf-wrap"><div class="hf-quality-card"><div class="hf-quality-copy"><div class="hf-quality-icon"><i class="bi bi-patch-check-fill"></i></div><div><h3>Qualidade Torcisão</h3><p>Consulte o certificado ISO 9001 da Torcisão. Requisitos específicos do item devem ser confirmados durante a cotação.</p></div></div><div class="hf-quality-actions"><a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($af_iso); ?>" target="_blank" rel="noopener">Ver certificado ISO</a></div></div></div></section>
 
