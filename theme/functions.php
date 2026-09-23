@@ -179,6 +179,22 @@ function torcisao_theme_assets(){
 }
 add_action('wp_enqueue_scripts','torcisao_theme_assets');
 
+/* Prioriza a imagem LCP da página canônica de Barra Trefilada. */
+function torcisao_preload_barra_lcp_image(){
+    if (!is_page(1622)) return;
+    $requested = isset($_GET['tipo']) ? sanitize_key(wp_unslash($_GET['tipo'])) : 'btc';
+    $map = [
+        'btc' => 'assets/barra1.webp',
+        'mtc' => 'assets/barra2.webp',
+        'atc' => 'assets/barra3.jpg',
+        'ressulfurado' => 'assets/barra4.jpg',
+    ];
+    $kind = isset($map[$requested]) ? $requested : 'btc';
+    $href = get_template_directory_uri().'/'.$map[$kind];
+    echo '<link rel="preload" as="image" href="'.esc_url($href).'" fetchpriority="high">'."\n";
+}
+add_action('wp_head','torcisao_preload_barra_lcp_image',2);
+
 function torcisao_asset($path){
     return esc_url(get_template_directory_uri().'/'.ltrim($path,'/'));
 }
@@ -256,9 +272,12 @@ function torcisao_output_product_faq_schema(){
             ['O que informar para solicitar cotação?','Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.'],
         ],
         1622 => [
-            ['Por que o 11SMn37 é usado em usinagem seriada?','O 11SMn37 é um aço de usinabilidade melhorada. Seu teor controlado de enxofre favorece inclusões que ajudam na formação e na quebra do cavaco, característica útil em operações contínuas e peças torneadas em série.'],
-            ['Qual a diferença entre barra trefilada e barra polida ou reendireitada?','A barra trefilada já recebe ganho de precisão dimensional e acabamento pelo trabalho a frio. Quando o projeto exige condição adicional de superfície ou retilineidade, pode ser avaliada uma barra polida ou reendireitada. A tolerância final deve ser confirmada conforme desenho, aplicação e especificação do pedido.'],
-            ['O que informar ao solicitar barra 11SMn37?','Informe bitola, comprimento, tolerância, acabamento desejado, quantidade, aplicação e qualquer requisito de laudo ou especificação. Para barra polida ou reendireitada, sinalize essa necessidade já na cotação.'],
+            ['O que é barra trefilada e como ela é produzida?','Barra trefilada é um perfil de aço obtido por trefilação a frio. Nesse processo, o material passa por uma matriz para reduzir e controlar sua seção, melhorando precisão dimensional e acabamento superficial. A escolha do aço, da bitola, da tolerância e do acabamento deve seguir a aplicação da peça.'],
+            ['Quais as vantagens do aço 11SMn37 na usinagem?','O 11SMn37 é um aço ressulfurado de usinabilidade melhorada. O enxofre controlado favorece inclusões de sulfeto de manganês, que ajudam na formação e na quebra do cavaco durante operações de corte.'],
+            ['Qual a diferença entre barra trefilada, polida e reendireitada?','A barra trefilada passa por trabalho a frio para melhorar controle dimensional e condição superficial. Quando o projeto exige requisitos adicionais de retilineidade ou superfície, podem ser avaliadas etapas de reendireitamento e polimento.'],
+            ['Como escolher entre barras BTC, MTC e ATC?','O teor de carbono é um dos fatores de seleção. Aços de baixo teor de carbono costumam ser avaliados quando conformabilidade, ductilidade ou soldabilidade têm maior peso; faixas intermediárias equilibram resistência e processamento; e aços de maior teor de carbono entram em aplicações que exigem maior dureza ou resistência ao desgaste.'],
+            ['O que enviar para uma cotação técnica de barras trefiladas?','Informe grau ou especificação do aço, perfil, bitola, comprimento, quantidade, tolerâncias, acabamento, aplicação e requisitos de documentação ou ensaio.'],
+            ['Onde comprar barra trefilada 11SMn37 no Brasil?','A Torcisão fabrica e fornece barras trefiladas em aço ressulfurado 11SMn37 para clientes industriais. A empresa está localizada em São Paulo e atende demandas B2B em diferentes regiões.'],
         ],
         1621 => [
             ['Qual a diferença entre arame BTC, MTC e ATC?','As siglas indicam faixas de baixo, médio e alto teor de carbono. Essa variação altera o equilíbrio entre conformabilidade, resistência e dureza, por isso a classe de aço deve ser escolhida conforme a peça e o processo de fabricação.'],
@@ -416,7 +435,7 @@ function torcisao_output_product_schema(){
             'category' => 'Barras trefiladas de aço',
             'material' => ['Aço carbono','Aço ressulfurado 11SMn37'],
             'additionalProperty' => [
-                ['@type'=>'PropertyValue','name'=>'Classes de aço','value'=>'BTC 1006 a 1020; MTC 1035 a 1045; ATC 1050; aço ressulfurado 11SMn37'],
+                ['@type'=>'PropertyValue','name'=>'Classes de aço','value'=>'BTC 1004 a 1020; MTC 1035 a 1045; ATC 1050; aço ressulfurado 11SMn37'],
                 ['@type'=>'PropertyValue','name'=>'Faixa de bitolas','value'=>'2,00 mm a 15,88 mm, conforme classe de aço'],
                 ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
                 ['@type'=>'PropertyValue','name'=>'Acabamento','value'=>'Trefilado ou trefilado polido, conforme especificação'],
