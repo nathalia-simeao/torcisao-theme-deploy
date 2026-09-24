@@ -6,6 +6,27 @@ document.documentElement.dataset.torHomeProductGalleryV24='1';
 
 const MEDIA='https://torcisao.com.br/wp-content/uploads/2026/09/';
 
+function thumbnailUrl(src){
+  return String(src||'').replace(/\.png(?:\?.*)?$/i,'-150x150.png');
+}
+function displayUrl(src){
+  const value=String(src||'');
+  if(/\/barra[^/]+a[123]\.png$/i.test(value))return value.replace(/\.png$/i,'-768x768.png');
+  if(/\/(arametrefiladorolo|arametrefiladospider|aramespidera1|aramespidera2)\.png$/i.test(value))return value.replace(/\.png$/i,'-768x768.png');
+  if(/\/(baixacamada|altacamada)\.png$/i.test(value))return value.replace(/\.png$/i,'-375x1024.png');
+  if(/\/hasteinteirapeca\.png$/i.test(value))return value.replace(/\.png$/i,'-768x1152.png');
+  if(/\/conjunto-de-hastes\.png$/i.test(value))return value.replace(/\.png$/i,'-768x576.png');
+  return value;
+}
+function intrinsicSize(src){
+  const value=String(src||'');
+  if(/-768x768\.png$/i.test(value))return [768,768];
+  if(/-375x1024\.png$/i.test(value))return [375,1024];
+  if(/-768x1152\.png$/i.test(value))return [768,1152];
+  if(/-768x576\.png$/i.test(value))return [768,576];
+  return null;
+}
+
 const DATA={
   arame:{
     pickerId:'tpeArameAnglePicker',pickerClass:'tor-arame-angle-picker',buttonClass:'tor-arame-angle-btn',heading:'Opções',showPicker:true,
@@ -100,6 +121,8 @@ function init(){
       image.removeAttribute('srcset');
     }
     image.alt=desiredAlt;
+    const dims=intrinsicSize(src);
+    if(dims){image.width=dims[0];image.height=dims[1];}
     revealImage(src,token);
   }
   function pickerFor(line){
@@ -124,7 +147,7 @@ function init(){
       btn.type='button';btn.className=cfg.buttonClass+(index===selected?' is-active':'');
       btn.setAttribute('aria-label',(cfg.heading==='Ângulos'?'Ver ângulo ':'Ver opção ')+(index+1));
       btn.setAttribute('aria-pressed',index===selected?'true':'false');
-      const thumb=document.createElement('img');thumb.src=src;thumb.alt='';thumb.loading='lazy';thumb.decoding='async';btn.appendChild(thumb);
+      const thumb=document.createElement('img');thumb.src=thumbnailUrl(src);thumb.alt='';thumb.loading='lazy';thumb.decoding='async';thumb.width=150;thumb.height=150;btn.appendChild(thumb);
       btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();selected=index;hideImage();sync(false);});
       picker.appendChild(btn);
     });
@@ -139,7 +162,7 @@ function init(){
     if(selected>=items.length)selected=0;
     hideAll(cfg.showPicker?s.line:'');
     renderPicker(s.line,cfg,items);
-    applyImage(items[selected],cfg.alt(s,selected));
+    applyImage(displayUrl(items[selected]),cfg.alt(s,selected));
   }
   function schedule(reset=true){
     cancelAnimationFrame(frame);
