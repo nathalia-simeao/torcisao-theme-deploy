@@ -51,11 +51,12 @@ function initHeroArameImage(){
 }
 
 function initClickableToolCards(){
-  qa('#ferramentas-tecnicas .th-tool-card').forEach((card,index)=>{
-    card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label',index===0?'Abrir Consulta de Tolerância Dimensional':'Abrir Assistente de Aplicação Theo');
-    const activate=()=>{const btn=index===0?document.getElementById('thToleranceOpen'):document.getElementById('thAssistantOpen');btn?.click();};
-    card.addEventListener('click',e=>{if(e.target.closest('button,a,input,select'))return;activate();});
-    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+  /* O card é conteúdo estrutural. A ação acessível é o <button> real interno.
+     O controlador da Home mantém o clique visual do card sem falsificar semântica ARIA. */
+  qa('#ferramentas-tecnicas .th-tool-card').forEach(card=>{
+    card.removeAttribute('role');
+    card.removeAttribute('tabindex');
+    card.removeAttribute('aria-label');
   });
 }
 
