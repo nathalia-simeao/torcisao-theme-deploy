@@ -160,8 +160,6 @@ function torcisao_lazy_hubspot_loader(){
         var target=event.target&&event.target.closest?event.target.closest(selector):null;
         if(target)load();
       }
-      document.addEventListener('pointerover',commercialIntent,{passive:true,capture:true});
-      document.addEventListener('focusin',commercialIntent,true);
       document.addEventListener('click',commercialIntent,true);
       window.TorcisaoLoadHubSpot=load;
     })();
