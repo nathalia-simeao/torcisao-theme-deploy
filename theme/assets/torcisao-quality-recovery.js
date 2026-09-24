@@ -11,11 +11,6 @@ function init(){
   const products=document.getElementById('produtos');
   if(!quality||!products)return;
 
-  /* A seção aprovada vinha imediatamente depois do Explorador de Produtos. */
-  if(products.nextElementSibling!==quality){
-    products.insertAdjacentElement('afterend',quality);
-  }
-
   quality.innerHTML=`
     <div class="th-container">
       <div class="tq-grid">
