@@ -73,7 +73,7 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
             <a class="tor-footer-contact-link" href="tel:+551123349989"><span class="tor-footer-iconbox"><i class="bi bi-telephone"></i></span><span>(11) 2334-9989</span></a>
             <a class="tor-footer-contact-link" href="mailto:contatotrefilados@torcisao.com.br"><span class="tor-footer-iconbox"><i class="bi bi-envelope"></i></span><span>contatotrefilados@torcisao.com.br</span></a>
           </div>
-          <div class="tor-footer-social" aria-label="Redes sociais Torcisão">
+          <div class="tor-footer-social" role="group" aria-label="Redes sociais Torcisão">
             <a href="https://www.instagram.com/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
             <a href="https://www.linkedin.com/company/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
             <a href="https://www.facebook.com/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
@@ -86,9 +86,9 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
 
         <section aria-labelledby="torFooterPayments">
           <h2 class="tor-footer-title" id="torFooterPayments"><?php echo esc_html($t['payments']); ?></h2>
-          <div class="tor-footer-payments" aria-label="Formas de pagamento aceitas">
+          <div class="tor-footer-payments" role="group" aria-label="Formas de pagamento aceitas">
             <span class="tor-pay tor-pay-visa">VISA</span>
-            <span class="tor-pay" aria-label="Mastercard"><svg viewBox="0 0 58 34" aria-hidden="true"><circle cx="22" cy="17" r="11" fill="#eb001b"/><circle cx="36" cy="17" r="11" fill="#f79e1b"/><path d="M29 8.7a11 11 0 0 1 0 16.6 11 11 0 0 1 0-16.6Z" fill="#ff5f00"/></svg></span>
+            <span class="tor-pay" role="img" aria-label="Mastercard"><svg viewBox="0 0 58 34" aria-hidden="true"><circle cx="22" cy="17" r="11" fill="#eb001b"/><circle cx="36" cy="17" r="11" fill="#f79e1b"/><path d="M29 8.7a11 11 0 0 1 0 16.6 11 11 0 0 1 0-16.6Z" fill="#ff5f00"/></svg></span>
             <span class="tor-pay tor-pay-elo">elo<span style="color:#ef7b30">•</span></span>
             <span class="tor-pay tor-pay-boleto"><span>▥<br>BOLETO</span></span>
             <span class="tor-pay tor-pay-pix">◇ PIX</span>
