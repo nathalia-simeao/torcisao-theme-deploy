@@ -216,6 +216,7 @@ function init(){
   });
 
   render();
+  container.removeAttribute('aria-busy');
   /* Não pré-carrega todas as linhas da galeria: evita tráfego e disputa de rede no primeiro carregamento. */
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
