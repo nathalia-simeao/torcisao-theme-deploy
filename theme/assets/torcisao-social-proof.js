@@ -130,12 +130,6 @@ function init(){
   const applications=document.getElementById('aplicacoes');
   if(!section)return;
 
-  applications?.remove();
-
-  if(quality&&quality.nextElementSibling!==section){
-    quality.insertAdjacentElement('afterend',section);
-  }
-
   section.innerHTML=`
     <div class="th-container">
       <div class="ts-proof-head">
