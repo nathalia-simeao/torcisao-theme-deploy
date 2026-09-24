@@ -115,7 +115,7 @@ add_action('wp_enqueue_scripts','torcisao_trim_custom_template_assets',999);
 /**
  * HubSpot permanece disponível, mas sai do caminho crítico da Home e da Barra PT.
  * O formulário custom continua carregando o embed de Forms quando a cotação é aberta.
- * O tracking global entra após interação real ou, como fallback, após 30s.
+ * O tracking global entra somente quando existe intenção comercial explícita.
  */
 function torcisao_defer_hubspot_global_script(){
     if (!(is_front_page() || is_page(1622))) return;
@@ -144,11 +144,11 @@ function torcisao_lazy_hubspot_loader(){
     (function(){
       if(window.__torcisaoHubSpotLazy)return;
       window.__torcisaoHubSpotLazy=true;
-      var loaded=false,timer=null;
+      var loaded=false;
+      var selector='#homeQuoteTab,.js-home-quote,#tpeQuote,#bfQuoteTab,.js-bf-quote,[data-commercial-whatsapp]';
       function load(){
         if(loaded||document.getElementById('hs-script-loader'))return;
         loaded=true;
-        if(timer)clearTimeout(timer);
         var s=document.createElement('script');
         s.id='hs-script-loader';
         s.async=true;
@@ -156,16 +156,13 @@ function torcisao_lazy_hubspot_loader(){
         s.src='https://js.hs-scripts.com/50818463.js?integration=WordPress&ver=11.3.75';
         document.body.appendChild(s);
       }
-      function interacted(){
-        ['pointerdown','keydown','touchstart'].forEach(function(ev){
-          window.removeEventListener(ev,interacted,{capture:true});
-        });
-        setTimeout(load,700);
+      function commercialIntent(event){
+        var target=event.target&&event.target.closest?event.target.closest(selector):null;
+        if(target)load();
       }
-      ['pointerdown','keydown','touchstart'].forEach(function(ev){
-        window.addEventListener(ev,interacted,{passive:true,capture:true,once:true});
-      });
-      timer=setTimeout(load,30000);
+      document.addEventListener('pointerover',commercialIntent,{passive:true,capture:true});
+      document.addEventListener('focusin',commercialIntent,true);
+      document.addEventListener('click',commercialIntent,true);
       window.TorcisaoLoadHubSpot=load;
     })();
     </script>
