@@ -11,20 +11,19 @@ function thumbnailUrl(src){
 }
 function displayUrl(src){
   const value=String(src||'');
-  if(/\/barra[^/]+a[123]\.png$/i.test(value))return value.replace(/\.png$/i,'-768x768.png');
-  if(/\/(arametrefiladorolo|arametrefiladospider|aramespidera1|aramespidera2)\.png$/i.test(value))return value.replace(/\.png$/i,'-768x768.png');
-  if(/\/(baixacamada|altacamada)\.png$/i.test(value))return value.replace(/\.png$/i,'-375x1024.png');
-  if(/\/hasteinteirapeca\.png$/i.test(value))return value.replace(/\.png$/i,'-768x1152.png');
-  if(/\/conjunto-de-hastes\.png$/i.test(value))return value.replace(/\.png$/i,'-768x576.png');
+  const mobile=window.matchMedia&&window.matchMedia('(max-width:767px)').matches;
+  if(/\/barra[^/]+a[123]\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-300x300.png':'-768x768.png');
+  if(/\/(arametrefiladorolo|arametrefiladospider|aramespidera1|aramespidera2)\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-300x300.png':'-768x768.png');
+  if(/\/(aramera1|aramera2)\.png$/i.test(value))return mobile?value.replace(/\.png$/i,'-300x300.png'):value;
+  if(/\/(baixacamada|altacamada)\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-110x300.png':'-375x1024.png');
+  if(/\/hasteinteirapeca\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-200x300.png':'-768x1152.png');
+  if(/\/conjunto-de-hastes\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-300x225.png':'-768x576.png');
   return value;
 }
 function intrinsicSize(src){
   const value=String(src||'');
-  if(/-768x768\.png$/i.test(value))return [768,768];
-  if(/-375x1024\.png$/i.test(value))return [375,1024];
-  if(/-768x1152\.png$/i.test(value))return [768,1152];
-  if(/-768x576\.png$/i.test(value))return [768,576];
-  return null;
+  const m=value.match(/-(\d+)x(\d+)\.png$/i);
+  return m?[Number(m[1]),Number(m[2])]:null;
 }
 
 const DATA={
