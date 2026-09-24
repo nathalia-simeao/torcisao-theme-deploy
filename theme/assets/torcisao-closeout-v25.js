@@ -95,14 +95,31 @@ function initLanguageA11y(){
   dialog.addEventListener('keydown',e=>trapTab(e,dialog));
 }
 
-function initDialogLabels(){
-  qa('[role="dialog"]').forEach(dialog=>{
-    if(dialog.hasAttribute('aria-label')||dialog.hasAttribute('aria-labelledby'))return;
-    const title=q('h1,h2,h3,[data-dialog-title]',dialog);
-    if(!title)return;
+function labelDialog(dialog){
+  if(!dialog||dialog.hasAttribute('aria-label')||dialog.hasAttribute('aria-labelledby'))return;
+  const title=q('h1,h2,h3,[data-dialog-title]',dialog);
+  if(title){
     if(!title.id)title.id='tor-dialog-title-'+Math.random().toString(36).slice(2,9);
     dialog.setAttribute('aria-labelledby',title.id);
-  });
+    return;
+  }
+  if(dialog.classList.contains('hs-overlay-cta')||String(dialog.id||'').indexOf('hs-overlay-cta')===0){
+    dialog.setAttribute('aria-label','Atendimento Torcisão');
+  }
+}
+function initDialogLabels(){
+  qa('[role="dialog"]').forEach(labelDialog);
+  if(!document.body||document.body.dataset.torDialogObserver==='1')return;
+  document.body.dataset.torDialogObserver='1';
+  new MutationObserver(mutations=>{
+    mutations.forEach(mutation=>{
+      mutation.addedNodes.forEach(node=>{
+        if(!(node instanceof Element))return;
+        if(node.matches?.('[role="dialog"]'))labelDialog(node);
+        qa('[role="dialog"]',node).forEach(labelDialog);
+      });
+    });
+  }).observe(document.body,{childList:true,subtree:true});
 }
 
 function initQualityPolicyA11y(){
