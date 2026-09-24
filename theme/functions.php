@@ -162,7 +162,6 @@ function torcisao_theme_assets(){
         wp_enqueue_script('torcisao-social-proof',$uri.'/assets/torcisao-social-proof.js',['torcisao-quality-recovery'], '20260922-2', true);
         wp_enqueue_script('torcisao-about-history',$uri.'/assets/torcisao-about-history.js',['torcisao-phase8'], '20260906-2200', true);
         wp_enqueue_script('torcisao-timeline-mobile',$uri.'/assets/torcisao-timeline-mobile.js',['torcisao-about-history'], '20260906-2112', true);
-        wp_enqueue_script('torcisao-home-product-gallery-v24',$uri.'/assets/torcisao-home-product-gallery-v24.js',['torcisao-products-explorer'],'20260907-1',true);
     }
     wp_enqueue_script('torcisao-lens-wheel-zoom',$uri.'/assets/torcisao-lens-wheel-zoom.js',$is_home?['torcisao-social-proof']:['torcisao-phase8'], $ver, true);
     wp_enqueue_script('torcisao-commercial-handoff',$uri.'/assets/torcisao-commercial-handoff.js',['torcisao-lens-wheel-zoom'], $ver, true);
@@ -217,7 +216,7 @@ add_action('wp_head','torcisao_preload_barra_lcp_image',2);
  * onde não há botão nem One Tap ativo.
  */
 function torcisao_disable_public_siwg_on_barra(){
-    if (!is_page(1622)) return;
+    if (!(is_front_page() || is_page([1621,1622,1623,1627,1628,1629,1630,1631,1632]))) return;
     global $wp_filter;
     if (empty($wp_filter['template_redirect']) || empty($wp_filter['template_redirect']->callbacks)) return;
 
