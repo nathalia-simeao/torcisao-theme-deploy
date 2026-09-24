@@ -79,7 +79,7 @@ function torcisao_closeout_assets(){
     wp_enqueue_script(
         'torcisao-closeout-v25',
         $uri.'/assets/torcisao-closeout-v25.js',
-        ['torcisao-footer-group-v2'],
+        ['torcisao-phase8'],
         '20260907-1',
         true
     );
@@ -193,7 +193,8 @@ add_filter('wp_resource_hints','torcisao_resource_hints',10,2);
 /** Antecipamos somente a imagem LCP inicial da Home. */
 function torcisao_preload_home_lcp(){
     if (!is_front_page()) return;
-    $src = esc_url(get_template_directory_uri().'/assets/barra1.webp');
-    echo '<link rel="preload" as="image" href="'.$src.'" fetchpriority="high">' . "\n";
+    $hero = wp_get_attachment_image_url(1556,'full');
+    if (!$hero) $hero = 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Barras.png';
+    echo '<link rel="preload" as="image" href="'.esc_url($hero).'" fetchpriority="high">' . "\n";
 }
 add_action('wp_head','torcisao_preload_home_lcp',2);
