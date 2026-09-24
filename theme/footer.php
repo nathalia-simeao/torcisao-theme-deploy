@@ -120,7 +120,7 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
         <p class="tor-footer-group-label" id="torGroupTitle"><?php echo esc_html($t['group']); ?></p>
         <div class="tor-footer-company-grid">
           <div class="tor-footer-company" aria-label="Torcisão Trefilados">
-            <div class="tor-footer-company-brand"><img src="<?php echo torcisao_asset('assets/lgcabecalhoclara220.png'); ?>" alt="Torcisão Trefilados"></div>
+            <div class="tor-footer-company-brand"><img src="<?php echo torcisao_asset('assets/lgcabecalhoclara220.png'); ?>" alt="Torcisão Trefilados" width="220" height="110"></div>
             <div class="tor-footer-company-copy"><strong><?php echo esc_html($t['current_company']); ?></strong><span>CNPJ 62.147.178/0001-17<br><?php echo esc_html($t['current_site']); ?></span></div>
             <span class="tor-footer-company-arrow" aria-hidden="true">•</span>
           </div>
