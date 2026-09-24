@@ -41,7 +41,7 @@ function fixElo(){
   const elo=document.querySelector('.tor-pay-elo');
   if(!elo) return;
   if(elo.textContent.trim()!=='ELO') elo.textContent='ELO';
-  elo.setAttribute('aria-label','Elo');
+  elo.removeAttribute('aria-label');
 }
 
 let spanishEyebrowObserver=null;
