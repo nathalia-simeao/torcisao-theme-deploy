@@ -64,13 +64,6 @@ function torcisao_scope_heavy_assets(){
         ['torcisao-home-gallery-arame-v22'],
         '20260907-9'
     );
-    wp_enqueue_script(
-        'torcisao-home-product-gallery-v24',
-        $uri.'/assets/torcisao-home-product-gallery-v24.js',
-        ['torcisao-products-explorer'],
-        '20260907-2',
-        true
-    );
 }
 add_action('wp_enqueue_scripts','torcisao_scope_heavy_assets',100);
 
@@ -80,7 +73,7 @@ function torcisao_closeout_assets(){
     wp_enqueue_style(
         'torcisao-closeout-v25',
         $uri.'/assets/torcisao-closeout-v25.css',
-        ['torcisao-section-rhythm-v8'],
+        ['torcisao-global-alignment-v7'],
         '20260907-1'
     );
     wp_enqueue_script(
@@ -92,6 +85,93 @@ function torcisao_closeout_assets(){
     );
 }
 add_action('wp_enqueue_scripts','torcisao_closeout_assets',120);
+
+/**
+ * Páginas custom não usam o conteúdo renderizado pelo Gutenberg/Elementor.
+ * Remove apenas assets de framework que não participam do layout dessas rotas.
+ */
+function torcisao_trim_custom_template_assets(){
+    $is_custom_product = torcisao_is_product_page();
+    $is_custom_home = is_front_page();
+
+    if ($is_custom_home || $is_custom_product) {
+        wp_dequeue_style('wp-block-library');
+    }
+
+    if ($is_custom_home) {
+        foreach ([
+            'elementor-frontend',
+            'base-desktop',
+            'base-mobile',
+            'elementor-gf-roboto',
+            'elementor-gf-robotoslab',
+        ] as $handle) {
+            wp_dequeue_style($handle);
+        }
+    }
+}
+add_action('wp_enqueue_scripts','torcisao_trim_custom_template_assets',999);
+
+/**
+ * HubSpot permanece disponível, mas sai do caminho crítico da Home e da Barra PT.
+ * O formulário custom continua carregando o embed de Forms quando a cotação é aberta.
+ * O tracking global entra após a primeira interação ou após 12s.
+ */
+function torcisao_defer_hubspot_global_script(){
+    if (!(is_front_page() || is_page(1622))) return;
+
+    global $wp_scripts;
+    if ($wp_scripts && !empty($wp_scripts->queue)) {
+        foreach ((array) $wp_scripts->queue as $handle) {
+            $registered = $wp_scripts->registered[$handle] ?? null;
+            $src = is_object($registered) ? (string) ($registered->src ?? '') : '';
+            if (strpos($src,'js.hs-scripts.com') !== false) {
+                wp_dequeue_script($handle);
+            }
+        }
+    }
+
+    foreach (['leadin-script-loader-js','leadin-script-loader','hubspot'] as $handle) {
+        wp_dequeue_script($handle);
+    }
+}
+add_action('wp_enqueue_scripts','torcisao_defer_hubspot_global_script',9999);
+
+function torcisao_lazy_hubspot_loader(){
+    if (!(is_front_page() || is_page(1622))) return;
+    ?>
+    <script id="torcisao-hubspot-lazy-loader">
+    (function(){
+      if(window.__torcisaoHubSpotLazy)return;
+      window.__torcisaoHubSpotLazy=true;
+      var loaded=false,timer=null;
+      function load(){
+        if(loaded||document.getElementById('hs-script-loader'))return;
+        loaded=true;
+        if(timer)clearTimeout(timer);
+        var s=document.createElement('script');
+        s.id='hs-script-loader';
+        s.async=true;
+        s.defer=true;
+        s.src='https://js.hs-scripts.com/50818463.js?integration=WordPress&ver=11.3.75';
+        document.body.appendChild(s);
+      }
+      function interacted(){
+        ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){
+          window.removeEventListener(ev,interacted,{capture:true});
+        });
+        setTimeout(load,700);
+      }
+      ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){
+        window.addEventListener(ev,interacted,{passive:true,capture:true,once:true});
+      });
+      timer=setTimeout(load,12000);
+      window.TorcisaoLoadHubSpot=load;
+    })();
+    </script>
+    <?php
+}
+add_action('wp_footer','torcisao_lazy_hubspot_loader',98);
 
 /** Usa Montserrat variável para reduzir o número de arquivos de fonte transferidos. */
 function torcisao_optimize_font_src($src,$handle){
