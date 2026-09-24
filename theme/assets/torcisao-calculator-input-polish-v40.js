@@ -167,13 +167,8 @@ function init(){
 }
 
 function boot(){
-  init();
-  let tries=0;
-  const timer=setInterval(function(){
-    tries+=1;
-    const ready=init();
-    if(ready||tries>=12)clearInterval(timer);
-  },80);
+  const ready=init();
+  if(!ready)setTimeout(init,260);
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);
