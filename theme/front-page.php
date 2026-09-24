@@ -190,7 +190,6 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
 
 <?php get_template_part('template-parts/home-conversion'); ?>
 <script>window.TORCISAO_HOME=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'urls'=>['arame'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('arame',$home_lang):home_url('/arame-trefilado/')),'barra'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('barra',$home_lang):home_url('/barra-trefilada/')),'haste'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('haste',$home_lang):home_url('/haste-de-aterramento/'))]]); ?>;</script>
-<script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home-stability-v35.js'); ?>?v=20260907-1"></script>
 <script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home-product-gallery-v24.js'); ?>?v=20260907-3"></script>
 <script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home.js'); ?>?v=20260922-1"></script>
 <?php get_footer(); ?>
