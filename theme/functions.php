@@ -324,6 +324,16 @@ function torcisao_suppress_pt_home_styles($html,$handle,$href,$media){
 }
 add_filter('style_loader_tag','torcisao_suppress_pt_home_styles',PHP_INT_MAX,4);
 
+function torcisao_async_pt_home_external_styles($html,$handle,$href,$media){
+    if (!torcisao_is_pt_home_request()) return $html;
+    if (!in_array($handle,['torcisao-fonts','bootstrap-icons'],true)) return $html;
+
+    $safe_href = esc_url($href);
+    return '<link rel="preload" as="style" href="'.$safe_href.'" onload="this.onload=null;this.rel=\'stylesheet\'">'
+        .'<noscript><link rel="stylesheet" href="'.$safe_href.'"></noscript>';
+}
+add_filter('style_loader_tag','torcisao_async_pt_home_external_styles',PHP_INT_MAX-1,4);
+
 /* Prioriza a imagem LCP da página canônica de Barra Trefilada. */
 function torcisao_preload_barra_lcp_image(){
     if (!is_page(1622)) return;
