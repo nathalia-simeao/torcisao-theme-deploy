@@ -71,16 +71,20 @@ function apply(){
   return !!footer;
 }
 
-if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded',apply);
-}else{
+function boot(){
   apply();
+  const shell=document.querySelector('.tor-footer-group-shell');
+  if(!shell)return;
+  const observer=new MutationObserver(function(){
+    apply();
+    if(shell.querySelector('.tor-footer-company-segment')) observer.disconnect();
+  });
+  observer.observe(shell,{childList:true,subtree:true});
+  setTimeout(function(){apply();observer.disconnect();},1200);
 }
-
-let tries=0;
-const timer=setInterval(function(){
-  tries++;
-  apply();
-  if(tries>30) clearInterval(timer);
-},120);
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',boot,{once:true});
+}else{
+  boot();
+}
 })();
