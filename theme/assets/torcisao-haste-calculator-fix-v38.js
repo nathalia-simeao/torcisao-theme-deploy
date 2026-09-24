@@ -135,8 +135,7 @@ function patchCommercialOffer(){
 function init(){
   bindCalculator();
   if(!patchCommercialOffer()){
-    let tries=0;
-    const timer=setInterval(()=>{tries++;bindCalculator();if(patchCommercialOffer()||tries>60)clearInterval(timer);},100);
+    setTimeout(function(){bindCalculator();patchCommercialOffer();},900);
   }
   window.TorcisaoHasteCalculator={recalculate:renderHasteResult,formula:'D² × 0,00616 × comprimento'};
 }
