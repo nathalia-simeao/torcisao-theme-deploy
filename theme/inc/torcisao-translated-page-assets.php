@@ -128,13 +128,15 @@ if (!function_exists('torcisao_product_tolerance_modal_assets')) {
 if (!function_exists('torcisao_haste_calculator_fix_assets')) {
     function torcisao_haste_calculator_fix_assets(){
         $uri = get_template_directory_uri();
-        wp_enqueue_script(
-            'torcisao-haste-calculator-fix-v38',
-            $uri.'/assets/torcisao-haste-calculator-fix-v38.js',
-            ['torcisao-header'],
-            '20260908-1115',
-            true
-        );
+        if (!(is_front_page() && function_exists('torcisao_request_language') && torcisao_request_language()==='pt')) {
+            wp_enqueue_script(
+                'torcisao-haste-calculator-fix-v38',
+                $uri.'/assets/torcisao-haste-calculator-fix-v38.js',
+                ['torcisao-header'],
+                '20260908-1115',
+                true
+            );
+        }
     }
     add_action('wp_enqueue_scripts','torcisao_haste_calculator_fix_assets',130);
 }
@@ -149,13 +151,15 @@ if (!function_exists('torcisao_footer_segments_assets')) {
             ['torcisao-footer-group-v2'],
             '20260908-1'
         );
-        wp_enqueue_script(
-            'torcisao-footer-segments-v39',
-            $uri.'/assets/torcisao-footer-segments-v39.js',
-            ['torcisao-footer-group-v2'],
-            '20260908-1',
-            true
-        );
+        if (!(is_front_page() && function_exists('torcisao_request_language') && torcisao_request_language()==='pt')) {
+            wp_enqueue_script(
+                'torcisao-footer-segments-v39',
+                $uri.'/assets/torcisao-footer-segments-v39.js',
+                ['torcisao-footer-group-v2'],
+                '20260908-1',
+                true
+            );
+        }
     }
     add_action('wp_enqueue_scripts','torcisao_footer_segments_assets',135);
 }
@@ -170,13 +174,15 @@ if (!function_exists('torcisao_calculator_input_polish_assets')) {
             ['torcisao-phase8'],
             '20260908-1222'
         );
-        wp_enqueue_script(
-            'torcisao-calculator-input-polish-v40',
-            $uri.'/assets/torcisao-calculator-input-polish-v40.js',
-            ['torcisao-phase8'],
-            '20260908-1222',
-            true
-        );
+        if (!(is_front_page() && function_exists('torcisao_request_language') && torcisao_request_language()==='pt')) {
+            wp_enqueue_script(
+                'torcisao-calculator-input-polish-v40',
+                $uri.'/assets/torcisao-calculator-input-polish-v40.js',
+                ['torcisao-phase8'],
+                '20260908-1222',
+                true
+            );
+        }
     }
     add_action('wp_enqueue_scripts','torcisao_calculator_input_polish_assets',140);
 }
