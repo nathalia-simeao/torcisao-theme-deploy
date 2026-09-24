@@ -51,12 +51,3 @@ html[data-bs-theme="dark"] .tpe-lens{background-color:rgba(24,25,27,.94)}
 @media(max-width:767.98px){body.home .th-products{padding-top:22px!important;padding-bottom:38px!important}.tpe-line-menu{display:flex;overflow-x:auto;padding:5px;border-radius:22px;scrollbar-width:none}.tpe-line-menu::-webkit-scrollbar{display:none}.tpe-line-tab{flex:0 0 auto;min-width:112px}.tpe-shell{gap:10px}.tpe-option-list{grid-template-columns:1fr}.tpe-stage{min-height:420px}.tpe-image-wrap{inset:55px 8px 42px;padding:5px}.tpe-stage-toolbar{left:10px;right:10px;top:10px}.tpe-stage-toolbar>span{display:none}.tpe-lightbox{padding:6px}.tpe-lightbox-stage{width:calc(100vw - 12px);height:calc(100dvh - 12px);border-radius:22px}.tpe-lightbox-image{width:calc(100% - 34px);height:calc(100% - 96px)}}
 
 
-/* CLS guard: reserva a geometria final do Explorador antes do controlador JS montar. */
-.tpe-initial-shell{min-height:590px}
-.tpe-initial-shell .tpe-skeleton-hidden{visibility:hidden;pointer-events:none}
-@media(max-width:991.98px){
-  .tpe-initial-shell{min-height:1080px}
-}
-@media(max-width:767.98px){
-  .tpe-initial-shell{min-height:1180px}
-}
