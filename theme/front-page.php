@@ -62,10 +62,45 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
   </section>
 
   <section class="th-section th-products" id="produtos">
-    <div class="th-container">
-      <div class="th-section-head th-section-head-split">
-        <div><span class="th-kicker">Explorador de Produtos</span><h2>Conheça nossas matérias-primas</h2></div>
-        <p>Visualize as três linhas principais da Torcisão e acesse a página completa quando precisar comparar opções, medidas e aplicações</p>
+    <div class="th-container tpe-initial-shell" aria-busy="true">
+      <div class="tpe-head"><span class="th-kicker">Explorador de Produtos</span></div>
+      <div class="tpe-line-menu tpe-skeleton-hidden" aria-hidden="true">
+        <button type="button" class="tpe-line-tab is-active" tabindex="-1">Arame</button>
+        <button type="button" class="tpe-line-tab" tabindex="-1">Barra</button>
+        <button type="button" class="tpe-line-tab" tabindex="-1">Haste</button>
+        <button type="button" class="tpe-line-tab" tabindex="-1">Conectores</button>
+      </div>
+      <div class="tpe-shell tpe-skeleton-hidden" aria-hidden="true">
+        <aside class="tpe-options">
+          <div class="tpe-options-head"><small>OPÇÕES</small><strong>Arame</strong></div>
+          <div class="tpe-option-group"><small>Linha</small><div class="tpe-option-list">
+            <button type="button" class="tpe-option is-active" tabindex="-1">BTC · Baixo Carbono</button>
+            <button type="button" class="tpe-option" tabindex="-1">MTC · Médio Carbono</button>
+            <button type="button" class="tpe-option" tabindex="-1">ATC · Alto Carbono</button>
+          </div></div>
+          <div class="tpe-option-group"><small>Visualização</small><div class="tpe-option-list">
+            <button type="button" class="tpe-option" tabindex="-1">Rolo</button>
+            <button type="button" class="tpe-option is-active" tabindex="-1">Spider</button>
+          </div></div>
+        </aside>
+        <div class="tpe-stage">
+          <div class="tpe-stage-toolbar"><span>Produto Torcisão</span><div><button type="button" tabindex="-1">−</button><span>1,0×</span><button type="button" tabindex="-1">+</button></div></div>
+          <div class="tpe-image-wrap" aria-hidden="true"></div>
+          <div class="tpe-caption"><small>ARAME TREFILADO</small><strong>Arame Trefilado · Baixo Carbono</strong></div>
+        </div>
+        <aside class="tpe-info">
+          <span class="tpe-info-kicker">ARAME TREFILADO</span>
+          <h3>Arame Trefilado · Baixo Carbono</h3>
+          <p>Arame trefilado para aplicações industriais.</p>
+          <div class="tpe-specs">
+            <div><small>Faixa de aço</small><strong>1004 a 1020</strong></div>
+            <div><small>Bitola</small><strong>2,00 a 15,88 mm</strong></div>
+            <div><small>Perfil</small><strong>Redondo</strong></div>
+            <div><small>Acondicionamento</small><strong>Rolos ou spiders</strong></div>
+            <div><small>Tolerância</small><strong>Sob consulta</strong></div>
+          </div>
+          <div class="tpe-actions"><button type="button" class="tpe-btn tpe-btn-primary" tabindex="-1">Solicitar cotação</button><button type="button" class="tpe-btn tpe-btn-secondary" tabindex="-1">Usar o assistente</button></div>
+        </aside>
       </div>
     </div>
   </section>
