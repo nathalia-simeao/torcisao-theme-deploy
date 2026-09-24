@@ -11,7 +11,7 @@
 <header class="tor-header" id="torHeader">
   <div class="tor-header-row">
     <a class="tor-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Torcisão Trefilados - início">
-      <img src="<?php echo torcisao_asset('assets/lgcabecalho400.png'); ?>" alt="Torcisão Trefilados">
+      <img src="<?php echo torcisao_asset('assets/lgcabecalho400.png'); ?>" alt="Torcisão Trefilados" width="500" height="160">
     </a>
 
     <nav class="tor-nav" aria-label="Linhas de produtos">
