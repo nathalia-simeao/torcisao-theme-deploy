@@ -12,9 +12,6 @@ $hero_barra = wp_get_attachment_image_url(1556, 'full') ?: 'https://torcisao.com
 $hero_haste = wp_get_attachment_image_url(1557, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Hastes.png';
 $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Arames.png';
 ?>
-<link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home.css'); ?>?v=20260907-4">
-<link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home-phase5.css'); ?>?v=20260907-1" data-tor-home-phase="5">
-<link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home-phase7.css'); ?>?v=20260907-1" data-tor-home-phase="7">
 <main class="th-home" id="home">
   <section class="th-hero" aria-label="Torcisão Trefilados">
     <div class="th-hero-track" id="thHeroTrack">
