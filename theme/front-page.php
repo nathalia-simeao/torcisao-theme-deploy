@@ -15,11 +15,6 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home.css'); ?>?v=20260907-4">
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home-phase5.css'); ?>?v=20260907-1" data-tor-home-phase="5">
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home-phase7.css'); ?>?v=20260907-1" data-tor-home-phase="7">
-<style>
-#produtos .tpe-image-wrap{opacity:0;transition:opacity .16s ease}
-#produtos.tor-gallery-ready .tpe-image-wrap{opacity:1}
-</style>
-
 <main class="th-home" id="home">
   <section class="th-hero" aria-label="Torcisão Trefilados">
     <div class="th-hero-track" id="thHeroTrack">
@@ -62,7 +57,7 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
   </section>
 
   <section class="th-section th-products" id="produtos">
-    <div class="th-container" aria-busy="true">
+    <div class="th-container">
       <div class="tpe-head"><span class="th-kicker">Explorador de Produtos</span></div>
       <div class="tpe-line-menu" role="tablist" aria-label="Selecione a linha Torcisão">
         <button type="button" class="tpe-line-tab is-active" data-tpe-line="arame" role="tab" aria-selected="true">Arame</button>
@@ -127,6 +122,14 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
     </div>
   </section>
 
+  <section class="th-section th-quality" id="qualidade">
+    <div class="th-container"><div class="th-quality-card"><div><span class="th-kicker">Qualidade</span><h2>Certificação disponível para consulta</h2><p>Acesse o certificado de qualidade da Torcisão e consulte a equipe quando o projeto tiver requisitos específicos</p></div><a class="th-pill th-pill-primary" href="https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf" target="_blank" rel="noopener">Ver certificado ISO</a></div></div>
+  </section>
+
+  <section class="th-section th-numbers" id="numeros">
+    <div class="th-container"><div class="th-section-head"><span class="th-kicker">Resultados que falam por si</span><h2>A Torcisão está no seu dia a dia</h2></div><div class="th-number-grid"><article><strong>1968</strong><span>Início da trajetória Torcisão</span></article><article><strong>+11 mil</strong><span>Clientes atendidos</span></article><article><strong>95%</strong><span>Nível de satisfação apresentado no material institucional</span></article></div></div>
+  </section>
+
   <?php if ($home_lang === 'pt') : ?>
   <section class="th-section th-differentials" id="fornecimento-b2b">
     <div class="th-container">
@@ -155,12 +158,6 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
   </section>
   <?php endif; ?>
 
-  <section class="th-section th-applications" id="aplicacoes">
-    <div class="th-container">
-      <div class="th-section-head"><span class="th-kicker">Aplicações e segmentos</span><h2>Presença em diferentes cadeias industriais</h2><p>A Torcisão atende aplicações associadas a indústria, construção, energia, máquinas, mobilidade e bens de consumo</p></div>
-      <div class="th-chip-cloud" aria-label="Segmentos atendidos"><span>Agrícola</span><span>Máquinas e Equipamentos</span><span>Construção Civil</span><span>Estruturas Metálicas</span><span>Ferramentas Manuais</span><span>Eletrodomésticos</span><span>Quatro Rodas</span><span>Duas Rodas</span><span>Pesados</span><span>Náutica</span><span>Linha Branca</span><span>Móveis</span><span>Motores Elétricos</span><span>Bombas</span><span>Energia</span><span>Telecomunicações</span></div>
-    </div>
-  </section>
 
   <section class="th-section th-differentials" id="diferenciais">
     <div class="th-container">
@@ -173,13 +170,6 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
     </div>
   </section>
 
-  <section class="th-section th-quality" id="qualidade">
-    <div class="th-container"><div class="th-quality-card"><div><span class="th-kicker">Qualidade</span><h2>Certificação disponível para consulta</h2><p>Acesse o certificado de qualidade da Torcisão e consulte a equipe quando o projeto tiver requisitos específicos</p></div><a class="th-pill th-pill-primary" href="https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf" target="_blank" rel="noopener">Ver certificado ISO</a></div></div>
-  </section>
-
-  <section class="th-section th-numbers" id="numeros">
-    <div class="th-container"><div class="th-section-head"><span class="th-kicker">Resultados que falam por si</span><h2>A Torcisão está no seu dia a dia</h2></div><div class="th-number-grid"><article><strong>1968</strong><span>Início da trajetória Torcisão</span></article><article><strong>+11 mil</strong><span>Clientes atendidos</span></article><article><strong>95%</strong><span>Nível de satisfação apresentado no material institucional</span></article></div></div>
-  </section>
 
   <section class="th-section th-about" id="quem-somos">
     <div class="th-container th-about-grid">
@@ -247,6 +237,5 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
 
 <?php get_template_part('template-parts/home-conversion'); ?>
 <script>window.TORCISAO_HOME=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'urls'=>['arame'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('arame',$home_lang):home_url('/arame-trefilado/')),'barra'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('barra',$home_lang):home_url('/barra-trefilada/')),'haste'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('haste',$home_lang):home_url('/haste-de-aterramento/'))]]); ?>;</script>
-<script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home-product-gallery-v24.js'); ?>?v=20260907-3"></script>
 <script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home.js'); ?>?v=20260922-1"></script>
 <?php get_footer(); ?>
