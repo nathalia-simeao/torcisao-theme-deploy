@@ -205,6 +205,125 @@ function torcisao_theme_assets(){
 }
 add_action('wp_enqueue_scripts','torcisao_theme_assets');
 
+/*
+ * Home PT: consolida o CSS próprio do tema no HTML para eliminar dezenas de
+ * solicitações render-blocking em redes móveis. A ordem abaixo replica a
+ * cascata atual. Fontes e Bootstrap Icons permanecem externos.
+ */
+function torcisao_is_pt_home_request(){
+    return is_front_page() && function_exists('torcisao_request_language') && torcisao_request_language()==='pt';
+}
+
+function torcisao_home_inline_css(){
+    if (!torcisao_is_pt_home_request()) return;
+
+    $theme = get_template_directory();
+    $files = [
+        'style.css',
+        'assets/torcisao-header-recovery.css',
+        'assets/torcisao-header-scroll-blur.css',
+        'assets/torcisao-phase6.css',
+        'assets/torcisao-phase8.css',
+        'assets/torcisao-global-polish.css',
+        'assets/torcisao-mobile-menu-polish.css',
+        'assets/torcisao-commercial-handoff.css',
+        'assets/torcisao-footer-recovery.css',
+        'assets/torcisao-footer-group-v2.css',
+        'assets/torcisao-footer-polish-v3.css',
+        'assets/torcisao-products-explorer.css',
+        'assets/torcisao-explorer-image-calibration.css',
+        'assets/torcisao-explorer-layout-phase10.css',
+        'assets/torcisao-explorer-depth.css',
+        'assets/torcisao-mobile-product-tabs.css',
+        'assets/torcisao-quality-recovery.css',
+        'assets/torcisao-quality-polish.css',
+        'assets/torcisao-social-proof.css',
+        'assets/torcisao-motion-scrollbar-fix.css',
+        'assets/torcisao-about-history.css',
+        'assets/torcisao-about-stability.css',
+        'assets/torcisao-quote-safe-zone.css',
+        'assets/torcisao-timeline-mobile.css',
+        'assets/torcisao-home-mobile-final.css',
+        'assets/torcisao-mobile-blog-footer-v5.css',
+        'assets/torcisao-industrial-logo-balance-v6.css',
+        'assets/torcisao-global-alignment-v7.css',
+        'assets/torcisao-section-rhythm-v8.css',
+        'assets/torcisao-btc-gallery-v20.css',
+        'assets/torcisao-arame-gallery-v22.css',
+        'assets/torcisao-haste-gallery-v23.css',
+        'assets/torcisao-closeout-v25.css',
+        'assets/torcisao-footer-segments-v39.css',
+        'assets/torcisao-calculator-input-polish-v40.css',
+        'assets/torcisao-home.css',
+        'assets/torcisao-home-phase5.css',
+        'assets/torcisao-home-phase7.css',
+    ];
+
+    $css = '';
+    foreach ($files as $relative) {
+        $path = $theme.'/'.$relative;
+        if (!is_readable($path)) continue;
+        $chunk = file_get_contents($path);
+        if ($chunk === false || $chunk === '') continue;
+        $css .= "\n/* ".$relative." */\n".$chunk."\n";
+    }
+
+    if ($css !== '') {
+        echo "<style id=\"torcisao-home-inline-css\">\n".$css."\n</style>\n";
+    }
+}
+add_action('wp_head','torcisao_home_inline_css',99);
+
+function torcisao_suppress_pt_home_styles($html,$handle,$href,$media){
+    if (!torcisao_is_pt_home_request()) return $html;
+
+    $handles = [
+        'torcisao-style',
+        'torcisao-header',
+        'torcisao-header-scroll-blur',
+        'torcisao-phase6',
+        'torcisao-phase8',
+        'torcisao-global-polish',
+        'torcisao-mobile-menu-polish',
+        'torcisao-commercial-handoff',
+        'torcisao-footer-recovery',
+        'torcisao-footer-group-v2',
+        'torcisao-footer-polish-v3',
+        'torcisao-products-explorer',
+        'torcisao-explorer-image-calibration',
+        'torcisao-explorer-layout-phase10',
+        'torcisao-explorer-depth',
+        'torcisao-mobile-product-tabs',
+        'torcisao-quality-recovery',
+        'torcisao-quality-polish',
+        'torcisao-social-proof',
+        'torcisao-motion-scrollbar-fix',
+        'torcisao-about-history',
+        'torcisao-about-stability',
+        'torcisao-quote-safe-zone',
+        'torcisao-timeline-mobile',
+        'torcisao-home-mobile-final',
+        'torcisao-mobile-blog-footer-v5',
+        'torcisao-industrial-logo-balance-v6',
+        'torcisao-global-alignment-v7',
+        'torcisao-section-rhythm-v8',
+        'torcisao-home-gallery-barra-v20',
+        'torcisao-home-gallery-arame-v22',
+        'torcisao-home-gallery-haste-v23',
+        'torcisao-closeout-v25',
+        'torcisao-footer-segments-v39',
+        'torcisao-calculator-input-polish-v40',
+        'wp-block-library',
+        'elementor-frontend',
+        'base-desktop',
+        'base-mobile',
+        'elementor-gf-roboto',
+        'elementor-gf-robotoslab',
+    ];
+    return in_array($handle,$handles,true) ? '' : $html;
+}
+add_filter('style_loader_tag','torcisao_suppress_pt_home_styles',PHP_INT_MAX,4);
+
 /* Prioriza a imagem LCP da página canônica de Barra Trefilada. */
 function torcisao_preload_barra_lcp_image(){
     if (!is_page(1622)) return;
