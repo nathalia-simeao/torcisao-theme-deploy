@@ -103,6 +103,7 @@ function torcisao_theme_assets(){
     $uri = get_template_directory_uri();
     $ver = wp_get_theme()->get('Version') ?: '2026.09.06';
     $is_home = torcisao_is_home_experience();
+    $is_home_pt = is_front_page() && torcisao_request_language()==='pt';
     $is_product_page = is_page([1621,1622,1623,1627,1628,1629,1630,1631,1632]);
     $is_barra_page = is_page(1622);
     wp_enqueue_style('torcisao-fonts','https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap',[],null);
@@ -155,24 +156,23 @@ function torcisao_theme_assets(){
     wp_enqueue_script('torcisao-header',$uri.'/assets/torcisao-header-recovery.js',[], $ver, true);
     wp_enqueue_script('torcisao-phase8',$uri.'/assets/torcisao-phase8.js',['torcisao-header'], $ver, true);
     if ($is_home) {
-        wp_enqueue_script('torcisao-products-explorer',$uri.'/assets/torcisao-products-explorer.js',['torcisao-phase8'], $ver, true);
-        $explorer_last_handle = 'torcisao-products-explorer';
-        if (!wp_is_mobile()) {
-            wp_enqueue_script('torcisao-explorer-image-calibration',$uri.'/assets/torcisao-explorer-image-calibration.js',[$explorer_last_handle], $ver, true);
-            $explorer_last_handle = 'torcisao-explorer-image-calibration';
-            wp_enqueue_script('torcisao-explorer-pre3d',$uri.'/assets/torcisao-explorer-pre3d.js',[$explorer_last_handle], $ver, true);
-            $explorer_last_handle = 'torcisao-explorer-pre3d';
+        if ($is_home_pt) {
+            wp_enqueue_script('torcisao-home-lazy-runtime',$uri.'/assets/torcisao-home-lazy-runtime.js',['torcisao-phase8'],'20260924-1',true);
+        } else {
+            wp_enqueue_script('torcisao-products-explorer',$uri.'/assets/torcisao-products-explorer.js',['torcisao-phase8'], $ver, true);
+            wp_enqueue_script('torcisao-explorer-image-calibration',$uri.'/assets/torcisao-explorer-image-calibration.js',['torcisao-products-explorer'], $ver, true);
+            wp_enqueue_script('torcisao-explorer-pre3d',$uri.'/assets/torcisao-explorer-pre3d.js',['torcisao-explorer-image-calibration'], $ver, true);
+            wp_enqueue_script('torcisao-quality-recovery',$uri.'/assets/torcisao-quality-recovery.js',['torcisao-explorer-pre3d'], $ver, true);
+            wp_enqueue_script('torcisao-social-proof',$uri.'/assets/torcisao-social-proof.js',['torcisao-quality-recovery'], '20260922-2', true);
+            wp_enqueue_script('torcisao-about-history',$uri.'/assets/torcisao-about-history.js',['torcisao-phase8'], '20260906-2200', true);
+            wp_enqueue_script('torcisao-timeline-mobile',$uri.'/assets/torcisao-timeline-mobile.js',['torcisao-about-history'], '20260906-2112', true);
         }
-        wp_enqueue_script('torcisao-quality-recovery',$uri.'/assets/torcisao-quality-recovery.js',[$explorer_last_handle], $ver, true);
-        wp_enqueue_script('torcisao-social-proof',$uri.'/assets/torcisao-social-proof.js',['torcisao-quality-recovery'], '20260922-2', true);
-        wp_enqueue_script('torcisao-about-history',$uri.'/assets/torcisao-about-history.js',['torcisao-phase8'], '20260906-2200', true);
-        wp_enqueue_script('torcisao-timeline-mobile',$uri.'/assets/torcisao-timeline-mobile.js',['torcisao-about-history'], '20260906-2112', true);
     }
     $skip_legacy_lens = $is_home || is_page(1622);
     if (!$skip_legacy_lens) {
         wp_enqueue_script('torcisao-lens-wheel-zoom',$uri.'/assets/torcisao-lens-wheel-zoom.js',$is_home?['torcisao-social-proof']:['torcisao-phase8'], $ver, true);
     }
-    $commercial_handoff_dep = $skip_legacy_lens ? ($is_home ? ['torcisao-social-proof'] : ['torcisao-phase8']) : ['torcisao-lens-wheel-zoom'];
+    $commercial_handoff_dep = $skip_legacy_lens ? (($is_home_pt || !$is_home) ? ['torcisao-phase8'] : ['torcisao-social-proof']) : ['torcisao-lens-wheel-zoom'];
     wp_enqueue_script('torcisao-commercial-handoff',$uri.'/assets/torcisao-commercial-handoff.js',$commercial_handoff_dep, $ver, true);
     if ($is_product_page && !$is_barra_page) {
         wp_enqueue_script('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.js',['torcisao-phase8'],'20260907-1',true);
@@ -187,8 +187,10 @@ function torcisao_theme_assets(){
         wp_enqueue_script('torcisao-product-data-consistency-v16',$uri.'/assets/torcisao-product-data-consistency-v16.js',['torcisao-barra-commercial-v14'],'20260907-1',true);
         wp_enqueue_script('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.js',['torcisao-product-data-consistency-v16'],'20260907-1',true);
     }
-    wp_enqueue_script('torcisao-footer-recovery',$uri.'/assets/torcisao-footer-recovery.js',['torcisao-commercial-handoff'], '20260907-3', true);
-    wp_enqueue_script('torcisao-footer-group-v2',$uri.'/assets/torcisao-footer-group-v2.js',['torcisao-footer-recovery'], '20260907-2', true);
+    if (!$is_home_pt) {
+        wp_enqueue_script('torcisao-footer-recovery',$uri.'/assets/torcisao-footer-recovery.js',['torcisao-commercial-handoff'], '20260907-3', true);
+        wp_enqueue_script('torcisao-footer-group-v2',$uri.'/assets/torcisao-footer-group-v2.js',['torcisao-footer-recovery'], '20260907-2', true);
+    }
 
     /* Runtime exato: evita traduções parciais como "Torcisão Drawns". */
     $request_lang = torcisao_request_language();
