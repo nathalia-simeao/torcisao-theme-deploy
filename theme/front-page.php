@@ -11,7 +11,6 @@ $home_assets = get_template_directory_uri();
 $hero_barra = wp_get_attachment_image_url(1556, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Barras.png';
 $hero_haste = wp_get_attachment_image_url(1557, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Hastes.png';
 $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Arames.png';
-$fabrica_image = wp_get_attachment_image_url(54, 'medium_large') ?: 'https://torcisao.com.br/wp-content/uploads/2025/12/fabrica1-768x560.png';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home.css'); ?>?v=20260907-4">
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home-phase5.css'); ?>?v=20260907-1" data-tor-home-phase="5">
@@ -128,7 +127,7 @@ $fabrica_image = wp_get_attachment_image_url(54, 'medium_large') ?: 'https://tor
   <section class="th-section th-about" id="quem-somos">
     <div class="th-container th-about-grid">
       <div class="th-about-copy"><span class="th-kicker">Quem Somos</span><h2>Mais do que fornecer aço, a Torcisão entrega valorização para o projeto</h2><p>Com uma trajetória iniciada em 1968, a Torcisão atua com arames trefilados, barras trefiladas e hastes de aterramento para diferentes cadeias industriais</p><p>Conhecimento de processo, relacionamento comercial e evolução contínua fazem parte da forma como a empresa atende seus clientes</p></div>
-      <figure class="th-about-image"><img src="<?php echo esc_url($fabrica_image); ?>" alt="Ambiente industrial Torcisão" width="768" height="560" loading="lazy" decoding="async"></figure>
+      <figure class="th-about-image"><?php echo wp_get_attachment_image(54, 'medium_large', false, ['alt'=>'Ambiente industrial Torcisão','loading'=>'lazy','decoding'=>'async','sizes'=>'(max-width: 767px) 100vw, 50vw']); ?></figure>
     </div>
     <div class="th-container th-timeline-wrap"><div class="th-timeline-head"><div><strong>Nosso crescimento conta a nossa história</strong><span>Uma trajetória construída ao longo de décadas</span></div></div><div class="th-timeline" aria-label="Linha do tempo Torcisão"><span class="is-highlight">1968</span><span>1975</span><span>1978</span><span>1999</span><span>2005</span><span>2006</span><span>2011</span><span>2013</span><span>2014</span><span>2015</span><span>2016</span><span>2017</span><span>2019</span><span>2022</span><span>2024</span></div></div>
   </section>
