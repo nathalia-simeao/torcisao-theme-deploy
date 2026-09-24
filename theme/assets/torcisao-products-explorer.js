@@ -73,6 +73,13 @@ function allImageUrls(){
   return Array.from(urls);
 }
 const imageCache=new Map();
+function optimizedExplorerUrl(url){
+  const value=String(url||'');
+  const mobile=window.matchMedia&&window.matchMedia('(max-width:767px)').matches;
+  if(/\/(arametrefiladorolo|arametrefiladospider)\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-300x300.png':'-768x768.png');
+  if(/\/(baixacamada|altacamada)\.png$/i.test(value))return value.replace(/\.png$/i,mobile?'-110x300.png':'-375x1024.png');
+  return value;
+}
 function preload(url){
   if(imageCache.has(url))return imageCache.get(url);
   const p=new Promise(resolve=>{
@@ -86,7 +93,8 @@ function init(){
   const section=document.getElementById('produtos');if(!section)return;
   const container=q('.th-container',section);if(!container)return;
 
-  container.innerHTML=`
+  if(!q('#tpeShell',container)){
+    container.innerHTML=`
     <div class="tpe-head"><span class="th-kicker">Explorador de Produtos</span></div>
     <div class="tpe-line-menu" role="tablist" aria-label="Selecione a linha Torcisão">
       ${Object.entries(DATA).map(([key,d],i)=>`<button type="button" class="tpe-line-tab${i===0?' is-active':''}" data-tpe-line="${key}" role="tab">${d.label}</button>`).join('')}
@@ -118,6 +126,7 @@ function init(){
         </div>
       </aside>
     </div>`;
+  }
 
   const state={line:'arame',variant:'btc',view:'spider',finish:'trefilada'};
   let zoom=1,tiltX=0,tiltY=0,lensZoom=2.3,lastPointer=null,renderToken=0;
@@ -155,7 +164,7 @@ function init(){
     stage.dataset.line=state.line;
     qa('.tpe-line-tab',section).forEach(b=>{const on=b.dataset.tpeLine===state.line;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',on?'true':'false');});
     buildOptions();
-    switchImage(d.image(state),v.title);
+    switchImage(optimizedExplorerUrl(d.image(state)),v.title);
     q('#tpeCaptionKicker').textContent=d.kicker;q('#tpeCaptionTitle').textContent=v.title;
     q('#tpeInfoKicker').textContent=d.kicker;q('#tpeInfoTitle').textContent=v.title;q('#tpeInfoLead').textContent=v.lead;
     q('#tpeSpecs').innerHTML=v.facts.map(([a,b])=>`<div><small>${a}</small><strong>${b}</strong></div>`).join('');
