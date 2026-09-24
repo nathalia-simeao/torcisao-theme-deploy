@@ -115,7 +115,7 @@ add_action('wp_enqueue_scripts','torcisao_trim_custom_template_assets',999);
 /**
  * HubSpot permanece disponível, mas sai do caminho crítico da Home e da Barra PT.
  * O formulário custom continua carregando o embed de Forms quando a cotação é aberta.
- * O tracking global entra após a primeira interação ou após 12s.
+ * O tracking global entra após interação real ou, como fallback, após 30s.
  */
 function torcisao_defer_hubspot_global_script(){
     if (!(is_front_page() || is_page(1622))) return;
@@ -157,15 +157,15 @@ function torcisao_lazy_hubspot_loader(){
         document.body.appendChild(s);
       }
       function interacted(){
-        ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){
+        ['pointerdown','keydown','touchstart'].forEach(function(ev){
           window.removeEventListener(ev,interacted,{capture:true});
         });
         setTimeout(load,700);
       }
-      ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){
+      ['pointerdown','keydown','touchstart'].forEach(function(ev){
         window.addEventListener(ev,interacted,{passive:true,capture:true,once:true});
       });
-      timer=setTimeout(load,12000);
+      timer=setTimeout(load,30000);
       window.TorcisaoLoadHubSpot=load;
     })();
     </script>
