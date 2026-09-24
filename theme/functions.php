@@ -156,9 +156,14 @@ function torcisao_theme_assets(){
     wp_enqueue_script('torcisao-phase8',$uri.'/assets/torcisao-phase8.js',['torcisao-header'], $ver, true);
     if ($is_home) {
         wp_enqueue_script('torcisao-products-explorer',$uri.'/assets/torcisao-products-explorer.js',['torcisao-phase8'], $ver, true);
-        wp_enqueue_script('torcisao-explorer-image-calibration',$uri.'/assets/torcisao-explorer-image-calibration.js',['torcisao-products-explorer'], $ver, true);
-        wp_enqueue_script('torcisao-explorer-pre3d',$uri.'/assets/torcisao-explorer-pre3d.js',['torcisao-explorer-image-calibration'], $ver, true);
-        wp_enqueue_script('torcisao-quality-recovery',$uri.'/assets/torcisao-quality-recovery.js',['torcisao-explorer-pre3d'], $ver, true);
+        $explorer_last_handle = 'torcisao-products-explorer';
+        if (!wp_is_mobile()) {
+            wp_enqueue_script('torcisao-explorer-image-calibration',$uri.'/assets/torcisao-explorer-image-calibration.js',[$explorer_last_handle], $ver, true);
+            $explorer_last_handle = 'torcisao-explorer-image-calibration';
+            wp_enqueue_script('torcisao-explorer-pre3d',$uri.'/assets/torcisao-explorer-pre3d.js',[$explorer_last_handle], $ver, true);
+            $explorer_last_handle = 'torcisao-explorer-pre3d';
+        }
+        wp_enqueue_script('torcisao-quality-recovery',$uri.'/assets/torcisao-quality-recovery.js',[$explorer_last_handle], $ver, true);
         wp_enqueue_script('torcisao-social-proof',$uri.'/assets/torcisao-social-proof.js',['torcisao-quality-recovery'], '20260922-2', true);
         wp_enqueue_script('torcisao-about-history',$uri.'/assets/torcisao-about-history.js',['torcisao-phase8'], '20260906-2200', true);
         wp_enqueue_script('torcisao-timeline-mobile',$uri.'/assets/torcisao-timeline-mobile.js',['torcisao-about-history'], '20260906-2112', true);
