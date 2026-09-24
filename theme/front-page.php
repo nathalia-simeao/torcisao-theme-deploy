@@ -11,7 +11,7 @@ $home_assets = get_template_directory_uri();
 $hero_barra = wp_get_attachment_image_url(1556, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Barras.png';
 $hero_haste = wp_get_attachment_image_url(1557, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Hastes.png';
 $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2026/09/Hero-Torcisao-Arames.png';
-$fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.com.br/wp-content/uploads/2025/12/fabrica1.png';
+$fabrica_image = wp_get_attachment_image_url(54, 'medium_large') ?: 'https://torcisao.com.br/wp-content/uploads/2025/12/fabrica1-768x560.png';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home.css'); ?>?v=20260907-4">
 <link rel="stylesheet" href="<?php echo esc_url($home_assets . '/assets/torcisao-home-phase5.css'); ?>?v=20260907-1" data-tor-home-phase="5">
@@ -24,9 +24,9 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
 <main class="th-home" id="home">
   <section class="th-hero" aria-label="Torcisão Trefilados">
     <div class="th-hero-track" id="thHeroTrack">
-      <article class="th-hero-slide is-active" data-home-hero-slide><img src="<?php echo esc_url($hero_barra); ?>" alt="Barras trefiladas Torcisão" fetchpriority="high" decoding="async"></article>
-      <article class="th-hero-slide" data-home-hero-slide><img src="<?php echo esc_url($hero_haste); ?>" alt="Hastes de aterramento Torcisão" loading="lazy" decoding="async"></article>
-      <article class="th-hero-slide" data-home-hero-slide><img src="<?php echo esc_url($hero_arame); ?>" alt="Arames trefilados Torcisão" loading="lazy" decoding="async"></article>
+      <article class="th-hero-slide is-active" data-home-hero-slide><img src="<?php echo esc_url($hero_barra); ?>" alt="Barras trefiladas Torcisão" width="199" height="112" fetchpriority="high" decoding="async"></article>
+      <article class="th-hero-slide" data-home-hero-slide><img src="<?php echo esc_url($hero_haste); ?>" alt="Hastes de aterramento Torcisão" width="199" height="112" loading="lazy" decoding="async"></article>
+      <article class="th-hero-slide" data-home-hero-slide><img src="<?php echo esc_url($hero_arame); ?>" alt="Arames trefilados Torcisão" width="199" height="112" loading="lazy" decoding="async"></article>
     </div>
     <div class="th-hero-shade"></div>
     <div class="th-container th-hero-content">
@@ -52,7 +52,7 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
           <button type="button" class="th-text-link" id="thToleranceOpen">Consultar tolerância <span>→</span></button>
         </article>
         <article class="th-tool-card th-tool-card-theo">
-          <div class="th-theo-mini"><img src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" alt="Theo, assistente Torcisão"><span><small>Assistente de Aplicação</small><strong>Theo</strong></span></div>
+          <div class="th-theo-mini"><img src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" width="410" height="420" alt="Theo, assistente Torcisão"><span><small>Assistente de Aplicação</small><strong>Theo</strong></span></div>
           <span class="th-tool-number">02</span>
           <h3>Não sabe qual linha avaliar?</h3>
           <p>Escolha manualmente uma linha ou descreva a aplicação para o Theo organizar as opções Torcisão e direcionar ao próximo passo</p>
@@ -128,7 +128,7 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
   <section class="th-section th-about" id="quem-somos">
     <div class="th-container th-about-grid">
       <div class="th-about-copy"><span class="th-kicker">Quem Somos</span><h2>Mais do que fornecer aço, a Torcisão entrega valorização para o projeto</h2><p>Com uma trajetória iniciada em 1968, a Torcisão atua com arames trefilados, barras trefiladas e hastes de aterramento para diferentes cadeias industriais</p><p>Conhecimento de processo, relacionamento comercial e evolução contínua fazem parte da forma como a empresa atende seus clientes</p></div>
-      <figure class="th-about-image"><img src="<?php echo esc_url($fabrica_image); ?>" alt="Ambiente industrial Torcisão" loading="lazy" decoding="async"></figure>
+      <figure class="th-about-image"><img src="<?php echo esc_url($fabrica_image); ?>" alt="Ambiente industrial Torcisão" width="768" height="560" loading="lazy" decoding="async"></figure>
     </div>
     <div class="th-container th-timeline-wrap"><div class="th-timeline-head"><div><strong>Nosso crescimento conta a nossa história</strong><span>Uma trajetória construída ao longo de décadas</span></div></div><div class="th-timeline" aria-label="Linha do tempo Torcisão"><span class="is-highlight">1968</span><span>1975</span><span>1978</span><span>1999</span><span>2005</span><span>2006</span><span>2011</span><span>2013</span><span>2014</span><span>2015</span><span>2016</span><span>2017</span><span>2019</span><span>2022</span><span>2024</span></div></div>
   </section>
@@ -167,7 +167,7 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
 <div class="th-modal-backdrop" id="thAssistantModal" aria-hidden="true">
   <section class="th-modal th-modal-assistant" role="dialog" aria-modal="true" aria-labelledby="thAssistantTitle">
     <div class="th-modal-head th-assistant-head">
-      <div class="th-assistant-identity"><img src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" alt="Theo"><div><small>ASSISTENTE DE APLICAÇÃO</small><h2 id="thAssistantTitle">Theo</h2><p>Escolha manualmente ou descreva a aplicação para organizar as opções Torcisão</p></div></div>
+      <div class="th-assistant-identity"><img src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" width="410" height="420" alt="Theo"><div><small>ASSISTENTE DE APLICAÇÃO</small><h2 id="thAssistantTitle">Theo</h2><p>Escolha manualmente ou descreva a aplicação para organizar as opções Torcisão</p></div></div>
       <button type="button" class="th-modal-close" data-th-assistant-close aria-label="Fechar">×</button>
     </div>
     <div class="th-modal-body th-assistant-body">
@@ -182,7 +182,7 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
         <div class="th-manual-result" id="thManualProductResult"></div>
       </div>
       <div class="th-assistant-divider"><span>ou descreva a aplicação</span></div>
-      <div class="th-theo-chat-title"><img src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" alt=""><div><strong>Converse com o Theo</strong><small>Respostas baseadas nas informações Torcisão</small></div></div>
+      <div class="th-theo-chat-title"><img src="https://torcisao.com.br/wp-content/uploads/2026/09/Perfil_Theo_Torcisao.png" width="410" height="420" alt=""><div><strong>Converse com o Theo</strong><small>Respostas baseadas nas informações Torcisão</small></div></div>
       <div class="th-chat" id="thHomeChat" aria-live="polite"><div class="th-msg assistant">Olá! Conte o material, bitola, quantidade, aplicação ou requisito que você precisa avaliar. Eu organizo as opções Torcisão e indico o próximo passo</div></div>
     </div>
     <div class="th-assistant-compose"><input id="thAssistantInput" type="text" maxlength="600" placeholder="Ex.: preciso de material para fabricar pinos..." aria-label="Mensagem para o Theo"><button type="button" id="thAssistantSend" aria-label="Enviar"><i class="bi bi-arrow-up"></i></button></div>
@@ -191,7 +191,6 @@ $fabrica_image = wp_get_attachment_image_url(54, 'full') ?: 'https://torcisao.co
 
 <?php get_template_part('template-parts/home-conversion'); ?>
 <script>window.TORCISAO_HOME=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'urls'=>['arame'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('arame',$home_lang):home_url('/arame-trefilado/')),'barra'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('barra',$home_lang):home_url('/barra-trefilada/')),'haste'=>esc_url_raw(function_exists('torcisao_page_url')?torcisao_page_url('haste',$home_lang):home_url('/haste-de-aterramento/'))]]); ?>;</script>
-<script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home-i18n-v29.js'); ?>?v=20260907-1"></script>
 <script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home-stability-v35.js'); ?>?v=20260907-1"></script>
 <script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home-product-gallery-v24.js'); ?>?v=20260907-3"></script>
 <script defer src="<?php echo esc_url($home_assets . '/assets/torcisao-home.js'); ?>?v=20260922-1"></script>
