@@ -46,14 +46,14 @@ function syncBarQuoteForm(formNode){
  setHubSpotField(form,'pagina_de_origem_do_lead',selected.origin);
 }
 const image=$('bfImage'),wrap=$('bfImageWrap'),lens=$('bfLens'),stage=q('.hf-stage',root);
-let lensImage=lens.querySelector('img');
-if(!lensImage){
-  lensImage=document.createElement('img');
-  lensImage.className='hf-lens-image';
-  lensImage.alt='';
-  lensImage.setAttribute('aria-hidden','true');
-  lens.appendChild(lensImage);
+let lensCanvas=lens.querySelector('canvas');
+if(!lensCanvas){
+  lensCanvas=document.createElement('canvas');
+  lensCanvas.className='hf-lens-canvas';
+  lensCanvas.setAttribute('aria-hidden','true');
+  lens.appendChild(lensCanvas);
 }
+const lensCtx=lensCanvas.getContext('2d');
 function rows(items){return items.map(([a,b])=>`<div class="hf-spec-row"><small>${a}</small><strong>${b}</strong></div>`).join('')}
 function ensureFinishPicker(){
  let picker=$('bfImageVariants');
@@ -92,7 +92,6 @@ function renderGallery(){
  image.removeAttribute('srcset');
  image.alt='Barra '+g.label+' '+(finish==='polida'?'polida':'trefilada')+' · ângulo '+(angle+1);
  lens.style.backgroundImage='none';
- lensImage.src=src;
  lens.classList.remove('is-visible');
  $('bfCaptionMeta').textContent=(finish==='polida'?'Polida':'Trefilada')+' · ângulo '+(angle+1);
 }
@@ -119,25 +118,56 @@ wrap.addEventListener('mousemove',e=>{
 
   const wrapX=e.clientX-wr.left;
   const wrapY=e.clientY-wr.top;
-  const imageX=e.clientX-ir.left;
-  const imageY=e.clientY-ir.top;
-  const factor=2.35;
   const lensW=lens.offsetWidth||150;
   const lensH=lens.offsetHeight||150;
+  const factor=2.4;
 
-  /* A lente usa uma cópia real da imagem, evitando diferença entre background e object-fit. */
+  /* Zera qualquer inclinação antes de mapear o cursor para os pixels reais. */
   wrap.style.setProperty('--tilt-x','0deg');
   wrap.style.setProperty('--tilt-y','0deg');
+
+  const stableRect=image.getBoundingClientRect();
+  const px=(e.clientX-stableRect.left)/stableRect.width;
+  const py=(e.clientY-stableRect.top)/stableRect.height;
+  if(px<0||px>1||py<0||py>1||!image.naturalWidth||!image.naturalHeight){hideLens();return;}
 
   lens.style.left=wrapX+'px';
   lens.style.top=wrapY+'px';
 
-  const src=image.currentSrc||image.src;
-  if(lensImage.src!==src)lensImage.src=src;
-  lensImage.style.width=(ir.width*factor)+'px';
-  lensImage.style.height=(ir.height*factor)+'px';
-  lensImage.style.left=(lensW/2-imageX*factor)+'px';
-  lensImage.style.top=(lensH/2-imageY*factor)+'px';
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const targetW=Math.round(lensW*dpr);
+  const targetH=Math.round(lensH*dpr);
+  if(lensCanvas.width!==targetW||lensCanvas.height!==targetH){
+    lensCanvas.width=targetW;
+    lensCanvas.height=targetH;
+  }
+  lensCanvas.style.width=lensW+'px';
+  lensCanvas.style.height=lensH+'px';
+
+  const sourceX=px*image.naturalWidth;
+  const sourceY=py*image.naturalHeight;
+  const cropW=(lensW/factor)*(image.naturalWidth/stableRect.width);
+  const cropH=(lensH/factor)*(image.naturalHeight/stableRect.height);
+  const sx=sourceX-cropW/2;
+  const sy=sourceY-cropH/2;
+
+  lensCtx.setTransform(dpr,0,0,dpr,0,0);
+  lensCtx.clearRect(0,0,lensW,lensH);
+  lensCtx.fillStyle='#fff';
+  lensCtx.fillRect(0,0,lensW,lensH);
+
+  const ix0=Math.max(0,sx);
+  const iy0=Math.max(0,sy);
+  const ix1=Math.min(image.naturalWidth,sx+cropW);
+  const iy1=Math.min(image.naturalHeight,sy+cropH);
+
+  if(ix1>ix0&&iy1>iy0){
+    const dx=(ix0-sx)*(lensW/cropW);
+    const dy=(iy0-sy)*(lensH/cropH);
+    const dw=(ix1-ix0)*(lensW/cropW);
+    const dh=(iy1-iy0)*(lensH/cropH);
+    lensCtx.drawImage(image,ix0,iy0,ix1-ix0,iy1-iy0,dx,dy,dw,dh);
+  }
 
   lens.classList.add('is-visible');
 });
