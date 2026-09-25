@@ -269,24 +269,10 @@ function torcisao_home_inline_css(){
     }
 
     if ($css !== '') {
-        /* Mesma cascata, menos bytes: remove comentários e espaços redundantes.
-           Não altera seletores, declarações nem a ordem dos arquivos. */
-        $css = preg_replace('!\/\*(?!\!)[\s\S]*?\*\/!', '', $css);
-        $css = preg_replace('/\s+/', ' ', $css);
-        $css = preg_replace('/\s*([{};,:])\s*/', '$1', $css);
-        $css = trim($css);
-        echo "<style id=\"torcisao-home-inline-css\">".$css."</style>\n";
+        echo "<style id=\"torcisao-home-inline-css\">\n".$css."\n</style>\n";
     }
 }
 add_action('wp_head','torcisao_home_inline_css',99);
-
-/* A Home é totalmente custom: não usa estilos de blocos do Gutenberg. */
-function torcisao_remove_unused_wp_global_styles(){
-    if (!torcisao_is_pt_home_request()) return;
-    wp_dequeue_style('global-styles');
-    wp_dequeue_style('classic-theme-styles');
-}
-add_action('wp_enqueue_scripts','torcisao_remove_unused_wp_global_styles',9999);
 
 function torcisao_suppress_pt_home_styles($html,$handle,$href,$media){
     if (!torcisao_is_pt_home_request()) return $html;
