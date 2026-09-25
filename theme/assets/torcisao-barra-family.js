@@ -79,7 +79,13 @@ function renderGallery(){
    btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();angle=index;renderGallery();});
    anglePicker.appendChild(btn);
  });
- const src=urls[angle];image.src=src;image.removeAttribute('srcset');image.alt='Barra '+g.label+' '+(finish==='polida'?'polida':'trefilada')+' · ângulo '+(angle+1);$('bfCaptionMeta').textContent=(finish==='polida'?'Polida':'Trefilada')+' · ângulo '+(angle+1);
+ const src=urls[angle];
+ image.src=src;
+ image.removeAttribute('srcset');
+ image.alt='Barra '+g.label+' '+(finish==='polida'?'polida':'trefilada')+' · ângulo '+(angle+1);
+ lens.style.backgroundImage='url("'+src.replace(/"/g,'\\\"')+'")';
+ lens.classList.remove('is-visible');
+ $('bfCaptionMeta').textContent=(finish==='polida'?'Polida':'Trefilada')+' · ângulo '+(angle+1);
 }
 function render(){
  const d=data[kind];
@@ -90,7 +96,39 @@ function render(){
 }
 function updateZoom(){image.style.setProperty('--hf-zoom',zoom);$('bfZoomLabel').textContent=zoom.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'×'}
 qa('[data-bf-kind]').forEach(b=>b.addEventListener('click',()=>{kind=b.dataset.bfKind;finish='trefilada';angle=0;render();syncBarQuoteForm();track('product_variant_select',{product:'barra_trefilada',variant:kind})}));$('bfZoomIn').addEventListener('click',()=>{zoom=Math.min(2.6,zoom+.2);updateZoom()});$('bfZoomOut').addEventListener('click',()=>{zoom=Math.max(.8,zoom-.2);updateZoom()});
-wrap.addEventListener('mousemove',e=>{if(innerWidth<768)return;const r=wrap.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;wrap.style.setProperty('--tilt-y',((x/r.width-.5)*5)+'deg');wrap.style.setProperty('--tilt-x',((.5-y/r.height)*5)+'deg');lens.style.left=x+'px';lens.style.top=y+'px';lens.style.backgroundImage=`url("${image.currentSrc||image.src}")`;lens.style.backgroundSize=`${image.clientWidth*2.3}px ${image.clientHeight*2.3}px`;lens.style.backgroundPosition=`${-(x-r.width/2)*2+lens.clientWidth/2}px ${-(y-r.height/2)*2+lens.clientHeight/2}px`;lens.classList.add('is-visible')});wrap.addEventListener('mouseleave',()=>{wrap.style.setProperty('--tilt-x','0deg');wrap.style.setProperty('--tilt-y','0deg');lens.classList.remove('is-visible')});
+function hideLens(){
+  wrap.style.setProperty('--tilt-x','0deg');
+  wrap.style.setProperty('--tilt-y','0deg');
+  lens.classList.remove('is-visible');
+}
+wrap.addEventListener('mousemove',e=>{
+  if(innerWidth<768){hideLens();return;}
+  const wr=wrap.getBoundingClientRect();
+  const ir=image.getBoundingClientRect();
+  const inside=e.clientX>=ir.left&&e.clientX<=ir.right&&e.clientY>=ir.top&&e.clientY<=ir.bottom;
+  if(!inside){hideLens();return;}
+
+  const wrapX=e.clientX-wr.left;
+  const wrapY=e.clientY-wr.top;
+  const imageX=e.clientX-ir.left;
+  const imageY=e.clientY-ir.top;
+  const factor=2.6;
+  const lensW=lens.offsetWidth||150;
+  const lensH=lens.offsetHeight||150;
+
+  /* Mantém a imagem estável enquanto a lupa está ativa para o mapa de pixels coincidir. */
+  wrap.style.setProperty('--tilt-x','0deg');
+  wrap.style.setProperty('--tilt-y','0deg');
+
+  lens.style.left=wrapX+'px';
+  lens.style.top=wrapY+'px';
+  lens.style.backgroundImage=`url("${image.currentSrc||image.src}")`;
+  lens.style.backgroundRepeat='no-repeat';
+  lens.style.backgroundSize=`${ir.width*factor}px ${ir.height*factor}px`;
+  lens.style.backgroundPosition=`${lensW/2-imageX*factor}px ${lensH/2-imageY*factor}px`;
+  lens.classList.add('is-visible');
+});
+wrap.addEventListener('mouseleave',hideLens);
 const light=$('bfLightbox');function openLight(){const li=$('bfLightboxImage');li.src=image.currentSrc||image.src;li.alt=image.alt;light.classList.add('is-open');light.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function closeLight(){light.classList.remove('is-open');light.setAttribute('aria-hidden','true');document.body.style.overflow=''}wrap.addEventListener('click',openLight);q('.hf-lightbox-close',light)?.addEventListener('click',closeLight);light.addEventListener('click',e=>{if(e.target===light)closeLight()});
 const assistant=$('bfAssistant'),chat=$('bfChat'),input=$('bfAssistantInput');function addMsg(role,text,loading=false){const d=document.createElement('div');d.className='hf-msg '+role+(loading?' is-loading':'');d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}function openAssistant(){assistant.classList.add('is-open');assistant.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>input.focus(),100)}function closeAssistant(){assistant.classList.remove('is-open');assistant.setAttribute('aria-hidden','true');document.body.style.overflow=''}$('bfAssistantOpen')?.addEventListener('click',openAssistant);$('bfAssistantOpenBottom')?.addEventListener('click',openAssistant);q('.hf-assistant-close',assistant)?.addEventListener('click',closeAssistant);assistant.addEventListener('click',e=>{if(e.target===assistant)closeAssistant()});$('bfManualAction').addEventListener('click',()=>{const k=$('bfManualSelect').value,d=data[k],res=$('bfManualResult');res.innerHTML=`<strong>${d.title}</strong><small>${d.lead}</small><div class="hf-manual-tags">${d.facts.slice(0,3).map(x=>`<span>${x[0]}: ${x[1]}</span>`).join('')}</div>`;res.classList.add('is-visible')});
 async function send(){const text=input.value.trim();if(text.length<3)return;input.value='';addMsg('user',text);history.push({role:'user',content:text});const load=addMsg('assistant','Consultando as informações Torcisão…',true);try{const r=await fetch(cfg.rest||'/wp-json/torcisao/v1/application-assistant',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({query:text,history:history.slice(-24)})});const j=await r.json();const ans=j.answer||j.error||'Não consegui concluir essa consulta agora. Fale com um especialista da Torcisão.';load.classList.remove('is-loading');load.textContent=ans;history.push({role:'assistant',content:ans});track('theo_query',{page:'barra_trefilada',product_key:j.product_key||''})}catch(e){load.classList.remove('is-loading');load.textContent='Não consegui concluir essa consulta agora. Fale com um especialista da Torcisão.';}}$('bfAssistantSend').addEventListener('click',send);input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send()}});
