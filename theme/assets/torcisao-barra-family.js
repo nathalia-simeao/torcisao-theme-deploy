@@ -46,6 +46,14 @@ function syncBarQuoteForm(formNode){
  setHubSpotField(form,'pagina_de_origem_do_lead',selected.origin);
 }
 const image=$('bfImage'),wrap=$('bfImageWrap'),lens=$('bfLens'),stage=q('.hf-stage',root);
+let lensImage=lens.querySelector('img');
+if(!lensImage){
+  lensImage=document.createElement('img');
+  lensImage.className='hf-lens-image';
+  lensImage.alt='';
+  lensImage.setAttribute('aria-hidden','true');
+  lens.appendChild(lensImage);
+}
 function rows(items){return items.map(([a,b])=>`<div class="hf-spec-row"><small>${a}</small><strong>${b}</strong></div>`).join('')}
 function ensureFinishPicker(){
  let picker=$('bfImageVariants');
@@ -83,7 +91,8 @@ function renderGallery(){
  image.src=src;
  image.removeAttribute('srcset');
  image.alt='Barra '+g.label+' '+(finish==='polida'?'polida':'trefilada')+' · ângulo '+(angle+1);
- lens.style.backgroundImage='url("'+src.replace(/"/g,'\\\"')+'")';
+ lens.style.backgroundImage='none';
+ lensImage.src=src;
  lens.classList.remove('is-visible');
  $('bfCaptionMeta').textContent=(finish==='polida'?'Polida':'Trefilada')+' · ângulo '+(angle+1);
 }
@@ -112,20 +121,24 @@ wrap.addEventListener('mousemove',e=>{
   const wrapY=e.clientY-wr.top;
   const imageX=e.clientX-ir.left;
   const imageY=e.clientY-ir.top;
-  const factor=2.6;
+  const factor=2.35;
   const lensW=lens.offsetWidth||150;
   const lensH=lens.offsetHeight||150;
 
-  /* Mantém a imagem estável enquanto a lupa está ativa para o mapa de pixels coincidir. */
+  /* A lente usa uma cópia real da imagem, evitando diferença entre background e object-fit. */
   wrap.style.setProperty('--tilt-x','0deg');
   wrap.style.setProperty('--tilt-y','0deg');
 
   lens.style.left=wrapX+'px';
   lens.style.top=wrapY+'px';
-  lens.style.backgroundImage=`url("${image.currentSrc||image.src}")`;
-  lens.style.backgroundRepeat='no-repeat';
-  lens.style.backgroundSize=`${ir.width*factor}px ${ir.height*factor}px`;
-  lens.style.backgroundPosition=`${lensW/2-imageX*factor}px ${lensH/2-imageY*factor}px`;
+
+  const src=image.currentSrc||image.src;
+  if(lensImage.src!==src)lensImage.src=src;
+  lensImage.style.width=(ir.width*factor)+'px';
+  lensImage.style.height=(ir.height*factor)+'px';
+  lensImage.style.left=(lensW/2-imageX*factor)+'px';
+  lensImage.style.top=(lensH/2-imageY*factor)+'px';
+
   lens.classList.add('is-visible');
 });
 wrap.addEventListener('mouseleave',hideLens);
