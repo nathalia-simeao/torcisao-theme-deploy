@@ -385,6 +385,47 @@ function torcisao_disable_public_siwg_on_barra(){
 }
 add_action('template_redirect','torcisao_disable_public_siwg_on_barra',1);
 
+/*
+ * Hreflang explícito para as famílias de produto multilíngues.
+ * As páginas usam templates customizados e hoje não recebem os alternates
+ * do Polylang no head, então declaramos o trio PT/EN/ES + x-default.
+ */
+function torcisao_product_hreflang_tags(){
+    if (!is_page()) return;
+
+    $sets = [
+        [1621,1629,1630,[
+            'pt-BR' => home_url('/arame-trefilado/'),
+            'en'    => home_url('/en/drawn-wire/'),
+            'es'    => home_url('/es/alambre-trefilado/'),
+        ]],
+        [1622,1631,1632,[
+            'pt-BR' => home_url('/barra-trefilada/'),
+            'en'    => home_url('/en/drawn-bar/'),
+            'es'    => home_url('/es/barra-de-acero-trefilada/'),
+        ]],
+        [1623,1627,1628,[
+            'pt-BR' => home_url('/haste-de-aterramento/'),
+            'en'    => home_url('/en/grounding-rod/'),
+            'es'    => home_url('/es/varilla-de-puesta-a-tierra/'),
+        ]],
+    ];
+
+    $current_id = (int) get_queried_object_id();
+
+    foreach ($sets as $set) {
+        [$pt,$en,$es,$urls] = $set;
+        if (!in_array($current_id,[$pt,$en,$es],true)) continue;
+
+        foreach ($urls as $lang => $url) {
+            echo '<link rel="alternate" hreflang="'.esc_attr($lang).'" href="'.esc_url($url).'">'."\n";
+        }
+        echo '<link rel="alternate" hreflang="x-default" href="'.esc_url($urls['pt-BR']).'">'."\n";
+        break;
+    }
+}
+add_action('wp_head','torcisao_product_hreflang_tags',3);
+
 function torcisao_asset($path){
     return esc_url(get_template_directory_uri().'/'.ltrim($path,'/'));
 }
