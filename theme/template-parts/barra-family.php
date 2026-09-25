@@ -55,7 +55,7 @@ if ($bf_ssr) {
 <main class="hf-page bf-page" id="barra-trefilada" data-initial-kind="<?php echo esc_attr($bf_initial); ?>">
   <section class="hf-top"><div class="hf-wrap">
     <span class="hf-eyebrow">Linha Torcisão Trefilados</span>
-    <h1 class="hf-title">Barra Trefilada</h1>
+    <h1 class="hf-title"><?php echo esc_html($bf_lang === 'en' ? 'Drawn Steel Bar' : ($bf_lang === 'es' ? 'Barra de Acero Trefilada' : 'Barra Trefilada de Aço')); ?></h1>
     <p class="hf-intro">Barra trefilada é um perfil de aço conformado a frio para obter maior controle dimensional e acabamento superficial. A Torcisão fornece opções BTC, MTC, ATC e aço ressulfurado 11SMn37 para aplicações industriais.</p>
     <div class="hf-family-tabs" style="--hf-tab-count:4" role="tablist" aria-label="Opções de Barra Trefilada">
       <button type="button" class="hf-family-tab" data-bf-kind="btc" role="tab">Baixo Carbono</button>
