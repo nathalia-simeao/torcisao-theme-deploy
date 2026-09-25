@@ -134,7 +134,7 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
     <div class="th-container">
       <div class="th-section-head th-section-head-split">
         <div><span class="th-kicker">Fornecimento B2B</span><h2>Fabricante de barras e arames trefilados com atendimento comercial direto</h2></div>
-        <p>A Torcisão atende compras industriais de barras e arames trefilados. A especificação do material orienta a análise de disponibilidade, prazo e condição comercial.</p>
+        <p>A Torcisão atende compras industriais de <a class="th-context-link" href="<?php echo esc_url(torcisao_page_url('barra')); ?>">barras trefiladas de aço</a> e arames trefilados. A especificação do material orienta a análise de disponibilidade, prazo e condição comercial.</p>
       </div>
       <div class="th-diff-grid">
         <article>
