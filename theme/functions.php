@@ -218,45 +218,17 @@ function torcisao_home_inline_css(){
     if (!torcisao_is_pt_home_request()) return;
 
     $theme = get_template_directory();
+    /* Somente o que participa da primeira viewport. */
     $files = [
         'style.css',
         'assets/torcisao-header-recovery.css',
         'assets/torcisao-header-scroll-blur.css',
-        'assets/torcisao-phase6.css',
-        'assets/torcisao-phase8.css',
         'assets/torcisao-global-polish.css',
         'assets/torcisao-mobile-menu-polish.css',
-        'assets/torcisao-commercial-handoff.css',
-        'assets/torcisao-footer-recovery.css',
-        'assets/torcisao-footer-group-v2.css',
-        'assets/torcisao-footer-polish-v3.css',
-        'assets/torcisao-products-explorer.css',
-        'assets/torcisao-explorer-image-calibration.css',
-        'assets/torcisao-explorer-layout-phase10.css',
-        'assets/torcisao-explorer-depth.css',
-        'assets/torcisao-mobile-product-tabs.css',
-        'assets/torcisao-quality-recovery.css',
-        'assets/torcisao-quality-polish.css',
-        'assets/torcisao-social-proof.css',
-        'assets/torcisao-motion-scrollbar-fix.css',
-        'assets/torcisao-about-history.css',
-        'assets/torcisao-about-stability.css',
-        'assets/torcisao-quote-safe-zone.css',
-        'assets/torcisao-timeline-mobile.css',
-        'assets/torcisao-home-mobile-final.css',
-        'assets/torcisao-mobile-blog-footer-v5.css',
-        'assets/torcisao-industrial-logo-balance-v6.css',
-        'assets/torcisao-global-alignment-v7.css',
-        'assets/torcisao-section-rhythm-v8.css',
-        'assets/torcisao-btc-gallery-v20.css',
-        'assets/torcisao-arame-gallery-v22.css',
-        'assets/torcisao-haste-gallery-v23.css',
-        'assets/torcisao-closeout-v25.css',
-        'assets/torcisao-footer-segments-v39.css',
-        'assets/torcisao-calculator-input-polish-v40.css',
         'assets/torcisao-home.css',
         'assets/torcisao-home-phase5.css',
         'assets/torcisao-home-phase7.css',
+        'assets/torcisao-home-mobile-final.css',
     ];
 
     $css = '';
@@ -277,14 +249,32 @@ add_action('wp_head','torcisao_home_inline_css',99);
 function torcisao_suppress_pt_home_styles($html,$handle,$href,$media){
     if (!torcisao_is_pt_home_request()) return $html;
 
-    $handles = [
+    /* Já estão no CSS crítico inline. */
+    $critical = [
         'torcisao-style',
         'torcisao-header',
         'torcisao-header-scroll-blur',
-        'torcisao-phase6',
-        'torcisao-phase8',
         'torcisao-global-polish',
         'torcisao-mobile-menu-polish',
+        'torcisao-home-mobile-final',
+    ];
+
+    /* Frameworks que a Home custom não utiliza. */
+    $drop = [
+        'wp-block-library',
+        'elementor-frontend',
+        'base-desktop',
+        'base-mobile',
+        'elementor-gf-roboto',
+        'elementor-gf-robotoslab',
+    ];
+
+    if (in_array($handle,$critical,true) || in_array($handle,$drop,true)) return '';
+
+    /* CSS abaixo da dobra baixa imediatamente, mas não segura o primeiro paint. */
+    $async = [
+        'torcisao-phase6',
+        'torcisao-phase8',
         'torcisao-commercial-handoff',
         'torcisao-footer-recovery',
         'torcisao-footer-group-v2',
@@ -302,7 +292,6 @@ function torcisao_suppress_pt_home_styles($html,$handle,$href,$media){
         'torcisao-about-stability',
         'torcisao-quote-safe-zone',
         'torcisao-timeline-mobile',
-        'torcisao-home-mobile-final',
         'torcisao-mobile-blog-footer-v5',
         'torcisao-industrial-logo-balance-v6',
         'torcisao-global-alignment-v7',
@@ -313,14 +302,15 @@ function torcisao_suppress_pt_home_styles($html,$handle,$href,$media){
         'torcisao-closeout-v25',
         'torcisao-footer-segments-v39',
         'torcisao-calculator-input-polish-v40',
-        'wp-block-library',
-        'elementor-frontend',
-        'base-desktop',
-        'base-mobile',
-        'elementor-gf-roboto',
-        'elementor-gf-robotoslab',
     ];
-    return in_array($handle,$handles,true) ? '' : $html;
+
+    if (in_array($handle,$async,true)) {
+        $safe_href = esc_url($href);
+        return '<link rel="preload" as="style" href="'.$safe_href.'" onload="this.onload=null;this.rel=\'stylesheet\'">'
+            .'<noscript><link rel="stylesheet" href="'.$safe_href.'"></noscript>';
+    }
+
+    return $html;
 }
 add_filter('style_loader_tag','torcisao_suppress_pt_home_styles',PHP_INT_MAX,4);
 
