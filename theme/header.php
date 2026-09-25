@@ -76,7 +76,7 @@
 <div class="tor-modal-backdrop" id="torLanguageModal" aria-hidden="true">
   <section class="tor-modal tor-language-modal" role="dialog" aria-modal="true" aria-labelledby="torLanguageTitle">
     <div class="tor-modal-head tor-language-head">
-      <div><small>IDIOMA E TRADUÇÃO</small><h2 id="torLanguageTitle">Escolha como deseja navegar</h2></div>
+      <div><small>IDIOMA E TRADUÇÃO</small><div class="tor-modal-title" id="torLanguageTitle">Escolha como deseja navegar</div></div>
       <button class="tor-close" type="button" data-language-close aria-label="Fechar">×</button>
     </div>
     <div class="tor-modal-body tor-language-body">
@@ -101,7 +101,7 @@
 <div class="torcisao-calc-overlay" id="torcisaoCalcOverlay" aria-hidden="true">
   <section class="torcisao-calc-modal" role="dialog" aria-modal="true" aria-labelledby="torcisaoCalcTitle">
     <div class="torcisao-calc-modal-head">
-      <div><small class="torcisao-calc-eyebrow">CALCULADORA TORCISÃO</small><h2 id="torcisaoCalcTitle">Calculadora de arame trefilado</h2><div class="torcisao-calc-profile-badge" id="calcProfileBadge">PERFIL REDONDO</div><p id="calcMethodDescription">Cálculo teórico por bitola e metragem para arames Torcisão com seção circular.</p></div>
+      <div><small class="torcisao-calc-eyebrow">CALCULADORA TORCISÃO</small><div class="torcisao-calc-title" id="torcisaoCalcTitle">Calculadora de arame trefilado</div><div class="torcisao-calc-profile-badge" id="calcProfileBadge">PERFIL REDONDO</div><p id="calcMethodDescription">Cálculo teórico por bitola e metragem para arames Torcisão com seção circular.</p></div>
       <button type="button" class="torcisao-calc-close tor-standard-close" id="torcisaoCalcClose" aria-label="Fechar">×</button>
     </div>
     <div class="torcisao-calc-body">
