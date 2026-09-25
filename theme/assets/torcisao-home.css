@@ -17,3 +17,24 @@
 @media(max-width:380px){.th-container{margin-left:11px;margin-right:11px}.th-product-select{flex-basis:82%}.th-hero-actions{display:grid}.th-pill{width:100%}}
 
 .th-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+
+/* Acessibilidade: contraste AA para textos laranja pequenos em superfícies claras. */
+html:not([data-bs-theme="dark"]) body.home .th-home .th-kicker,
+html:not([data-bs-theme="dark"]) body.home .th-home .th-theo-mini small,
+html:not([data-bs-theme="dark"]) body.home .th-home .th-blog-card small,
+html:not([data-bs-theme="dark"]) body.home .th-home .th-text-link span,
+html:not([data-bs-theme="dark"]) body.home .th-home .tpe-head .th-kicker,
+html:not([data-bs-theme="dark"]) body.home .th-home .tpe-options-head small,
+html:not([data-bs-theme="dark"]) body.home .th-home .tpe-caption small,
+html:not([data-bs-theme="dark"]) body.home .th-home .tpe-info-kicker,
+html:not([data-bs-theme="dark"]) body.home .th-home .tpe-line-tab.is-active,
+html:not([data-bs-theme="dark"]) body.home .th-home .tpe-btn-secondary{
+  color:#b44f0b!important;
+}
+html:not([data-bs-theme="dark"]) body.home .tor-modal-head small,
+html:not([data-bs-theme="dark"]) body.home .tor-browser-translate-status,
+html:not([data-bs-theme="dark"]) body.home .torcisao-calc-eyebrow,
+html:not([data-bs-theme="dark"]) body.home .torcisao-calc-profile-badge{
+  color:#b44f0b!important;
+}
