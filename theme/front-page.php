@@ -33,6 +33,7 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
 
   <section class="th-section th-tools" id="ferramentas-tecnicas">
     <div class="th-container">
+      <h2 class="th-sr-only">Ferramentas técnicas</h2>
       <div class="th-tools-label"><span class="th-kicker">Ferramentas Técnicas</span></div>
       <div class="th-tools-grid">
         <article class="th-tool-card">
@@ -55,6 +56,7 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
 
   <section class="th-section th-products" id="produtos">
     <div class="th-container">
+      <h2 class="th-sr-only">Explorador de produtos Torcisão</h2>
       <div class="tpe-head"><span class="th-kicker">Explorador de Produtos</span></div>
       <div class="tpe-line-menu" role="tablist" aria-label="Selecione a linha Torcisão">
         <button type="button" class="tpe-line-tab is-active" data-tpe-line="arame" role="tab" aria-selected="true">Arame</button>
