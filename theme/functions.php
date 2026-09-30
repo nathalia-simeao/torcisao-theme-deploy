@@ -613,100 +613,213 @@ add_filter('wpseo_schema_organization','torcisao_enrich_organization_schema',11,
 
 
 
-/* Product JSON-LD das páginas principais de produto em PT-BR.
- * Estrutura sem Offer: a Torcisão trabalha com cotação consultiva e não publica
- * preço, estoque ou SKU comercial no site.
+/* ProductGroup JSON-LD das três famílias principais em PT/EN/ES.
+ * Sem Offer, preço, disponibilidade ou SKU: a Torcisão trabalha com cotação
+ * consultiva e esses dados não são publicados como condição fixa no site.
  */
 function torcisao_output_product_schema(){
-    if (!is_page([1621,1622,1623])) return;
-    if (function_exists('torcisao_request_language') && torcisao_request_language() !== 'pt') return;
-
-    $products = [
-        1623 => [
-            'name' => 'Haste de Aterramento',
-            'description' => 'Fabricante de hastes de aterramento de baixa e alta camada, com opções de 20 e 254 mícrons, medidas, conectores e suporte técnico para cotação.',
-            'image' => [
-                get_template_directory_uri().'/assets/hastebaixa.webp',
-                get_template_directory_uri().'/assets/hastealta.png',
-            ],
-            'category' => 'Hastes de aterramento',
-            'material' => ['Aço-carbono SAE 1010/1020','Cobre'],
-            'additionalProperty' => [
-                ['@type'=>'PropertyValue','name'=>'Camadas disponíveis','value'=>'20 µm e 254 µm'],
-                ['@type'=>'PropertyValue','name'=>'Núcleo','value'=>'Aço-carbono SAE 1010/1020'],
-                ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
-                ['@type'=>'PropertyValue','name'=>'Faixa de diâmetros','value'=>'9,00 mm a 17,30 mm, conforme camada e especificação'],
-                ['@type'=>'PropertyValue','name'=>'Comprimentos','value'=>'Até 3.000 mm, conforme combinação e especificação'],
-                ['@type'=>'PropertyValue','name'=>'Alta camada','value'=>'254 µm de cobre eletrolítico, conforme ABNT NBR 13571'],
-            ],
-        ],
-        1622 => [
-            'name' => 'Barra Trefilada de Aço',
-            'description' => 'Conheça barras trefiladas BTC, MTC, ATC e aço ressulfurado 11SMn37 da Torcisão, com precisão dimensional, acabamento e suporte técnico para cotação.',
-            'image' => [
-                get_template_directory_uri().'/assets/barra1.webp',
-                get_template_directory_uri().'/assets/barra2.webp',
-                get_template_directory_uri().'/assets/barra3.jpg',
-                get_template_directory_uri().'/assets/barra4.jpg',
-            ],
-            'category' => 'Barras trefiladas de aço',
-            'material' => ['Aço carbono','Aço ressulfurado 11SMn37'],
-            'additionalProperty' => [
-                ['@type'=>'PropertyValue','name'=>'Classes de aço','value'=>'BTC 1004 a 1020; MTC 1035 a 1045; ATC 1050; aço ressulfurado 11SMn37'],
-                ['@type'=>'PropertyValue','name'=>'Faixa de bitolas','value'=>'2,00 mm a 15,88 mm, conforme classe de aço'],
-                ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
-                ['@type'=>'PropertyValue','name'=>'Acabamento','value'=>'Trefilado ou trefilado polido, conforme especificação'],
-                ['@type'=>'PropertyValue','name'=>'Tolerância','value'=>'Conforme classe, aplicação e especificação comercial'],
-                ['@type'=>'PropertyValue','name'=>'Comprimento','value'=>'Conforme especificação do pedido'],
-            ],
-        ],
-        1621 => [
-            'name' => 'Arame Trefilado de Aço',
-            'description' => 'Conheça arames trefilados BTC, MTC e ATC da Torcisão, em rolos ou spiders, com opções de bitola e suporte técnico para aplicações industriais e cotação.',
-            'image' => [
-                'https://torcisao.com.br/wp-content/uploads/2026/09/arametrefiladorolo.png',
-            ],
-            'category' => 'Arames trefilados de aço',
-            'material' => ['Aço carbono'],
-            'additionalProperty' => [
-                ['@type'=>'PropertyValue','name'=>'Classes de aço','value'=>'BTC 1004 a 1020; MTC 1035 a 1050; ATC 1060 a 1090'],
-                ['@type'=>'PropertyValue','name'=>'Faixa de bitolas','value'=>'2,00 mm a 15,88 mm, conforme classe de aço'],
-                ['@type'=>'PropertyValue','name'=>'Perfil','value'=>'Redondo'],
-                ['@type'=>'PropertyValue','name'=>'Forma de fornecimento','value'=>'Rolos ou spiders'],
-                ['@type'=>'PropertyValue','name'=>'Acabamento','value'=>'Trefilado'],
-                ['@type'=>'PropertyValue','name'=>'Tolerância','value'=>'Sob consulta conforme especificação do pedido'],
-            ],
-        ],
-    ];
-
     $page_id = get_queried_object_id();
-    if (empty($products[$page_id])) return;
+    if (!in_array($page_id, [1621,1629,1630,1622,1631,1632,1623,1627,1628], true)) return;
 
     $url = get_permalink($page_id);
     if (!$url) return;
 
-    $data = $products[$page_id];
+    $brand = [
+        '@type' => 'Brand',
+        'name' => 'Torcisão Trefilados',
+    ];
+    $manufacturer = [
+        '@id' => 'https://torcisao.com.br/#organization',
+    ];
+
+    $groups = [
+        /* Hastes de aterramento */
+        1623 => [
+            'name' => 'Haste de Aterramento',
+            'description' => 'Fabricante de hastes de aterramento de baixa e alta camada, com opções de 20 e 254 mícrons, medidas, conectores e suporte técnico para cotação.',
+            'category' => 'Hastes de aterramento',
+            'image' => [get_template_directory_uri().'/assets/hastebaixa.webp',get_template_directory_uri().'/assets/hastealta.png'],
+            'variesBy' => ['espessura da camada de cobre'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Camadas disponíveis','value'=>'Baixa camada de até 20 µm e alta camada de 254 µm'],
+                ['@type'=>'PropertyValue','name'=>'Aplicação','value'=>'Sistemas de aterramento e SPDA, conforme especificação do projeto'],
+            ],
+            'variants' => [
+                ['slug'=>'baixa-camada','name'=>'Haste de Aterramento - Baixa Camada','description'=>'Haste de aterramento com camada de cobre de até 20 µm.','material'=>['Aço','Cobre'],'property'=>['name'=>'Camada de cobre','value'=>'até 20 µm']],
+                ['slug'=>'alta-camada','name'=>'Haste de Aterramento - Alta Camada','description'=>'Haste de aterramento com camada de cobre de 254 µm.','material'=>['Aço','Cobre'],'property'=>['name'=>'Camada de cobre','value'=>'254 µm']],
+            ],
+        ],
+        1627 => [
+            'name' => 'Grounding Rod',
+            'description' => 'Explore Torcisão grounding rods with low and high copper coating options, technical specifications and support for your project.',
+            'category' => 'Grounding rods',
+            'image' => [get_template_directory_uri().'/assets/hastebaixa.webp',get_template_directory_uri().'/assets/hastealta.png'],
+            'variesBy' => ['copper coating thickness'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Available coatings','value'=>'Low coating up to 20 µm and high coating of 254 µm'],
+                ['@type'=>'PropertyValue','name'=>'Application','value'=>'Grounding and lightning protection systems, according to project specification'],
+            ],
+            'variants' => [
+                ['slug'=>'low-coating','name'=>'Grounding Rod - Low Copper Coating','description'=>'Grounding rod with copper coating up to 20 µm.','material'=>['Steel','Copper'],'property'=>['name'=>'Copper coating','value'=>'up to 20 µm']],
+                ['slug'=>'high-coating','name'=>'Grounding Rod - High Copper Coating','description'=>'Grounding rod with 254 µm copper coating.','material'=>['Steel','Copper'],'property'=>['name'=>'Copper coating','value'=>'254 µm']],
+            ],
+        ],
+        1628 => [
+            'name' => 'Varilla de Puesta a Tierra',
+            'description' => 'Fabricante de varillas de puesta a tierra de baja y alta capa, con opciones de 20 y 254 micras, medidas, conectores y soporte técnico para cotización.',
+            'category' => 'Varillas de puesta a tierra',
+            'image' => [get_template_directory_uri().'/assets/hastebaixa.webp',get_template_directory_uri().'/assets/hastealta.png'],
+            'variesBy' => ['espesor de la capa de cobre'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Capas disponibles','value'=>'Baja capa de hasta 20 µm y alta capa de 254 µm'],
+                ['@type'=>'PropertyValue','name'=>'Aplicación','value'=>'Sistemas de puesta a tierra y SPDA, según la especificación del proyecto'],
+            ],
+            'variants' => [
+                ['slug'=>'baja-capa','name'=>'Varilla de Puesta a Tierra - Baja Capa','description'=>'Varilla de puesta a tierra con capa de cobre de hasta 20 µm.','material'=>['Acero','Cobre'],'property'=>['name'=>'Capa de cobre','value'=>'hasta 20 µm']],
+                ['slug'=>'alta-capa','name'=>'Varilla de Puesta a Tierra - Alta Capa','description'=>'Varilla de puesta a tierra con capa de cobre de 254 µm.','material'=>['Acero','Cobre'],'property'=>['name'=>'Capa de cobre','value'=>'254 µm']],
+            ],
+        ],
+
+        /* Barras trefiladas */
+        1622 => [
+            'name' => 'Barra Trefilada de Aço',
+            'description' => 'Conheça barras trefiladas BTC, MTC, ATC e aço ressulfurado 11SMn37 da Torcisão, com precisão dimensional, acabamento e suporte técnico para cotação.',
+            'category' => 'Barras trefiladas de aço',
+            'image' => [get_template_directory_uri().'/assets/barra1.webp',get_template_directory_uri().'/assets/barra2.webp',get_template_directory_uri().'/assets/barra3.jpg',get_template_directory_uri().'/assets/barra4.jpg'],
+            'variesBy' => ['https://schema.org/material'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Classes disponíveis','value'=>'BTC, MTC, ATC e aço ressulfurado 11SMn37'],
+                ['@type'=>'PropertyValue','name'=>'Acabamento','value'=>'Trefilado ou trefilado polido, conforme especificação'],
+            ],
+            'variants' => [
+                ['slug'=>'btc','name'=>'Barra Trefilada BTC - Baixo Carbono','description'=>'Barra trefilada de aço de baixo carbono.','material'=>'Aço carbono BTC','property'=>['name'=>'Classe de aço','value'=>'BTC - baixo carbono']],
+                ['slug'=>'mtc','name'=>'Barra Trefilada MTC - Médio Carbono','description'=>'Barra trefilada de aço de médio carbono.','material'=>'Aço carbono MTC','property'=>['name'=>'Classe de aço','value'=>'MTC - médio carbono']],
+                ['slug'=>'atc','name'=>'Barra Trefilada ATC - Alto Carbono','description'=>'Barra trefilada de aço de alto carbono.','material'=>'Aço carbono ATC','property'=>['name'=>'Classe de aço','value'=>'ATC - alto carbono']],
+                ['slug'=>'11smn37','name'=>'Barra Trefilada em Aço 11SMn37','description'=>'Barra trefilada em aço ressulfurado 11SMn37 para aplicações de usinagem.','material'=>'Aço ressulfurado 11SMn37','property'=>['name'=>'Classe de aço','value'=>'11SMn37']],
+            ],
+        ],
+        1631 => [
+            'name' => 'Drawn Steel Bar',
+            'description' => 'Explore Torcisão drawn bar solutions in low, medium and high carbon and resulfurized steel for demanding industrial applications.',
+            'category' => 'Drawn steel bars',
+            'image' => [get_template_directory_uri().'/assets/barra1.webp',get_template_directory_uri().'/assets/barra2.webp',get_template_directory_uri().'/assets/barra3.jpg',get_template_directory_uri().'/assets/barra4.jpg'],
+            'variesBy' => ['https://schema.org/material'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Available classes','value'=>'BTC, MTC, ATC and 11SMn37 resulfurized steel'],
+                ['@type'=>'PropertyValue','name'=>'Finish','value'=>'Drawn or drawn and polished, according to specification'],
+            ],
+            'variants' => [
+                ['slug'=>'btc','name'=>'BTC Drawn Steel Bar - Low Carbon','description'=>'Low-carbon drawn steel bar.','material'=>'BTC low-carbon steel','property'=>['name'=>'Steel class','value'=>'BTC - low carbon']],
+                ['slug'=>'mtc','name'=>'MTC Drawn Steel Bar - Medium Carbon','description'=>'Medium-carbon drawn steel bar.','material'=>'MTC medium-carbon steel','property'=>['name'=>'Steel class','value'=>'MTC - medium carbon']],
+                ['slug'=>'atc','name'=>'ATC Drawn Steel Bar - High Carbon','description'=>'High-carbon drawn steel bar.','material'=>'ATC high-carbon steel','property'=>['name'=>'Steel class','value'=>'ATC - high carbon']],
+                ['slug'=>'11smn37','name'=>'11SMn37 Drawn Steel Bar','description'=>'Drawn bar in 11SMn37 resulfurized steel for machining applications.','material'=>'11SMn37 resulfurized steel','property'=>['name'=>'Steel class','value'=>'11SMn37']],
+            ],
+        ],
+        1632 => [
+            'name' => 'Barra de Acero Trefilada',
+            'description' => 'Conozca barras trefiladas BTC, MTC, ATC y acero resulfurado 11SMn37 de Torcisão, con precisión dimensional, acabado y soporte técnico para cotización.',
+            'category' => 'Barras de acero trefiladas',
+            'image' => [get_template_directory_uri().'/assets/barra1.webp',get_template_directory_uri().'/assets/barra2.webp',get_template_directory_uri().'/assets/barra3.jpg',get_template_directory_uri().'/assets/barra4.jpg'],
+            'variesBy' => ['https://schema.org/material'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Clases disponibles','value'=>'BTC, MTC, ATC y acero resulfurado 11SMn37'],
+                ['@type'=>'PropertyValue','name'=>'Acabado','value'=>'Trefilado o trefilado y pulido, según especificación'],
+            ],
+            'variants' => [
+                ['slug'=>'btc','name'=>'Barra Trefilada BTC - Bajo Carbono','description'=>'Barra de acero trefilada de bajo carbono.','material'=>'Acero al carbono BTC','property'=>['name'=>'Clase de acero','value'=>'BTC - bajo carbono']],
+                ['slug'=>'mtc','name'=>'Barra Trefilada MTC - Medio Carbono','description'=>'Barra de acero trefilada de medio carbono.','material'=>'Acero al carbono MTC','property'=>['name'=>'Clase de acero','value'=>'MTC - medio carbono']],
+                ['slug'=>'atc','name'=>'Barra Trefilada ATC - Alto Carbono','description'=>'Barra de acero trefilada de alto carbono.','material'=>'Acero al carbono ATC','property'=>['name'=>'Clase de acero','value'=>'ATC - alto carbono']],
+                ['slug'=>'11smn37','name'=>'Barra Trefilada en Acero 11SMn37','description'=>'Barra trefilada en acero resulfurado 11SMn37 para aplicaciones de mecanizado.','material'=>'Acero resulfurado 11SMn37','property'=>['name'=>'Clase de acero','value'=>'11SMn37']],
+            ],
+        ],
+
+        /* Arames trefilados */
+        1621 => [
+            'name' => 'Arame Trefilado de Aço',
+            'description' => 'Conheça arames trefilados BTC, MTC e ATC da Torcisão, em rolos ou spiders, com opções de bitola e suporte técnico para aplicações industriais e cotação.',
+            'category' => 'Arames trefilados de aço',
+            'image' => ['https://torcisao.com.br/wp-content/uploads/2026/09/arametrefiladorolo.png'],
+            'variesBy' => ['https://schema.org/material'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Classes disponíveis','value'=>'BTC 1004 a 1020; MTC 1035 a 1050; ATC 1060 a 1090'],
+                ['@type'=>'PropertyValue','name'=>'Forma de fornecimento','value'=>'Rolos ou spiders'],
+            ],
+            'variants' => [
+                ['slug'=>'btc','name'=>'Arame Trefilado BTC - Baixo Carbono','description'=>'Arame trefilado BTC em aço de baixo carbono, faixa SAE 1004 a 1020.','material'=>'Aço carbono BTC','property'=>['name'=>'Faixa SAE','value'=>'1004 a 1020']],
+                ['slug'=>'mtc','name'=>'Arame Trefilado MTC - Médio Carbono','description'=>'Arame trefilado MTC em aço de médio carbono, faixa SAE 1035 a 1050.','material'=>'Aço carbono MTC','property'=>['name'=>'Faixa SAE','value'=>'1035 a 1050']],
+                ['slug'=>'atc','name'=>'Arame Trefilado ATC - Alto Carbono','description'=>'Arame trefilado ATC em aço de alto carbono, faixa SAE 1060 a 1090.','material'=>'Aço carbono ATC','property'=>['name'=>'Faixa SAE','value'=>'1060 a 1090']],
+            ],
+        ],
+        1629 => [
+            'name' => 'Drawn Steel Wire',
+            'description' => 'Explore Torcisão drawn wire solutions in low, medium and high carbon steel, with technical specifications for industrial applications.',
+            'category' => 'Drawn steel wire',
+            'image' => ['https://torcisao.com.br/wp-content/uploads/2026/09/arametrefiladorolo.png'],
+            'variesBy' => ['https://schema.org/material'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Available classes','value'=>'BTC 1004 to 1020; MTC 1035 to 1050; ATC 1060 to 1090'],
+                ['@type'=>'PropertyValue','name'=>'Supply form','value'=>'Coils or spiders'],
+            ],
+            'variants' => [
+                ['slug'=>'btc','name'=>'BTC Drawn Steel Wire - Low Carbon','description'=>'BTC low-carbon drawn steel wire, SAE range 1004 to 1020.','material'=>'BTC low-carbon steel','property'=>['name'=>'SAE range','value'=>'1004 to 1020']],
+                ['slug'=>'mtc','name'=>'MTC Drawn Steel Wire - Medium Carbon','description'=>'MTC medium-carbon drawn steel wire, SAE range 1035 to 1050.','material'=>'MTC medium-carbon steel','property'=>['name'=>'SAE range','value'=>'1035 to 1050']],
+                ['slug'=>'atc','name'=>'ATC Drawn Steel Wire - High Carbon','description'=>'ATC high-carbon drawn steel wire, SAE range 1060 to 1090.','material'=>'ATC high-carbon steel','property'=>['name'=>'SAE range','value'=>'1060 to 1090']],
+            ],
+        ],
+        1630 => [
+            'name' => 'Alambre Trefilado de Acero',
+            'description' => 'Conozca alambres trefilados BTC, MTC y ATC de Torcisão, en rollos o spiders, con opciones de diámetro y soporte técnico para aplicaciones industriales.',
+            'category' => 'Alambres trefilados de acero',
+            'image' => ['https://torcisao.com.br/wp-content/uploads/2026/09/arametrefiladorolo.png'],
+            'variesBy' => ['https://schema.org/material'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>'Clases disponibles','value'=>'BTC 1004 a 1020; MTC 1035 a 1050; ATC 1060 a 1090'],
+                ['@type'=>'PropertyValue','name'=>'Forma de suministro','value'=>'Rollos o spiders'],
+            ],
+            'variants' => [
+                ['slug'=>'btc','name'=>'Alambre Trefilado BTC - Bajo Carbono','description'=>'Alambre trefilado BTC en acero de bajo carbono, rango SAE 1004 a 1020.','material'=>'Acero al carbono BTC','property'=>['name'=>'Rango SAE','value'=>'1004 a 1020']],
+                ['slug'=>'mtc','name'=>'Alambre Trefilado MTC - Medio Carbono','description'=>'Alambre trefilado MTC en acero de medio carbono, rango SAE 1035 a 1050.','material'=>'Acero al carbono MTC','property'=>['name'=>'Rango SAE','value'=>'1035 a 1050']],
+                ['slug'=>'atc','name'=>'Alambre Trefilado ATC - Alto Carbono','description'=>'Alambre trefilado ATC en acero de alto carbono, rango SAE 1060 a 1090.','material'=>'Acero al carbono ATC','property'=>['name'=>'Rango SAE','value'=>'1060 a 1090']],
+            ],
+        ],
+    ];
+
+    if (empty($groups[$page_id])) return;
+    $data = $groups[$page_id];
+
+    $variants = [];
+    foreach ($data['variants'] as $variant) {
+        $variants[] = [
+            '@type' => 'Product',
+            '@id' => $url.'#variant-'.$variant['slug'],
+            'name' => $variant['name'],
+            'description' => $variant['description'],
+            'url' => $url,
+            'brand' => $brand,
+            'manufacturer' => $manufacturer,
+            'material' => $variant['material'],
+            'isVariantOf' => ['@id' => $url.'#product-group'],
+            'additionalProperty' => [
+                ['@type'=>'PropertyValue','name'=>$variant['property']['name'],'value'=>$variant['property']['value']],
+            ],
+        ];
+    }
+
     $schema = [
         '@context' => 'https://schema.org',
-        '@type' => 'Product',
-        '@id' => $url.'#product',
+        '@type' => 'ProductGroup',
+        '@id' => $url.'#product-group',
         'url' => $url,
         'name' => $data['name'],
         'description' => $data['description'],
         'image' => $data['image'],
         'category' => $data['category'],
-        'material' => $data['material'],
-        'brand' => [
-            '@type' => 'Brand',
-            'name' => 'Torcisão Trefilados',
-        ],
-        'manufacturer' => [
-            '@id' => 'https://torcisao.com.br/#organization',
-        ],
-        'mainEntityOfPage' => [
-            '@id' => $url,
-        ],
+        'brand' => $brand,
+        'manufacturer' => $manufacturer,
+        'mainEntityOfPage' => ['@id' => $url],
+        'variesBy' => $data['variesBy'],
         'additionalProperty' => $data['additionalProperty'],
+        'hasVariant' => $variants,
     ];
 
     echo "\n<script type=\"application/ld+json\" id=\"torcisao-product-schema\">";
