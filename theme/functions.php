@@ -371,9 +371,47 @@ function torcisao_disable_public_siwg_on_barra(){
 }
 add_action('template_redirect','torcisao_disable_public_siwg_on_barra',1);
 
-/* Hreflang: deixado exclusivamente a cargo do Polylang.
- * Evita conjuntos duplicados/conflictantes nas páginas PT/EN/ES.
+/* Hreflang PT/EN/ES: deixado exclusivamente a cargo do Polylang.
+ * Evita conjuntos duplicados/conflictantes nas páginas traduzidas.
+ *
+ * x-default: usamos a versão PT como fallback apenas nas famílias principais
+ * de produto e nas três versões da Home. O hreflang espanhol permanece "es"
+ * (genérico), pois o conteúdo não é exclusivo da Espanha.
  */
+function torcisao_output_x_default_hreflang(){
+    if (!is_page()) return;
+
+    $page_id = get_queried_object_id();
+    $fallback_map = [
+        /* Home PT / EN / ES */
+        762  => 762,
+        1223 => 762,
+        1224 => 762,
+
+        /* Arame PT / EN / ES */
+        1621 => 1621,
+        1629 => 1621,
+        1630 => 1621,
+
+        /* Barra PT / EN / ES */
+        1622 => 1622,
+        1631 => 1622,
+        1632 => 1622,
+
+        /* Haste PT / EN / ES */
+        1623 => 1623,
+        1627 => 1623,
+        1628 => 1623,
+    ];
+
+    if (!isset($fallback_map[$page_id])) return;
+
+    $fallback_url = get_permalink($fallback_map[$page_id]);
+    if (!$fallback_url) return;
+
+    echo '<link rel="alternate" href="'.esc_url($fallback_url).'" hreflang="x-default" />'."\n";
+}
+add_action('wp_head','torcisao_output_x_default_hreflang',4);
 
 function torcisao_asset($path){
     return esc_url(get_template_directory_uri().'/'.ltrim($path,'/'));
