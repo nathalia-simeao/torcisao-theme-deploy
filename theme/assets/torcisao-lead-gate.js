@@ -54,7 +54,7 @@ const T={
     whatsapp:'Falar com o comercial no WhatsApp',
     whatsappHint:'O histórico desta consulta vai junto na mensagem.',
     waIntro:'Olá! Eu estava usando uma ferramenta no site da Torcisão e gostaria de falar com o comercial.',
-    waOrigin:'Origem',waOutro:'Gostaria de continuar este atendimento pelo WhatsApp.',
+    waOrigin:'Origem',waOutro:'Gostaria de continuar este atendimento pelo WhatsApp.',waHistory:'O que eu consultei no site:',
     locked:'Liberado com seu contato'
   },
   en:{
@@ -78,7 +78,7 @@ const T={
     whatsapp:'Talk to sales on WhatsApp',
     whatsappHint:'This lookup history goes with the message.',
     waIntro:'Hello! I was using a tool on the Torcisão website and would like to talk to sales.',
-    waOrigin:'Source',waOutro:'I would like to continue on WhatsApp.',
+    waOrigin:'Source',waOutro:'I would like to continue on WhatsApp.',waHistory:'What I looked up on the site:',
     locked:'Unlocked with your contact'
   },
   es:{
@@ -102,7 +102,7 @@ const T={
     whatsapp:'Hablar con el comercial por WhatsApp',
     whatsappHint:'El historial de esta consulta va en el mensaje.',
     waIntro:'¡Hola! Estaba usando una herramienta en el sitio de Torcisão y me gustaría hablar con el comercial.',
-    waOrigin:'Origen',waOutro:'Me gustaría continuar por WhatsApp.',
+    waOrigin:'Origen',waOutro:'Me gustaría continuar por WhatsApp.',waHistory:'Lo que consulté en el sitio:',
     locked:'Liberado con tu contacto'
   }
 };
@@ -146,18 +146,84 @@ function syncHistory(opts){
   try{fetch(HISTORY_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',keepalive:true,body:payload}).catch(()=>{})}catch(e){}
 }
 
+/* ---------- memória do que o cliente fez nas ferramentas ----------
+ * Guarda o último uso de cada ferramenta (cálculo, tolerância, conversa
+ * do Theo) por 3 horas, mesmo trocando de página. Esse histórico vai em
+ * QUALQUER botão de WhatsApp do comercial e no lead do HubSpot. */
+const CTX_KEY='torcisao_tool_history_v1';
+const CTX_TTL=3*60*60*1000;
+let ctxMem={};
+function readCtx(){
+  let all=ctxMem;
+  try{all=JSON.parse(localStorage.getItem(CTX_KEY)||'{}')||{}}catch(e){}
+  const now=Date.now();Object.keys(all).forEach(k=>{if(!all[k]||now-all[k].at>CTX_TTL)delete all[k];});
+  return all;
+}
+function remember(opts){
+  if(!opts)return;const lines=cleanLines(opts.lines);if(!lines.length)return;
+  const all=readCtx();all[opts.source||'ferramenta']={label:opts.label||'Ferramenta do site',lines,at:Date.now()};
+  ctxMem=all;try{localStorage.setItem(CTX_KEY,JSON.stringify(all))}catch(e){}
+}
+function recentContexts(exceptSource){
+  return Object.entries(readCtx()).filter(([k])=>k!==exceptSource).sort((a,b)=>b[1].at-a[1].at).slice(0,3)
+    .map(([k,v])=>({source:k,label:v.label,lines:v.lines}));
+}
+const shortLines=c=>/assistente|theo/i.test(c.source+c.label)?c.lines.slice(-8):c.lines;
+function historyBlock(ctxs){
+  const out=[t('waHistory')];
+  ctxs.forEach(c=>{out.push('',`• ${c.label}`,...shortLines(c));});
+  return out.join('\n');
+}
+function syncAllHistory(){recentContexts().forEach(syncHistory);}
+
 /* ---------- WhatsApp com histórico ---------- */
 function openWhatsApp(opts){
   opts=opts||{};
+  remember(opts);
   const lines=cleanLines(opts.lines);
   const msg=[t('waIntro'),'',`${t('waOrigin')}: ${opts.label||'Site'}`];
   const lead=getLead();if(lead&&lead.name)msg.push(`${t('name')}: ${lead.name}`);
-  if(lines.length)msg.push('',...lines);
+  if(lines.length)msg.push('',...shortLines({source:opts.source||'',label:opts.label||'',lines}));
+  const others=recentContexts(opts.source);
+  if(others.length)msg.push('',historyBlock(others));
   msg.push('',t('waOutro'));
-  syncHistory(opts);
-  track('whatsapp_click',{origin:opts.source||'ferramenta',context_preserved:lines.length?'yes':'no',lead_identified:lead?'yes':'no'});
-  window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg.join('\n')),'_blank','noopener');
+  syncHistory(opts);others.forEach(syncHistory);
+  track('whatsapp_click',{origin:opts.source||'ferramenta',context_preserved:(lines.length||others.length)?'yes':'no',lead_identified:lead?'yes':'no'});
+  skipWrap=true;
+  try{window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg.join('\n')),'_blank','noopener');}finally{skipWrap=false;}
 }
+
+/* Qualquer outro caminho para o WhatsApp do comercial (botão do topo,
+   páginas de produto, rodapé, scripts antigos) também leva o histórico. */
+function isCommercialWa(href){
+  try{
+    const u=new URL(href,location.href);
+    if(u.hostname==='wa.me')return u.pathname.replace(/\D/g,'')===PHONE?u:null;
+    if(/(^|\.)whatsapp\.com$/.test(u.hostname)&&(u.searchParams.get('phone')||'').replace(/\D/g,'')===PHONE)return u;
+  }catch(e){}
+  return null;
+}
+let skipWrap=false;
+function withHistory(href){
+  if(skipWrap)return href;
+  const u=isCommercialWa(href);if(!u)return href;
+  const ctxs=recentContexts();if(!ctxs.length)return href;
+  const base=u.searchParams.get('text')||t('waIntro');
+  if(base.includes(t('waHistory'))||ctxs.every(c=>c.lines.every(l=>base.includes(l))))return href;
+  u.searchParams.set('text',base+'\n\n'+historyBlock(ctxs));
+  ctxs.forEach(syncHistory);
+  track('whatsapp_click',{origin:'link_site',context_preserved:'yes',lead_identified:getLead()?'yes':'no'});
+  return u.href.replace(/\+/g,'%20');
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+  const next=withHistory(a.href);if(next!==a.href)a.href=next;
+},true);
+(function wrapOpen(){
+  if(window.__TORCISAO_WA_OPEN__)return;window.__TORCISAO_WA_OPEN__=true;
+  const base=window.open;
+  window.open=function(url,...rest){try{if(typeof url==='string')url=withHistory(url);}catch(e){}return base.call(window,url,...rest);};
+})();
 function whatsappButton(getOpts,extraClass){
   const wrap=document.createElement('div');
   wrap.className='tor-wa-inline'+(extraClass?' '+extraClass:'');
@@ -214,6 +280,7 @@ function gateForm(kind,getOpts,onDone,onLater){
       setLead({token:json.lead_token,name,first_name:json.first_name||name.split(/\s+/)[0],at:Date.now()});
       sentHistory.add((opts.source||kind)+'|'+cleanLines(opts.lines).join('|'));
       track('generate_lead',{lead_source:opts.source||kind,tool:kind});
+      remember(opts);setTimeout(syncAllHistory,300);
       onDone();
     }catch(ex){fail(t('errGeneric'));}
     finally{btn.disabled=false;btn.textContent=label;}
@@ -251,6 +318,7 @@ function refreshCalc(){
   let slot=modal.querySelector('.tor-lead-slot--calc');
   if(!slot){slot=document.createElement('div');slot.className='tor-lead-slot tor-lead-slot--calc';const note=modal.querySelector('#calcNote');(note||results).insertAdjacentElement(note?'beforebegin':'afterend',slot);}
   if(!calcHasResult()){modal.classList.remove('tor-gated');slot.innerHTML='';return;}
+  remember(calcOpts());
   if(isUnlocked()){
     modal.classList.remove('tor-gated');
     if(!slot.querySelector('.tor-wa-inline')){slot.innerHTML='';slot.appendChild(whatsappButton(calcOpts));}
@@ -290,6 +358,7 @@ function refreshTol(cfg){
   let slot=out.parentElement?.querySelector(':scope > .tor-lead-slot--tol[data-for="'+cfg.id+'"]');
   if(!slot){slot=document.createElement('div');slot.className='tor-lead-slot tor-lead-slot--tol';slot.dataset.for=cfg.id;out.insertAdjacentElement('afterend',slot);}
   if(!values){out.classList.remove('tor-gated');slot.innerHTML='';return;}
+  remember(opts());
   if(isUnlocked()){
     out.classList.remove('tor-gated');
     if(!slot.querySelector('.tor-wa-inline')){slot.innerHTML='';slot.appendChild(whatsappButton(opts));}
@@ -373,6 +442,7 @@ function placeTheoExtras(root){
           if(json&&json.lead_token&&!getLead()){
             setLead({token:json.lead_token,name:json.first_name||'',first_name:json.first_name||'',at:Date.now()});
             track('generate_lead',{lead_source:'assistente_aplicacao',tool:'theo_chat'});
+            setTimeout(()=>recentContexts('assistente_aplicacao').forEach(syncHistory),600);
             refreshCalc();TOL_TARGETS.forEach(refreshTol);
           }
           /* espera o chat desenhar a resposta */
@@ -380,7 +450,7 @@ function placeTheoExtras(root){
             const r=root||openAssistantRoot();const log=chatLog(r);
             const loading=log&&log.querySelector('.loading,.is-loading,[data-loading]');
             if((!log||loading)&&tries++<20)return setTimeout(tick,150);
-            if(r)placeTheoExtras(r);
+            if(r){placeTheoExtras(r);remember(theoOpts(r)());}
           };setTimeout(tick,120);
         }).catch(()=>{});
       }catch(e){}
@@ -396,7 +466,7 @@ function placeTheoExtras(root){
 function installHandoffOverride(){
   const api=window.TorcisaoCommercialHandoff;
   if(!api||api.__torLead)return;
-  api.offer=function(opts){syncHistory(opts||{});};
+  api.offer=function(opts){remember(opts||{});syncHistory(opts||{});};
   api.whatsapp=openWhatsApp;
   api.__torLead=true;
 }
