@@ -127,3 +127,15 @@
 /* Botão do WhatsApp centralizado dentro da calculadora e da tolerância */
 .tor-lead-slot .tor-wa-inline{align-items:center;text-align:center}
 .tor-lead-slot .tor-wa-inline small{text-align:center}
+
+/* Theo guiado: botões de resposta rápida */
+.tor-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px;animation:tlgIn .25s ease both}
+.tor-chip{
+  appearance:none;cursor:pointer;font:inherit;font-size:13.5px;font-weight:600;line-height:1.2;
+  padding:9px 14px;border-radius:999px;border:1.5px solid rgba(239,123,48,.55);
+  background:#fff;color:var(--tlg-orange-dark);transition:background .15s,color .15s,border-color .15s,transform .1s;
+}
+.tor-chip:hover{background:var(--tlg-orange);border-color:var(--tlg-orange);color:#fff}
+.tor-chip:active{transform:translateY(1px)}
+.tor-chip:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(239,123,48,.25)}
+@media (max-width:640px){.tor-chip{font-size:13px;padding:8px 12px}}

@@ -406,6 +406,66 @@ function theoLabel(root){
 }
 const theoOpts=root=>()=>({source:'assistente_aplicacao',label:theoLabel(root),lines:conversationLines(root)});
 
+/* ---------- Theo guiado: botões de resposta rápida ---------- */
+const CHATS=[
+  {chat:'thHomeChat',input:'thAssistantInput',send:'thAssistantSend',line:''},
+  {chat:'afChat',input:'afAssistantInput',send:'afAssistantSend',line:'arame'},
+  {chat:'bfChat',input:'bfAssistantInput',send:'bfAssistantSend',line:'barra'},
+  {chat:'hfChat',input:'hfAssistantInput',send:'hfAssistantSend',line:'haste'}
+];
+const START={
+  pt:{line:[['Arame trefilado','line','arame'],['Barra trefilada','line','barra'],['Haste de aterramento','line','haste'],['Outra coisa','line','outro']],
+      arame:[['Molas','app','arame_mtc:2'],['Telas','app','arame_mtc:0'],['Gradil','app','arame_btc:2'],['Cabos','app','arame_mtc:1'],['Pregos','app','arame_mtc:4'],['Outra aplicação','app','outro']],
+      barra:[['Fixadores','app','barra_btc:0'],['Autopeças','app','barra_btc:1'],['Pinos','app','barra_ressulfurado:1'],['Molas Helicoidais','app','barra_btc:4'],['Sistemas Hidráulicos','app','barra_ressulfurado:6'],['Outra aplicação','app','outro']],
+      haste:[['Baixa camada','haste','haste_baixa'],['Alta camada','haste','haste_alta'],['Conectores','haste','conectores'],['Não sei qual escolher','haste','nao_sei']]},
+  en:{line:[['Drawn wire','line','arame'],['Drawn bar','line','barra'],['Grounding rod','line','haste'],['Something else','line','outro']],
+      arame:[['Springs','app','arame_mtc:2'],['Mesh','app','arame_mtc:0'],['Fencing','app','arame_btc:2'],['Cables','app','arame_mtc:1'],['Nails','app','arame_mtc:4'],['Other application','app','outro']],
+      barra:[['Fasteners','app','barra_btc:0'],['Auto Parts','app','barra_btc:1'],['Pins','app','barra_ressulfurado:1'],['Helical Springs','app','barra_btc:4'],['Hydraulic Systems','app','barra_ressulfurado:6'],['Other application','app','outro']],
+      haste:[['Low coating','haste','haste_baixa'],['High coating','haste','haste_alta'],['Connectors','haste','conectores'],["I'm not sure which",'haste','nao_sei']]},
+  es:{line:[['Alambre trefilado','line','arame'],['Barra trefilada','line','barra'],['Varilla de tierra','line','haste'],['Otra cosa','line','outro']],
+      arame:[['Resortes','app','arame_mtc:2'],['Mallas','app','arame_mtc:0'],['Cercados','app','arame_btc:2'],['Cables','app','arame_mtc:1'],['Clavos','app','arame_mtc:4'],['Otra aplicación','app','outro']],
+      barra:[['Fijadores','app','barra_btc:0'],['Autopartes','app','barra_btc:1'],['Pasadores','app','barra_ressulfurado:1'],['Resortes Helicoidales','app','barra_btc:4'],['Sistemas Hidráulicos','app','barra_ressulfurado:6'],['Otra aplicación','app','outro']],
+      haste:[['Capa baja','haste','haste_baixa'],['Capa alta','haste','haste_alta'],['Conectores','haste','conectores'],['No sé cuál elegir','haste','nao_sei']]}
+};
+let pendingGuided=null;
+const chatCfg=el=>CHATS.find(c=>el&&(el.id===c.chat||el.querySelector?.('#'+c.chat)))||null;
+function cfgForRoot(root){return root?CHATS.find(c=>root.querySelector('#'+c.chat))||null:null;}
+function clearChips(log){log&&log.querySelectorAll(':scope > .tor-chips').forEach(n=>n.remove());}
+function renderChips(cfg,chips){
+  const log=document.getElementById(cfg.chat);if(!log||!chips||!chips.length)return;
+  clearChips(log);
+  const row=document.createElement('div');row.className='tor-chips';row.setAttribute('role','group');
+  chips.forEach(c=>{
+    const b=document.createElement('button');b.type='button';b.className='tor-chip';b.textContent=c.label;
+    b.addEventListener('click',()=>{
+      const input=document.getElementById(cfg.input),send=document.getElementById(cfg.send);if(!input||!send)return;
+      clearChips(log);pendingGuided={step:c.step,value:c.value};
+      input.value=c.label;input.dispatchEvent(new Event('input',{bubbles:true}));send.click();
+      track('theo_quick_reply',{step:c.step,value:c.value});
+    });
+    row.appendChild(b);
+  });
+  const answers=log.querySelectorAll('.th-msg.assistant,.hf-msg.assistant');
+  const last=answers[answers.length-1];
+  if(last&&last.parentElement===log)last.insertAdjacentElement('afterend',row);else log.appendChild(row);
+  log.scrollTop=log.scrollHeight;
+}
+function startChips(cfg){
+  const log=document.getElementById(cfg.chat);if(!log||log.offsetParent===null)return;
+  if(log.querySelector('.th-msg.user,.hf-msg.user,.tor-chips'))return;
+  const set=(START[lang()]||START.pt)[cfg.line||'line'];
+  renderChips(cfg,set.map(([label,step,value])=>({label,step,value})));
+}
+function watchChats(){
+  CHATS.forEach(cfg=>{
+    const log=document.getElementById(cfg.chat);if(!log||log.dataset.torChips)return;
+    log.dataset.torChips='1';
+    const root=log.closest('.th-modal-backdrop,.hf-assistant,[role="dialog"]')||log.parentElement;
+    new MutationObserver(()=>setTimeout(()=>startChips(cfg),60)).observe(root,{attributes:true,attributeFilter:['class','hidden','aria-hidden','style']});
+    startChips(cfg);
+  });
+}
+
 function placeTheoExtras(root){
   const log=chatLog(root);if(!log)return;
   const answers=log.querySelectorAll('.th-msg.assistant,.hf-msg.assistant');
@@ -416,7 +476,8 @@ function placeTheoExtras(root){
   const last=answers[answers.length-1];
   let wa=log.querySelector(':scope > .tor-wa-inline--theo');
   if(!wa)wa=whatsappButton(theoOpts(root),'tor-wa-inline--theo');
-  last.insertAdjacentElement('afterend',wa);
+  const anchor=last.nextElementSibling&&last.nextElementSibling.classList.contains('tor-chips')?last.nextElementSibling:last;
+  anchor.insertAdjacentElement('afterend',wa);
   log.scrollTop=log.scrollHeight;
 }
 
@@ -436,6 +497,9 @@ function placeTheoExtras(root){
       if(theoDeclined())body.contact_declined=true;
       if(!body.session_id)body.session_id=sessionId();
       if(!body.utm)body.utm=utmValues();
+      const cfg=cfgForRoot(root);
+      if(cfg){body.theo_line=cfg.line;clearChips(document.getElementById(cfg.chat));}
+      if(pendingGuided){body.guided=pendingGuided;pendingGuided=null;}
       if(!body.lang)body.lang=lang();
       init=Object.assign({},init,{body:JSON.stringify(body)});
     }catch(e){}
@@ -452,9 +516,9 @@ function placeTheoExtras(root){
           /* espera o chat desenhar a resposta */
           let tries=0;const tick=()=>{
             const r=root||openAssistantRoot();const log=chatLog(r);
-            const loading=log&&log.querySelector('.loading,.is-loading,[data-loading]');
+            const loading=log&&log.querySelector('.loading,.is-loading,[data-loading]')||(log&&[...log.querySelectorAll('.th-msg.assistant,.hf-msg.assistant')].slice(-1).some(m=>/^(Consultando as informa|Checking Torcis|Consultando la informa)/i.test(m.textContent||'')));
             if((!log||loading)&&tries++<20)return setTimeout(tick,150);
-            if(r){placeTheoExtras(r);remember(theoOpts(r)());}
+            if(r){const cfg=cfgForRoot(r);if(cfg&&json&&json.chips)renderChips(cfg,json.chips);placeTheoExtras(r);remember(theoOpts(r)());}
           };setTimeout(tick,120);
         }).catch(()=>{});
       }catch(e){}
@@ -490,6 +554,8 @@ window.TorcisaoLeadGate={isUnlocked,getLead,syncHistory,whatsapp:openWhatsApp,re
 function init(){
   installHandoffOverride();
   watchTol();
+  watchChats();
+  document.addEventListener('click',()=>setTimeout(()=>{watchChats();CHATS.forEach(startChips);},350),true);
   /* a tolerância de produto e a da Home são criadas por scripts tardios */
   new MutationObserver(()=>{watchTol();installHandoffOverride();}).observe(document.body,{childList:true});
 }
