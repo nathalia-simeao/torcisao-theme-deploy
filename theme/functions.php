@@ -829,3 +829,19 @@ function torcisao_output_product_schema(){
 }
 add_action('wp_head','torcisao_output_product_schema',31);
 
+
+/* ============================================================
+ * 2026-11 · Trava de resultado + contato nas ferramentas
+ * (calculadora de aço, tolerância dimensional e Theo).
+ * Os leads são recebidos pelo plugin privado Torcisão Theo Core 1.5+
+ * em /wp-json/torcisao/v1/lead. Sem o plugin, as ferramentas seguem
+ * funcionando e a trava não aparece.
+ * ============================================================ */
+function torcisao_lead_gate_assets(){
+    if (is_admin()) return;
+    if (!function_exists('torcisao_lead_route')) return; // plugin privado ausente
+    $uri = get_template_directory_uri();
+    wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261104-1');
+    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261104-1', true);
+}
+add_action('wp_enqueue_scripts', 'torcisao_lead_gate_assets', 200);
