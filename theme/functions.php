@@ -841,7 +841,19 @@ function torcisao_lead_gate_assets(){
     if (is_admin()) return;
     if (!function_exists('torcisao_lead_route')) return; // plugin privado ausente
     $uri = get_template_directory_uri();
-    wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261104-3');
-    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261104-3', true);
+    wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261104-4');
+    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261104-4', true);
 }
 add_action('wp_enqueue_scripts', 'torcisao_lead_gate_assets', 200);
+
+/* 2026-11 · UTMs guardadas desde a página de entrada e preenchidas em todos os
+   formulários HubSpot (campos ocultos utm_source, utm_medium, utm_campaign…). */
+function torcisao_attribution_assets(){
+    if (is_admin()) return;
+    wp_enqueue_script('torcisao-hubspot-attribution', get_template_directory_uri().'/assets/torcisao-hubspot-attribution-v1.js', [], '20261104-1', false);
+}
+add_action('wp_enqueue_scripts', 'torcisao_attribution_assets', 5);
+add_filter('script_loader_tag', function($tag, $handle){
+    if ($handle !== 'torcisao-hubspot-attribution') return $tag;
+    return str_replace('<script ', '<script data-torcisao-hubspot-attribution ', $tag);
+}, 10, 2);

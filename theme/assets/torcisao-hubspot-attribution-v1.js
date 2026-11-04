@@ -10,7 +10,7 @@ const KEYS={
   landing:'torcisao_session_landing'
 };
 const UTM_KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','gbraid','wbraid'];
-const TARGET_FIELDS=['utm_source','utm_medium','utm_campaign','utm_history','first_utm_data','latest_utm_data','pagina_de_origem_do_lead'];
+const TARGET_FIELDS=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_history','first_utm_data','latest_utm_data','pagina_de_origem_do_lead'];
 
 function safeParse(value){
   if(!value)return null;
@@ -80,6 +80,30 @@ function snapshot(){
   return {first,latest,history,landing};
 }
 
+/* 2026-11: antes o script só LIA as UTMs; ninguém as guardava. Se o cliente
+   chegava por um anúncio e preenchia o formulário em outra página, a UTM se
+   perdia. Agora a primeira e a última origem ficam guardadas (90 dias) e a
+   página de entrada da visita também. */
+const FIRST_TTL=90*24*60*60*1000;
+function writeLocal(key,value){try{localStorage.setItem(key,JSON.stringify({data:value,at:Date.now()}));}catch(e){}}
+function storedAt(key){try{const v=JSON.parse(localStorage.getItem(key)||'null');return v&&v.at?v.at:0;}catch(e){return 0;}}
+function persist(){
+  try{if(!sessionStorage.getItem(KEYS.landing))sessionStorage.setItem(KEYS.landing,location.href);}catch(e){}
+  const urlData=fromUrl();
+  if(!hasAttribution(urlData))return;
+  const firstAt=storedAt(KEYS.first);
+  const first=normalizeData(readLocal(KEYS.first));
+  if(!hasAttribution(first)||(firstAt&&Date.now()-firstAt>FIRST_TTL))writeLocal(KEYS.first,urlData);
+  const latest=normalizeData(readLocal(KEYS.latest));
+  const same=UTM_KEYS.every(k=>(latest[k]||'')===(urlData[k]||''));
+  if(!same){
+    writeLocal(KEYS.latest,urlData);
+    let history=readLocal(KEYS.history);if(!Array.isArray(history))history=[];
+    history.push(urlData);writeLocal(KEYS.history,history.slice(-10));
+  }
+}
+persist();
+
 function nativeSet(field,value){
   if(!field||value===undefined||value===null||value==='')return false;
   const text=String(value);
@@ -99,6 +123,8 @@ function fill(scope){
     utm_source:data.latest.utm_source||data.first.utm_source||'',
     utm_medium:data.latest.utm_medium||data.first.utm_medium||'',
     utm_campaign:data.latest.utm_campaign||data.first.utm_campaign||'',
+    utm_term:data.latest.utm_term||data.first.utm_term||'',
+    utm_content:data.latest.utm_content||data.first.utm_content||'',
     first_utm_data:stringify(data.first),
     latest_utm_data:stringify(data.latest),
     utm_history:stringify(data.history),
@@ -144,6 +170,7 @@ window.addEventListener('message',event=>{
   if(data.type==='hsFormCallback'||data.eventName==='onFormReady')fillEventually(document);
 });
 
-window.TorcisaoHubSpotAttribution={snapshot,fill,fillEventually};
+function values(){return fill(document.createElement('div')).values;}
+window.TorcisaoHubSpotAttribution={snapshot,fill,fillEventually,values};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

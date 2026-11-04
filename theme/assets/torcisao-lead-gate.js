@@ -110,6 +110,9 @@ const t=k=>(T[lang()]||T.pt)[k]||T.pt[k];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const track=(event,params)=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push(Object.assign({event},params||{}));};
 
+/* ---------- origem (UTM) ---------- */
+function utmValues(){try{return (window.TorcisaoHubSpotAttribution&&window.TorcisaoHubSpotAttribution.values())||{}}catch(e){return {}}}
+
 /* ---------- estado do lead ---------- */
 let memoryLead=null;
 function getLead(){
@@ -270,7 +273,7 @@ function gateForm(kind,getOpts,onDone,onLater){
     try{
       const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({
         name,email,phone,consent:true,consent_text:t('consent')+' '+t('privacy'),website:form.elements.website.value,
-        source:opts.source||kind,label:opts.label||'',lines:cleanLines(opts.lines),page:location.href,lang:lang()
+        source:opts.source||kind,label:opts.label||'',lines:cleanLines(opts.lines),page:location.href,lang:lang(),utm:utmValues()
       })});
       const json=await res.json().catch(()=>({}));
       if(!res.ok||!json.ok){
@@ -432,6 +435,7 @@ function placeTheoExtras(root){
       if(lead&&lead.first_name)body.first_name=lead.first_name;
       if(theoDeclined())body.contact_declined=true;
       if(!body.session_id)body.session_id=sessionId();
+      if(!body.utm)body.utm=utmValues();
       if(!body.lang)body.lang=lang();
       init=Object.assign({},init,{body:JSON.stringify(body)});
     }catch(e){}
