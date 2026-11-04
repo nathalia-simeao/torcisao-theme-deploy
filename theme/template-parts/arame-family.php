@@ -86,5 +86,5 @@ $af_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
 <button type="button" class="btn-cta-mobile" id="afQuoteTab" data-analytics-origin="arame_aba_cotacao" data-analytics-product="arame_trefilado" aria-label="Solicitar cotação"><i class="bi bi-chat-dots-fill"></i><span class="btn-cta-mobile-label">Solicitar cotação</span></button>
 <div class="hf-quote-drawer" id="afQuoteDrawer" aria-hidden="true"><div class="hf-quote-panel"><div class="hf-quote-head"><div><small>COTAÇÃO</small><h3>Solicite seu orçamento</h3></div><button type="button" class="hf-quote-close" aria-label="Fechar">×</button></div><div id="afQuoteForm" data-analytics-origin="arame_aba_cotacao" data-analytics-product="arame_trefilado"></div></div></div>
 <script>window.TORCISAO_ARAME_PAGE=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'formId'=>'618563c8-4899-441b-965d-801a83009fdf','portalId'=>'50818463']); ?>;</script>
-<script defer src="<?php echo esc_url($af_assets . '/assets/torcisao-arame-family.js'); ?>?v=20260907-2"></script>
+<script defer src="<?php echo esc_url($af_assets . '/assets/torcisao-arame-family.js'); ?>?v=20261104-2"></script>
 <script defer src="<?php echo esc_url($af_assets . '/assets/torcisao-arame-commercial-v19.js'); ?>?v=20260907-1"></script>

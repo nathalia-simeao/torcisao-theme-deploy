@@ -334,22 +334,17 @@ function theoLabel(root){
 }
 const theoOpts=root=>()=>({source:'assistente_aplicacao',label:theoLabel(root),lines:conversationLines(root)});
 
-function placeTheoExtras(root,askContact){
+function placeTheoExtras(root){
   const log=chatLog(root);if(!log)return;
   const answers=log.querySelectorAll('.th-msg.assistant,.hf-msg.assistant');
-  const last=answers[answers.length-1];if(!last)return;
-  /* WhatsApp sempre logo abaixo da última resposta do Theo. */
+  /* O contato é pedido pelo próprio Theo na conversa; aqui só o WhatsApp,
+     a partir da 2ª resposta, sempre logo abaixo da última mensagem dele. */
+  const asked=log.querySelectorAll('.th-msg.user,.hf-msg.user').length;
+  if(asked<2||!answers.length)return;
+  const last=answers[answers.length-1];
   let wa=log.querySelector(':scope > .tor-wa-inline--theo');
   if(!wa)wa=whatsappButton(theoOpts(root),'tor-wa-inline--theo');
-  if(askContact&&!isUnlocked()&&!theoDeclined()&&!log.querySelector('.tor-lead-gate--theo')){
-    setTheoAsked();
-    const gate=gateForm('theo',theoOpts(root),()=>{unlockAll();},()=>{setTheoDeclined();gate.remove();});
-    last.insertAdjacentElement('afterend',gate);
-    gate.insertAdjacentElement('afterend',wa);
-  }else{
-    const gate=log.querySelector('.tor-lead-gate--theo');
-    (gate&&gate.previousElementSibling===last?gate:last).insertAdjacentElement('afterend',wa);
-  }
+  last.insertAdjacentElement('afterend',wa);
   log.scrollTop=log.scrollHeight;
 }
 
@@ -366,7 +361,7 @@ function placeTheoExtras(root,askContact){
       const lead=getLead();
       body.lead_known=!!lead;
       if(lead&&lead.first_name)body.first_name=lead.first_name;
-      if(theoDeclined()||theoAsked())body.contact_declined=true;
+      if(theoDeclined())body.contact_declined=true;
       if(!body.session_id)body.session_id=sessionId();
       if(!body.lang)body.lang=lang();
       init=Object.assign({},init,{body:JSON.stringify(body)});
@@ -374,13 +369,18 @@ function placeTheoExtras(root,askContact){
     return base(input,init).then(res=>{
       try{
         res.clone().json().then(json=>{
-          const ask=!!(json&&json.ask_contact);
+          /* O cliente passou o contato na conversa: o servidor já criou o lead. */
+          if(json&&json.lead_token&&!getLead()){
+            setLead({token:json.lead_token,name:json.first_name||'',first_name:json.first_name||'',at:Date.now()});
+            track('generate_lead',{lead_source:'assistente_aplicacao',tool:'theo_chat'});
+            refreshCalc();TOL_TARGETS.forEach(refreshTol);
+          }
           /* espera o chat desenhar a resposta */
           let tries=0;const tick=()=>{
             const r=root||openAssistantRoot();const log=chatLog(r);
             const loading=log&&log.querySelector('.loading,.is-loading,[data-loading]');
             if((!log||loading)&&tries++<20)return setTimeout(tick,150);
-            if(r)placeTheoExtras(r,ask);
+            if(r)placeTheoExtras(r);
           };setTimeout(tick,120);
         }).catch(()=>{});
       }catch(e){}
