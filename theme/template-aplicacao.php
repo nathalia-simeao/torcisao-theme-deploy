@@ -56,7 +56,12 @@ get_header();
     <div class="hf-section-head"><span class="hf-section-kicker">Linhas indicadas</span>
       <h2 class="hf-section-title"><?php echo count($ta['products']) > 1 ? 'Opções para ' . esc_html($ta['app']) : 'A linha indicada para ' . esc_html($ta['app']); ?></h2></div>
     <div class="ta-products ta-products--<?php echo (int) min(count($ta['products']), 4); ?>">
-      <?php foreach ($ta['products'] as $pk): $p = $ta_products[$pk]; ?>
+      <?php
+      /* Arame: na mesma página, um card em rolo e outro em spider, para as fotos não se repetirem */
+      $ta_arame_imgs = [TORCISAO_APP_MEDIA . 'arametrefiladorolo-768x768.png', TORCISAO_APP_MEDIA . 'arametrefiladospider-768x768.png'];
+      foreach ($ta['products'] as $ta_i => $pk): $p = $ta_products[$pk];
+          if ($ta_line === 'arame') $p['img'] = $ta_arame_imgs[$ta_i % 2];
+      ?>
       <article class="ta-product">
         <div class="ta-product-img"><img src="<?php echo esc_url($p['img']); ?>" alt="<?php echo esc_attr($p['name']); ?>" loading="lazy" decoding="async"></div>
         <div class="ta-product-body">
