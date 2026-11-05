@@ -117,7 +117,12 @@ function utmValues(){try{return (window.TorcisaoHubSpotAttribution&&window.Torci
 let memoryLead=null;
 function getLead(){
   if(memoryLead)return memoryLead;
-  try{const raw=JSON.parse(localStorage.getItem(STORE_KEY)||'null');if(raw&&raw.token){memoryLead=raw;return raw;}}catch(e){}
+  try{
+    const raw=JSON.parse(localStorage.getItem(STORE_KEY)||'null');
+    /* identificação vale 30 dias (mesmo prazo do vínculo com o lead no servidor) */
+    if(raw&&raw.token&&raw.at&&Date.now()-raw.at<30*24*60*60*1000){memoryLead=raw;return raw;}
+    if(raw)localStorage.removeItem(STORE_KEY);
+  }catch(e){}
   return null;
 }
 function setLead(lead){memoryLead=lead;try{localStorage.setItem(STORE_KEY,JSON.stringify(lead))}catch(e){}}
