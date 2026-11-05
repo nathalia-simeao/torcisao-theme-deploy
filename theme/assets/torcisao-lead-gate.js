@@ -55,8 +55,8 @@ const T={
     whatsappHint:'O histórico desta consulta vai junto na mensagem.',
     waIntro:'Olá! Eu estava usando uma ferramenta no site da Torcisão e gostaria de falar com o comercial.',
     waOrigin:'Origem',waOutro:'Gostaria de continuar este atendimento pelo WhatsApp.',waHistory:'O que eu consultei no site:',
-    fabLabel:'Falar no WhatsApp',fabTitle:'Fale com o comercial no WhatsApp',
-    fabCopy:'Preencha seus dados e o time comercial continua a conversa com você pelo WhatsApp.',
+    fabLabel:'Falar no WhatsApp',fabTitle:'Fale com nosso comercial',
+    fabCopy:'Preencha e continue pelo WhatsApp',
     fabLoading:'Carregando o formulário…',fabFail:'Não consegui carregar o formulário agora. Você pode chamar direto:',
     fabIntro:'Olá! Vim pelo site da Torcisão e gostaria de falar com o comercial.',
     fabOpen:'Abrir WhatsApp',fabClose:'Minimizar',
@@ -84,8 +84,8 @@ const T={
     whatsappHint:'This lookup history goes with the message.',
     waIntro:'Hello! I was using a tool on the Torcisão website and would like to talk to sales.',
     waOrigin:'Source',waOutro:'I would like to continue on WhatsApp.',waHistory:'What I looked up on the site:',
-    fabLabel:'Chat on WhatsApp',fabTitle:'Talk to sales on WhatsApp',
-    fabCopy:'Fill in your details and our sales team will continue the conversation with you on WhatsApp.',
+    fabLabel:'Chat on WhatsApp',fabTitle:'Talk to our sales team',
+    fabCopy:'Fill in and continue on WhatsApp',
     fabLoading:'Loading the form…',fabFail:'Could not load the form right now. You can message us directly:',
     fabIntro:'Hello! I came from the Torcisão website and would like to talk to sales.',
     fabOpen:'Open WhatsApp',fabClose:'Minimize',
@@ -113,8 +113,8 @@ const T={
     whatsappHint:'El historial de esta consulta va en el mensaje.',
     waIntro:'¡Hola! Estaba usando una herramienta en el sitio de Torcisão y me gustaría hablar con el comercial.',
     waOrigin:'Origen',waOutro:'Me gustaría continuar por WhatsApp.',waHistory:'Lo que consulté en el sitio:',
-    fabLabel:'Hablar por WhatsApp',fabTitle:'Habla con el comercial por WhatsApp',
-    fabCopy:'Completa tus datos y el equipo comercial continuará la conversación contigo por WhatsApp.',
+    fabLabel:'Hablar por WhatsApp',fabTitle:'Habla con nuestro comercial',
+    fabCopy:'Completa y continúa por WhatsApp',
     fabLoading:'Cargando el formulario…',fabFail:'No pude cargar el formulario ahora. Puedes escribirnos directo:',
     fabIntro:'¡Hola! Vengo del sitio de Torcisão y me gustaría hablar con el comercial.',
     fabOpen:'Abrir WhatsApp',fabClose:'Minimizar',
@@ -605,9 +605,9 @@ function installWaFab(){
   root.innerHTML=`
     <section class="tor-wa-panel" role="dialog" aria-modal="false" aria-labelledby="torWaFabTitle" hidden>
       <header class="tor-wa-panel-head">
-        <span class="tor-wa-panel-icon" aria-hidden="true"><i class="bi bi-whatsapp"></i></span>
-        <div><strong id="torWaFabTitle">${esc(t('fabTitle'))}</strong><p>${esc(t('fabCopy'))}</p></div>
         <button type="button" class="tor-wa-panel-x" aria-label="${esc(t('fabClose'))}" data-close>×</button>
+        <strong id="torWaFabTitle">${esc(t('fabTitle'))}</strong>
+        <p>${esc(t('fabCopy'))}</p>
       </header>
       <div class="tor-wa-hs" id="torWaHsForm"><p class="tor-wa-loading">${esc(t('fabLoading'))}</p></div>
     </section>
