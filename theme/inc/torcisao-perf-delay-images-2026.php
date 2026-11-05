@@ -50,10 +50,10 @@ function torcisao_img_map() {
 /** Gera as cópias que faltam (poucas por vez, para não pesar o painel). */
 function torcisao_img_build($limit = 6, $budget = 12.0) {
     if (!function_exists('wp_get_image_editor')) return;
-    if (!wp_image_editor_supports(['mime_type' => 'image/webp'])) {
-        update_option('torcisao_img_status', 'sem suporte a WebP no servidor', false);
-        return;
-    }
+    /* WebP quando o servidor suporta; senão, PNG menor (800 px), que já ajuda bastante */
+    $webp = wp_image_editor_supports(['mime_type' => 'image/webp']);
+    $fmt = $webp ? ['image/webp', 'webp', 1000] : ['image/png', 'png', 800];
+    update_option('torcisao_img_status', $webp ? 'webp' : 'png (servidor sem WebP)', false);
     $up = wp_upload_dir(null, false);
     if (!empty($up['error'])) return;
     $map = torcisao_img_map();
@@ -72,15 +72,15 @@ function torcisao_img_build($limit = 6, $budget = 12.0) {
         $src = trailingslashit($up['basedir']) . $rel;
         if (!is_readable($src)) { $failed[$rel] = 'ausente'; $changed = true; continue; }
         $name = preg_replace('/\.(png|jpe?g)$/i', '', basename($rel));
-        $slug = str_replace('/', '-', dirname($rel)) . '-' . $name . '-1000.webp';
+        $slug = str_replace('/', '-', dirname($rel)) . '-' . $name . '-' . $fmt[2] . '.' . $fmt[1];
         $dest = $out_dir . '/' . $slug;
         $ed = wp_get_image_editor($src);
         if (is_wp_error($ed)) { $failed[$rel] = 'editor'; $changed = true; continue; }
         $size = $ed->get_size();
-        if (!empty($size['width']) && $size['width'] > 1000) $ed->resize(1000, null, false);
+        if (!empty($size['width']) && $size['width'] > $fmt[2]) $ed->resize($fmt[2], null, false);
         $ed->set_quality(80);
-        $saved = $ed->save($dest, 'image/webp');
-        if (is_wp_error($saved) || !is_readable($dest)) { $failed[$rel] = 'save'; $changed = true; continue; }
+        $saved = $ed->save($dest, $fmt[0]);
+        if (is_wp_error($saved) || !is_readable($dest)) { $failed[$rel] = 'save: ' . (is_wp_error($saved) ? $saved->get_error_message() : '?'); $changed = true; continue; }
         /* só usa a cópia se ela for realmente menor */
         if (filesize($dest) >= filesize($src)) { @unlink($dest); $failed[$rel] = 'maior'; $changed = true; continue; }
         $map[$rel] = $out_url . '/' . $slug;
@@ -99,6 +99,31 @@ add_action('admin_init', function () {
     set_transient('torcisao_img_build_lock', 1, 60);
     torcisao_img_build(8, 10.0);
     delete_transient('torcisao_img_build_lock');
+});
+/* Aviso no Painel com o andamento (some quando todas estiverem prontas). */
+add_action('admin_notices', function () {
+    if (!current_user_can('manage_options')) return;
+    $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+    if (!$screen || $screen->id !== 'dashboard') return;
+    if (isset($_GET['torcisao_img_reset']) && check_admin_referer('torcisao_img_reset')) {
+        delete_option('torcisao_img_failed');
+        torcisao_img_build(8, 10.0);
+    }
+    $total = count(torcisao_img_candidates());
+    $ok = count(torcisao_img_map());
+    $failed = get_option('torcisao_img_failed', []);
+    $failed = is_array($failed) ? $failed : [];
+    if ($ok + count($failed) >= $total && !$failed) return;
+    $status = get_option('torcisao_img_status', 'ainda não rodou');
+    $reasons = [];
+    foreach ($failed as $rel => $why) $reasons[$why] = ($reasons[$why] ?? 0) + 1;
+    $txt = [];
+    foreach ($reasons as $why => $n) $txt[] = esc_html($why) . ' (' . (int) $n . ')';
+    $reset = wp_nonce_url(admin_url('index.php?torcisao_img_reset=1'), 'torcisao_img_reset');
+    echo '<div class="notice notice-info"><p><strong>Torcisão · fotos otimizadas:</strong> ' . (int) $ok . ' de ' . (int) $total
+        . ' prontas · formato: ' . esc_html($status)
+        . ($txt ? ' · não otimizadas: ' . implode(', ', $txt) : '')
+        . ' · <a href="' . esc_url($reset) . '">tentar de novo</a></p></div>';
 });
 add_action('torcisao_img_build_event', function () { torcisao_img_build(20, 25.0); });
 add_action('init', function () {
