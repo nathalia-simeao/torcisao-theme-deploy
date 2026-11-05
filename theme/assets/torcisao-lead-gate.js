@@ -55,6 +55,13 @@ const T={
     whatsappHint:'O histórico desta consulta vai junto na mensagem.',
     waIntro:'Olá! Eu estava usando uma ferramenta no site da Torcisão e gostaria de falar com o comercial.',
     waOrigin:'Origem',waOutro:'Gostaria de continuar este atendimento pelo WhatsApp.',waHistory:'O que eu consultei no site:',
+    fabLabel:'Falar no WhatsApp',fabTitle:'Fale com o comercial no WhatsApp',
+    fabCopy:'Deixe seu nome e WhatsApp e conte o que precisa. A conversa abre no WhatsApp já com o resumo para o time.',
+    fabCopyKnown:'Conte o que você precisa e a conversa abre no WhatsApp já com o resumo para o time.',
+    fabNeed:'O que você precisa? (opcional)',fabNeedPh:'Ex.: barra 1/2" BTC, 2 toneladas',
+    fabEmail:'E-mail (opcional)',fabSubmit:'Abrir conversa no WhatsApp',
+    fabIntro:'Olá! Vim pelo site da Torcisão e gostaria de falar com o comercial.',
+    fabDone:'Pronto! Se o WhatsApp não abriu sozinho, toque no botão abaixo.',fabOpen:'Abrir WhatsApp',fabClose:'Minimizar',
     locked:'Liberado com seu contato'
   },
   en:{
@@ -79,6 +86,13 @@ const T={
     whatsappHint:'This lookup history goes with the message.',
     waIntro:'Hello! I was using a tool on the Torcisão website and would like to talk to sales.',
     waOrigin:'Source',waOutro:'I would like to continue on WhatsApp.',waHistory:'What I looked up on the site:',
+    fabLabel:'Chat on WhatsApp',fabTitle:'Talk to sales on WhatsApp',
+    fabCopy:'Leave your name and WhatsApp and tell us what you need. The chat opens on WhatsApp with a summary for our team.',
+    fabCopyKnown:'Tell us what you need and the chat opens on WhatsApp with a summary for our team.',
+    fabNeed:'What do you need? (optional)',fabNeedPh:'E.g. 1/2" BTC bar, 2 tons',
+    fabEmail:'Email (optional)',fabSubmit:'Open WhatsApp chat',
+    fabIntro:'Hello! I came from the Torcisão website and would like to talk to sales.',
+    fabDone:'Done! If WhatsApp did not open, tap the button below.',fabOpen:'Open WhatsApp',fabClose:'Minimize',
     locked:'Unlocked with your contact'
   },
   es:{
@@ -103,6 +117,13 @@ const T={
     whatsappHint:'El historial de esta consulta va en el mensaje.',
     waIntro:'¡Hola! Estaba usando una herramienta en el sitio de Torcisão y me gustaría hablar con el comercial.',
     waOrigin:'Origen',waOutro:'Me gustaría continuar por WhatsApp.',waHistory:'Lo que consulté en el sitio:',
+    fabLabel:'Hablar por WhatsApp',fabTitle:'Habla con el comercial por WhatsApp',
+    fabCopy:'Deja tu nombre y WhatsApp y cuéntanos qué necesitas. La conversación se abre en WhatsApp con el resumen para el equipo.',
+    fabCopyKnown:'Cuéntanos qué necesitas y la conversación se abre en WhatsApp con el resumen para el equipo.',
+    fabNeed:'¿Qué necesitas? (opcional)',fabNeedPh:'Ej.: barra 1/2" BTC, 2 toneladas',
+    fabEmail:'E-mail (opcional)',fabSubmit:'Abrir conversación en WhatsApp',
+    fabIntro:'¡Hola! Vengo del sitio de Torcisão y me gustaría hablar con el comercial.',
+    fabDone:'¡Listo! Si WhatsApp no se abrió, toca el botón de abajo.',fabOpen:'Abrir WhatsApp',fabClose:'Minimizar',
     locked:'Liberado con tu contacto'
   }
 };
@@ -198,7 +219,23 @@ function openWhatsApp(opts){
   syncHistory(opts);others.forEach(syncHistory);
   track('whatsapp_click',{origin:opts.source||'ferramenta',context_preserved:(lines.length||others.length)?'yes':'no',lead_identified:lead?'yes':'no'});
   skipWrap=true;
-  try{window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg.join('\n')),'_blank','noopener');}finally{skipWrap=false;}
+  try{window.open(waUrl(msg),'_blank','noopener');}finally{skipWrap=false;}
+}
+function waUrl(msg){return 'https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg.join('\n'));}
+/* Monta a mensagem (com histórico) sem abrir nada: usado pelo botão flutuante. */
+function waMessage(opts){
+  opts=opts||{};
+  remember(opts);
+  const lines=cleanLines(opts.lines);
+  const msg=[opts.intro||t('waIntro'),'',`${t('waOrigin')}: ${opts.label||'Site'}`];
+  const lead=getLead();if(lead&&lead.name)msg.push(`${t('name')}: ${lead.name}`);
+  if(lines.length)msg.push('',...lines);
+  const others=recentContexts(opts.source);
+  if(others.length)msg.push('',historyBlock(others));
+  msg.push('',t('waOutro'));
+  syncHistory(opts);others.forEach(syncHistory);
+  track('whatsapp_click',{origin:opts.source||'site',context_preserved:(lines.length||others.length)?'yes':'no',lead_identified:lead?'yes':'no'});
+  return msg;
 }
 
 /* Qualquer outro caminho para o WhatsApp do comercial (botão do topo,
@@ -559,11 +596,122 @@ window.addEventListener('pagehide',()=>{
   const root=openAssistantRoot();if(root)syncHistory(theoOpts(root)());
 });
 
+
+/* ============================================================
+ * 5) BOTÃO FLUTUANTE DO WHATSAPP (todas as páginas)
+ *    Abre um formulário curto (nome, WhatsApp, e-mail opcional, o que
+ *    precisa). O contato vai para o HubSpot como lead e a conversa abre
+ *    no WhatsApp com o resumo + histórico das ferramentas. Fechar só
+ *    minimiza: o botão fica no canto da tela.
+ * ============================================================ */
+const FAB_KEY='torcisao_wa_fab_v1';
+function fabState(){try{return JSON.parse(localStorage.getItem(FAB_KEY)||'{}')||{}}catch(e){return {}}}
+function fabSave(v){try{localStorage.setItem(FAB_KEY,JSON.stringify(Object.assign(fabState(),v)))}catch(e){}}
+function installWaFab(){
+  if(document.getElementById('torWaFab')||!document.body)return;
+  const root=document.createElement('div');
+  root.id='torWaFab';root.className='tor-wa-fab';
+  root.innerHTML=`
+    <section class="tor-wa-panel" role="dialog" aria-modal="false" aria-labelledby="torWaFabTitle" hidden>
+      <header class="tor-wa-panel-head">
+        <span class="tor-wa-panel-icon" aria-hidden="true"><i class="bi bi-whatsapp"></i></span>
+        <div><strong id="torWaFabTitle">${esc(t('fabTitle'))}</strong><p data-copy></p></div>
+        <button type="button" class="tor-wa-panel-x" aria-label="${esc(t('fabClose'))}" data-close>×</button>
+      </header>
+      <form class="tor-wa-form" novalidate>
+        <div data-unknown>
+          <label><span>${esc(t('name'))}</span><input name="name" type="text" autocomplete="name" maxlength="80"></label>
+          <label><span>${esc(t('phone'))}</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" placeholder="${esc(t('phPhone'))}"></label>
+          <label><span>${esc(t('fabEmail'))}</span><input name="email" type="email" autocomplete="email" inputmode="email" maxlength="120"></label>
+        </div>
+        <label><span>${esc(t('fabNeed'))}</span><textarea name="need" rows="2" maxlength="400" placeholder="${esc(t('fabNeedPh'))}"></textarea></label>
+        <label class="tor-lead-gate-hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+        <label class="tor-wa-consent" data-unknown><input name="consent" type="checkbox"><span>${esc(t('consent'))} <a href="${esc(t('privacyUrl'))}" target="_blank" rel="noopener">${esc(t('privacy'))}</a>.</span></label>
+        <p class="tor-lead-gate-error" role="alert" hidden></p>
+        <button type="submit" class="tor-wa-submit"><i class="bi bi-whatsapp" aria-hidden="true"></i> <span>${esc(t('fabSubmit'))}</span></button>
+        <div class="tor-wa-done" hidden><p>${esc(t('fabDone'))}</p><a class="tor-wa-submit" target="_blank" rel="noopener" href="#"><i class="bi bi-whatsapp" aria-hidden="true"></i> ${esc(t('fabOpen'))}</a></div>
+      </form>
+    </section>
+    <button type="button" class="tor-wa-fab-btn" aria-label="${esc(t('fabLabel'))}" aria-expanded="false"><i class="bi bi-whatsapp" aria-hidden="true"></i><span>${esc(t('fabLabel'))}</span></button>`;
+  document.body.appendChild(root);
+  const panel=root.querySelector('.tor-wa-panel'),fab=root.querySelector('.tor-wa-fab-btn'),form=root.querySelector('form');
+  const err=form.querySelector('.tor-lead-gate-error'),submit=form.querySelector('button.tor-wa-submit'),done=form.querySelector('.tor-wa-done');
+  function paint(){
+    const known=!!getLead();
+    root.querySelectorAll('[data-unknown]').forEach(n=>n.hidden=known);
+    root.querySelector('[data-copy]').textContent=known?t('fabCopyKnown'):t('fabCopy');
+  }
+  function open(auto){
+    paint();done.hidden=true;submit.hidden=false;err.hidden=true;
+    panel.hidden=false;root.classList.add('is-open');fab.setAttribute('aria-expanded','true');
+    if(!auto)setTimeout(()=>{(form.querySelector('[data-unknown]:not([hidden]) input')||form.elements.need).focus({preventScroll:true});},60);
+    track('whatsapp_widget_open',{auto:auto?'yes':'no'});
+  }
+  function close(){panel.hidden=true;root.classList.remove('is-open');fab.setAttribute('aria-expanded','false');fabSave({closedAt:Date.now()});}
+  fab.addEventListener('click',()=>panel.hidden?open(false):close());
+  root.querySelector('[data-close]').addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)close();});
+  function fail(msg,field){err.textContent=msg;err.hidden=false;if(field)form.elements[field]?.focus();}
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();err.hidden=true;
+    const known=getLead();
+    const name=form.elements.name.value.trim(),phone=form.elements.phone.value.trim(),email=form.elements.email.value.trim(),need=form.elements.need.value.trim();
+    if(!known){
+      if(name.length<2)return fail(t('errName'),'name');
+      if(phone.replace(/\D/g,'').length<10)return fail(t('errPhone'),'phone');
+      if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return fail(t('errEmail'),'email');
+      if(!form.elements.consent.checked)return fail(t('errConsent'),'consent');
+    }
+    const opts={source:'whatsapp_widget',label:'Botão WhatsApp do site · '+(document.title||location.pathname),lines:need?[need]:[],intro:t('fabIntro')};
+    /* abre a aba já no clique (senão o navegador bloqueia) e só depois envia o contato */
+    let win=null;skipWrap=true;
+    try{win=window.open('','_blank');}catch(ex){}finally{skipWrap=false;}
+    submit.disabled=true;
+    if(!known){
+      try{
+        const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({
+          name,email,phone,consent:true,consent_text:t('consent')+' '+t('privacy'),website:form.elements.website.value,
+          source:opts.source,label:opts.label,lines:cleanLines(opts.lines),page:location.href,lang:lang(),utm:utmValues()
+        })});
+        const json=await res.json().catch(()=>({}));
+        if(res.ok&&json.ok){
+          setLead({token:json.lead_token,name,first_name:json.first_name||name.split(/\s+/)[0],at:Date.now()});
+          track('generate_lead',{lead_source:'whatsapp_widget',tool:'whatsapp'});
+        }else if(json.fields&&json.fields.length){
+          if(win)try{win.close();}catch(ex){}
+          submit.disabled=false;
+          const f=json.fields[0];
+          return fail(f==='email'?t('errEmail'):f==='phone'?t('errPhone'):f==='name'?t('errName'):f==='consent'?t('errConsent'):t('errGeneric'),f);
+        }
+      }catch(ex){/* sem rede para o site: segue para o WhatsApp mesmo assim */}
+    }
+    const url=waUrl(waMessage(opts));
+    submit.disabled=false;
+    if(win&&!win.closed){try{win.opener=null;win.location.href=url;}catch(ex){win=null;}}
+    const link=done.querySelector('a');link.href=url;
+    submit.hidden=true;done.hidden=false;paint();
+    if(!win)link.focus();
+    fabSave({sentAt:Date.now()});
+  });
+  /* Abre sozinho uma vez (a cada 7 dias) para quem ainda não falou com a gente;
+     fechar só minimiza para o botão do canto. */
+  const st=fabState(),week=7*24*60*60*1000;
+  const recently=(st.closedAt&&Date.now()-st.closedAt<week)||(st.sentAt&&Date.now()-st.sentAt<week);
+  if(!getLead()&&!recently){
+    setTimeout(()=>{
+      if(!panel.hidden)return;
+      if(document.querySelector('.tor-commercial-offer-overlay.is-open,#thAssistantModal.is-open,.hf-assistant.is-open,[aria-modal="true"]:not([hidden]):not(.tor-wa-panel)'))return;
+      open(true);
+    },20000);
+  }
+}
+
 /* ---------- API pública ---------- */
 window.TorcisaoLeadGate={isUnlocked,getLead,syncHistory,whatsapp:openWhatsApp,refresh:()=>{refreshCalc();watchTol();TOL_TARGETS.forEach(refreshTol);}};
 
 function init(){
   installHandoffOverride();
+  installWaFab();
   watchTol();
   watchChats();
   document.addEventListener('click',()=>setTimeout(()=>{watchChats();CHATS.forEach(startChips);},350),true);
