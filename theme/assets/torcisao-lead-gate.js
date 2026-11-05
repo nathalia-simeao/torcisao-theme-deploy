@@ -636,17 +636,21 @@ function installWaFab(){
   fab.addEventListener('click',()=>panel.hidden?open(false):close());
   root.querySelector('[data-close]').addEventListener('click',close);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)close();});
-  /* Abre sozinho uma vez a cada 7 dias para quem ainda não enviou;
-     fechar só minimiza para o botão do canto. */
-  const st=fabState(),week=7*24*60*60*1000;
-  const recently=(st.closedAt&&Date.now()-st.closedAt<week)||(st.sentAt&&Date.now()-st.sentAt<week);
-  if(!recently){
-    setTimeout(()=>{
-      if(!panel.hidden)return;
-      if(document.querySelector('.tor-commercial-offer-overlay.is-open,#thAssistantModal.is-open,.hf-assistant.is-open,[aria-modal="true"]:not([hidden]):not(.tor-wa-panel)'))return;
-      open(true);
-    },20000);
+  /* Quem abre sozinho é o CTA deslizante do HubSpot ("[WAGeral] - Botão WhatsApp
+     Lateral"), que guarda as métricas de visualização/clique. Este botão só fica no
+     canto para reabrir o formulário e some enquanto o CTA do HubSpot está na tela. */
+  const ctaSel='[id^="hs-web-interactive"],[class*="hs-web-interactive"],[id^="hs-interactives"],.leadinModal,[id^="leadinModal"]';
+  function ctaVisible(){
+    return [...document.querySelectorAll(ctaSel)].some(el=>{
+      if(root.contains(el))return false;
+      const r=el.getBoundingClientRect(),cs=getComputedStyle(el);
+      return r.width>40&&r.height>40&&cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>0.05;
+    });
   }
+  let raf=0;
+  function sync(){raf=0;root.classList.toggle('is-hidden-by-cta',panel.hidden&&ctaVisible());}
+  new MutationObserver(()=>{if(!raf)raf=requestAnimationFrame(sync);}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class']});
+  setInterval(sync,1500);
 }
 
 /* ---------- API pública ---------- */
