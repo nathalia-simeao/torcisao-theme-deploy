@@ -165,6 +165,8 @@ function initWorkModal(){
     if(status){status.textContent='Enviando seu currículo para o RH...';status.className='tor-work-status';}
 
     try{
+      /* página pode vir do cache com nonce vencido: busca um novo antes de enviar */
+      try{const nr=await fetch(ajaxUrl+'?action=torcisao_resume_nonce',{credentials:'same-origin'});const nj=await nr.json();if(nj&&nj.success&&nj.data&&nj.data.nonce)data.set('nonce',nj.data.nonce);}catch(e){}
       const response=await fetch(ajaxUrl,{method:'POST',body:data,credentials:'same-origin'});
       const json=await response.json();
       if(!response.ok||!json?.success)throw new Error(json?.data?.message||json?.data||'Não foi possível enviar agora.');

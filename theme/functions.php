@@ -188,7 +188,7 @@ function torcisao_theme_assets(){
         wp_enqueue_script('torcisao-product-quote-tab-v17',$uri.'/assets/torcisao-product-quote-tab-v17.js',['torcisao-product-data-consistency-v16'],'20260907-1',true);
     }
     if (!$is_home_pt) {
-        wp_enqueue_script('torcisao-footer-recovery',$uri.'/assets/torcisao-footer-recovery.js',['torcisao-commercial-handoff'], '20260907-3', true);
+        wp_enqueue_script('torcisao-footer-recovery',$uri.'/assets/torcisao-footer-recovery.js',['torcisao-commercial-handoff'], '20261105-1', true);
         wp_enqueue_script('torcisao-footer-group-v2',$uri.'/assets/torcisao-footer-group-v2.js',['torcisao-footer-recovery'], '20260907-2', true);
     }
 

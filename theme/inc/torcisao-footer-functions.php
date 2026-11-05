@@ -85,6 +85,13 @@ function torcisao_send_resume_ajax(){
 
     wp_send_json_success(['message'=>'Currículo enviado diretamente para o RH com sucesso.']);
 }
+/* Nonce novo para páginas servidas pelo cache (o do HTML pode ter vencido). */
+function torcisao_resume_nonce_ajax(){
+    nocache_headers();
+    wp_send_json_success(['nonce' => wp_create_nonce('torcisao_resume')]);
+}
+add_action('wp_ajax_torcisao_resume_nonce', 'torcisao_resume_nonce_ajax');
+add_action('wp_ajax_nopriv_torcisao_resume_nonce', 'torcisao_resume_nonce_ajax');
 add_action('wp_ajax_torcisao_send_resume', 'torcisao_send_resume_ajax');
 add_action('wp_ajax_nopriv_torcisao_send_resume', 'torcisao_send_resume_ajax');
 
