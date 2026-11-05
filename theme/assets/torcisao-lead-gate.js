@@ -647,10 +647,25 @@ function installWaFab(){
       return r.width>40&&r.height>40&&cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>0.05;
     });
   }
+  /* O botão só aparece depois que o CTA do HubSpot já foi mostrado e fechado, ou quando
+     o HubSpot carregou e o CTA não aparece (o visitante já tinha fechado antes). */
+  let ctaSeen=false,graceUntil=0;
+  root.classList.add('is-waiting');
+  function startGrace(){if(!graceUntil)graceUntil=Date.now()+12000;}
+  if(window.__torcisaoDelayedAt||!document.querySelector('script[type="text/torcisao-delay"]'))startGrace();
+  else ['pointerdown','touchstart','keydown','scroll','wheel'].forEach(ev=>addEventListener(ev,startGrace,{passive:true,once:true}));
+  setTimeout(startGrace,4500);
   let raf=0;
-  function sync(){raf=0;root.classList.toggle('is-hidden-by-cta',panel.hidden&&ctaVisible());}
+  function sync(){
+    raf=0;
+    const vis=ctaVisible();
+    if(vis)ctaSeen=true;
+    const ready=ctaSeen||(graceUntil&&Date.now()>graceUntil);
+    root.classList.toggle('is-waiting',!ready&&panel.hidden);
+    root.classList.toggle('is-hidden-by-cta',panel.hidden&&vis);
+  }
   new MutationObserver(()=>{if(!raf)raf=requestAnimationFrame(sync);}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class']});
-  setInterval(sync,1500);
+  setInterval(sync,1000);
 }
 
 /* ---------- API pública ---------- */

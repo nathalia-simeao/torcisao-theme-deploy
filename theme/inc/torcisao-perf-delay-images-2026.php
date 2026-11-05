@@ -198,7 +198,7 @@ function torcisao_delay_buffer($html) {
     if (!$count) return $html;
     $loader = <<<'JS'
 <script id="torcisao-delay-loader">(function(){var go=false,ev=['pointerdown','touchstart','keydown','scroll','wheel'];
-function run(){if(go)return;go=true;ev.forEach(function(e){removeEventListener(e,run,{passive:true})});
+function run(){if(go)return;go=true;window.__torcisaoDelayedAt=Date.now();ev.forEach(function(e){removeEventListener(e,run,{passive:true})});
 var list=[].slice.call(document.querySelectorAll('script[type="text/torcisao-delay"]'));
 (function next(){var o=list.shift();if(!o)return;var s=document.createElement('script');
 for(var i=0;i<o.attributes.length;i++){var a=o.attributes[i];if(a.name==='type')continue;if(a.name==='data-torcisao-src'){s.src=a.value;continue}s.setAttribute(a.name,a.value)}
@@ -214,3 +214,17 @@ JS;
 add_action('template_redirect', function () {
     if (torcisao_delay_enabled()) ob_start('torcisao_delay_buffer');
 }, 1);
+
+/* O tema antigo tirava o script do HubSpot da Home e da Barra (só carregava ao clicar em
+   cotação), e com isso o CTA deslizante de WhatsApp nunca aparecia nessas páginas. Agora o
+   script volta em todas as páginas, carregado após a 1ª interação (acima). */
+add_action('after_setup_theme', function () {
+    if (torcisao_delay_enabled_soft()) {
+        remove_action('wp_enqueue_scripts', 'torcisao_defer_hubspot_global_script', 9999);
+        remove_action('wp_footer', 'torcisao_lazy_hubspot_loader', 98);
+    }
+}, 20);
+function torcisao_delay_enabled_soft() {
+    if (defined('TORCISAO_NO_DELAY_JS') && TORCISAO_NO_DELAY_JS) return false;
+    return !isset($_GET['torcisao_nodelay']);
+}

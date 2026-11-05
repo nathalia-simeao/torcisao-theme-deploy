@@ -143,7 +143,7 @@
 /* ---------- Botão flutuante do WhatsApp (2026-11) ---------- */
 .tor-wa-fab{position:fixed;right:20px;bottom:20px;z-index:999990;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:inherit;pointer-events:none}
 .tor-wa-fab>*{pointer-events:auto}
-.tor-wa-fab.is-hidden-by-cta{display:none}
+.tor-wa-fab.is-hidden-by-cta,.tor-wa-fab.is-waiting{display:none}
 .tor-wa-fab-btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 18px;border:0;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:.95rem;box-shadow:0 10px 28px rgba(0,0,0,.18);cursor:pointer;transition:transform .15s,box-shadow .15s}
 .tor-wa-fab-btn i{font-size:1.5rem;line-height:1}
 .tor-wa-fab-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.22)}
