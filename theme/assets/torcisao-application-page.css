@@ -82,3 +82,33 @@
 .ta-hero .hf-intro{max-width:68ch;margin-inline:0;text-align:left}
 .ta-crumbs,.ta-hero-actions,.ta-trust{justify-content:flex-start}
 .ta-faq{margin-top:0!important}
+
+/* Formulário de cotação */
+.ta-form-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(22px,4vw,56px);align-items:start}
+.ta-form-copy p{color:var(--hf-text);line-height:1.7;margin:14px 0 22px}
+.ta-form-copy a{color:var(--hf-orange-dark);font-weight:700}
+.ta-form-card{background:var(--hf-card);border:1px solid var(--hf-line);border-radius:var(--ta-radius);box-shadow:var(--hf-shadow);padding:clamp(18px,3vw,32px);min-height:320px}
+.ta-form-loading{color:var(--hf-text);font-size:.9rem;margin:0}
+#cotacao{scroll-margin-top:110px}
+.ta-cta-side{display:flex;flex-direction:column;gap:10px}
+@media (max-width:900px){.ta-form-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Formulário HubSpot no visual do site */
+#taQuoteForm .hs-form{font-family:'Montserrat',sans-serif;color:var(--hf-ink)}
+#taQuoteForm fieldset{max-width:none!important;border:0;padding:0;margin:0}
+#taQuoteForm fieldset.form-columns-2 .hs-form-field{width:50%!important;float:left;padding-right:12px;box-sizing:border-box}
+#taQuoteForm fieldset.form-columns-2 .hs-form-field:last-child{padding-right:0}
+#taQuoteForm .input{margin-right:0!important}
+#taQuoteForm .hs-form-field{margin-bottom:14px}
+#taQuoteForm .hs-form-field>label{display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--hf-text);margin-bottom:6px}
+#taQuoteForm .hs-input:not([type=checkbox]):not([type=radio]){width:100%!important;box-sizing:border-box;border:1px solid var(--hf-line);border-radius:14px;padding:12px 14px;font:inherit;font-size:.95rem;background:var(--hf-bg);color:var(--hf-ink);transition:border-color .15s,box-shadow .15s}
+#taQuoteForm textarea.hs-input{min-height:110px;resize:vertical}
+#taQuoteForm .hs-input:focus{outline:none;border-color:var(--hf-orange);box-shadow:0 0 0 3px rgba(239,123,48,.18)}
+#taQuoteForm .hs-form-booleancheckbox-display,#taQuoteForm .hs-form-checkbox-display{display:flex;gap:8px;align-items:flex-start;font-size:.82rem;color:var(--hf-text)}
+#taQuoteForm .inputs-list{list-style:none;padding:0;margin:0}
+#taQuoteForm .legal-consent-container,#taQuoteForm .legal-consent-container p{font-size:.78rem;line-height:1.5;color:var(--hf-text)}
+#taQuoteForm .hs-error-msgs{list-style:none;padding:0;margin:6px 0 0;color:#b42318;font-size:.8rem;font-weight:600}
+#taQuoteForm .hs-button{width:100%;min-height:50px;border:0;border-radius:999px;background:var(--hf-orange);color:#fff;font:800 .82rem/1 'Montserrat',sans-serif;letter-spacing:.02em;cursor:pointer;margin-top:6px;transition:background .15s}
+#taQuoteForm .hs-button:hover{background:var(--hf-orange-dark)}
+#taQuoteForm .submitted-message{font-size:1rem;line-height:1.6;color:var(--hf-ink);padding:10px 0}
+@media (max-width:560px){#taQuoteForm fieldset.form-columns-2 .hs-form-field{width:100%!important;float:none;padding-right:0}}

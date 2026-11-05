@@ -28,7 +28,7 @@ get_header();
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
-<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-2">
+<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-3">
 <main class="hf-page ta-page" id="aplicacao" data-ta-key="<?php echo esc_attr($ta_key); ?>" data-ta-line="<?php echo esc_attr($ta_line); ?>">
 
   <section class="hf-top ta-hero"><div class="hf-wrap">
@@ -41,7 +41,8 @@ get_header();
     <h1 class="hf-title"><?php echo esc_html($ta['title']); ?></h1>
     <p class="hf-intro"><?php echo esc_html($ta['intro']); ?></p>
     <div class="ta-hero-actions">
-      <a class="hf-btn hf-btn-primary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_hero" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Solicitar cotação</a>
+      <a class="hf-btn hf-btn-primary js-ta-form-link" href="#cotacao" data-analytics-origin="aplicacao_hero" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-clipboard-check"></i> Solicitar cotação</a>
+      <a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_hero_whatsapp" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Falar no WhatsApp</a>
       <button type="button" class="hf-btn hf-btn-secondary js-ta-calc" data-product="<?php echo esc_attr($ta_line); ?>"><i class="bi bi-calculator"></i> Calcular peso e metragem</button>
     </div>
     <ul class="ta-trust">
@@ -98,6 +99,24 @@ get_header();
     </aside>
   </div></div></section>
 
+  <section class="hf-section ta-form-section" id="cotacao"><div class="hf-wrap"><div class="ta-form-grid">
+    <div class="ta-form-copy">
+      <span class="hf-section-kicker">Cotação</span>
+      <h2 class="hf-section-title">Solicite sua cotação</h2>
+      <p>Preencha o formulário com aço, bitola, quantidade e aplicação. O time comercial valida a especificação e retorna com preço e prazo.</p>
+      <ul class="ta-check">
+        <li><i class="bi bi-check2-circle"></i>Atendimento direto com a fábrica</li>
+        <li><i class="bi bi-check2-circle"></i>Validação técnica da especificação</li>
+        <li><i class="bi bi-check2-circle"></i>Prefere conversar? <a href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_form_whatsapp">Chame no WhatsApp</a></li>
+      </ul>
+    </div>
+    <div class="ta-form-card">
+      <div id="taQuoteForm" data-form-id="<?php echo esc_attr(torcisao_app_form_id($ta_line)); ?>" data-analytics-origin="aplicacao_formulario" data-analytics-product="<?php echo esc_attr($ta_key); ?>">
+        <p class="ta-form-loading">Carregando o formulário…</p>
+      </div>
+    </div>
+  </div></div></section>
+
   <section class="hf-section" id="faq"><div class="hf-wrap">
     <div class="hf-section-head"><span class="hf-section-kicker">Dúvidas frequentes</span><h2 class="hf-section-title"><?php echo esc_html(ucfirst($ta['app'])); ?>: perguntas comuns</h2></div>
     <div class="hf-mini-faq ta-faq">
@@ -124,9 +143,12 @@ get_header();
     <div class="hf-cta-copy"><span class="hf-section-kicker">Atendimento comercial</span>
       <h2>Vamos cotar o seu <?php echo esc_html(mb_strtolower($ta_line_name)); ?> para <?php echo esc_html($ta['app']); ?>?</h2>
       <p>Envie aço, bitola, quantidade e aplicação. O time Torcisão valida a especificação e retorna com preço e prazo.</p></div>
-    <div class="hf-cta-side"><a class="hf-btn hf-btn-primary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_cta" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Falar com o comercial</a></div>
+    <div class="hf-cta-side ta-cta-side">
+      <a class="hf-btn hf-btn-primary js-ta-form-link" href="#cotacao" data-analytics-origin="aplicacao_cta" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-clipboard-check"></i> Preencher formulário</a>
+      <a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_cta_whatsapp" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Falar no WhatsApp</a>
+    </div>
   </div></div></section>
 </main>
 <script>window.TORCISAO_APP_PAGE=<?php echo wp_json_encode(['rest' => esc_url_raw(rest_url('torcisao/v1/application-assistant')), 'key' => $ta_key, 'line' => $ta_line, 'title' => $ta['title']]); ?>;</script>
-<script defer src="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.js'); ?>?v=20261105-1"></script>
+<script defer src="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.js'); ?>?v=20261105-3"></script>
 <?php get_footer();

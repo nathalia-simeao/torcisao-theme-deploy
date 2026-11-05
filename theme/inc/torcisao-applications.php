@@ -17,15 +17,18 @@ const TORCISAO_APP_MEDIA = 'https://torcisao.com.br/wp-content/uploads/2026/09/'
 
 /** Linhas do catálogo (espelho do catálogo aprovado do Theo). */
 function torcisao_app_products() {
-    $arame_img = TORCISAO_APP_MEDIA . 'arametrefiladorolo.png';
+    /* rolo, spider e detalhe do spider — para cada linha ter a sua foto */
+    $arame_rolo = TORCISAO_APP_MEDIA . 'arametrefiladorolo-768x768.png';
+    $arame_spider = TORCISAO_APP_MEDIA . 'arametrefiladospider-768x768.png';
+    $arame_detalhe = TORCISAO_APP_MEDIA . 'aramespidera1-768x768.png';
     return [
-        'arame_btc' => ['name' => 'Arame Trefilado - Baixo Teor de Carbono', 'short' => 'Baixo Teor de Carbono', 'line' => 'arame', 'kind' => 'btc', 'img' => $arame_img,
+        'arame_btc' => ['name' => 'Arame Trefilado - Baixo Teor de Carbono', 'short' => 'Baixo Teor de Carbono', 'line' => 'arame', 'kind' => 'btc', 'img' => $arame_rolo,
             'summary' => 'Arame trefilado de baixo teor de carbono para aplicações industriais e componentes conformados.',
             'specs' => ['Aços 1004 a 1020', 'Bitola 2,00 a 15,88 mm', 'Perfil redondo', 'Rolos ou spiders']],
-        'arame_mtc' => ['name' => 'Arame Trefilado - Médio Teor de Carbono', 'short' => 'Médio Teor de Carbono', 'line' => 'arame', 'kind' => 'mtc', 'img' => $arame_img,
+        'arame_mtc' => ['name' => 'Arame Trefilado - Médio Teor de Carbono', 'short' => 'Médio Teor de Carbono', 'line' => 'arame', 'kind' => 'mtc', 'img' => $arame_spider,
             'summary' => 'Arame trefilado de médio teor de carbono para aplicações que exigem validação de propriedades mecânicas e processo.',
             'specs' => ['Aços 1035 a 1050', 'Bitola 4,76 a 15,88 mm', 'Perfil redondo', 'Rolos ou spiders']],
-        'arame_atc' => ['name' => 'Arame Trefilado - Alto Teor de Carbono', 'short' => 'Alto Teor de Carbono', 'line' => 'arame', 'kind' => 'atc', 'img' => $arame_img,
+        'arame_atc' => ['name' => 'Arame Trefilado - Alto Teor de Carbono', 'short' => 'Alto Teor de Carbono', 'line' => 'arame', 'kind' => 'atc', 'img' => $arame_detalhe,
             'summary' => 'Arame trefilado de alto teor de carbono para aplicações que exigem validação de resistência, plasticidade, dureza e processo.',
             'specs' => ['Aços 1060 a 1090', 'Bitola 4,76 a 15,88 mm', 'Perfil redondo', 'Rolos ou spiders']],
         'barra_btc' => ['name' => 'Barra Trefilada - Baixo Teor de Carbono', 'short' => 'Baixo Teor de Carbono', 'line' => 'barra', 'kind' => 'btc', 'img' => TORCISAO_APP_MEDIA . 'barratrefiladabtca1.png',
@@ -41,6 +44,11 @@ function torcisao_app_products() {
             'summary' => 'Barra trefilada em aço ressulfurado 11SMn37 para aplicações em que usinabilidade, precisão dimensional e acabamento são critérios importantes.',
             'specs' => ['Aço 11SMn37', 'Bitola 4,76 a 15,88 mm', 'Perfil redondo', 'Tolerância sob consulta']],
     ];
+}
+
+/** Formulário de cotação do HubSpot (o mesmo das páginas de produto). */
+function torcisao_app_form_id($line) {
+    return $line === 'arame' ? '618563c8-4899-441b-965d-801a83009fdf' : '7032f62e-b2f6-486a-8db7-bd2822b5db93';
 }
 
 /** O que pedir na cotação, por linha. */
@@ -231,7 +239,7 @@ function torcisao_app_pages() {
 function torcisao_app_common_faq($line) {
     return [
         ['Qual é o pedido mínimo?', 'O lote mínimo varia conforme o aço, a bitola, a condição de produção, o ' . ($line === 'arame' ? 'acondicionamento' : 'comprimento') . ' e a quantidade. A Torcisão confirma a condição comercial durante a cotação.'],
-        ['Como solicitar uma cotação?', 'Fale com o comercial pelo WhatsApp ou pelo Theo nesta página informando aço, bitola, quantidade e aplicação. Se houver exigência de resistência, dureza, acabamento, tolerância ou documentação, inclua esses dados.'],
+        ['Como solicitar uma cotação?', 'Preencha o formulário de cotação nesta página, ou fale com o comercial pelo WhatsApp ou pelo Theo, informando aço, bitola, quantidade e aplicação. Se houver exigência de resistência, dureza, acabamento, tolerância ou documentação, inclua esses dados.'],
     ];
 }
 
