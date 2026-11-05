@@ -10,7 +10,6 @@
  *    de antes (a cascata não muda). O arquivo é gerado uma vez e reaproveitado;
  *    muda sozinho quando algum CSS do tema muda (hash por data de alteração).
  * 2) Bootstrap Icons deixa de bloquear a renderização (carrega logo depois).
- * 3) Pré-conexão com as fontes e o CDN.
  * 4) O script de UTM passa a ser "defer" (continua rodando antes do formulário).
  *
  * Para desligar o pacote e voltar aos arquivos separados: ?torcisao_nobundle=1
@@ -139,15 +138,6 @@ add_filter('style_loader_tag', function ($tag, $handle, $href) {
     if ($async === $tag) return $tag;
     return $async . '<noscript>' . $tag . '</noscript>';
 }, 10, 3);
-
-/* Pré-conexão com quem serve fontes e ícones. */
-add_filter('wp_resource_hints', function ($urls, $type) {
-    if ($type !== 'preconnect') return $urls;
-    $urls[] = ['href' => 'https://fonts.googleapis.com'];
-    $urls[] = ['href' => 'https://fonts.gstatic.com', 'crossorigin'];
-    $urls[] = ['href' => 'https://cdn.jsdelivr.net', 'crossorigin'];
-    return $urls;
-}, 10, 2);
 
 /* UTM: defer (o script já espera o DOM e observa formulários que aparecem depois). */
 add_filter('script_loader_tag', function ($tag, $handle) {

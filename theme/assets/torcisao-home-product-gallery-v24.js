@@ -31,8 +31,8 @@ const DATA={
     pickerId:'tpeArameAnglePicker',pickerClass:'tor-arame-angle-picker',buttonClass:'tor-arame-angle-btn',heading:'Opções',showPicker:true,
     items(state){
       const map={
-        rolo:[MEDIA+'arametrefiladorolo.png',MEDIA+'aramera1.png',MEDIA+'aramera2.png'],
-        spider:[MEDIA+'arametrefiladospider.png',MEDIA+'aramespidera1.png',MEDIA+'aramespidera2.png']
+        rolo:[(window.TorcisaoImg||String)(MEDIA+'arametrefiladorolo.png'),(window.TorcisaoImg||String)(MEDIA+'aramera1.png'),(window.TorcisaoImg||String)(MEDIA+'aramera2.png')],
+        spider:[(window.TorcisaoImg||String)(MEDIA+'arametrefiladospider.png'),(window.TorcisaoImg||String)(MEDIA+'aramespidera1.png'),(window.TorcisaoImg||String)(MEDIA+'aramespidera2.png')]
       };
       return map[state.view]||map.spider;
     },
@@ -43,10 +43,10 @@ const DATA={
     pickerId:'tpeBtcAnglePicker',pickerClass:'tor-btc-angle-picker',buttonClass:'tor-btc-angle-btn',heading:'Ângulos',showPicker:true,
     items(state){
       const map={
-        btc:{trefilada:[MEDIA+'barratrefiladabtca1.png',MEDIA+'barratrefiladabtca2.png',MEDIA+'barratrefiladabtca3.png'],polida:[MEDIA+'barrapolidabtca1.png',MEDIA+'barrapolidabtca2.png',MEDIA+'barrapolidabtca3.png']},
-        mtc:{trefilada:[MEDIA+'barratrefiladamtca1.png',MEDIA+'barratrefiladamtca2.png',MEDIA+'barratrefiladamtca3.png'],polida:[MEDIA+'barrapolidamtca1.png',MEDIA+'barrapolidamtca2.png',MEDIA+'barrapolidamtca3.png']},
-        atc:{trefilada:[MEDIA+'barratrefiladaatca1.png',MEDIA+'barratrefiladaatca2.png',MEDIA+'barratrefiladaatca3.png'],polida:[MEDIA+'barrapolidaatca1.png',MEDIA+'barrapolidaatca2.png',MEDIA+'barrapolidaatca3.png']},
-        ressulfurado:{trefilada:[MEDIA+'barratrefiladaressulfuradoa1.png',MEDIA+'barratrefiladaressulfuradoa2.png',MEDIA+'barratrefiladaressulfuradoa3.png'],polida:[MEDIA+'barrapolidaressulfuradoa1.png',MEDIA+'barrapolidaressulfuradoa2.png',MEDIA+'barrapolidaressulfuradoa3.png']}
+        btc:{trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladabtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladabtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladabtca3.png')],polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidabtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidabtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidabtca3.png')]},
+        mtc:{trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtca3.png')],polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidamtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidamtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidamtca3.png')]},
+        atc:{trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca3.png')],polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca3.png')]},
+        ressulfurado:{trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa3.png')],polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa3.png')]}
       };
       const variant=map[state.variant]||map.btc;
       return variant[state.finish==='polida'?'polida':'trefilada'];
@@ -57,8 +57,8 @@ const DATA={
   haste:{
     pickerId:'tpeHasteAnglePicker',pickerClass:'tor-haste-angle-picker',buttonClass:'tor-haste-angle-btn',heading:'Opções',showPicker:true,
     items(state){
-      const first=state.variant==='alta'?MEDIA+'altacamada.png':MEDIA+'baixacamada.png';
-      return [first,MEDIA+'hasteinteirapeca.png',MEDIA+'conjunto-de-hastes.png'];
+      const first=state.variant==='alta'?(window.TorcisaoImg||String)(MEDIA+'altacamada.png'):(window.TorcisaoImg||String)(MEDIA+'baixacamada.png');
+      return [first,(window.TorcisaoImg||String)(MEDIA+'hasteinteirapeca.png'),(window.TorcisaoImg||String)(MEDIA+'conjunto-de-hastes.png')];
     },
     signature(state){return ['haste',state.variant||'baixa'].join('|');},
     alt(state,index){return 'Haste de aterramento '+(state.variant==='alta'?'Alta Camada':'Baixa Camada')+' · opção '+(index+1);}
@@ -67,10 +67,10 @@ const DATA={
     pickerId:'tpeConnectorGalleryPicker',pickerClass:'tor-connector-gallery-picker',buttonClass:'tor-connector-gallery-btn',heading:'',showPicker:false,
     items(state){
       const map={
-        'olhal-simples':MEDIA+'olhalsimples.png',
-        'olhal-reforcado':MEDIA+'olhalreforcado.png',
-        'grampo-simples':MEDIA+'formatoUsimples.png',
-        'grampo-reforcado':MEDIA+'formatoUreforcado.png'
+        'olhal-simples':(window.TorcisaoImg||String)(MEDIA+'olhalsimples.png'),
+        'olhal-reforcado':(window.TorcisaoImg||String)(MEDIA+'olhalreforcado.png'),
+        'grampo-simples':(window.TorcisaoImg||String)(MEDIA+'formatoUsimples.png'),
+        'grampo-reforcado':(window.TorcisaoImg||String)(MEDIA+'formatoUreforcado.png')
       };
       return [map[state.variant]||map['olhal-simples']];
     },

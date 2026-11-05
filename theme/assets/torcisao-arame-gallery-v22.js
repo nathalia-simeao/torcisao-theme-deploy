@@ -4,14 +4,14 @@
 const MEDIA='https://torcisao.com.br/wp-content/uploads/2026/09/';
 const GALLERY={
   rolo:[
-    {src:MEDIA+'arametrefiladorolo.png'},
-    {src:MEDIA+'aramera1.png'},
-    {src:MEDIA+'aramera2.png'}
+    {src:(window.TorcisaoImg||String)(MEDIA+'arametrefiladorolo.png')},
+    {src:(window.TorcisaoImg||String)(MEDIA+'aramera1.png')},
+    {src:(window.TorcisaoImg||String)(MEDIA+'aramera2.png')}
   ],
   spider:[
-    {src:MEDIA+'arametrefiladospider.png'},
-    {src:MEDIA+'aramespidera1.png'},
-    {src:MEDIA+'aramespidera2.png'}
+    {src:(window.TorcisaoImg||String)(MEDIA+'arametrefiladospider.png')},
+    {src:(window.TorcisaoImg||String)(MEDIA+'aramespidera1.png')},
+    {src:(window.TorcisaoImg||String)(MEDIA+'aramespidera2.png')}
   ]
 };
 

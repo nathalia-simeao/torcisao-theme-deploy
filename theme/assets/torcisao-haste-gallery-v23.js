@@ -4,14 +4,14 @@
 const MEDIA='https://torcisao.com.br/wp-content/uploads/2026/09/';
 const GALLERY={
   baixa:[
-    {src:MEDIA+'baixacamada.png',alt:'Haste de aterramento Torcisão · Baixa Camada'},
-    {src:MEDIA+'hasteinteirapeca.png',alt:'Haste de aterramento Torcisão · peça inteira'},
-    {src:MEDIA+'conjunto-de-hastes.png',alt:'Conjunto de hastes de aterramento Torcisão'}
+    {src:(window.TorcisaoImg||String)(MEDIA+'baixacamada.png'),alt:'Haste de aterramento Torcisão · Baixa Camada'},
+    {src:(window.TorcisaoImg||String)(MEDIA+'hasteinteirapeca.png'),alt:'Haste de aterramento Torcisão · peça inteira'},
+    {src:(window.TorcisaoImg||String)(MEDIA+'conjunto-de-hastes.png'),alt:'Conjunto de hastes de aterramento Torcisão'}
   ],
   alta:[
-    {src:MEDIA+'altacamada.png',alt:'Haste de aterramento Torcisão · Alta Camada'},
-    {src:MEDIA+'hasteinteirapeca.png',alt:'Haste de aterramento Torcisão · peça inteira'},
-    {src:MEDIA+'conjunto-de-hastes.png',alt:'Conjunto de hastes de aterramento Torcisão'}
+    {src:(window.TorcisaoImg||String)(MEDIA+'altacamada.png'),alt:'Haste de aterramento Torcisão · Alta Camada'},
+    {src:(window.TorcisaoImg||String)(MEDIA+'hasteinteirapeca.png'),alt:'Haste de aterramento Torcisão · peça inteira'},
+    {src:(window.TorcisaoImg||String)(MEDIA+'conjunto-de-hastes.png'),alt:'Conjunto de hastes de aterramento Torcisão'}
   ]
 };
 

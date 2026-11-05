@@ -5,23 +5,23 @@ const MEDIA='https://torcisao.com.br/wp-content/uploads/2026/09/';
 const GALLERIES={
   btc:{
     label:'BTC',
-    trefilada:[MEDIA+'barratrefiladabtca1.png',MEDIA+'barratrefiladabtca2.png',MEDIA+'barratrefiladabtca3.png'],
-    polida:[MEDIA+'barrapolidabtca1.png',MEDIA+'barrapolidabtca2.png',MEDIA+'barrapolidabtca3.png']
+    trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladabtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladabtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladabtca3.png')],
+    polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidabtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidabtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidabtca3.png')]
   },
   mtc:{
     label:'MTC',
-    trefilada:[MEDIA+'barratrefiladamtca1.png',MEDIA+'barratrefiladamtca2.png',MEDIA+'barratrefiladamtca3.png'],
-    polida:[MEDIA+'barrapolidamtca1.png',MEDIA+'barrapolidamtca2.png',MEDIA+'barrapolidamtca3.png']
+    trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtca3.png')],
+    polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidamtca1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidamtca2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidamtca3.png')]
   },
   atc:{
     label:'ATC',
-    trefilada:[MEDIA+'barratrefiladaatca1.png',MEDIA+'barratrefiladaatca2.png',MEDIA+'barratrefiladaatca3.png'],
-    polida:[MEDIA+'barrapolidaatca1.png',MEDIA+'barrapolidaatca2.png',MEDIA+'barrapolidaatca3.png']
+    trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca3.png')],
+    polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca3.png')]
   },
   ressulfurado:{
     label:'Ressulfurado',
-    trefilada:[MEDIA+'barratrefiladaressulfuradoa1.png',MEDIA+'barratrefiladaressulfuradoa2.png',MEDIA+'barratrefiladaressulfuradoa3.png'],
-    polida:[MEDIA+'barrapolidaressulfuradoa1.png',MEDIA+'barrapolidaressulfuradoa2.png',MEDIA+'barrapolidaressulfuradoa3.png']
+    trefilada:[(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa1.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa2.png'),(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa3.png')],
+    polida:[(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa1.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa2.png'),(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa3.png')]
   }
 };
 

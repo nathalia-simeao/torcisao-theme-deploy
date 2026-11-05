@@ -5,39 +5,39 @@ const MEDIA='https://torcisao.com.br/wp-content/uploads/2026/09/';
 
 const exactImages={
   haste:{
-    baixa:[{label:'Baixa Camada',url:MEDIA+'baixacamada.png'}],
-    alta:[{label:'Alta Camada',url:MEDIA+'altacamada.png'}]
+    baixa:[{label:'Baixa Camada',url:(window.TorcisaoImg||String)(MEDIA+'baixacamada.png')}],
+    alta:[{label:'Alta Camada',url:(window.TorcisaoImg||String)(MEDIA+'altacamada.png')}]
   },
   arame:{
     btc:[
-      {label:'Rolo',url:MEDIA+'arametrefiladorolo.png'},
-      {label:'Spider',url:MEDIA+'arametrefiladospider.png'}
+      {label:'Rolo',url:(window.TorcisaoImg||String)(MEDIA+'arametrefiladorolo.png')},
+      {label:'Spider',url:(window.TorcisaoImg||String)(MEDIA+'arametrefiladospider.png')}
     ],
     mtc:[
-      {label:'Rolo',url:MEDIA+'arametrefiladorolo.png'},
-      {label:'Spider',url:MEDIA+'arametrefiladospider.png'}
+      {label:'Rolo',url:(window.TorcisaoImg||String)(MEDIA+'arametrefiladorolo.png')},
+      {label:'Spider',url:(window.TorcisaoImg||String)(MEDIA+'arametrefiladospider.png')}
     ],
     atc:[
-      {label:'Rolo',url:MEDIA+'arametrefiladorolo.png'},
-      {label:'Spider',url:MEDIA+'arametrefiladospider.png'}
+      {label:'Rolo',url:(window.TorcisaoImg||String)(MEDIA+'arametrefiladorolo.png')},
+      {label:'Spider',url:(window.TorcisaoImg||String)(MEDIA+'arametrefiladospider.png')}
     ]
   },
   barra:{
     btc:[
-      {label:'Baixo Carbono',url:MEDIA+'barrabtctrefilada.png'},
-      {label:'Sem polimento',url:MEDIA+'barratrefiladasempolimento.png'}
+      {label:'Baixo Carbono',url:(window.TorcisaoImg||String)(MEDIA+'barrabtctrefilada.png')},
+      {label:'Sem polimento',url:(window.TorcisaoImg||String)(MEDIA+'barratrefiladasempolimento.png')}
     ],
     mtc:[
-      {label:'Trefilada',url:MEDIA+'barratrefiladamtc.png'},
-      {label:'Trefilada polida',url:MEDIA+'barramtctrefiladapolida.png'}
+      {label:'Trefilada',url:(window.TorcisaoImg||String)(MEDIA+'barratrefiladamtc.png')},
+      {label:'Trefilada polida',url:(window.TorcisaoImg||String)(MEDIA+'barramtctrefiladapolida.png')}
     ],
     atc:[
-      {label:'Trefilada',url:MEDIA+'barratrefiladaatca1.png'},
-      {label:'Polida',url:MEDIA+'barrapolidaatca1.png'}
+      {label:'Trefilada',url:(window.TorcisaoImg||String)(MEDIA+'barratrefiladaatca1.png')},
+      {label:'Polida',url:(window.TorcisaoImg||String)(MEDIA+'barrapolidaatca1.png')}
     ],
     ressulfurado:[
-      {label:'Trefilada',url:MEDIA+'barratrefiladaressulfuradoa1.png'},
-      {label:'Polida',url:MEDIA+'barrapolidaressulfuradoa1.png'}
+      {label:'Trefilada',url:(window.TorcisaoImg||String)(MEDIA+'barratrefiladaressulfuradoa1.png')},
+      {label:'Polida',url:(window.TorcisaoImg||String)(MEDIA+'barrapolidaressulfuradoa1.png')}
     ]
   }
 };

@@ -13,25 +13,25 @@ const CONNECTORS={
   'olhal-simples':{
     title:'Olhal Simples',
     lead:'Conector para união entre haste e cabo em sistemas de aterramento.',
-    image:MEDIA+'olhalsimples.png',
+    image:(window.TorcisaoImg||String)(MEDIA+'olhalsimples.png'),
     facts:[['Norma','ABNT NBR 5370'],['Material','Latão ou bronze'],['Referência','2 kg / 100 peças'],['Aplicação','Haste + cabo']]
   },
   'olhal-reforcado':{
     title:'Olhal Reforçado',
     lead:'Modelo reforçado para conexão entre haste e cabo em sistemas de aterramento.',
-    image:MEDIA+'olhalreforcado.png',
+    image:(window.TorcisaoImg||String)(MEDIA+'olhalreforcado.png'),
     facts:[['Norma','ABNT NBR 5370'],['Material','Latão ou bronze'],['Referência','4 kg / 100 peças'],['Aplicação','Haste + cabo']]
   },
   'grampo-simples':{
     title:'Grampo U Simples',
     lead:'Conector em formato U para união entre haste e cabo.',
-    image:MEDIA+'formatoUsimples.png',
+    image:(window.TorcisaoImg||String)(MEDIA+'formatoUsimples.png'),
     facts:[['Norma','ABNT NBR 5370'],['Material','Latão ou bronze'],['Referência','8,5 kg / 100 peças'],['Aplicação','Haste + cabo']]
   },
   'grampo-reforcado':{
     title:'Grampo U Reforçado',
     lead:'Modelo reforçado em formato U para conexão entre haste e cabo.',
-    image:MEDIA+'formatoUreforcado.png',
+    image:(window.TorcisaoImg||String)(MEDIA+'formatoUreforcado.png'),
     facts:[['Norma','ABNT NBR 5370'],['Material','Latão ou bronze'],['Referência','15 kg / 100 peças'],['Aplicação','Haste + cabo']]
   }
 };
