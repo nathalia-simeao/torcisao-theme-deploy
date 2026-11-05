@@ -425,15 +425,15 @@ const CHATS=[
   CHATS.push({chat:'apChat',input:'apInput',send:'apSend',line:ap.dataset.line||'',start});})();
 const START={
   pt:{line:[['Arame trefilado','line','arame'],['Barra trefilada','line','barra'],['Haste de aterramento','line','haste'],['Outra coisa','line','outro']],
-      arame:[['Molas','app','arame_mtc:2'],['Telas','app','arame_mtc:0'],['Gradil','app','arame_btc:2'],['Cabos','app','arame_mtc:1'],['Pregos','app','arame_mtc:4'],['Outra aplicação','app','outro']],
+      arame:[['Molas','app','arame_mtc:2'],['Telas','app','arame_mtc:0'],['Gradil','app','arame_btc:2'],['Cabos','app','arame_mtc:1'],['Outra aplicação','app','outro']],
       barra:[['Fixadores','app','barra_btc:0'],['Autopeças','app','barra_btc:1'],['Pinos','app','barra_ressulfurado:1'],['Molas Helicoidais','app','barra_btc:4'],['Sistemas Hidráulicos','app','barra_ressulfurado:6'],['Outra aplicação','app','outro']],
       haste:[['Baixa camada','haste','haste_baixa'],['Alta camada','haste','haste_alta'],['Conectores','haste','conectores'],['Não sei qual escolher','haste','nao_sei']]},
   en:{line:[['Drawn wire','line','arame'],['Drawn bar','line','barra'],['Grounding rod','line','haste'],['Something else','line','outro']],
-      arame:[['Springs','app','arame_mtc:2'],['Mesh','app','arame_mtc:0'],['Fencing','app','arame_btc:2'],['Cables','app','arame_mtc:1'],['Nails','app','arame_mtc:4'],['Other application','app','outro']],
+      arame:[['Springs','app','arame_mtc:2'],['Mesh','app','arame_mtc:0'],['Fencing','app','arame_btc:2'],['Cables','app','arame_mtc:1'],['Other application','app','outro']],
       barra:[['Fasteners','app','barra_btc:0'],['Auto Parts','app','barra_btc:1'],['Pins','app','barra_ressulfurado:1'],['Helical Springs','app','barra_btc:4'],['Hydraulic Systems','app','barra_ressulfurado:6'],['Other application','app','outro']],
       haste:[['Low coating','haste','haste_baixa'],['High coating','haste','haste_alta'],['Connectors','haste','conectores'],["I'm not sure which",'haste','nao_sei']]},
   es:{line:[['Alambre trefilado','line','arame'],['Barra trefilada','line','barra'],['Varilla de tierra','line','haste'],['Otra cosa','line','outro']],
-      arame:[['Resortes','app','arame_mtc:2'],['Mallas','app','arame_mtc:0'],['Cercados','app','arame_btc:2'],['Cables','app','arame_mtc:1'],['Clavos','app','arame_mtc:4'],['Otra aplicación','app','outro']],
+      arame:[['Resortes','app','arame_mtc:2'],['Mallas','app','arame_mtc:0'],['Cercados','app','arame_btc:2'],['Cables','app','arame_mtc:1'],['Otra aplicación','app','outro']],
       barra:[['Fijadores','app','barra_btc:0'],['Autopartes','app','barra_btc:1'],['Pasadores','app','barra_ressulfurado:1'],['Resortes Helicoidales','app','barra_btc:4'],['Sistemas Hidráulicos','app','barra_ressulfurado:6'],['Otra aplicación','app','outro']],
       haste:[['Capa baja','haste','haste_baixa'],['Capa alta','haste','haste_alta'],['Conectores','haste','conectores'],['No sé cuál elegir','haste','nao_sei']]}
 };

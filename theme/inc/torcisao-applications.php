@@ -12,7 +12,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-const TORCISAO_APP_PAGES_VERSION = '2026.11.05.1';
+const TORCISAO_APP_PAGES_VERSION = '2026.11.05.2';
 const TORCISAO_APP_MEDIA = 'https://torcisao.com.br/wp-content/uploads/2026/09/';
 
 /** Linhas do catálogo (espelho do catálogo aprovado do Theo). */
@@ -103,7 +103,7 @@ function torcisao_app_pages() {
                 ['Qual arame trefilado é indicado para telas?', 'Para telas, a Torcisão indica o arame trefilado de médio teor de carbono, com aços de 1035 a 1050 e bitolas de 4,76 a 15,88 mm. A especificação final é validada com a equipe técnica conforme o tipo de tela e o equipamento.'],
                 ['Rolo ou spider: qual escolher para produzir telas?', 'Depende do sistema de alimentação da sua linha, do manuseio e do armazenamento. A Torcisão confirma a forma de fornecimento disponível para a especificação cotada.'],
             ],
-            'related' => ['arame-gradil', 'arame-pregos'],
+            'related' => ['arame-gradil', 'arame-molas'],
         ],
         'arame-cabos' => [
             'line' => 'arame', 'slug' => 'para-cabos-de-aco', 'app' => 'cabos de aço',
@@ -135,22 +135,7 @@ function torcisao_app_pages() {
                 ['Qual arame trefilado é indicado para gradil?', 'Para gradil e peças aramadas, a Torcisão indica o arame trefilado de baixo teor de carbono, com aços de 1004 a 1020, bitolas de 2,00 a 15,88 mm, em rolos ou spiders.'],
                 ['O arame de baixo carbono serve para displays, cestos e carrinhos?', 'Sim. Displays aramados, cestos aramados, racks metálicos, carrinhos de supermercado, utilidades domésticas e linha branca estão entre as aplicações da linha de baixo teor de carbono. A especificação final é validada na cotação.'],
             ],
-            'related' => ['arame-telas', 'arame-pregos'],
-        ],
-        'arame-pregos' => [
-            'line' => 'arame', 'slug' => 'para-pregos', 'app' => 'pregos',
-            'title' => 'Arame trefilado para pregos',
-            'seo_title' => 'Arame Trefilado para Pregos | Fabricante | Torcisão',
-            'meta' => 'Arame trefilado de médio teor de carbono para fabricação de pregos. Aços 1035 a 1050, rolos ou spiders. Solicite cotação direto da fábrica Torcisão.',
-            'intro' => 'Fabrica pregos? A Torcisão produz arame trefilado de médio teor de carbono para essa aplicação, em rolos ou spiders, com atendimento técnico para acertar a especificação.',
-            'why_title' => 'O que avaliar no arame para pregos',
-            'why' => 'Na produção de pregos, o arame precisa alimentar a máquina sem interrupção e manter as propriedades ao longo de todo o lote. Vale definir com o fornecedor a bitola, o aço e o acondicionamento que funcionam melhor no seu equipamento.',
-            'products' => ['arame_mtc'],
-            'theo' => 'Oi! Eu sou o Theo. Pra pregos, o caminho aqui é o nosso arame de médio teor de carbono. Você já sabe a bitola que precisa?',
-            'faq' => [
-                ['Qual arame trefilado usar para fabricar pregos?', 'Para pregos, a Torcisão indica o arame trefilado de médio teor de carbono, com aços de 1035 a 1050 e bitolas de 4,76 a 15,88 mm, em rolos ou spiders. A especificação final é validada na cotação.'],
-            ],
-            'related' => ['arame-telas', 'arame-gradil'],
+            'related' => ['arame-telas', 'arame-cabos'],
         ],
 
         /* ---------------- BARRA ---------------- */
@@ -288,6 +273,23 @@ add_action('admin_init', function () {
     update_option('torcisao_app_page_ids', $ids, false);
     update_option('torcisao_app_pages_version', TORCISAO_APP_PAGES_VERSION, false);
     if ($created) set_transient('torcisao_app_pages_notice', $created, WEEK_IN_SECONDS);
+});
+
+/* Páginas retiradas (ex.: arame para pregos — a Torcisão não fabrica arame para prego) */
+function torcisao_app_retired() { return ['arame-pregos']; }
+add_action('admin_init', function () {
+    if (!current_user_can('delete_pages') || get_option('torcisao_app_retired_done') === TORCISAO_APP_PAGES_VERSION) return;
+    $ids = (array) get_option('torcisao_app_page_ids', []);
+    foreach (torcisao_app_retired() as $key) {
+        $id = (int) ($ids[$key] ?? 0);
+        if ($id && get_post_status($id) === 'draft') wp_trash_post($id);   // vai para a lixeira (dá para restaurar)
+    }
+    update_option('torcisao_app_retired_done', TORCISAO_APP_PAGES_VERSION, false);
+}, 20);
+add_action('template_redirect', function () {
+    if (!is_page()) return;
+    $key = (string) get_post_meta(get_queried_object_id(), '_torcisao_app', true);
+    if ($key && in_array($key, torcisao_app_retired(), true)) { wp_safe_redirect(home_url('/arame-trefilado/'), 301); exit; }
 });
 
 add_action('admin_notices', function () {
