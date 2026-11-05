@@ -869,3 +869,7 @@ if (file_exists($torcisao_applications_file)) require_once $torcisao_application
 /* 2026-11 · SEO: redirecionamento dos endereços antigos e links para as páginas de aplicação */
 $torcisao_seo_file = get_template_directory().'/inc/torcisao-seo-2026.php';
 if (file_exists($torcisao_seo_file)) require_once $torcisao_seo_file;
+
+/* 2026-11 · Performance no celular: CSS do tema em um arquivo, ícones sem bloquear, UTM com defer */
+$torcisao_perf_bundle_file = get_template_directory().'/inc/torcisao-perf-bundle-2026.php';
+if (file_exists($torcisao_perf_bundle_file)) require_once $torcisao_perf_bundle_file;
