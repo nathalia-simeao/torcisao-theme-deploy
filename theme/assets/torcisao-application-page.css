@@ -112,3 +112,7 @@
 #taQuoteForm .hs-button:hover{background:var(--hf-orange-dark)}
 #taQuoteForm .submitted-message{font-size:1rem;line-height:1.6;color:var(--hf-ink);padding:10px 0}
 @media (max-width:560px){#taQuoteForm fieldset.form-columns-2 .hs-form-field{width:100%!important;float:none;padding-right:0}}
+
+/* Texto de apoio do topo: mesma largura e tamanho das páginas de produto, sem palavra solta no fim da linha */
+.ta-hero .hf-intro{max-width:980px;margin:16px 0 0;text-wrap:pretty}
+.ta-hero .hf-title{text-wrap:balance}

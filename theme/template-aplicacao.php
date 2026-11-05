@@ -28,7 +28,7 @@ get_header();
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
-<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-3">
+<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-4">
 <main class="hf-page ta-page" id="aplicacao" data-ta-key="<?php echo esc_attr($ta_key); ?>" data-ta-line="<?php echo esc_attr($ta_line); ?>">
 
   <section class="hf-top ta-hero"><div class="hf-wrap">
