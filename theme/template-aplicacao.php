@@ -28,7 +28,7 @@ get_header();
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
-<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-4">
+<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-5">
 <main class="hf-page ta-page" id="aplicacao" data-ta-key="<?php echo esc_attr($ta_key); ?>" data-ta-line="<?php echo esc_attr($ta_line); ?>">
 
   <section class="hf-top ta-hero"><div class="hf-wrap">
@@ -38,8 +38,10 @@ get_header();
       <span aria-current="page"><?php echo esc_html(ucfirst($ta['app'])); ?></span>
     </nav>
     <span class="hf-section-kicker"><?php echo esc_html($ta_line_name); ?> · Aplicação</span>
-    <h1 class="hf-title"><?php echo esc_html($ta['title']); ?></h1>
-    <p class="hf-intro"><?php echo esc_html($ta['intro']); ?></p>
+    <div class="ta-hero-copy">
+      <h1 class="hf-title"><?php echo esc_html($ta['title']); ?></h1>
+      <p class="hf-intro"><?php echo esc_html($ta['intro']); ?></p>
+    </div>
     <div class="ta-hero-actions">
       <a class="hf-btn hf-btn-primary js-ta-form-link" href="#cotacao" data-analytics-origin="aplicacao_hero" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-clipboard-check"></i> Solicitar cotação</a>
       <a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_hero_whatsapp" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Falar no WhatsApp</a>

@@ -116,3 +116,11 @@
 /* Texto de apoio do topo: mesma largura e tamanho das páginas de produto, sem palavra solta no fim da linha */
 .ta-hero .hf-intro{max-width:980px;margin:16px 0 0;text-wrap:pretty}
 .ta-hero .hf-title{text-wrap:balance}
+
+/* Título + texto de apoio como um bloco: o texto acompanha a largura do título e as linhas ficam equilibradas */
+.ta-hero-copy{display:grid;width:fit-content;max-width:100%;min-width:min(100%,920px)}
+.ta-hero-copy .hf-intro{max-width:none;width:auto;text-wrap:balance}
+/* o texto não define a largura do bloco: ocupa exatamente a largura do título (mínimo ~900px no computador) */
+.ta-hero-copy{display:inline-grid;width:auto;min-width:min(100%,900px)}
+.ta-hero-copy .hf-intro{width:0;min-width:100%;text-wrap:pretty}
+.ta-hero-copy{display:grid;width:fit-content;min-width:min(100%,980px)}
