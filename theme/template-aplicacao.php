@@ -28,7 +28,7 @@ get_header();
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
 <link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
-<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-1">
+<link rel="stylesheet" href="<?php echo esc_url($ta_assets . '/assets/torcisao-application-page.css'); ?>?v=20261105-2">
 <main class="hf-page ta-page" id="aplicacao" data-ta-key="<?php echo esc_attr($ta_key); ?>" data-ta-line="<?php echo esc_attr($ta_line); ?>">
 
   <section class="hf-top ta-hero"><div class="hf-wrap">
@@ -37,7 +37,7 @@ get_header();
       <a href="<?php echo esc_url($ta_line_url); ?>"><?php echo esc_html($ta_line_name); ?></a><span aria-hidden="true">›</span>
       <span aria-current="page"><?php echo esc_html(ucfirst($ta['app'])); ?></span>
     </nav>
-    <span class="hf-eyebrow"><?php echo esc_html($ta_line_name); ?> · Aplicação</span>
+    <span class="hf-section-kicker"><?php echo esc_html($ta_line_name); ?> · Aplicação</span>
     <h1 class="hf-title"><?php echo esc_html($ta['title']); ?></h1>
     <p class="hf-intro"><?php echo esc_html($ta['intro']); ?></p>
     <div class="ta-hero-actions">
@@ -99,8 +99,8 @@ get_header();
   </div></div></section>
 
   <section class="hf-section" id="faq"><div class="hf-wrap">
-    <div class="hf-mini-faq">
-      <div class="hf-mini-faq-head"><span class="hf-section-kicker">Dúvidas frequentes</span><h2 class="hf-section-title"><?php echo esc_html(ucfirst($ta['app'])); ?>: perguntas comuns</h2></div>
+    <div class="hf-section-head"><span class="hf-section-kicker">Dúvidas frequentes</span><h2 class="hf-section-title"><?php echo esc_html(ucfirst($ta['app'])); ?>: perguntas comuns</h2></div>
+    <div class="hf-mini-faq ta-faq">
       <div class="hf-mini-faq-grid">
         <?php foreach ($ta_faq as $f): ?><details><summary><?php echo esc_html($f[0]); ?></summary><p><?php echo esc_html($f[1]); ?></p></details><?php endforeach; ?>
       </div>
