@@ -841,8 +841,8 @@ function torcisao_lead_gate_assets(){
     if (is_admin()) return;
     if (!function_exists('torcisao_lead_route')) return; // plugin privado ausente
     $uri = get_template_directory_uri();
-    wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261104-6');
-    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261104-6', true);
+    wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261105-1');
+    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261105-1', true);
 }
 add_action('wp_enqueue_scripts', 'torcisao_lead_gate_assets', 200);
 
@@ -857,3 +857,7 @@ add_filter('script_loader_tag', function($tag, $handle){
     if ($handle !== 'torcisao-hubspot-attribution') return $tag;
     return str_replace('<script ', '<script data-torcisao-hubspot-attribution ', $tag);
 }, 10, 2);
+
+/* 2026-11 · Páginas de aplicação ("Arame trefilado para molas"…), criadas como rascunho */
+$torcisao_applications_file = get_template_directory().'/inc/torcisao-applications.php';
+if (file_exists($torcisao_applications_file)) require_once $torcisao_applications_file;

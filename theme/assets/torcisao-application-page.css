@@ -1,0 +1,76 @@
+/* TORCISÃO · páginas de aplicação (2026-11) — usa as variáveis das páginas de produto (--hf-*) */
+.ta-page{--ta-radius:22px}
+.ta-hero{padding:28px 0 40px}
+.ta-hero .hf-title{max-width:16ch;margin-inline:auto;text-wrap:balance}
+.ta-hero .hf-intro{max-width:62ch;margin-inline:auto}
+.ta-crumbs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:0 0 14px;font-size:.78rem;color:var(--hf-text)}
+.ta-crumbs a{color:var(--hf-text);text-decoration:none}
+.ta-crumbs a:hover{color:var(--hf-orange-dark);text-decoration:underline}
+.ta-crumbs [aria-current]{color:var(--hf-ink);font-weight:600}
+.ta-hero-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:26px}
+.ta-hero-actions .hf-btn{min-width:240px}
+.ta-trust{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 26px;list-style:none;margin:24px 0 0;padding:0;font-size:.82rem;font-weight:600;color:var(--hf-text)}
+.ta-trust i{color:var(--hf-orange);margin-right:6px}
+
+/* Linhas indicadas */
+.ta-products{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.ta-products--1{grid-template-columns:minmax(0,1fr)}
+.ta-products--1 .ta-product{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:stretch}
+.ta-product{background:var(--hf-card);border:1px solid var(--hf-line);border-radius:var(--ta-radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--hf-shadow)}
+.ta-product-img{background:var(--hf-soft);aspect-ratio:16/10;display:grid;place-items:center;padding:18px}
+.ta-products--1 .ta-product-img{aspect-ratio:auto;min-height:260px}
+.ta-product-img img{max-width:100%;max-height:220px;object-fit:contain}
+.ta-product-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.ta-product-body small{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--hf-orange-dark)}
+.ta-product-body h3{margin:0;font-size:1.25rem;line-height:1.25;color:var(--hf-ink)}
+.ta-product-body p{margin:0;color:var(--hf-text);font-size:.92rem;line-height:1.55}
+.ta-specs{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:4px 0 0;padding:0}
+.ta-specs li{font-size:.76rem;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--hf-soft);color:var(--hf-ink);border:1px solid var(--hf-line)}
+.ta-product-link{margin-top:auto;padding-top:8px;font-weight:700;font-size:.86rem;color:var(--hf-orange-dark);text-decoration:none}
+.ta-product-link:hover{text-decoration:underline}
+
+/* Na prática + Theo */
+.ta-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(22px,4vw,48px);align-items:start}
+.ta-why p{color:var(--hf-text);line-height:1.7;font-size:1rem;margin:14px 0 0}
+.ta-check-title{margin:28px 0 12px;font-size:1rem;color:var(--hf-ink)}
+.ta-check{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ta-check li{display:flex;gap:10px;align-items:flex-start;color:var(--hf-ink);font-size:.95rem;line-height:1.45}
+.ta-check i{color:var(--hf-orange);font-size:1.1rem;line-height:1.3}
+
+.ta-theo{background:var(--hf-card);border:1px solid var(--hf-line);border-radius:var(--ta-radius);box-shadow:var(--hf-shadow);display:flex;flex-direction:column;overflow:hidden;position:sticky;top:96px}
+.ta-theo-head{display:flex;gap:12px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--hf-line);background:linear-gradient(180deg,var(--hf-soft),var(--hf-card))}
+.ta-theo-head img{width:44px;height:44px;border-radius:50%;border:2px solid var(--hf-orange);object-fit:cover}
+.ta-theo-head strong{display:block;font-size:1rem;color:var(--hf-ink)}
+.ta-theo-head small{font-size:.76rem;color:var(--hf-text)}
+.ta-theo-log{padding:16px 18px;min-height:260px;max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ta-theo-log .th-msg{max-width:88%;padding:11px 14px;border-radius:16px;font-size:.9rem;line-height:1.5}
+.ta-theo-log .th-msg.assistant{align-self:flex-start;background:var(--hf-bg);color:var(--hf-ink);border:1px solid var(--hf-line);border-bottom-left-radius:6px}
+.ta-theo-log .th-msg.user{align-self:flex-end;background:var(--hf-orange);color:#fff;border-bottom-right-radius:6px}
+.ta-theo-log .th-msg.loading{opacity:.65;font-style:italic}
+.ta-theo-log .tor-chips{margin:2px 0}
+.ta-theo-log .tor-wa-inline{margin:4px 0}
+.ta-theo-form{display:flex;gap:10px;padding:12px 14px;border-top:1px solid var(--hf-line)}
+.ta-theo-form input{flex:1;min-width:0;border:1px solid var(--hf-line);border-radius:999px;padding:12px 16px;font:inherit;font-size:.92rem;background:var(--hf-bg);color:var(--hf-ink)}
+.ta-theo-form input:focus{outline:none;border-color:var(--hf-orange);box-shadow:0 0 0 3px rgba(239,123,48,.18)}
+.ta-theo-form button{flex:0 0 46px;height:46px;border:0;border-radius:50%;background:var(--hf-orange);color:#fff;font-size:1.1rem;cursor:pointer}
+.ta-theo-form button:hover{background:var(--hf-orange-dark)}
+
+/* Veja também */
+.ta-related .hf-wrap{display:flex;flex-direction:column;gap:14px}
+.ta-related-list{display:flex;flex-wrap:wrap;gap:10px}
+.ta-related-list a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--hf-line);background:var(--hf-card);color:var(--hf-ink);font-weight:600;font-size:.9rem;text-decoration:none}
+.ta-related-list a:hover{border-color:var(--hf-orange);color:var(--hf-orange-dark)}
+
+@media (max-width:900px){
+  .ta-split{grid-template-columns:minmax(0,1fr)}
+  .ta-theo{position:static}
+  .ta-products--1 .ta-product{grid-template-columns:minmax(0,1fr)}
+  .ta-products--1 .ta-product-img{min-height:200px}
+}
+@media (max-width:560px){
+  .ta-hero-actions .hf-btn{min-width:0;width:100%}
+  .ta-theo-log{max-height:360px}
+}
+.ta-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ta-product-img{aspect-ratio:2/1}
+.ta-product-img img{max-height:180px}

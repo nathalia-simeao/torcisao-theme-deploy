@@ -389,7 +389,8 @@ function unlockAll(){
  * 3) THEO — contato dentro da conversa + WhatsApp com histórico
  * ============================================================ */
 function openAssistantRoot(){
-  return [...document.querySelectorAll('#thAssistantModal,.hf-assistant')].find(el=>el.classList.contains('is-open'))||null;
+  return [...document.querySelectorAll('#thAssistantModal,.hf-assistant')].find(el=>el.classList.contains('is-open'))
+    ||document.querySelector('.ta-theo')||null; /* Theo embutido nas páginas de aplicação */
 }
 function chatLog(root){return root?.querySelector('#thHomeChat,#hfChat,#bfChat,#afChat,[id$="Chat"],.hf-chat,.th-chat')||null;}
 function conversationLines(root){
@@ -402,6 +403,7 @@ function conversationLines(root){
   return lines.slice(-24);
 }
 function theoLabel(root){
+  const inline=root?.querySelector?.('#apChat');if(inline&&inline.dataset.label)return inline.dataset.label;
   const id=root?.id||'';return id==='hfAssistant'?'Theo · Haste':id==='bfAssistant'?'Theo · Barra':id==='afAssistant'?'Theo · Arame':'Theo · Assistente de Aplicação';
 }
 const theoOpts=root=>()=>({source:'assistente_aplicacao',label:theoLabel(root),lines:conversationLines(root)});
@@ -413,6 +415,9 @@ const CHATS=[
   {chat:'bfChat',input:'bfAssistantInput',send:'bfAssistantSend',line:'barra'},
   {chat:'hfChat',input:'hfAssistantInput',send:'hfAssistantSend',line:'haste'}
 ];
+(function(){const ap=document.getElementById('apChat');if(!ap)return;
+  let start=null;try{start=JSON.parse(ap.dataset.chips||'null')}catch(e){}
+  CHATS.push({chat:'apChat',input:'apInput',send:'apSend',line:ap.dataset.line||'',start});})();
 const START={
   pt:{line:[['Arame trefilado','line','arame'],['Barra trefilada','line','barra'],['Haste de aterramento','line','haste'],['Outra coisa','line','outro']],
       arame:[['Molas','app','arame_mtc:2'],['Telas','app','arame_mtc:0'],['Gradil','app','arame_btc:2'],['Cabos','app','arame_mtc:1'],['Pregos','app','arame_mtc:4'],['Outra aplicação','app','outro']],
@@ -453,6 +458,7 @@ function renderChips(cfg,chips){
 function startChips(cfg){
   const log=document.getElementById(cfg.chat);if(!log||log.offsetParent===null)return;
   if(log.querySelector('.th-msg.user,.hf-msg.user,.tor-chips'))return;
+  if(cfg.start){renderChips(cfg,cfg.start);return;}
   const set=(START[lang()]||START.pt)[cfg.line||'line'];
   renderChips(cfg,set.map(([label,step,value])=>({label,step,value})));
 }
