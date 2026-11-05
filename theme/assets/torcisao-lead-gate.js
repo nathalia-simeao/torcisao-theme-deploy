@@ -639,14 +639,27 @@ function installWaFab(){
   /* Quem abre sozinho é o CTA deslizante do HubSpot ("[WAGeral] - Botão WhatsApp
      Lateral"), que guarda as métricas de visualização/clique. Este botão só fica no
      canto para reabrir o formulário e some enquanto o CTA do HubSpot está na tela. */
-  const ctaSel='[id^="hs-web-interactive"],[class*="hs-web-interactive"],[id^="hs-interactives"],.leadinModal,[id^="leadinModal"]';
+  /* Só o CTA em si (iframe "Popup CTA" / bloco hs-overlay-cta-ID). O contêiner flutuante
+     do HubSpot continua na página depois de fechado, então não serve de sinal. */
+  const ctaSel='iframe[aria-label="Popup CTA"],iframe[data-test-id="interactive-frame"],[id^="hs-overlay-cta-"],#hs-interactives-modal-overlay';
+  let ctaMsgOpen=null;
   function ctaVisible(){
+    if(ctaMsgOpen===false)return false;
     return [...document.querySelectorAll(ctaSel)].some(el=>{
-      if(root.contains(el))return false;
+      if(root.contains(el)||el.closest('.hs-cta-embed,.hs-web-interactive-inline'))return false;
       const r=el.getBoundingClientRect(),cs=getComputedStyle(el);
-      return r.width>40&&r.height>40&&cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>0.05;
+      return r.width>40&&r.height>40&&r.bottom>0&&r.top<innerHeight&&cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>0.05;
     });
   }
+  /* O HubSpot avisa por mensagem quando o CTA abre e fecha */
+  addEventListener('message',e=>{
+    let d='';try{d=typeof e.data==='string'?e.data:JSON.stringify(e.data);}catch(x){}
+    if(!d||d.indexOf('HS_CTA_')<0)return;
+    if(d.indexOf('HS_CTA_SHOWING_CTA')>=0){ctaMsgOpen=true;ctaSeen=true;}
+    else if(d.indexOf('HS_CTA_HAS_CLOSED')>=0||d.indexOf('HS_CTA_CLOSE_INTERACTIVE')>=0){ctaMsgOpen=false;ctaSeen=true;setTimeout(()=>{ctaMsgOpen=null;},1500);}
+    else return;
+    if(!raf)raf=requestAnimationFrame(sync);
+  });
   /* O botão só aparece depois que o CTA do HubSpot já foi mostrado e fechado, ou quando
      o HubSpot carregou e o CTA não aparece (o visitante já tinha fechado antes). */
   let ctaSeen=false,graceUntil=0;
