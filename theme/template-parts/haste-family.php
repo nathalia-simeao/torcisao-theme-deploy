@@ -8,6 +8,13 @@ $hf_iso = 'https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf'
 $hf_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela página de Haste de Aterramento da Torcisão e gostaria de falar com a equipe comercial sobre uma cotação.');
 $hf_unified_form_id = '8fdff701-c5a7-4684-9358-d557a70425a5';
 $hf_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
+/* SEO: título e texto da opção inicial já no HTML (antes vinham vazios e só o JS preenchia) */
+$hf_seo = [
+    'baixa' => ['Baixa Camada · 20 µm', 'Núcleo sólido de aço-carbono SAE 1010/1020 com revestimento de cobre de 20 µm. Consulte as combinações disponíveis de diâmetro e comprimento para a sua especificação.'],
+    'alta' => ['Alta Camada · 254 µm', 'Núcleo de aço-carbono SAE 1010/1020 com revestimento eletrolítico de cobre, pureza ≥ 99,9% e camada de 254 µm, conforme ABNT NBR 13571.'],
+    'conectores' => ['Olhal Simples', ''],
+];
+$hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260905">
 <link rel="stylesheet" href="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-1">
@@ -30,8 +37,8 @@ $hf_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
       <div class="hf-explorer" id="hfExplorer">
         <div class="hf-copy">
           <span class="hf-product-kicker" id="hfKicker">Haste de aterramento</span>
-          <h2 class="hf-product-title" id="hfProductTitle"></h2>
-          <p class="hf-product-lead" id="hfProductLead"></p>
+          <h2 class="hf-product-title" id="hfProductTitle"><?php echo esc_html($hf_seo_now[0]); ?></h2>
+          <p class="hf-product-lead" id="hfProductLead"><?php echo esc_html($hf_seo_now[1]); ?></p>
           <div class="hf-facts" id="hfFacts"></div>
           <div class="hf-connector-picker" id="hfConnectorPicker">
             <span class="hf-picker-label">Modelo</span>

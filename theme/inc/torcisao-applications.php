@@ -263,6 +263,7 @@ add_action('admin_init', function () {
                 '_torcisao_app' => $key,
                 '_yoast_wpseo_title' => $p['seo_title'],
                 '_yoast_wpseo_metadesc' => $p['meta'],
+                '_yoast_wpseo_focuskw' => mb_strtolower($p['title']),
             ],
         ], true);
         if (is_wp_error($id)) continue;
@@ -274,6 +275,16 @@ add_action('admin_init', function () {
     update_option('torcisao_app_pages_version', TORCISAO_APP_PAGES_VERSION, false);
     if ($created) set_transient('torcisao_app_pages_notice', $created, WEEK_IN_SECONDS);
 });
+
+/* Frase-chave do Yoast nas páginas já criadas (uma vez) */
+add_action('admin_init', function () {
+    if (!current_user_can('edit_pages') || get_option('torcisao_app_focuskw_done') === '1') return;
+    foreach ((array) get_option('torcisao_app_page_ids', []) as $key => $id) {
+        $p = torcisao_app_pages()[$key] ?? null;
+        if ($p && $id && !get_post_meta($id, '_yoast_wpseo_focuskw', true)) update_post_meta($id, '_yoast_wpseo_focuskw', mb_strtolower($p['title']));
+    }
+    update_option('torcisao_app_focuskw_done', '1', false);
+}, 30);
 
 /* Páginas retiradas (ex.: arame para pregos — a Torcisão não fabrica arame para prego) */
 function torcisao_app_retired() { return ['arame-pregos']; }

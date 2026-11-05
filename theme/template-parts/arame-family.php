@@ -7,6 +7,13 @@ $af_assets = get_template_directory_uri();
 $af_iso = 'https://torcisao.com.br/wp-content/uploads/2026/09/TORCISAO-9001.pdf';
 $af_whatsapp = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela página de Arame Trefilado da Torcisão e gostaria de falar com a equipe comercial sobre uma cotação.');
 $af_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
+/* SEO: o Google recebe o título e o texto da opção inicial já no HTML (antes vinham vazios e só o JS preenchia) */
+$af_seo = [
+    'btc' => ['Baixo Teor de Carbono · 1004 a 1020', 'Arame trefilado de baixo teor de carbono, em perfil redondo e fornecido em rolos ou spiders. Consulte bitola, tolerância e condição de fornecimento para o seu pedido.'],
+    'mtc' => ['Médio Teor de Carbono · 1035 a 1050', 'Arame trefilado de médio teor de carbono, em perfil redondo e fornecido em rolos ou spiders. A seleção deve considerar aço, bitola, requisito mecânico e processo da peça.'],
+    'atc' => ['Alto Teor de Carbono · 1060 a 1090', 'Arame trefilado de alto teor de carbono, em perfil redondo e fornecido em rolos ou spiders. A especificação deve ser validada conforme aço, bitola, requisito mecânico e processo da peça.'],
+];
+$af_seo_now = $af_lang === 'pt' ? $af_seo[$af_initial] : ['', ''];
 ?>
 <link rel="stylesheet" href="<?php echo esc_url($af_assets . '/assets/torcisao-haste-family.css'); ?>?v=20260906">
 <link rel="stylesheet" href="<?php echo esc_url($af_assets . '/assets/torcisao-haste-aeo-v1.css'); ?>?v=20260921-2">
@@ -26,8 +33,8 @@ $af_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
   <section class="hf-explorer-section"><div class="hf-wrap"><div class="hf-explorer">
     <div class="hf-copy">
       <span class="hf-product-kicker">Arame trefilado</span>
-      <h2 class="hf-product-title" id="afProductTitle"></h2>
-      <p class="hf-product-lead" id="afProductLead"></p>
+      <h2 class="hf-product-title" id="afProductTitle"><?php echo esc_html($af_seo_now[0]); ?></h2>
+      <p class="hf-product-lead" id="afProductLead"><?php echo esc_html($af_seo_now[1]); ?></p>
       <div class="hf-facts" id="afFacts"></div>
       <div class="hf-actions">
         <button type="button" class="hf-btn hf-btn-primary js-af-quote" data-analytics-origin="arame_produto_principal" data-analytics-product="arame_trefilado"><i class="bi bi-whatsapp"></i> Solicitar cotação</button>
@@ -75,6 +82,7 @@ $af_lang = function_exists('torcisao_request_language') ? torcisao_request_langu
   </div>
 </div><?php endif; ?></div></section>
 
+  <?php if (function_exists('torcisao_seo_application_links')) torcisao_seo_application_links('arame'); ?>
   <section class="hf-section hf-quality-section"><div class="hf-wrap"><div class="hf-quality-card"><div class="hf-quality-copy"><div class="hf-quality-icon"><i class="bi bi-patch-check-fill"></i></div><div><h3>Qualidade Torcisão</h3><p>Consulte o certificado ISO 9001 da Torcisão. Requisitos específicos do item devem ser confirmados durante a cotação.</p></div></div><div class="hf-quality-actions"><a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($af_iso); ?>" target="_blank" rel="noopener">Ver certificado ISO</a></div></div></div></section>
 
   <section class="hf-cta"><div class="hf-wrap"><div class="hf-cta-box"><div class="hf-cta-copy"><span class="hf-section-kicker">Atendimento comercial</span><h2>Pronto para avançar com sua cotação?</h2><p>Envie aplicação, faixa de aço, bitola, forma de fornecimento e quantidade para a equipe Torcisão validar a condição do pedido e preparar a cotação.</p></div><div class="hf-cta-side"><div class="hf-theo-card"><div class="hf-commercial-icon" aria-hidden="true"><i class="bi bi-headset"></i></div><div class="hf-theo-copy"><small>Equipe Torcisão</small><strong>Comercial</strong><span>(11) 2334-9989 · atendimento direto</span></div></div><div class="hf-cta-actions"><a class="hf-btn hf-btn-primary" href="<?php echo esc_url($af_whatsapp); ?>" target="_blank" rel="noopener" data-analytics-origin="arame_cta_whatsapp" data-analytics-product="arame_trefilado"><i class="bi bi-whatsapp"></i> Falar com o comercial</a><button type="button" class="hf-btn hf-btn-secondary js-af-quote" data-analytics-origin="arame_cta_final" data-analytics-product="arame_trefilado">Solicitar cotação</button></div></div></div></div></section>

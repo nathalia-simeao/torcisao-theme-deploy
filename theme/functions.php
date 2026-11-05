@@ -861,3 +861,7 @@ add_filter('script_loader_tag', function($tag, $handle){
 /* 2026-11 · Páginas de aplicação ("Arame trefilado para molas"…), criadas como rascunho */
 $torcisao_applications_file = get_template_directory().'/inc/torcisao-applications.php';
 if (file_exists($torcisao_applications_file)) require_once $torcisao_applications_file;
+
+/* 2026-11 · SEO: redirecionamento dos endereços antigos e links para as páginas de aplicação */
+$torcisao_seo_file = get_template_directory().'/inc/torcisao-seo-2026.php';
+if (file_exists($torcisao_seo_file)) require_once $torcisao_seo_file;
