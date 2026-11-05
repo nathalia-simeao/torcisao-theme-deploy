@@ -614,7 +614,7 @@ add_filter('wpseo_schema_organization','torcisao_enrich_organization_schema',11,
 
 
 
-/* ProductGroup JSON-LD das três famílias principais em PT/EN/ES.
+/* Dados estruturados (Service + catálogo) das três famílias principais em PT/EN/ES.
  * Sem Offer, preço, disponibilidade ou SKU: a Torcisão trabalha com cotação
  * consultiva e esses dados não são publicados como condição fixa no site.
  */
@@ -788,39 +788,43 @@ function torcisao_output_product_schema(){
     if (empty($groups[$page_id])) return;
     $data = $groups[$page_id];
 
-    $variants = [];
+    /* 2026-11: antes era ProductGroup/Product. O Google exige preço (offers), avaliação
+     * ou nota para esse tipo e marcava "Snippets do produto: item inválido" no Search Console.
+     * Como a Torcisão não publica preço e não vamos inventar avaliações, as linhas passam a
+     * ser descritas como Service (fornecimento sob cotação) com catálogo das classes. */
+    $items = [];
     foreach ($data['variants'] as $variant) {
-        $variants[] = [
-            '@type' => 'Product',
-            '@id' => $url.'#variant-'.$variant['slug'],
-            'name' => $variant['name'],
-            'description' => $variant['description'],
-            'url' => $url,
-            'brand' => $brand,
-            'manufacturer' => $manufacturer,
-            'material' => $variant['material'],
-            'isVariantOf' => ['@id' => $url.'#product-group'],
-            'additionalProperty' => [
-                ['@type'=>'PropertyValue','name'=>$variant['property']['name'],'value'=>$variant['property']['value']],
+        $items[] = [
+            '@type' => 'Offer',
+            'itemOffered' => [
+                '@type' => 'Service',
+                '@id' => $url.'#linha-'.$variant['slug'],
+                'name' => $variant['name'],
+                'description' => $variant['description'],
+                'url' => $url,
             ],
         ];
     }
 
     $schema = [
         '@context' => 'https://schema.org',
-        '@type' => 'ProductGroup',
-        '@id' => $url.'#product-group',
+        '@type' => 'Service',
+        '@id' => $url.'#fornecimento',
         'url' => $url,
         'name' => $data['name'],
         'description' => $data['description'],
         'image' => $data['image'],
+        'serviceType' => $data['category'],
         'category' => $data['category'],
         'brand' => $brand,
-        'manufacturer' => $manufacturer,
+        'provider' => $manufacturer,
+        'areaServed' => ['@type' => 'Country', 'name' => 'Brasil'],
         'mainEntityOfPage' => ['@id' => $url],
-        'variesBy' => $data['variesBy'],
-        'additionalProperty' => $data['additionalProperty'],
-        'hasVariant' => $variants,
+        'hasOfferCatalog' => [
+            '@type' => 'OfferCatalog',
+            'name' => $data['name'],
+            'itemListElement' => $items,
+        ],
     ];
 
     echo "\n<script type=\"application/ld+json\" id=\"torcisao-product-schema\">";
