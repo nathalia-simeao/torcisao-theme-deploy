@@ -153,8 +153,8 @@
 .tor-wa-panel{position:relative;width:min(360px,calc(100vw - 32px));max-height:calc(100vh - 110px);overflow:auto;background:#fff;color:#33475b;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.22);font-family:Montserrat,system-ui,sans-serif;animation:torWaIn .18s ease-out}
 .tor-wa-panel[hidden]{display:none}
 @keyframes torWaIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.tor-wa-panel-head{padding:22px 40px 4px;text-align:center}
-.tor-wa-panel-head strong{display:block;font-size:1.3rem;line-height:1.2;font-weight:800;color:#ef7b30}
+.tor-wa-panel-head{padding:22px 30px 4px;text-align:center}
+.tor-wa-panel-head strong{display:block;font-size:clamp(.9rem,4.2vw,1.12rem);line-height:1.2;font-weight:800;color:#ef7b30;white-space:nowrap}
 .tor-wa-panel-head p{margin:2px 0 0;font-size:.85rem;line-height:1.35;font-weight:700;color:#191b1e}
 .tor-wa-panel-x{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:transparent;color:#191b1e;font-size:1.25rem;line-height:1;cursor:pointer}
 .tor-wa-hs{padding:6px 30px 22px;min-height:120px}
