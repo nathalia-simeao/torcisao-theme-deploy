@@ -82,7 +82,39 @@ if ($bf_ssr) {
     </div>
   </div></div></section>
 
-  <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Dados técnicos para avaliar a aplicação</h2><p class="hf-section-intro">As referências abaixo reproduzem as informações publicadas pela Torcisão. Tolerâncias, composição, tratamento e demais requisitos devem ser confirmados conforme o desenho ou memorial do projeto.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="bfSpecs"><?php if ($bf_ssr) : foreach ($bf_ssr['specs'] as $bf_spec) : ?><div class="hf-spec-row"><small><?php echo esc_html($bf_spec[0]); ?></small><strong><?php echo esc_html($bf_spec[1]); ?></strong></div><?php endforeach; endif; ?></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="bfAvailability"><?php if ($bf_ssr) : ?><table class="hf-availability-table"><thead><tr><th>Referência</th><th>Informação</th></tr></thead><tbody><?php foreach ($bf_ssr['availability'] as $bf_row) : ?><tr><td><?php echo esc_html($bf_row[0]); ?></td><td><?php echo esc_html($bf_row[1]); ?></td></tr><?php endforeach; ?></tbody></table><?php endif; ?></div></div></div><?php if ($bf_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida de acabamento e usinagem em barras trefiladas"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>Acabamento e usinagem</strong></div><div class="hf-aeo-quick-item"><span>Barra trefilada</span><strong>Precisão dimensional</strong><p>O trabalho a frio melhora acabamento e controle dimensional. A tolerância final deve seguir o desenho e a especificação do pedido.</p></div><div class="hf-aeo-quick-item"><span>Polida / reendireitada</span><strong>Etapa adicional</strong><p>Pode ser avaliada quando o projeto exige condição adicional de superfície ou retilineidade. Confirme acabamento e tolerância na cotação.</p></div><div class="hf-aeo-quick-item"><span>11SMn37</span><strong>Usinabilidade melhorada</strong><p>O aço ressulfurado favorece a formação e a quebra do cavaco em usinagem seriada. Bitola, tolerância e acabamento continuam sendo especificados separadamente.</p></div></div><?php endif; ?></div></section>
+  <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Dados técnicos para avaliar a aplicação</h2><p class="hf-section-intro">As referências abaixo reproduzem as informações publicadas pela Torcisão. Tolerâncias, composição, tratamento e demais requisitos devem ser confirmados conforme o desenho ou memorial do projeto.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="bfSpecs"><?php if ($bf_ssr) : foreach ($bf_ssr['specs'] as $bf_spec) : ?><div class="hf-spec-row"><small><?php echo esc_html($bf_spec[0]); ?></small><strong><?php echo esc_html($bf_spec[1]); ?></strong></div><?php endforeach; endif; ?></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="bfAvailability"><?php if ($bf_ssr) : ?><table class="hf-availability-table"><thead><tr><th>Referência</th><th>Informação</th></tr></thead><tbody><?php foreach ($bf_ssr['availability'] as $bf_row) : ?><tr><td><?php echo esc_html($bf_row[0]); ?></td><td><?php echo esc_html($bf_row[1]); ?></td></tr><?php endforeach; ?></tbody></table><?php endif; ?></div></div></div><?php if ($bf_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida de acabamento e usinagem em barras trefiladas"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>Acabamento e usinagem</strong></div><div class="hf-aeo-quick-item"><span>Barra trefilada</span><strong>Precisão dimensional</strong><p>O trabalho a frio melhora acabamento e controle dimensional. A tolerância final deve seguir o desenho e a especificação do pedido.</p></div><div class="hf-aeo-quick-item"><span>Polida / reendireitada</span><strong>Etapa adicional</strong><p>Pode ser avaliada quando o projeto exige condição adicional de superfície ou retilineidade. Confirme acabamento e tolerância na cotação.</p></div><div class="hf-aeo-quick-item"><span>11SMn37</span><strong>Usinabilidade melhorada</strong><p>O aço ressulfurado favorece a formação e a quebra do cavaco em usinagem seriada. Bitola, tolerância e acabamento continuam sendo especificados separadamente.</p></div></div>
+
+      <?php /* AEO: resumo técnico em texto fixo no HTML, para leitura por buscadores e assistentes de IA (não depende do JS do seletor). */ ?>
+      <div class="hf-aeo-summary" id="resumo-tecnico" style="margin-top:28px">
+        <div class="hf-section-head" style="margin-bottom:18px"><span class="hf-section-kicker">Resumo técnico</span><h2 class="hf-section-title" style="font-size:clamp(1.5rem,2.2vw,2.1rem)">Barras trefiladas direto da fábrica, com entrega rápida</h2><p class="hf-section-intro">A Torcisão Trefilados fabrica barras de aço trefiladas de baixo, médio e alto teor de carbono e em aço ressulfurado 11SMn37, com venda direta para indústrias de usinagem, autopeças, válvulas e sistemas hidráulicos em todo o Brasil. Perfil redondo, feixes embalados, acabamento trefilado comum ou reendireitado e polido.</p></div>
+        <div class="hf-spec-grid">
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Ligas e bitolas</strong><small>Faixas de aço SAE e diâmetros disponíveis</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Liga</th><th>Bitolas</th></tr></thead>
+              <tbody>
+                <tr><td>BTC · SAE 1006 a 1020</td><td>2,00 a 15,88 mm</td></tr>
+                <tr><td>MTC · SAE 1035 a 1050</td><td>4,76 a 15,88 mm</td></tr>
+                <tr><td>ATC · SAE 1060 a 1090</td><td>4,76 a 15,88 mm</td></tr>
+                <tr><td>Aço ressulfurado 11SMn37</td><td>4,76 a 15,88 mm</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Prazo de entrega e lote mínimo</strong><small>Compra direta de fábrica</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Condição</th><th>Prazo / lote</th></tr></thead>
+              <tbody>
+                <tr><td>Trefilado comum (escuro)</td><td>Até 7 dias úteis</td></tr>
+                <tr><td>Trefilado reendireitado e polido</td><td>Até 15 dias úteis</td></tr>
+                <tr><td>Lote mínimo</td><td>500 kg por pedido</td></tr>
+                <tr><td>Tolerância</td><td>Sob consulta</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <?php endif; ?></div></section>
 
   <section class="hf-section" id="aplicacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Aplicações</span><h2 class="hf-section-title">Onde cada linha pode ser avaliada</h2><p class="hf-section-intro">A aplicação indica um ponto de partida. A seleção do aço depende dos requisitos mecânicos, dimensionais e do processo de fabricação.</p></div><div class="hf-app-grid"><article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="bfApplications"><?php if ($bf_ssr) : foreach ($bf_ssr['apps'] as $bf_app) : ?><li><?php echo esc_html($bf_app); ?></li><?php endforeach; endif; ?></ul></article><article class="hf-app-card"><h3>O que validar no projeto</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Aço / teor de carbono</strong><p>Confirme a classificação do material prevista no desenho ou especificação.</p></div><div class="hf-variant-box"><strong>Dimensão e tolerância</strong><p>Bitola, comprimento e tolerância devem acompanhar a necessidade da peça.</p></div><div class="hf-variant-box"><strong>Processo</strong><p>Usinagem, conformação, soldagem, tratamento ou acabamento podem alterar a seleção final.</p></div></div></article></div><?php if ($bf_lang === 'pt') : ?>
 <div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
@@ -116,7 +148,15 @@ if ($bf_ssr) {
     </details>
     <details>
       <summary>Existe barra 11SMn37 a pronta entrega?</summary>
-      <p>Estoque industrial é dinâmico. Por isso, a Torcisão verifica a disponibilidade real da bitola, acabamento e quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.</p>
+      <p>Sim. Barras em trefilado comum são entregues em até 7 dias úteis, e barras reendireitadas e polidas em até 15 dias úteis. Como o estoque é dinâmico, a Torcisão confirma a disponibilidade da bitola, do acabamento e da quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.</p>
+    </details>
+    <details>
+      <summary>Qual o prazo de entrega de barras trefiladas para pedidos urgentes?</summary>
+      <p>Barras em trefilado comum (escuro) são entregues em até 7 dias úteis, e barras reendireitadas e polidas em até 15 dias úteis. Materiais de produção externa têm prazo sob consulta. Para pedidos urgentes, informe bitola, aço, acabamento e quantidade para a equipe verificar o estoque na hora.</p>
+    </details>
+    <details>
+      <summary>Qual o lote mínimo para comprar barra trefilada direto da fábrica?</summary>
+      <p>O lote mínimo é de 500 kg por pedido.</p>
     </details>
     <details>
       <summary>Quais aplicações usam barras trefiladas?</summary>
