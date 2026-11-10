@@ -18,7 +18,7 @@ const technical={
   },
   haste:{
     baixa:{specs:[['Revestimento','Cobre · 20 µm'],['Núcleo','Aço-carbono SAE 1010/1020'],['Perfil','Redondo'],['Acabamento','Trefilado / cobre']],availability:[['9,00 mm','1.000 · 1.200 · 1.500 · 2.000 · 2.400 mm'],['10,00 mm','1.000 · 1.200 · 1.500 · 2.000 · 2.400 mm'],['11,00 mm','1.200 · 1.500 · 2.000 · 2.400 · 3.000 mm'],['12,30 mm','1.200 · 1.500 · 2.000 · 2.400 · 3.000 mm'],['12,70 mm','2.000 · 2.400 mm'],['15,40 mm','1.200 · 1.500 · 2.000 · 2.400 · 3.000 mm']]},
-    alta:{specs:[['Revestimento','Cobre eletrolítico · 254 µm'],['Pureza do cobre','≥ 99,9%'],['Núcleo','Aço-carbono SAE 1010/1020'],['Norma','ABNT NBR 13571'],['Tolerância','Sob consulta'],['Perfil','Redondo'],['Acabamento','Trefilado / cobre']],availability:[['1/2” · 12,80 mm','2.400 · 3.000 mm'],['5/8” · 14,30 mm','2.400 · 3.000 mm'],['3/4” · 17,30 mm','2.400 · 3.000 mm'],['2.000 mm','Sob consulta']]}
+    alta:{specs:[['Revestimento','Cobre eletrolítico · 254 µm'],['Pureza do cobre','≥ 99,9%'],['Núcleo','Aço-carbono SAE 1010/1020'],['Norma','ABNT NBR 13571'],['Tolerância','Sob consulta'],['Perfil','Redondo'],['Acabamento','Trefilado / cobre']],availability:[['1/2”','2.400 · 3.000 mm'],['5/8”','2.400 · 3.000 mm'],['3/4”','2.400 · 3.000 mm'],['2.000 mm','Sob consulta']]}
   }
 };
 
