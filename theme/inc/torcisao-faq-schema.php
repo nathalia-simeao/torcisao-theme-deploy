@@ -56,7 +56,7 @@ function torcisao_product_faq_schema_data(){
             ],
             [
                 'question' => 'O que enviar para uma cotação técnica de barras trefiladas?',
-                'answer' => 'Informe grau ou especificação do aço, perfil, bitola, comprimento, quantidade, tolerâncias, acabamento, aplicação e requisitos de documentação ou ensaio. Para aço ressulfurado, consulte também o <a href="<?php echo esc_url(home_url(\'/2026/09/15/7-criterios-para-escolher-fabricante-de-barras-trefiladas-em-aco-11smn37/\')); ?>">guia de compra de barras 11SMn37</a>.',
+                'answer' => 'Informe grau ou especificação do aço, perfil, bitola, comprimento, quantidade, tolerâncias, acabamento, aplicação e requisitos de documentação ou ensaio. Para aço ressulfurado, consulte também o guia de compra de barras 11SMn37 no blog da Torcisão.',
             ],
             [
                 'question' => 'Onde comprar barra trefilada 11SMn37 no Brasil?',
