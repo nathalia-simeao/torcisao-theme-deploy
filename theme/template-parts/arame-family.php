@@ -47,7 +47,60 @@ $af_seo_now = $af_lang === 'pt' ? $af_seo[$af_initial] : ['', ''];
     </div>
   </div></div></section>
 
-  <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Características da opção selecionada</h2><p class="hf-section-intro">Consulte faixa de aço, bitola, perfil, acabamento e forma de fornecimento. A tolerância deve ser confirmada conforme a especificação do pedido.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="afSpecs"></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="afAvailability"></div></div></div><?php if ($af_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida entre arames BTC, MTC e ATC"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>BTC x MTC x ATC</strong></div><div class="hf-aeo-quick-item"><span>BTC</span><strong>SAE 1004 a 1020</strong><p>Faixa de baixo teor de carbono, usualmente avaliada quando a conformabilidade é relevante, como em displays, utilidades, linha branca e racks.</p></div><div class="hf-aeo-quick-item"><span>MTC</span><strong>SAE 1035 a 1050</strong><p>Faixa intermediária de carbono, indicada para aplicações que exigem equilíbrio entre conformação e maior resistência mecânica.</p></div><div class="hf-aeo-quick-item"><span>ATC</span><strong>SAE 1060 a 1090</strong><p>Faixa de alto teor de carbono, usada em aplicações que exigem maior resistência, como molas, cabos de aço e componentes industriais.</p></div></div><?php endif; ?></div></section>
+  <section class="hf-section" id="especificacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Especificações</span><h2 class="hf-section-title">Características da opção selecionada</h2><p class="hf-section-intro">Consulte faixa de aço, bitola, perfil, acabamento e forma de fornecimento. A tolerância deve ser confirmada conforme a especificação do pedido.</p></div><div class="hf-spec-grid"><div class="hf-spec-card" id="afSpecs"></div><div class="hf-availability-card"><div class="hf-availability-head"><strong>Faixa e fornecimento</strong><small>Referências da opção selecionada</small></div><div id="afAvailability"></div></div></div><?php if ($af_lang === 'pt') : ?><div class="hf-aeo-quick" aria-label="Comparação rápida entre arames BTC, MTC e ATC"><div class="hf-aeo-quick-title"><small>Comparação rápida</small><strong>BTC x MTC x ATC</strong></div><div class="hf-aeo-quick-item"><span>BTC</span><strong>SAE 1004 a 1020</strong><p>Faixa de baixo teor de carbono, usualmente avaliada quando a conformabilidade é relevante, como em displays, utilidades, linha branca e racks.</p></div><div class="hf-aeo-quick-item"><span>MTC</span><strong>SAE 1035 a 1050</strong><p>Faixa intermediária de carbono, indicada para aplicações que exigem equilíbrio entre conformação e maior resistência mecânica.</p></div><div class="hf-aeo-quick-item"><span>ATC</span><strong>SAE 1060 a 1090</strong><p>Faixa de alto teor de carbono, usada em aplicações que exigem maior resistência, como molas, cabos de aço e componentes industriais.</p></div></div>
+
+      <?php /* AEO: resumo técnico em texto fixo no HTML, para leitura por buscadores e assistentes de IA (não depende do JS do seletor). */ ?>
+      <div class="hf-aeo-summary" id="resumo-tecnico" style="margin-top:28px">
+        <div class="hf-section-head" style="margin-bottom:18px"><span class="hf-section-kicker">Resumo técnico</span><h2 class="hf-section-title" style="font-size:clamp(1.5rem,2.2vw,2.1rem)">Arame trefilado direto da fábrica</h2><p class="hf-section-intro">A Torcisão Trefilados fabrica arame de aço trefilado de baixo, médio e alto teor de carbono, em rolos ou spiders, com venda direta para distribuidores, atacadistas e indústrias de transformação em todo o Brasil. Perfil redondo, acabamento trefilado. Tolerâncias sob consulta.</p></div>
+        <div class="hf-spec-grid">
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Ligas, bitolas e aplicações</strong><small>Faixas de aço SAE e diâmetros disponíveis</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Liga</th><th>Bitolas e aplicações</th></tr></thead>
+              <tbody>
+                <tr><td>BTC · SAE 1004 a 1020</td><td>2,00 a 15,88 mm · displays aramados, utilidades domésticas, linha branca, racks</td></tr>
+                <tr><td>MTC · SAE 1035 a 1050</td><td>4,76 a 15,88 mm · telas, molas, cabos de aço, componentes automotivos, pregos</td></tr>
+                <tr><td>ATC · SAE 1060 a 1090</td><td>4,76 a 15,88 mm · telas, molas, cabos de aço, componentes automotivos, pregos</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Lote mínimo</strong><small>Compra direta de fábrica</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Situação</th><th>Lote mínimo</th></tr></thead>
+              <tbody>
+                <tr><td>Bitola padrão em estoque</td><td>1 rolo (150 kg), com retirada na fábrica e faturamento em vencimento único</td></tr>
+                <tr><td>Produção em linha monobloco (bitola padrão ou não)</td><td>500 kg</td></tr>
+                <tr><td>Bitola fora de estoque</td><td>2.000 kg</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="hf-spec-grid" style="margin-top:20px">
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Prazos de entrega</strong><small>Conforme bitola e forma de fornecimento</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Material</th><th>Prazo</th></tr></thead>
+              <tbody>
+                <tr><td>Arame em spider em estoque · 2,05 a 6,36 mm</td><td>3 dias úteis</td></tr>
+                <tr><td>Arame fracionado / estocador · 2,05 a 6,35 mm</td><td>5 dias úteis (+1 dia útil para o interior, de 60 a 250 km)</td></tr>
+                <tr><td>Arame sob produção · 6,36 a 15,88 mm</td><td>10 dias úteis</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Rolo ou spider</strong><small>Formas de fornecimento</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Forma</th><th>Quando costuma ser indicada</th></tr></thead>
+              <tbody>
+                <tr><td>Spider</td><td>Arame em suporte metálico, para alimentação contínua da linha e manuseio com empilhadeira. Comum em displays, linha branca e telas de alto volume.</td></tr>
+                <tr><td>Rolo</td><td>Arame em bobina amarrada, para volumes menores, desbobinador próprio ou quando o material é fracionado.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <?php endif; ?></div></section>
 
   <section class="hf-section" id="aplicacoes"><div class="hf-wrap"><div class="hf-section-head"><span class="hf-section-kicker">Aplicação e consulta</span><h2 class="hf-section-title">Organize os requisitos antes da cotação</h2><p class="hf-section-intro">Informe aplicação, faixa de aço, bitola, propriedades requeridas e forma de fornecimento para direcionar a consulta à opção adequada.</p></div><div class="hf-app-grid"><article class="hf-app-card"><h3>Ferramentas para avançar</h3><ul class="hf-chip-list" id="afApplications"></ul></article><article class="hf-app-card"><h3>O que informar na consulta</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Aço e bitola</strong><p>Informe a faixa de aço e o diâmetro nominal previstos no desenho ou na especificação.</p></div><div class="hf-variant-box"><strong>Requisito mecânico</strong><p>Quando houver requisito de resistência, dureza ou outra propriedade, informe a referência prevista para a peça.</p></div><div class="hf-variant-box"><strong>Forma de fornecimento</strong><p>Indique rolo ou spider e as demais condições do pedido. A disponibilidade é confirmada durante a cotação.</p></div></div></article></div><?php if ($af_lang === 'pt') : ?>
 <div class="hf-mini-faq" id="faq" style="margin-top:clamp(30px,5vw,56px)">
@@ -65,7 +118,7 @@ $af_seo_now = $af_lang === 'pt' ? $af_seo[$af_initial] : ['', ''];
     </details>
     <details>
       <summary>Qual é o lote mínimo de arame trefilado?</summary>
-      <p>O lote mínimo pode variar conforme classe do aço, bitola, condição de produção, acondicionamento e quantidade solicitada. Por isso, a Torcisão confirma a condição comercial durante a cotação. Para uma resposta objetiva, informe aço, bitola, rolo ou spider, quantidade e aplicação.</p>
+      <p>Para bitola padrão em estoque, o lote mínimo é 1 rolo de 150 kg, com retirada na fábrica e faturamento em vencimento único. Produção em linha monobloco começa em 500 kg, e bitolas fora de estoque começam em 2.000 kg.</p>
     </details>
     <details>
       <summary>Onde comprar arame trefilado MTC e ATC direto de fabricante?</summary>
@@ -74,6 +127,14 @@ $af_seo_now = $af_lang === 'pt' ? $af_seo[$af_initial] : ['', ''];
     <details>
       <summary>Como solicitar cotação de arame trefilado?</summary>
       <p>Envie classe ou grau do aço, bitola, quantidade, aplicação e forma de fornecimento. Quando houver exigência de resistência, dureza, acabamento, tolerância ou documentação, inclua esses dados na consulta.</p>
+    </details>
+    <details>
+      <summary>Qual o prazo de entrega do arame trefilado?</summary>
+      <p>Arame em spider em estoque (2,05 a 6,36 mm) sai em 3 dias úteis. Arame fracionado ou de estocador (2,05 a 6,35 mm) leva 5 dias úteis, com 1 dia útil a mais para o interior entre 60 e 250 km. Bitolas sob produção (6,36 a 15,88 mm) levam 10 dias úteis.</p>
+    </details>
+    <details>
+      <summary>Qual arame usar para molas e telas?</summary>
+      <p>Arame de médio teor de carbono (MTC, SAE 1035 a 1050) ou de alto teor de carbono (ATC, SAE 1060 a 1090), nas bitolas de 4,76 a 15,88 mm. A escolha depende da resistência exigida pela peça.</p>
     </details>
     <details>
       <summary>O que avaliar além do preço?</summary>
