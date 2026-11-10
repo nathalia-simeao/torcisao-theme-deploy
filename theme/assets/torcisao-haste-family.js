@@ -44,9 +44,9 @@ const data={
    facts:[['Camada','254 µm'],['Material','SAE 1010/1020'],['Cobre','Pureza ≥ 99,9%'],['Norma','ABNT NBR 13571']],
    specs:[['Revestimento','Cobre eletrolítico · 254 µm'],['Pureza do cobre','≥ 99,9%'],['Núcleo','Aço-carbono SAE 1010/1020'],['Norma','ABNT NBR 13571'],['Tolerância','Sob consulta'],['Perfil','Redondo'],['Acabamento','Trefilado / cobre']],
    availability:[
-     ['1/2” · 12,80 mm','2.400 · 3.000 mm'],
-     ['5/8” · 14,30 mm','2.400 · 3.000 mm'],
-     ['3/4” · 17,30 mm','2.400 · 3.000 mm'],
+     ['1/2”','2.400 · 3.000 mm'],
+     ['5/8”','2.400 · 3.000 mm'],
+     ['3/4”','2.400 · 3.000 mm'],
      ['2.000 mm','Sob consulta']
    ],
    apps:commonApps

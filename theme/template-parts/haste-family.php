@@ -84,6 +84,64 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
         <div class="hf-aeo-quick-item"><span>Alta camada</span><strong>254 µm</strong><p>Camada nominal mais espessa de cobre, indicada quando essa condição é exigida na especificação do sistema.</p></div>
         <div class="hf-aeo-quick-note"><strong>Referências técnicas</strong><p>Para SPDA, consulte a ABNT NBR 5419:2026. Para hastes de aço cobreado, verifique também a ABNT NBR 13571. Nos conectores da linha Torcisão, a referência publicada é a ABNT NBR 5370.</p></div>
       </div>
+
+      <?php /* AEO: resumo técnico em texto fixo no HTML, para leitura por buscadores e assistentes de IA (não depende do JS do seletor). */ ?>
+      <div class="hf-aeo-summary" id="resumo-tecnico" style="margin-top:28px">
+        <div class="hf-section-head" style="margin-bottom:18px"><span class="hf-section-kicker">Resumo técnico</span><h2 class="hf-section-title" style="font-size:clamp(1.5rem,2.2vw,2.1rem)">Hastes de aterramento direto da fábrica</h2><p class="hf-section-intro">A Torcisão Trefilados fabrica hastes de aterramento cobreadas de alta camada (254 µm) e baixa camada (20 µm), com venda direta para distribuidores, atacadistas, construtoras e instaladores de SPDA em todo o Brasil. Perfil redondo, acabamento trefilado com cobre, pacotes com 10 unidades. Tolerâncias sob consulta.</p></div>
+        <div class="hf-spec-grid">
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Haste alta camada · 254 µm</strong><small>Núcleo de aço-carbono SAE 1010/1020, cobre eletrolítico com pureza ≥ 99,9%, conforme ABNT NBR 13571</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Bitola</th><th>Comprimentos</th></tr></thead>
+              <tbody>
+                <tr><td>1/2”</td><td>2,40 m e 3,00 m</td></tr>
+                <tr><td>5/8”</td><td>2,40 m e 3,00 m</td></tr>
+                <tr><td>3/4”</td><td>2,40 m e 3,00 m</td></tr>
+                <tr><td>2,00 m</td><td>Sob consulta</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Haste baixa camada · 20 µm</strong><small>Mesmo núcleo sólido de aço-carbono SAE 1010/1020 e mesmo processo de banho da alta camada</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Diâmetro</th><th>Comprimentos</th></tr></thead>
+              <tbody>
+                <tr><td>9,00 mm</td><td>1,00 · 1,20 · 1,50 · 2,00 · 2,40 m</td></tr>
+                <tr><td>10,00 mm</td><td>1,00 · 1,20 · 1,50 · 2,00 · 2,40 m</td></tr>
+                <tr><td>11,00 mm</td><td>1,20 · 1,50 · 2,00 · 2,40 · 3,00 m</td></tr>
+                <tr><td>12,30 mm</td><td>1,20 · 1,50 · 2,00 · 2,40 · 3,00 m</td></tr>
+                <tr><td>12,70 mm</td><td>2,00 · 2,40 m</td></tr>
+                <tr><td>15,40 mm</td><td>1,20 · 1,50 · 2,00 · 2,40 · 3,00 m</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="hf-spec-grid" style="margin-top:20px">
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Lote mínimo</strong><small>Compra direta de fábrica</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Item</th><th>Lote mínimo</th></tr></thead>
+              <tbody>
+                <tr><td>Haste alta camada (254 µm)</td><td>30 peças</td></tr>
+                <tr><td>Haste baixa camada (20 µm)</td><td>100 peças</td></tr>
+                <tr><td>Conectores grampo e olhal (ABNT NBR 5370)</td><td>Cotados no mesmo pedido das hastes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hf-availability-card">
+            <div class="hf-availability-head"><strong>Prazos de entrega</strong><small>Conforme a situação do material</small></div>
+            <table class="hf-availability-table">
+              <thead><tr><th>Situação do material</th><th>Prazo</th></tr></thead>
+              <tbody>
+                <tr><td>Em estoque, sem etiqueta</td><td>3 dias úteis</td></tr>
+                <tr><td>Em estoque, com etiqueta</td><td>5 dias úteis</td></tr>
+                <tr><td>Aguardando banho de cobre</td><td>10 dias úteis</td></tr>
+                <tr><td>Produção completa (trefilação, banho e separação)</td><td>25 dias úteis</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
       <?php endif; ?>
     </div>
   </section>
@@ -92,7 +150,7 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
     <div class="hf-wrap">
       <div class="hf-section-head"><span class="hf-section-kicker">Aplicações</span><h2 class="hf-section-title">Organize os requisitos antes da cotação</h2><p class="hf-section-intro">Use o assistente para estruturar camada, medida, conector e demais pontos técnicos que precisam ser validados no seu projeto.</p></div>
       <div class="hf-app-grid">
-        <article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="hfApplications"></ul></article>
+        <article class="hf-app-card"><h3>Aplicações publicadas</h3><ul class="hf-chip-list" id="hfApplications"><?php if ($hf_lang === 'pt') : foreach (['Sistemas de aterramento','SPDA','Geração e transmissão de energia','Distribuição de energia','Redes de telecomunicações','Aterramento de equipamentos','Energias renováveis','Construção industrial'] as $hf_app) : ?><li><?php echo esc_html($hf_app); ?></li><?php endforeach; endif; ?></ul></article>
         <article class="hf-app-card"><h3>O que validar no projeto</h3><div class="hf-variant-note"><div class="hf-variant-box"><strong>Dimensão</strong><p>Bitola e comprimento compatíveis com o desenho ou memorial.</p></div><div class="hf-variant-box"><strong>Requisito técnico</strong><p>Norma, camada, material e condição de instalação exigidos.</p></div><div class="hf-variant-box"><strong>Conexão</strong><p>Modelo de conector e cabo previstos no sistema de aterramento.</p></div></div></article>
       </div>
       <?php if ($hf_lang === 'pt') : ?>
@@ -110,6 +168,22 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
           <details>
             <summary>O que informar para solicitar cotação?</summary>
             <p>Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.</p>
+          </details>
+          <details>
+            <summary>Quais bitolas de haste de aterramento a Torcisão fabrica?</summary>
+            <p>Alta camada (254 µm) em 1/2”, 5/8” e 3/4”, com 2,40 m e 3,00 m. Baixa camada (20 µm) de 9,00 a 15,40 mm, com comprimentos de 1,00 m a 3,00 m.</p>
+          </details>
+          <details>
+            <summary>Qual o lote mínimo para comprar direto da fábrica?</summary>
+            <p>30 peças para a haste de alta camada (254 µm) e 100 peças para a haste de baixa camada (20 µm).</p>
+          </details>
+          <details>
+            <summary>Qual o prazo de entrega das hastes?</summary>
+            <p>Material em estoque sai em 3 dias úteis (5 dias úteis com etiqueta). Itens que dependem de banho de cobre levam 10 dias úteis, e produção completa leva até 25 dias úteis.</p>
+          </details>
+          <details>
+            <summary>A Torcisão vende direto para distribuidoras e revendas?</summary>
+            <p>Sim. A Torcisão atende distribuidores, atacadistas, construtoras e instaladores de SPDA com venda direta de fábrica, e hastes e conectores podem ser cotados e entregues no mesmo pedido.</p>
           </details>
         </div>
       </div>
@@ -144,4 +218,4 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
 <button type="button" class="btn-cta-mobile" id="hfQuoteTab" data-analytics-origin="haste_aba_cotacao" data-analytics-product="haste_aterramento" aria-label="Solicitar cotação"><i class="bi bi-chat-dots-fill"></i><span class="btn-cta-mobile-label">Solicitar cotação</span></button>
 <div class="hf-quote-drawer" id="hfQuoteDrawer" aria-hidden="true"><div class="hf-quote-panel"><div class="hf-quote-head"><div><small>COTAÇÃO</small><h3>Solicite seu orçamento</h3></div><button type="button" class="hf-quote-close" aria-label="Fechar">×</button></div><div id="hfQuoteForm" data-analytics-origin="haste_aba_cotacao" data-analytics-product="haste_aterramento"></div></div></div>
 <script>window.TORCISAO_HASTE_PAGE=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'portalId'=>'50818463','formId'=>$hf_unified_form_id,'formIds'=>['baixa'=>$hf_unified_form_id,'alta'=>$hf_unified_form_id,'conectores'=>$hf_unified_form_id]]); ?>;</script>
-<script defer src="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.js'); ?>?v=20261104-2"></script>
+<script defer src="<?php echo esc_url($hf_assets . '/assets/torcisao-haste-family.js'); ?>?v=20261110-1"></script>

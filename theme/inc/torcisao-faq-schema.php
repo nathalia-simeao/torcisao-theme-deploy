@@ -14,11 +14,27 @@ function torcisao_product_faq_schema_data(){
             ],
             [
                 'question' => 'Quais normas consultar em projetos de SPDA?',
-                'answer' => 'A ABNT NBR 5419:2026 trata da proteção contra descargas atmosféricas. Para hastes de aço cobreado e acessórios, verifique também a ABNT NBR 13571 e os requisitos definidos no memorial do projeto.',
+                'answer' => 'A ABNT NBR 5419:2026 trata da proteção contra descargas atmosféricas. Para hastes de aço cobreado, consulte também a ABNT NBR 13571. Para os conectores da linha Torcisão, a referência publicada é a ABNT NBR 5370. O memorial e o responsável técnico devem definir os requisitos aplicáveis ao projeto.',
             ],
             [
                 'question' => 'O que informar para solicitar cotação?',
                 'answer' => 'Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.',
+            ],
+            [
+                'question' => 'Quais bitolas de haste de aterramento a Torcisão fabrica?',
+                'answer' => 'Alta camada (254 µm) em 1/2”, 5/8” e 3/4”, com 2,40 m e 3,00 m. Baixa camada (20 µm) de 9,00 a 15,40 mm, com comprimentos de 1,00 m a 3,00 m.',
+            ],
+            [
+                'question' => 'Qual o lote mínimo para comprar direto da fábrica?',
+                'answer' => '30 peças para a haste de alta camada (254 µm) e 100 peças para a haste de baixa camada (20 µm).',
+            ],
+            [
+                'question' => 'Qual o prazo de entrega das hastes?',
+                'answer' => 'Material em estoque sai em 3 dias úteis (5 dias úteis com etiqueta). Itens que dependem de banho de cobre levam 10 dias úteis, e produção completa leva até 25 dias úteis.',
+            ],
+            [
+                'question' => 'A Torcisão vende direto para distribuidoras e revendas?',
+                'answer' => 'Sim. A Torcisão atende distribuidores, atacadistas, construtoras e instaladores de SPDA com venda direta de fábrica, e hastes e conectores podem ser cotados e entregues no mesmo pedido.',
             ],
         ],
         1622 => [
