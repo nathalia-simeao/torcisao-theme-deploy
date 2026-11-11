@@ -38,8 +38,59 @@ function torcisao_img_candidates() {
             }
         }
     }
+    /* capas do blog: os tamanhos que o tema usa nos cards e no topo do post */
+    $posts = get_posts(['post_type' => 'post', 'post_status' => ['publish', 'future'], 'numberposts' => 40, 'fields' => 'ids', 'suppress_filters' => true]);
+    foreach ($posts as $pid) {
+        $aid = get_post_thumbnail_id($pid);
+        if (!$aid) continue;
+        $file = get_post_meta($aid, '_wp_attached_file', true);
+        $meta = wp_get_attachment_metadata($aid);
+        if (!$file || !is_array($meta)) continue;
+        $dir = dirname($file);
+        foreach (['medium', 'medium_large', 'large'] as $sz) {
+            if (!empty($meta['sizes'][$sz]['file']) && preg_match('/\.(png|jpe?g)$/i', $meta['sizes'][$sz]['file'])) $found[$dir . '/' . $meta['sizes'][$sz]['file']] = true;
+        }
+    }
     ksort($found);
     return array_keys($found);
+}
+
+/* Versões extras das fotos de produto: 640 px (celular) e 200 px (miniaturas). */
+function torcisao_img_variants() { return ['md' => 640, 'sm' => 200]; }
+function torcisao_img_map_v($v) {
+    $map = get_option('torcisao_img_map_' . $v, []);
+    return is_array($map) ? $map : [];
+}
+/** Gera as versões menores a partir da cópia de 1000 px já existente (barato e rápido). */
+function torcisao_img_build_variants($limit = 12, $budget = 10.0) {
+    if (!function_exists('wp_get_image_editor') || !wp_image_editor_supports(['mime_type' => 'image/webp'])) return;
+    $up = wp_upload_dir(null, false);
+    if (!empty($up['error'])) return;
+    $base_dir = trailingslashit($up['basedir']); $base_url = trailingslashit($up['baseurl']);
+    $start = microtime(true); $done = 0;
+    foreach (torcisao_img_variants() as $v => $w) {
+        $vmap = torcisao_img_map_v($v); $changed = false;
+        foreach (torcisao_img_map() as $rel => $url) {
+            if (isset($vmap[$rel])) continue;
+            if ($done >= $limit || microtime(true) - $start > $budget) break 2;
+            $src = str_replace($base_url, $base_dir, $url);
+            if (!is_readable($src)) continue;
+            $done++;
+            $ed = wp_get_image_editor($src);
+            if (is_wp_error($ed)) continue;
+            $size = $ed->get_size();
+            if (empty($size['width']) || $size['width'] <= $w * 1.15) { $vmap[$rel] = $url; $changed = true; continue; }
+            $ed->resize($w, null, false);
+            $ed->set_quality(78);
+            $dest = preg_replace('/-(\d+)\.webp$/', '-' . $w . '.webp', $src);
+            if ($dest === $src) $dest = preg_replace('/\.webp$/', '-' . $w . '.webp', $src);
+            $saved = $ed->save($dest, 'image/webp');
+            if (is_wp_error($saved) || !is_readable($dest)) continue;
+            $vmap[$rel] = str_replace($base_dir, $base_url, $dest);
+            $changed = true;
+        }
+        if ($changed) update_option('torcisao_img_map_' . $v, $vmap, true);
+    }
 }
 
 function torcisao_img_map() {
@@ -98,6 +149,7 @@ add_action('admin_init', function () {
     if (get_transient('torcisao_img_build_lock')) return;
     set_transient('torcisao_img_build_lock', 1, 60);
     torcisao_img_build(8, 10.0);
+    torcisao_img_build_variants(12, 8.0);
     delete_transient('torcisao_img_build_lock');
 });
 /* Aviso no Painel com o andamento (some quando todas estiverem prontas). */
@@ -125,7 +177,7 @@ add_action('admin_notices', function () {
         . ($txt ? ' · não otimizadas: ' . implode(', ', $txt) : '')
         . ' · <a href="' . esc_url($reset) . '">tentar de novo</a></p></div>';
 });
-add_action('torcisao_img_build_event', function () { torcisao_img_build(20, 25.0); });
+add_action('torcisao_img_build_event', function () { torcisao_img_build(20, 25.0); torcisao_img_build_variants(40, 25.0); });
 add_action('init', function () {
     if (!wp_next_scheduled('torcisao_img_build_event')) wp_schedule_event(time() + 120, 'hourly', 'torcisao_img_build_event');
 });
@@ -135,7 +187,21 @@ add_action('wp_head', function () {
     $map = torcisao_img_map();
     $short = [];
     foreach ($map as $rel => $url) $short[$rel] = $url;
-    echo "<script id=\"torcisao-img-map\">window.TORCISAO_IMG_MAP=" . wp_json_encode($short, JSON_UNESCAPED_SLASHES) . ";window.TorcisaoImg=function(u){try{var m=window.TORCISAO_IMG_MAP||{},k=String(u).split('?')[0].replace(/^.*wp-content\\/uploads\\//,'');return m[k]||u}catch(e){return u}};</script>\n";
+    $md = torcisao_img_map_v('md'); $sm = torcisao_img_map_v('sm');
+    /* só o que muda de URL (sm/md iguais ao 1000 ficam de fora para o mapa não crescer à toa) */
+    $md = array_filter($md, function ($u, $k) use ($map) { return ($map[$k] ?? '') !== $u; }, ARRAY_FILTER_USE_BOTH);
+    $sm = array_filter($sm, function ($u, $k) use ($map) { return ($map[$k] ?? '') !== $u; }, ARRAY_FILTER_USE_BOTH);
+    echo "<script id=\"torcisao-img-map\">window.TORCISAO_IMG_MAP=" . wp_json_encode($short, JSON_UNESCAPED_SLASHES)
+        . ";window.TORCISAO_IMG_MD=" . wp_json_encode($md, JSON_UNESCAPED_SLASHES)
+        . ";window.TORCISAO_IMG_SM=" . wp_json_encode($sm, JSON_UNESCAPED_SLASHES)
+        . ";window.TorcisaoImgKey=function(u){return String(u).split('?')[0].replace(/^.*wp-content\\/uploads\\//,'')};"
+        . "window.TorcisaoImg=function(u){try{var k=TorcisaoImgKey(u),mob=(window.innerWidth||1000)<768;return (mob&&window.TORCISAO_IMG_MD[k])||window.TORCISAO_IMG_MAP[k]||u}catch(e){return u}};"
+        /* miniaturas: qualquer foto otimizada exibida com até 120 px troca para a versão de 200 px */
+        . "(function(){var R={};function idx(){for(var k in TORCISAO_IMG_MAP){R[TORCISAO_IMG_MAP[k]]=k;if(TORCISAO_IMG_MD[k])R[TORCISAO_IMG_MD[k]]=k}}idx();"
+        . "function fix(i){var s=i.getAttribute('src')||'';if(i.hasAttribute('data-tor-ss')&&(i.getAttribute('srcset')||'').indexOf(s.split('?')[0])<0){i.removeAttribute('srcset');i.removeAttribute('sizes');i.removeAttribute('data-tor-ss')}var k=R[s.split('?')[0]];if(!k||!TORCISAO_IMG_SM[k])return;if(i.complete&&!i.naturalWidth&&i.getAttribute('src'))return;var w=parseFloat(getComputedStyle(i).width)||0;if(!w&&i.complete&&i.naturalWidth)w=i.clientWidth;if(w>0&&w<=120&&s!==TORCISAO_IMG_SM[k])i.setAttribute('src',TORCISAO_IMG_SM[k])}"
+        . "function scan(n){if(n.tagName==='IMG')fix(n);else if(n.querySelectorAll)[].forEach.call(n.querySelectorAll('img'),fix)}"
+        . "new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='attributes')fix(m.target);else [].forEach.call(m.addedNodes,scan)})}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});"
+        . "addEventListener('load',function(){scan(document)})})();</script>\n";
 }, 1);
 
 /* ---------------------------------------------------------------- adiamento de scripts */
@@ -156,7 +222,7 @@ function torcisao_delay_is_third_party($attrs, $body) {
         $type = strtolower(trim($t[2]));
         if ($type !== '' && $type !== 'text/javascript' && $type !== 'application/javascript' && $type !== 'module') return false;
     }
-    if (preg_match('/\sid\s*=\s*[\'"](torcisao|hs-script-loader)/i', $attrs) && stripos($src, 'googletagmanager') === false) return false;
+    if (preg_match('/\sid\s*=\s*[\'"]torcisao/i', $attrs) && stripos($src, 'googletagmanager') === false) return false;
     $hosts = '#(googletagmanager\.com|google-analytics\.com|js\.hs-scripts\.com|js\.hs-analytics\.net|js\.hs-banner\.com|js\.hscollectedforms\.net|js\.usemessages\.com|static\.hotjar\.com|connect\.facebook\.net|clarity\.ms)#i';
     if ($src !== '') {
         if (stripos($src, 'hsforms') !== false) return false;
@@ -184,6 +250,18 @@ function torcisao_delay_buffer($html) {
             $to[] = str_replace('/', '\\/', $url);
         }
         $html = str_replace($from, $to, $html);
+        $md = torcisao_img_map_v('md');
+        if ($md) {
+            $lg2md = [];
+            foreach ($map as $rel => $url) if (!empty($md[$rel]) && $md[$rel] !== $url) $lg2md[$url] = $md[$rel];
+            if ($lg2md) {
+                $html = preg_replace_callback('#<img\b(?![^>]*\ssrcset=)([^>]*?)\ssrc=(["\'])([^"\']+)\2([^>]*)>#i', function ($m) use ($lg2md) {
+                    $u = $m[3];
+                    if (!isset($lg2md[$u])) return $m[0];
+                    return '<img' . $m[1] . ' src=' . $m[2] . $u . $m[2] . ' srcset="' . esc_attr($lg2md[$u]) . ' 640w, ' . esc_attr($u) . ' 1000w" sizes="(max-width: 767px) 92vw, 700px" data-tor-ss="1"' . $m[4] . '>';
+                }, $html);
+            }
+        }
     }
     $count = 0;
     $html = preg_replace_callback('#<script\b([^>]*)>(.*?)</script>#is', function ($m) use (&$count) {

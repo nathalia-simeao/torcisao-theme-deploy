@@ -40,7 +40,8 @@ if ($bf_lang === 'pt' && $bf_initial === 'btc') {
         'apps' => ['Fixadores','Autopeças','Cesto metálico','Rack metálico','Molas helicoidais','Amortecedores'],
     ];
 }
-$bf_ssr_image_url = $bf_ssr ? $bf_assets . '/' . $bf_ssr['image'] : $bf_assets . '/assets/' . (['btc'=>'barra1.webp','mtc'=>'barra2.webp','atc'=>'barra3.jpg','ressulfurado'=>'barra4.jpg'][$bf_initial] ?? 'barra1.webp');
+/* mesma foto que o script exibe primeiro (a otimização troca pela cópia WebP), para não baixar duas */
+$bf_ssr_image_url = 'https://torcisao.com.br/wp-content/uploads/2026/09/' . (['btc'=>'barratrefiladabtca1.png','mtc'=>'barratrefiladamtca1.png','atc'=>'barratrefiladaatca1.png','ressulfurado'=>'barratrefiladaressulfuradoa1.png'][$bf_initial] ?? 'barratrefiladabtca1.png');
 $bf_ssr_dims = [0,0];
 if ($bf_ssr) {
     $bf_ssr_image_file = get_template_directory() . '/' . $bf_ssr['image'];

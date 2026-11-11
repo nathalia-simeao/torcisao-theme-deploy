@@ -84,7 +84,7 @@ while (have_posts()) : the_post();
 
                 <?php if (has_post_thumbnail()) : ?>
                     <figure class="tor-article-cover">
-                        <?php the_post_thumbnail('full', ['loading'=>'eager','decoding'=>'async']); ?>
+                        <?php the_post_thumbnail('large', ['loading'=>'eager','decoding'=>'async','fetchpriority'=>'high','sizes'=>'(max-width: 767px) 100vw, 1024px']); ?>
                         <?php if ($thumb_caption) : ?><figcaption><?php echo esc_html($thumb_caption); ?></figcaption><?php endif; ?>
                     </figure>
                 <?php endif; ?>
