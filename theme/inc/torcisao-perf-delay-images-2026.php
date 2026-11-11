@@ -73,7 +73,11 @@ function torcisao_img_build_variants($limit = 12, $budget = 10.0) {
         foreach (torcisao_img_map() as $rel => $url) {
             if (isset($vmap[$rel])) continue;
             if ($done >= $limit || microtime(true) - $start > $budget) break 2;
-            $src = str_replace($base_url, $base_dir, $url);
+            /* caminho local pela parte depois de /wp-content/uploads/ (não depende de http/https nem do domínio salvo) */
+            $pos = strpos($url, '/wp-content/uploads/');
+            if ($pos === false) continue;
+            $relpath = substr($url, $pos + strlen('/wp-content/uploads/'));
+            $src = $base_dir . $relpath;
             if (!is_readable($src)) continue;
             $done++;
             $ed = wp_get_image_editor($src);
@@ -86,7 +90,7 @@ function torcisao_img_build_variants($limit = 12, $budget = 10.0) {
             if ($dest === $src) $dest = preg_replace('/\.webp$/', '-' . $w . '.webp', $src);
             $saved = $ed->save($dest, 'image/webp');
             if (is_wp_error($saved) || !is_readable($dest)) continue;
-            $vmap[$rel] = str_replace($base_dir, $base_url, $dest);
+            $vmap[$rel] = substr($url, 0, $pos + strlen('/wp-content/uploads/')) . substr($dest, strlen($base_dir));
             $changed = true;
         }
         if ($changed) update_option('torcisao_img_map_' . $v, $vmap, true);
