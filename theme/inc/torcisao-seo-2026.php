@@ -21,6 +21,10 @@ function torcisao_seo_legacy_target($path) {
         'produtos/aco-retificado-1020' => '/barra-trefilada/',
         'produtos/aco-retificado-1045' => '/barra-trefilada/',
         'produtos/aco-descascado-1045' => '/barra-trefilada/',
+        /* Prefixo /pt/ do Polylang antigo: o português fica sem prefixo. Sem isto o
+           WordPress "chutava" /pt/inicio/ para a home em inglês (/en/inicio-english/). */
+        'pt' => '/',
+        'pt/inicio' => '/',
     ];
     if (isset($exact[$p])) return $exact[$p];
 
@@ -57,9 +61,9 @@ function torcisao_seo_application_links($line) {
         if ($url) $links[] = [$p['title'], $url];
     }
     if (!$links) return;
-    $name = $line === 'arame' ? 'arame trefilado' : 'barra trefilada';
+    $name = $line === 'arame' ? 'o arame trefilado' : 'a barra trefilada';
     echo '<section class="hf-section ta-applinks"><div class="hf-wrap">';
-    echo '<div class="hf-section-head"><span class="hf-section-kicker">Por aplicação</span><h2 class="hf-section-title">Encontre o ' . esc_html($name) . ' para o que você fabrica</h2></div>';
+    echo '<div class="hf-section-head"><span class="hf-section-kicker">Por aplicação</span><h2 class="hf-section-title">Encontre ' . esc_html($name) . ' para o que você fabrica</h2></div>';
     echo '<div class="ta-applinks-grid">';
     foreach ($links as [$t, $u]) echo '<a href="' . esc_url($u) . '"><span>' . esc_html($t) . '</span><i class="bi bi-arrow-right" aria-hidden="true"></i></a>';
     echo '</div></div></section>';
