@@ -877,3 +877,11 @@ if (file_exists($torcisao_perf_bundle_file)) require_once $torcisao_perf_bundle_
 /* 2026-11 · Performance parte 2: GTM/HubSpot tracking após a 1ª interação e fotos em WebP */
 $torcisao_perf_delay_file = get_template_directory().'/inc/torcisao-perf-delay-images-2026.php';
 if (file_exists($torcisao_perf_delay_file)) require_once $torcisao_perf_delay_file;
+
+/* Blog: a consulta principal da página de posts usa os mesmos 6 posts por página
+   da listagem do tema (page-blog.php). Com 10 (padrão de Configurações > Leitura),
+   /blog/page/2/ dava 404 mesmo com o link "Próxima" aparecendo. */
+add_action('pre_get_posts', function($q){
+    if (is_admin() || !$q->is_main_query()) return;
+    if ($q->is_home()) $q->set('posts_per_page', 6);
+});
