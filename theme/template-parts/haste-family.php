@@ -190,6 +190,8 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
     </div>
   </section>
 
+  <?php if (function_exists('torcisao_seo_related_posts')) torcisao_seo_related_posts('haste'); ?>
+
   <section class="hf-section hf-quality-section">
     <div class="hf-wrap"><div class="hf-quality-card"><div class="hf-quality-copy"><div class="hf-quality-icon"><i class="bi bi-patch-check-fill"></i></div><div><h3>Qualidade Torcisão</h3><p>Consulte o certificado ISO e, quando necessário, valide requisitos específicos com nossa equipe.</p></div></div><div class="hf-quality-actions"><a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($hf_iso); ?>" target="_blank" rel="noopener">Ver certificado ISO</a></div></div></div>
   </section>
