@@ -64,6 +64,9 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
             <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html($t['home']); ?></a>
             <a href="<?php echo esc_url(home_url('/#produtos')); ?>"><?php echo esc_html($t['products']); ?></a>
             <a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php echo esc_html($t['blog']); ?></a>
+            <?php if ($footer_lang === 'pt') : ?>
+            <a href="<?php echo esc_url(home_url('/contato/')); ?>">Contato</a>
+            <?php endif; ?>
           </nav>
         </section>
 
@@ -72,6 +75,9 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
           <div class="tor-footer-contact-list">
             <a class="tor-footer-contact-link" href="tel:+551123349989"><span class="tor-footer-iconbox"><i class="bi bi-telephone"></i></span><span>(11) 2334-9989</span></a>
             <a class="tor-footer-contact-link" href="mailto:contatotrefilados@torcisao.com.br"><span class="tor-footer-iconbox"><i class="bi bi-envelope"></i></span><span>contatotrefilados@torcisao.com.br</span></a>
+            <?php if ($footer_lang === 'pt') : ?>
+            <a class="tor-footer-contact-link" href="<?php echo esc_url(home_url('/contato/')); ?>"><span class="tor-footer-iconbox"><i class="bi bi-chat-dots"></i></span><span>Página de contato e cotação</span></a>
+            <?php endif; ?>
           </div>
           <div class="tor-footer-social" role="group" aria-label="Redes sociais Torcisão">
             <a href="https://www.instagram.com/torcisaotrefilados/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>

@@ -22,6 +22,9 @@
 
     <div class="tor-actions">
       <a class="tor-blog" href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a>
+      <?php if (!function_exists('torcisao_request_language') || torcisao_request_language() === 'pt') : ?>
+      <a class="tor-blog tor-contact-link" href="<?php echo esc_url(home_url('/contato/')); ?>">Contato</a>
+      <?php endif; ?>
       <div class="tor-control-pill" aria-label="Preferências do site">
         <button type="button" data-theme-toggle aria-label="Alternar modo claro e escuro"><i class="bi bi-circle-half"></i></button>
         <span class="tor-control-divider"></span>
@@ -69,6 +72,13 @@
       <span>Blog</span>
       <span class="tor-mobile-link-arrow" aria-hidden="true">→</span>
     </a>
+    <?php if (!function_exists('torcisao_request_language') || torcisao_request_language() === 'pt') : ?>
+    <a href="<?php echo esc_url(home_url('/contato/')); ?>">
+      <span class="tor-mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 5.5h15a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17h-1A1.5 1.5 0 0 1 3 15.5V7a1.5 1.5 0 0 1 1.5-1.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7.5 10h9M7.5 13.2h5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span>Contato</span>
+      <span class="tor-mobile-link-arrow" aria-hidden="true">→</span>
+    </a>
+    <?php endif; ?>
   </nav>
 </aside>
 
