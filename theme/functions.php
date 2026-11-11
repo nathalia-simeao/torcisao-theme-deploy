@@ -846,7 +846,7 @@ function torcisao_lead_gate_assets(){
     if (!function_exists('torcisao_lead_route')) return; // plugin privado ausente
     $uri = get_template_directory_uri();
     wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261111-1');
-    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261111-2', true);
+    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261111-3', true);
 }
 add_action('wp_enqueue_scripts', 'torcisao_lead_gate_assets', 200);
 
