@@ -59,7 +59,7 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
           <div class="hf-stage-toolbar"><button type="button" class="hf-tool" id="hfZoomOut" aria-label="Diminuir zoom">−</button><span class="hf-tool hf-zoom-label" id="hfZoomLabel">1,0×</span><button type="button" class="hf-tool" id="hfZoomIn" aria-label="Aumentar zoom">+</button></div>
           <div class="hf-viewer">
             <div class="hf-image-wrap" id="hfImageWrap" tabindex="0" role="button" aria-label="Abrir imagem ampliada">
-              <img class="hf-image" id="hfImage" src="" alt="" loading="eager" decoding="async">
+              <?php $hf_img0 = ["baixa"=>$hf_assets."/assets/hastebaixa.webp","alta"=>$hf_assets."/assets/hastealta.png","conectores"=>"https://torcisao.com.br/wp-content/uploads/2026/09/olhalsimples.png"][$hf_initial]; ?><img class="hf-image skip-lazy" id="hfImage" src="<?php echo esc_url($hf_img0); ?>" alt="<?php echo esc_attr($hf_seo_now[0] ?: "Haste de aterramento Torcisão"); ?>" loading="eager" fetchpriority="high" decoding="async">
               <div class="hf-lens" id="hfLens" aria-hidden="true"></div>
             </div>
             <div class="hf-caption"><div><small id="hfCaptionKicker"></small><strong id="hfCaptionTitle"></strong></div><span id="hfCaptionMeta"></span></div>
@@ -201,7 +201,7 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
   </section>
 </main>
 
-<div class="hf-lightbox" id="hfLightbox" aria-hidden="true"><button type="button" class="hf-lightbox-close" aria-label="Fechar">×</button><img id="hfLightboxImage" src="" alt=""></div>
+<div class="hf-lightbox" id="hfLightbox" aria-hidden="true"><button type="button" class="hf-lightbox-close" aria-label="Fechar">×</button><img id="hfLightboxImage" alt=""></div>
 
 <div class="hf-assistant" id="hfAssistant" aria-hidden="true">
   <div class="hf-assistant-dialog" role="dialog" aria-modal="true" aria-labelledby="hfAssistantTitle">

@@ -914,3 +914,9 @@ function torcisao_restore_theme_images(){
     }
 }
 add_action('init', 'torcisao_restore_theme_images', 1);
+
+/* SEO mobile (Lighthouse "áreas de toque"): links do rodapé e "Ver todos os artigos"
+   tinham 16–22 px de altura e ficavam colados no celular. */
+add_action('wp_head', function(){
+    echo "<style id=\"torcisao-tap-targets\">@media(max-width:767.98px){.tor-footer-links a{display:flex;align-items:center;min-height:44px}.ts-related-all a{display:inline-flex;align-items:center;min-height:44px}}</style>\n";
+}, 99);
