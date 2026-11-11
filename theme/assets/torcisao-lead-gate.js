@@ -598,6 +598,22 @@ function loadHsForms(){
   });
   return hsLoading;
 }
+/* O formulário HubSpot do widget roda num iframe: o CSS da página não entra lá e a
+   Montserrat não está carregada dentro dele, então o navegador caía numa fonte serifada. */
+function waFormFont(host){
+  let tries=0;
+  (function inject(){
+    const ifr=host.querySelector('iframe');let d=null;
+    try{d=ifr&&ifr.contentDocument;}catch(e){d=null;}
+    if(!d||!d.head){if(++tries<40)setTimeout(inject,150);return;}
+    if(d.getElementById('torWaFont'))return;
+    const l=d.createElement('link');l.id='torWaFont';l.rel='stylesheet';
+    l.href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap';
+    const st=d.createElement('style');
+    st.textContent="html,body,body *{font-family:'Montserrat',system-ui,sans-serif!important}";
+    d.head.appendChild(l);d.head.appendChild(st);
+  })();
+}
 function installWaFab(){
   if(document.getElementById('torWaFab')||!document.body)return;
   const root=document.createElement('div');
@@ -620,6 +636,7 @@ function installWaFab(){
     loadHsForms().then(()=>{
       host.innerHTML='';
       window.hbspt.forms.create({portalId:'50818463',formId:WA_FORM_ID,region:'na1',target:'#torWaHsForm',
+        onFormReady:()=>waFormFont(host),
         onFormSubmitted:()=>{fabSave({sentAt:Date.now()});track('generate_lead',{lead_source:'whatsapp_widget',tool:'whatsapp'});syncAllHistory();}
       });
     }).catch(()=>{

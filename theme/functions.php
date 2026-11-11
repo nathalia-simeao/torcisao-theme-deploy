@@ -846,7 +846,7 @@ function torcisao_lead_gate_assets(){
     if (!function_exists('torcisao_lead_route')) return; // plugin privado ausente
     $uri = get_template_directory_uri();
     wp_enqueue_style('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.css', [], '20261111-1');
-    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261106-1', true);
+    wp_enqueue_script('torcisao-lead-gate', $uri.'/assets/torcisao-lead-gate.js', [], '20261111-2', true);
 }
 add_action('wp_enqueue_scripts', 'torcisao_lead_gate_assets', 200);
 
@@ -885,3 +885,32 @@ add_action('pre_get_posts', function($q){
     if (is_admin() || !$q->is_main_query()) return;
     if ($q->is_home()) $q->set('posts_per_page', 6);
 });
+
+/* Imagens do tema: o repositório do WP Pusher não leva imagens, e cada "Update theme"
+   substitui a pasta do tema e apagava logo e fotos de produto. Aqui o tema guarda uma
+   cópia em wp-content/uploads/torcisao-theme-assets/ (que o deploy não toca) e repõe
+   em assets/ o que estiver faltando. Na primeira vez, busca as imagens no tema antigo
+   "novo-trefilados", ainda instalado no servidor. */
+function torcisao_restore_theme_images(){
+    $imgs = ['lgcabecalho400.png','lgcabecalhoclara220.png','lgcabecalhoclara400.png','arame1.webp','barra1.webp','barra2.webp','barra3.jpg','barra4.jpg','hastealta.png','hastebaixa.webp'];
+    $dest = trailingslashit(get_template_directory()) . 'assets/';
+    $missing = [];
+    foreach ($imgs as $f) { if (!file_exists($dest . $f)) $missing[] = $f; }
+    if (!$missing) return;
+    $up = wp_upload_dir(null, false);
+    if (empty($up['basedir'])) return;
+    $store  = trailingslashit($up['basedir']) . 'torcisao-theme-assets/';
+    $legacy = trailingslashit(WP_CONTENT_DIR) . 'themes/novo-trefilados/assets/';
+    if (!is_dir($store)) wp_mkdir_p($store);
+    foreach ($imgs as $f) {
+        if (!file_exists($store . $f)) {
+            foreach ([$dest . $f, $legacy . $f] as $src) {
+                if (file_exists($src)) { @copy($src, $store . $f); break; }
+            }
+        }
+    }
+    foreach ($missing as $f) {
+        if (file_exists($store . $f)) @copy($store . $f, $dest . $f);
+    }
+}
+add_action('init', 'torcisao_restore_theme_images', 1);
