@@ -189,4 +189,4 @@ if ($bf_ssr) {
 <button type="button" class="btn-cta-mobile" id="bfQuoteTab" data-analytics-origin="barra_aba_cotacao" data-analytics-product="barra_trefilada" aria-label="Solicitar cotação"><i class="bi bi-chat-dots-fill"></i><span class="btn-cta-mobile-label">Solicitar cotação</span></button>
 <div class="hf-quote-drawer" id="bfQuoteDrawer" aria-hidden="true"><div class="hf-quote-panel"><div class="hf-quote-head"><div><small>COTAÇÃO</small><h3>Solicite seu orçamento</h3></div><button type="button" class="hf-quote-close" aria-label="Fechar">×</button></div><div id="bfQuoteForm" data-analytics-origin="barra_aba_cotacao" data-analytics-product="barra_trefilada"></div></div></div>
 <script>window.TORCISAO_BARRA_PAGE=<?php echo wp_json_encode(['rest'=>esc_url_raw(rest_url('torcisao/v1/application-assistant')),'formId'=>'7032f62e-b2f6-486a-8db7-bd2822b5db93','portalId'=>'50818463']); ?>;</script>
-<script defer src="<?php echo esc_url($bf_assets . '/assets/torcisao-barra-family.js'); ?>?v=20261104-2"></script>
+<script defer src="<?php echo esc_url($bf_assets . '/assets/torcisao-barra-family.js'); ?>?v=20261111-1"></script>
