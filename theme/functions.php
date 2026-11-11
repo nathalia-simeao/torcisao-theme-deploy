@@ -920,3 +920,12 @@ add_action('init', 'torcisao_restore_theme_images', 1);
 add_action('wp_head', function(){
     echo "<style id=\"torcisao-tap-targets\">@media(max-width:767.98px){.tor-footer-links a{display:flex;align-items:center;min-height:44px}.ts-related-all a{display:inline-flex;align-items:center;min-height:44px}}</style>\n";
 }, 99);
+
+/* SEO mobile: fonte mínima de 12px e largura travada na largura da tela.
+   Impresso direto no <head> (fora do bundle de performance) para ficar por último.
+   O arquivo é gerado por tools/gerar-fonte-minima-mobile.py: rode de novo ao criar estilos com fonte < 12px. */
+add_action('wp_head', function(){
+    $f = get_template_directory() . '/assets/torcisao-mobile-seo.css';
+    if (!file_exists($f)) return;
+    echo '<link rel="stylesheet" id="torcisao-mobile-seo-css" href="' . esc_url(get_template_directory_uri() . '/assets/torcisao-mobile-seo.css?v=' . filemtime($f)) . '" media="all">' . "\n";
+}, 999);

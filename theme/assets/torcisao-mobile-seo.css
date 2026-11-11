@@ -1,0 +1,94 @@
+@media (max-width:767.98px){
+/* GERADO: mínimo de 12px de fonte no celular (Lighthouse "tamanho de fonte legível").
+   Regenerar ao criar estilos novos com fonte < 12px. */
+body.home .tor-about-kicker,.hf-variant-box p,.hf-manual-head small,.hf-page .tor-tolerance-calc,.hf-page .tor-tolerance-result{font-size:max(12px,.69rem)!important}
+body.home .tor-year-btn,body.home .tor-year-btn i,#taQuoteForm .hs-form-field>label,#thToleranceModal .th-modal-primary,.tor-skip-link,.tor-commercial-offer-card p,body .tor-footer-v2 .tor-footer-company-copy span,.tor-pay-bndes,.tor-a11y-head p,.tor-a11y-action strong,.hf-mini-faq summary,.hf-eyebrow,.hf-section-kicker,.tor-product-switch button,.tor-calc-action button,.home-quote-placeholder,.th-home .th-tools-label .th-kicker,.th-modal-primary,.th-theo-chat-title strong,.th-msg,.th-kicker,.th-eyebrow,.th-text-link,.th-tool-number,.th-info-list strong,.th-blog-card p,#torWorkOverlay .tor-phone-ddd-option,.torcisao-calc-modal-head p,.hf-page .tor-tolerance-field input,.hf-page .tor-tolerance-field select,.tor-product-tol-run,.tpe-line-tab,body.home .tq-kicker,body.home .th-home .tb-blog-date,body.home .tor-year-btn > span,.tor-kicker,.tor-hero-eyebrow,.tor-product-card-link,.footer-col a,.tor-blog-badge{font-size:max(12px,.72rem)!important}
+body.home .tor-history-modal-kicker,
+body.home .tor-mvv-modal-kicker,.tor-work-channel strong,#haste-aterramento #hfConnectorPicker .hf-connector-btn,.hf-spec-row small,.hf-chip-list li,.hf-theo-copy span,.th-manual-action,.th-manual-result small,.hf-page .tor-product-tool small{font-size:max(12px,.67rem)!important}
+.ta-product-body small,#thToleranceModal .th-modal-head p,.tor-article-nav small,.tor-article-related-head span,.tor-related-card small,.tor-work-field label,.tor-a11y-reset,.tor-modal-head p,.home-quote-head p,.th-modal-head p,.th-chip-cloud span,.th-number-grid span,.th-timeline-head span,.th-timeline span,.th-blog-card a,.torcisao-calc-mode button,.tor-product-tol-head p,body.home .tq-cert-btn,.tor-stat span,.badge-cookie{font-size:max(12px,.7rem)!important}
+#thToleranceModal .th-modal-head small,.tor-a11y-audio-copy small,#torWorkOverlay .tor-phone-helper,.tor-a11y-head small,body .tor-footer-v2 .tor-footer-company-copy .tor-footer-company-segment,.hf-confidential-note,.tor-modal-head small,.tor-unit-toggle button,.home-quote-head small,.th-modal-head small,.torcisao-calc-field label,.torcisao-calc-note,.hf-page .tor-tolerance-field label,.tor-product-tol-head small,body.home .tq-cert-copy small,body.home .tq-modal-head small,body.home .th-home .tb-blog-tag{font-size:max(12px,.62rem)!important}
+#thToleranceModal .th-tool-context small,#thToleranceModal .th-tolerance-values small,.tor-preview-badge,.th-tool-context small,.th-tolerance-values small,.th-manual-card-head>span,.th-assistant-divider,.th-info-list small,#torWorkOverlay .tor-phone-ddd-option small,.tor-browser-translate-status,.torcisao-calc-profile-badge,.tor-product-tol-context small,.tor-product-tol-values small{font-size:max(12px,.58rem)!important}
+#thToleranceModal .th-tool-context p,#thToleranceModal .th-empty-result span,.tor-article-badge,.tor-footer-v2 .tor-pay-bndes,.tor-footer-group-label,.tor-input-shell>span,.th-tool-context p,.th-empty-result span,.th-manual-card-head p,.th-modal-note,.tor-product-tol-context p,.tor-product-tol-empty span,.tpe-option,.tor-product-card small{font-size:max(12px,.66rem)!important}
+#thToleranceModal .th-tolerance-input-block label,.tor-a11y-audio-status,.hf-aeo-quick-title small,.hf-aeo-quick-item span,.hf-manual-tags span,.tor-field label,.tor-mini-label,.th-tolerance-input-block label,.th-theo-mini small,.th-assistant-divider,.tor-language-section-head small,.torcisao-calc-help,.hf-page .hf-image-variant,.tor-product-tol-field label{font-size:max(12px,.61rem)!important}
+#thToleranceModal .th-premium-input span,.tor-footer-map-hint,.tor-work-consent,.hf-availability-head small,.tor-choice-row button,.th-premium-input span,.th-manual-result a,.th-product-select em,.tor-browser-translate-copy small,.tor-product-tol-input span,.tpe-specs strong{font-size:max(12px,.65rem)!important}
+#thToleranceModal .th-empty-result p,.tor-article-cover figcaption,.tor-article-cta small,.tor-commercial-offer-actions button,body.home .tpe-info>p,.tor-footer-company-copy span,.tor-work-status,.hf-aeo-quick-item p,.hf-aeo-quick-note p,.hf-mini-faq details p,.hf-availability-table th,.hf-availability-table td,.tor-calc-modes button,.home-quote-tab-label,.th-empty-result p,.th-manual-product-choices strong,.th-stage-caption,.th-manual-card>p,.th-manual-result a,#torWorkOverlay .tor-phone-ddd-trigger i,.tor-product-tol-empty p,.tpe-caption strong,.tpe-info>p,body.home .ts-proof-dialog small{font-size:max(12px,.68rem)!important}
+#thToleranceModal .th-tolerance-values .th-tol-limits span,.tor-commercial-offer-card small,.tor-a11y-action small,#haste-aterramento #hfConnectorPicker .hf-picker-label,.hf-fact small,.hf-caption small,.hf-stage-note,.hf-theo-copy small,.tor-calc-section-label small,.th-blog-card small,.torcisao-calc-eyebrow,.th-tolerance-values .th-tol-limits span{font-size:max(12px,.6rem)!important}
+#thToleranceModal .th-tolerance-values .th-tol-consult,body.home .tpe-btn,.tor-calc-section-label>span,.tor-result small,.th-product-select small,#torWorkOverlay .tor-phone-helper,.torcisao-calc-result small,.th-tolerance-values .th-tol-consult{font-size:max(12px,.59rem)!important}
+#thToleranceModal .th-tolerance-range-note,#thToleranceModal .th-modal-note,.tor-commercial-offer-context,.hf-product-kicker,.hf-picker-label,.hf-caption>span,.hf-assistant-divider,.tor-calc-note,.th-tolerance-range-note,.th-modal-note,.th-stage-tools>span,.th-tolerance-grid label span,.tor-browser-translate-hint,.tor-product-tol-note,.tpe-btn,.tpe-lightbox-tools span{font-size:max(12px,.63rem)!important}
+#torcisaoCalcOverlay .tor-calc-unit-caption,.tpe-caption small{font-size:max(12px,.53rem)!important}
+body .tor-footer-v2 .tor-footer-group-eyebrow,.tor-footer-copy,.tor-work-submit,.tor-work-whatsapp,.th-pill,.th-diff-grid p,.th-tolerance-result p,.th-msg,.tor-wa-hs .legal-consent-container,.tor-wa-hs .hs-richtext,.torcisao-calc-button,.tor-custom-select-option,.tor-pill{font-size:max(12px,.74rem)!important}
+.tor-footer-v2 .tor-pay-boleto{font-size:max(12px,.52rem)!important}
+.tor-a11y-audio-btn,.tor-work-head small,.tor-file-drop small,.hf-connector-btn,.hf-assistant-head small,.hf-quote-head small,.tor-lang-grid small,.th-manual-result small,.th-info-kicker,.tpe-stage-toolbar button,.tpe-stage-toolbar>div>span,.tpe-lightbox-caption,.footer-bottom,.ts-related-card small{font-size:max(12px,.64rem)!important}
+.tor-pay-boleto,.tpe-options-head small,.tpe-option-group>small,.tpe-stage-toolbar>span,.tpe-info-kicker,body.home .tq-cert-file{font-size:max(12px,.56rem)!important}
+.hf-family-tab,.hf-btn,.hf-assistant-head p,.btn-cta-mobile{font-size:max(12px,.73rem)!important}
+.th-manual-product-choices small{font-size:max(12px,.55rem)!important}
+.th-theo-chat-title small{font-size:max(12px,.57rem)!important}
+.tpe-specs small{font-size:max(12px,.51rem)!important}
+@media (max-width:420px){
+.tor-article-badge{font-size:max(12px,.63rem)!important}
+.tor-footer-ciesp{font-size:max(12px,.74rem)!important}
+}
+@media (max-width:560px){
+body .tor-footer-v2 .tor-footer-company-copy span{font-size:max(12px,.62rem)!important}
+#torWorkOverlay .tor-phone-ddi,#torWorkOverlay .tor-phone-ddd,#torWorkOverlay .tor-phone-local{font-size:max(12px,.71rem)!important}
+body .tor-footer-v2 .tor-footer-company-copy .tor-footer-company-segment{font-size:max(12px,.56rem)!important}
+#torWorkOverlay .tor-phone-ddi,#torWorkOverlay .tor-phone-ddd-trigger{font-size:max(12px,.70rem)!important}
+#torWorkOverlay .tor-phone-local{font-size:max(12px,.69rem)!important}
+}
+@media (max-width:680px){
+.hf-mini-faq summary{font-size:max(12px,.7rem)!important}
+}
+@media (max-width:380px){
+.hf-aeo-quick-item p,.hf-aeo-quick-note p{font-size:max(12px,.66rem)!important}
+body.home .tpe-line-tab{font-size:max(12px,.56rem)!important}
+}
+@media (max-width:760px){
+#haste-aterramento #hfConnectorPicker .hf-connector-btn{font-size:max(12px,.64rem)!important}
+body.home .th-home .tb-blog-date,body.home .th-home .tb-blog-all{font-size:max(12px,.56rem)!important}
+body.home .th-home .tb-blog-tag{font-size:max(12px,.45rem)!important}
+.hf-page .hf-image-variant{font-size:max(12px,.58rem)!important}
+}
+@media (max-width:767.98px){
+.hf-family-tab{font-size:max(12px,.59rem)!important}
+body.home .th-home .th-hero-content .th-eyebrow{font-size:max(12px,clamp(.44rem,1.95vw,.56rem))!important}
+.home-quote-head p{font-size:max(12px,.72rem)!important}
+.th-home .th-hero-content .th-eyebrow{font-size:max(12px,.66rem)!important}
+body.home .tpe-line-tab{font-size:max(12px,clamp(.58rem,2.6vw,.7rem))!important}
+}
+@media (max-width:520px){
+.tor-choice-row button{font-size:max(12px,.61rem)!important}
+}
+@media (max-width:991.98px){
+.home-quote-head p{font-size:max(12px,.72rem)!important}
+}
+@media (max-width:320px){
+body.home .th-home .th-hero-content .th-eyebrow{font-size:max(12px,.41rem)!important}
+}
+@media (max-width:390px){
+body .tor-footer-v2 .tor-footer-company-copy strong{font-size:max(12px,.73rem)!important}
+body .tor-footer-v2 .tor-footer-company-copy span{font-size:max(12px,.60rem)!important}
+}
+@media (max-width:900px){
+body.home .th-home .tb-blog-date{font-size:max(12px,.48rem)!important}
+body.home .th-home .tb-blog-tag{font-size:max(12px,.42rem)!important}
+body.home .th-home .tb-blog-all{font-size:max(12px,.58rem)!important}
+}
+@media (max-width:640px){
+body.home .ts-segment{font-size:max(12px,.7rem)!important}
+}
+@media (max-width:360px){
+body.home .th-home .tb-blog-all{font-size:max(12px,.54rem)!important}
+}
+/* Barra de Black Friday (#tbf-bar) e letreiro (.tfx) vêm de um snippet do WPCode, fora do tema */
+#tbf-bar .tbf-l{font-size:12px!important;margin-top:2px!important;letter-spacing:.5px!important}
+#tbf-bar .tbf-tt,#tbf-bar .tbf-pct{font-size:12px!important}
+.tfx-seg em,.tfx-k small{font-size:12px!important}
+}
+
+/* Largura da página = largura da tela (Lighthouse "content-width"): nada pode criar rolagem lateral */
+html,body{max-width:100%}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+@supports not (overflow:clip){body{overflow-x:hidden}}
+@media (max-width:767.98px){
+  #hs-interactives-modal-overlay,#hs-interactives-modal-overlay iframe,iframe[aria-label="Popup CTA"]{max-width:100vw!important}
+}
