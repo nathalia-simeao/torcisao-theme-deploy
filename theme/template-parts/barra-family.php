@@ -101,12 +101,13 @@ if ($bf_ssr) {
             </table>
           </div>
           <div class="hf-availability-card">
-            <div class="hf-availability-head"><strong>Prazo de entrega e lote mínimo</strong><small>Compra direta de fábrica</small></div>
+            <div class="hf-availability-head"><strong>Prazo de entrega e lote mínimo</strong><small>Compra direta de fábrica · prazo confirmado em cada proposta</small></div>
             <table class="hf-availability-table">
               <thead><tr><th>Condição</th><th>Prazo / lote</th></tr></thead>
               <tbody>
-                <tr><td>Trefilado comum (escuro)</td><td>Até 7 dias úteis</td></tr>
-                <tr><td>Trefilado reendireitado e polido</td><td>Até 15 dias úteis</td></tr>
+                <tr><td>Material em estoque</td><td>Despacho conforme disponibilidade da liga, da bitola e do acabamento</td></tr>
+                <tr><td>Material sob produção</td><td>Conforme a programação da linha; reendireitado e polido exige etapas adicionais</td></tr>
+                <tr><td>Pedido com urgência</td><td>Informe a data necessária na cotação: a equipe avalia uma condição de atendimento prioritário</td></tr>
                 <tr><td>Lote mínimo</td><td>500 kg por pedido</td></tr>
                 <tr><td>Tolerância</td><td>Sob consulta</td></tr>
               </tbody>
@@ -148,11 +149,11 @@ if ($bf_ssr) {
     </details>
     <details>
       <summary>Existe barra 11SMn37 a pronta entrega?</summary>
-      <p>Sim. Barras em trefilado comum são entregues em até 7 dias úteis, e barras reendireitadas e polidas em até 15 dias úteis. Como o estoque é dinâmico, a Torcisão confirma a disponibilidade da bitola, do acabamento e da quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.</p>
+      <p>Estoque industrial é dinâmico. Por isso, a Torcisão verifica a disponibilidade real da bitola, acabamento e quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.</p>
     </details>
     <details>
       <summary>Qual o prazo de entrega de barras trefiladas para pedidos urgentes?</summary>
-      <p>Barras em trefilado comum (escuro) são entregues em até 7 dias úteis, e barras reendireitadas e polidas em até 15 dias úteis. Materiais de produção externa têm prazo sob consulta. Para pedidos urgentes, informe bitola, aço, acabamento e quantidade para a equipe verificar o estoque na hora.</p>
+      <p>O prazo é confirmado em cada proposta e depende da disponibilidade em estoque, do acabamento e da programação da linha; barras reendireitadas e polidas passam por etapas adicionais. Para pedidos urgentes, informe bitola, aço, acabamento, quantidade e a data necessária: a equipe verifica o estoque e avalia uma condição de atendimento prioritário.</p>
     </details>
     <details>
       <summary>Qual o lote mínimo para comprar barra trefilada direto da fábrica?</summary>

@@ -78,13 +78,13 @@ $af_seo_now = $af_lang === 'pt' ? $af_seo[$af_initial] : ['', ''];
         </div>
         <div class="hf-spec-grid" style="margin-top:20px">
           <div class="hf-availability-card">
-            <div class="hf-availability-head"><strong>Prazos de entrega</strong><small>Conforme bitola e forma de fornecimento</small></div>
+            <div class="hf-availability-head"><strong>Prazo de entrega</strong><small>Confirmado em cada proposta</small></div>
             <table class="hf-availability-table">
               <thead><tr><th>Material</th><th>Prazo</th></tr></thead>
               <tbody>
-                <tr><td>Arame em spider em estoque · 2,05 a 6,36 mm</td><td>3 dias úteis</td></tr>
-                <tr><td>Arame fracionado / estocador · 2,05 a 6,35 mm</td><td>5 dias úteis (+1 dia útil para o interior, de 60 a 250 km)</td></tr>
-                <tr><td>Arame sob produção · 6,36 a 15,88 mm</td><td>10 dias úteis</td></tr>
+                <tr><td>Material em estoque</td><td>Despacho conforme disponibilidade da liga, da bitola e da forma de fornecimento (rolo ou spider)</td></tr>
+                <tr><td>Material sob produção</td><td>Conforme a programação da linha de trefilação</td></tr>
+                <tr><td>Pedido com urgência</td><td>Informe a data necessária na cotação: a equipe avalia uma condição de atendimento prioritário</td></tr>
               </tbody>
             </table>
           </div>
@@ -130,7 +130,7 @@ $af_seo_now = $af_lang === 'pt' ? $af_seo[$af_initial] : ['', ''];
     </details>
     <details>
       <summary>Qual o prazo de entrega do arame trefilado?</summary>
-      <p>Arame em spider em estoque (2,05 a 6,36 mm) sai em 3 dias úteis. Arame fracionado ou de estocador (2,05 a 6,35 mm) leva 5 dias úteis, com 1 dia útil a mais para o interior entre 60 e 250 km. Bitolas sob produção (6,36 a 15,88 mm) levam 10 dias úteis.</p>
+      <p>O prazo é confirmado em cada proposta. Arame em estoque, em rolo ou spider, tem o atendimento mais rápido; bitolas que precisam ser produzidas seguem a programação da linha. Em caso de urgência, informe a data necessária na cotação para a equipe avaliar uma condição prioritária.</p>
     </details>
     <details>
       <summary>Qual arame usar para molas e telas?</summary>
