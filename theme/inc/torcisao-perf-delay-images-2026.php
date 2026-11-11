@@ -68,6 +68,7 @@ function torcisao_img_build_variants($limit = 12, $budget = 10.0) {
     if (!empty($up['error'])) return;
     $base_dir = trailingslashit($up['basedir']); $base_url = trailingslashit($up['baseurl']);
     $start = microtime(true); $done = 0;
+    $diag = ['vistos' => 0, 'sem_arquivo' => 0, 'erro_editor' => 0, 'erro_salvar' => 0, 'gerados' => 0, 'ultimo' => ''];
     foreach (torcisao_img_variants() as $v => $w) {
         $vmap = torcisao_img_map_v($v); $changed = false;
         foreach (torcisao_img_map() as $rel => $url) {
@@ -78,10 +79,11 @@ function torcisao_img_build_variants($limit = 12, $budget = 10.0) {
             if ($pos === false) continue;
             $relpath = substr($url, $pos + strlen('/wp-content/uploads/'));
             $src = $base_dir . $relpath;
-            if (!is_readable($src)) continue;
+            $diag['vistos']++;
+            if (!is_readable($src)) { $diag['sem_arquivo']++; $diag['ultimo'] = $src; continue; }
             $done++;
             $ed = wp_get_image_editor($src);
-            if (is_wp_error($ed)) continue;
+            if (is_wp_error($ed)) { $diag['erro_editor']++; $diag['ultimo'] = $ed->get_error_message(); continue; }
             $size = $ed->get_size();
             if (empty($size['width']) || $size['width'] <= $w * 1.15) { $vmap[$rel] = $url; $changed = true; continue; }
             $ed->resize($w, null, false);
@@ -89,12 +91,15 @@ function torcisao_img_build_variants($limit = 12, $budget = 10.0) {
             $dest = preg_replace('/-(\d+)\.webp$/', '-' . $w . '.webp', $src);
             if ($dest === $src) $dest = preg_replace('/\.webp$/', '-' . $w . '.webp', $src);
             $saved = $ed->save($dest, 'image/webp');
-            if (is_wp_error($saved) || !is_readable($dest)) continue;
+            if (is_wp_error($saved) || !is_readable($dest)) { $diag['erro_salvar']++; $diag['ultimo'] = is_wp_error($saved) ? $saved->get_error_message() : $dest; continue; }
+            $diag['gerados']++;
             $vmap[$rel] = substr($url, 0, $pos + strlen('/wp-content/uploads/')) . substr($dest, strlen($base_dir));
             $changed = true;
         }
         if ($changed) update_option('torcisao_img_map_' . $v, $vmap, true);
     }
+    $diag['quando'] = current_time('mysql');
+    update_option('torcisao_img_variants_diag', $diag, false);
 }
 
 function torcisao_img_map() {
@@ -164,6 +169,13 @@ add_action('admin_notices', function () {
     if (isset($_GET['torcisao_img_reset']) && check_admin_referer('torcisao_img_reset')) {
         delete_option('torcisao_img_failed');
         torcisao_img_build(8, 10.0);
+    }
+    $vd = get_option('torcisao_img_variants_diag', []);
+    $nmd = count(torcisao_img_map_v('md')); $nsm = count(torcisao_img_map_v('sm')); $nlg = count(torcisao_img_map());
+    if ($nmd < $nlg || $nsm < $nlg) {
+        echo '<div class="notice notice-info"><p><strong>Torcisão · versões para celular:</strong> 640 px: ' . (int) $nmd . ' de ' . (int) $nlg . ' · 200 px: ' . (int) $nsm . ' de ' . (int) $nlg
+            . ($vd ? ' · última rodada ' . esc_html($vd['quando'] ?? '') . ': vistos ' . (int) ($vd['vistos'] ?? 0) . ', gerados ' . (int) ($vd['gerados'] ?? 0) . ', sem arquivo ' . (int) ($vd['sem_arquivo'] ?? 0) . ', erro editor ' . (int) ($vd['erro_editor'] ?? 0) . ', erro ao salvar ' . (int) ($vd['erro_salvar'] ?? 0) . (!empty($vd['ultimo']) ? ' · ' . esc_html(substr((string) $vd['ultimo'], -120)) : '') : ' · ainda não rodou')
+            . '</p></div>';
     }
     $total = count(torcisao_img_candidates());
     $ok = count(torcisao_img_map());
