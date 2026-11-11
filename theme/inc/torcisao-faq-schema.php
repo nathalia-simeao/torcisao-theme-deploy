@@ -30,7 +30,7 @@ function torcisao_product_faq_schema_data(){
             ],
             [
                 'question' => 'Qual o prazo de entrega das hastes?',
-                'answer' => 'Material em estoque sai em 3 dias úteis (5 dias úteis com etiqueta). Itens que dependem de banho de cobre levam 10 dias úteis, e produção completa leva até 25 dias úteis.',
+                'answer' => 'O prazo é confirmado em cada proposta. Hastes em estoque têm o atendimento mais rápido; itens que dependem de trefilação ou banho de cobre seguem a programação da linha. Em caso de urgência, informe a data necessária na cotação para a equipe avaliar uma condição prioritária.',
             ],
             [
                 'question' => 'A Torcisão vende direto para distribuidoras e revendas?',
@@ -64,11 +64,11 @@ function torcisao_product_faq_schema_data(){
             ],
             [
                 'question' => 'Existe barra 11SMn37 a pronta entrega?',
-                'answer' => 'Sim. Barras em trefilado comum são entregues em até 7 dias úteis, e barras reendireitadas e polidas em até 15 dias úteis. Como o estoque é dinâmico, a Torcisão confirma a disponibilidade da bitola, do acabamento e da quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.',
+                'answer' => 'Estoque industrial é dinâmico. Por isso, a Torcisão verifica a disponibilidade real da bitola, acabamento e quantidade no momento da consulta. Quando o prazo for crítico, informe isso já na cotação.',
             ],
             [
                 'question' => 'Qual o prazo de entrega de barras trefiladas para pedidos urgentes?',
-                'answer' => 'Barras em trefilado comum (escuro) são entregues em até 7 dias úteis, e barras reendireitadas e polidas em até 15 dias úteis. Materiais de produção externa têm prazo sob consulta. Para pedidos urgentes, informe bitola, aço, acabamento e quantidade para a equipe verificar o estoque na hora.',
+                'answer' => 'O prazo é confirmado em cada proposta e depende da disponibilidade em estoque, do acabamento e da programação da linha; barras reendireitadas e polidas passam por etapas adicionais. Para pedidos urgentes, informe bitola, aço, acabamento, quantidade e a data necessária: a equipe verifica o estoque e avalia uma condição de atendimento prioritário.',
             ],
             [
                 'question' => 'Qual o lote mínimo para comprar barra trefilada direto da fábrica?',
@@ -114,7 +114,7 @@ function torcisao_product_faq_schema_data(){
             ],
             [
                 'question' => 'Qual o prazo de entrega do arame trefilado?',
-                'answer' => 'Arame em spider em estoque (2,05 a 6,36 mm) sai em 3 dias úteis. Arame fracionado ou de estocador (2,05 a 6,35 mm) leva 5 dias úteis, com 1 dia útil a mais para o interior entre 60 e 250 km. Bitolas sob produção (6,36 a 15,88 mm) levam 10 dias úteis.',
+                'answer' => 'O prazo é confirmado em cada proposta. Arame em estoque, em rolo ou spider, tem o atendimento mais rápido; bitolas que precisam ser produzidas seguem a programação da linha. Em caso de urgência, informe a data necessária na cotação para a equipe avaliar uma condição prioritária.',
             ],
             [
                 'question' => 'Qual arame usar para molas e telas?',

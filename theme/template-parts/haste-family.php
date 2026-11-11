@@ -129,14 +129,13 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
             </table>
           </div>
           <div class="hf-availability-card">
-            <div class="hf-availability-head"><strong>Prazos de entrega</strong><small>Conforme a situação do material</small></div>
+            <div class="hf-availability-head"><strong>Prazo de entrega</strong><small>Confirmado em cada proposta</small></div>
             <table class="hf-availability-table">
               <thead><tr><th>Situação do material</th><th>Prazo</th></tr></thead>
               <tbody>
-                <tr><td>Em estoque, sem etiqueta</td><td>3 dias úteis</td></tr>
-                <tr><td>Em estoque, com etiqueta</td><td>5 dias úteis</td></tr>
-                <tr><td>Aguardando banho de cobre</td><td>10 dias úteis</td></tr>
-                <tr><td>Produção completa (trefilação, banho e separação)</td><td>25 dias úteis</td></tr>
+                <tr><td>Material em estoque</td><td>Despacho conforme disponibilidade da bitola, do comprimento e da quantidade</td></tr>
+                <tr><td>Material sob produção</td><td>Conforme a programação da linha de trefilação e do banho de cobre</td></tr>
+                <tr><td>Pedido com urgência</td><td>Informe a data necessária na cotação: a equipe avalia uma condição de atendimento prioritário</td></tr>
               </tbody>
             </table>
           </div>
@@ -179,7 +178,7 @@ $hf_seo_now = $hf_lang === 'pt' ? $hf_seo[$hf_initial] : ['', ''];
           </details>
           <details>
             <summary>Qual o prazo de entrega das hastes?</summary>
-            <p>Material em estoque sai em 3 dias úteis (5 dias úteis com etiqueta). Itens que dependem de banho de cobre levam 10 dias úteis, e produção completa leva até 25 dias úteis.</p>
+            <p>O prazo é confirmado em cada proposta. Hastes em estoque têm o atendimento mais rápido; itens que dependem de trefilação ou banho de cobre seguem a programação da linha. Em caso de urgência, informe a data necessária na cotação para a equipe avaliar uma condição prioritária.</p>
           </details>
           <details>
             <summary>A Torcisão vende direto para distribuidoras e revendas?</summary>
