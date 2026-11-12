@@ -64,8 +64,11 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
             <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html($t['home']); ?></a>
             <a href="<?php echo esc_url(home_url('/#produtos')); ?>"><?php echo esc_html($t['products']); ?></a>
             <a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php echo esc_html($t['blog']); ?></a>
-            <?php if ($footer_lang === 'pt') : ?>
-            <a href="<?php echo esc_url(home_url('/contato/')); ?>">Contato</a>
+            <?php
+            $footer_contact_url = $footer_lang === 'pt' ? home_url('/contato/') : (function_exists('torcisao_contact_url') ? torcisao_contact_url($footer_lang) : '');
+            $footer_contact_label = ['pt' => 'Contato', 'en' => 'Contact', 'es' => 'Contacto'][$footer_lang] ?? 'Contato';
+            if ($footer_contact_url) : ?>
+            <a href="<?php echo esc_url($footer_contact_url); ?>"><?php echo esc_html($footer_contact_label); ?></a>
             <?php endif; ?>
           </nav>
         </section>
@@ -75,8 +78,8 @@ $t = $footer_copy[$footer_lang] ?? $footer_copy['pt'];
           <div class="tor-footer-contact-list">
             <a class="tor-footer-contact-link" href="tel:+551123349989"><span class="tor-footer-iconbox"><i class="bi bi-telephone"></i></span><span>(11) 2334-9989</span></a>
             <a class="tor-footer-contact-link" href="mailto:contatotrefilados@torcisao.com.br"><span class="tor-footer-iconbox"><i class="bi bi-envelope"></i></span><span>contatotrefilados@torcisao.com.br</span></a>
-            <?php if ($footer_lang === 'pt') : ?>
-            <a class="tor-footer-contact-link" href="<?php echo esc_url(home_url('/contato/')); ?>"><span class="tor-footer-iconbox"><i class="bi bi-chat-dots"></i></span><span>Página de contato e cotação</span></a>
+            <?php if (!empty($footer_contact_url)) : ?>
+            <a class="tor-footer-contact-link" href="<?php echo esc_url($footer_contact_url); ?>"><span class="tor-footer-iconbox"><i class="bi bi-chat-dots"></i></span><span><?php echo esc_html(['pt' => 'Página de contato e cotação', 'en' => 'Contact and quote page', 'es' => 'Página de contacto y cotización'][$footer_lang] ?? 'Página de contato e cotação'); ?></span></a>
             <?php endif; ?>
           </div>
           <div class="tor-footer-social" role="group" aria-label="Redes sociais Torcisão">

@@ -173,7 +173,7 @@ $hero_arame = wp_get_attachment_image_url(1555, 'full') ?: 'https://torcisao.com
   <section class="th-section th-about" id="quem-somos">
     <div class="th-container th-about-grid">
       <div class="th-about-copy"><span class="th-kicker">Quem Somos</span><h2>Mais do que fornecer aço, a Torcisão entrega valorização para o projeto</h2><p>Com uma trajetória iniciada em 1968, a Torcisão atua com arames trefilados, barras trefiladas e hastes de aterramento para diferentes cadeias industriais</p><p>Conhecimento de processo, relacionamento comercial e evolução contínua fazem parte da forma como a empresa atende seus clientes</p></div>
-      <figure class="th-about-image"><?php echo wp_get_attachment_image(54, 'medium_large', false, ['alt'=>'Ambiente industrial Torcisão','loading'=>'lazy','decoding'=>'async','sizes'=>'(max-width: 767px) 100vw, 50vw']); ?></figure>
+      <figure class="th-about-image"><?php echo wp_get_attachment_image(wp_attachment_is_image(2067) ? 2067 : 54, 'medium_large', false, ['alt'=>'Ambiente industrial Torcisão','loading'=>'lazy','decoding'=>'async','sizes'=>'(max-width: 767px) 100vw, 50vw']); ?></figure>
     </div>
     <div class="th-container th-timeline-wrap"><div class="th-timeline-head"><div><strong>Nosso crescimento conta a nossa história</strong><span>Uma trajetória construída ao longo de décadas</span></div></div><div class="th-timeline" aria-label="Linha do tempo Torcisão"><span class="is-highlight">1968</span><span>1975</span><span>1978</span><span>1999</span><span>2005</span><span>2006</span><span>2011</span><span>2013</span><span>2014</span><span>2015</span><span>2016</span><span>2017</span><span>2019</span><span>2022</span><span>2024</span></div></div>
   </section>

@@ -176,7 +176,7 @@ function torcisao_theme_assets(){
     wp_enqueue_script('torcisao-commercial-handoff',$uri.'/assets/torcisao-commercial-handoff.js',$commercial_handoff_dep, $ver, true);
     if ($is_product_page && !$is_barra_page) {
         wp_enqueue_script('torcisao-product-pages-v9',$uri.'/assets/torcisao-product-pages-v9.js',['torcisao-phase8'],'20260907-1',true);
-        wp_enqueue_script('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.js',['torcisao-product-pages-v9'],'20261111-1',true);
+        wp_enqueue_script('torcisao-product-pages-v10',$uri.'/assets/torcisao-product-pages-v10.js',['torcisao-product-pages-v9'],'20261112-1',true);
         if (is_page(1623)) {
             wp_enqueue_script('torcisao-haste-application-v11',$uri.'/assets/torcisao-haste-application-v11.js',['torcisao-product-pages-v10'],'20260907-2',true);
         }
@@ -869,6 +869,14 @@ if (file_exists($torcisao_applications_file)) require_once $torcisao_application
 /* 2026-11 · SEO: redirecionamento dos endereços antigos e links para as páginas de aplicação */
 $torcisao_seo_file = get_template_directory().'/inc/torcisao-seo-2026.php';
 if (file_exists($torcisao_seo_file)) require_once $torcisao_seo_file;
+
+/* 2026-11 · Contato em inglês e espanhol (páginas do Polylang geradas a partir de /contato/) */
+$torcisao_contact_i18n_file = get_template_directory().'/inc/torcisao-contact-i18n.php';
+if (file_exists($torcisao_contact_i18n_file)) require_once $torcisao_contact_i18n_file;
+
+/* 2026-11 · Snippets que estavam no WPCode (#1638, #2057, #2058), agora versionados no tema */
+$torcisao_wpcode_migrated_file = get_template_directory().'/inc/torcisao-wpcode-migrated-2026.php';
+if (file_exists($torcisao_wpcode_migrated_file)) require_once $torcisao_wpcode_migrated_file;
 
 /* 2026-11 · Performance no celular: CSS do tema em um arquivo, ícones sem bloquear, UTM com defer */
 $torcisao_perf_bundle_file = get_template_directory().'/inc/torcisao-perf-bundle-2026.php';

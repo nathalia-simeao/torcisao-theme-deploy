@@ -196,6 +196,7 @@ if (!function_exists('torcisao_translated_page_assets')) {
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-i18n-legal-v28.js?v=20260907-3').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-i18n-audit-v31.js?v=20260907-3').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-i18n-catalog-v32.js?v=20260907-1').'"></script>';
+        echo '<script defer src="'.esc_url($uri.'/assets/torcisao-i18n-explorer-v46.js?v=20261112-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-i18n-final-v33.js?v=20260907-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-blog-i18n-v34.js?v=20260907-1').'"></script>';
         echo '<script defer src="'.esc_url($uri.'/assets/torcisao-audio-i18n-v33.js?v=20260907-1').'"></script>';

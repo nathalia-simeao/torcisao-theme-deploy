@@ -36,6 +36,22 @@ function torcisao_product_faq_schema_data(){
                 'question' => 'A Torcisão vende direto para distribuidoras e revendas?',
                 'answer' => 'Sim. A Torcisão atende distribuidores, atacadistas, construtoras e instaladores de SPDA com venda direta de fábrica, e hastes e conectores podem ser cotados e entregues no mesmo pedido.',
             ],
+            [
+                'question' => 'O que é haste de aterramento cobreada?',
+                'answer' => 'É uma haste com núcleo sólido de aço-carbono revestido por uma camada de cobre. Na Torcisão, o núcleo é de aço SAE 1010/1020 e a camada de cobre pode ser baixa, de até 20 µm, ou alta, de 254 µm. A camada correta é a que o projeto especifica.',
+            ],
+            [
+                'question' => 'A Torcisão fabrica haste de aterramento 5/8 x 2,40 m e 5/8 x 3,00 m?',
+                'answer' => 'Sim. A haste de alta camada (254 µm) é fabricada em 5/8”, 1/2” e 3/4”, com 2,40 m e 3,00 m. O comprimento de 2,00 m é sob consulta. Na baixa camada (20 µm), os diâmetros vão de 9,00 a 15,40 mm.',
+            ],
+            [
+                'question' => 'Quando usar a haste de aterramento de 254 mícrons?',
+                'answer' => 'A haste de alta camada, com 254 µm de cobre, é indicada quando essa condição é exigida na especificação do sistema. Em SPDA, confirme a exigência com o responsável técnico e com a ABNT NBR 5419:2026; para hastes de aço cobreado, consulte também a ABNT NBR 13571.',
+            ],
+            [
+                'question' => 'Qual o preço da haste de aterramento?',
+                'answer' => 'O preço depende da camada de cobre, da bitola, do comprimento e da quantidade. A Torcisão vende direto da fábrica, com lote mínimo de 30 peças na alta camada e de 100 peças na baixa camada. Envie esses dados na cotação para receber preço e prazo.',
+            ],
         ],
         1622 => [
             [

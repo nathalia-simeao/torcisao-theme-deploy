@@ -12,7 +12,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-const TORCISAO_APP_PAGES_VERSION = '2026.11.05.2';
+const TORCISAO_APP_PAGES_VERSION = '2026.11.12.1';
 const TORCISAO_APP_MEDIA = 'https://torcisao.com.br/wp-content/uploads/2026/09/';
 
 /** Linhas do catálogo (espelho do catálogo aprovado do Theo). */
@@ -43,11 +43,19 @@ function torcisao_app_products() {
         'barra_ressulfurado' => ['name' => 'Barra Trefilada - Aço Ressulfurado', 'short' => 'Aço Ressulfurado 11SMn37', 'line' => 'barra', 'kind' => 'ressulfurado', 'img' => TORCISAO_APP_MEDIA . 'barratrefiladaressulfuradoa1.png',
             'summary' => 'Barra trefilada em aço ressulfurado 11SMn37 para aplicações em que usinabilidade, precisão dimensional e acabamento são critérios importantes.',
             'specs' => ['Aço 11SMn37', 'Bitola 4,76 a 15,88 mm', 'Perfil redondo', 'Tolerância sob consulta']],
+        /* Hastes de aterramento: mesmos dados publicados em /haste-de-aterramento/ */
+        'haste_baixa' => ['name' => 'Haste de Aterramento - Baixa Camada', 'short' => 'Baixa Camada · até 20 µm', 'line' => 'haste', 'kind' => 'baixa', 'img' => get_template_directory_uri() . '/assets/hastebaixa.webp',
+            'summary' => 'Haste de aterramento de aço cobreado com camada de cobre de até 20 µm.',
+            'specs' => ['Camada de cobre de até 20 µm', 'Diâmetros de 9,00 a 15,40 mm', 'Comprimentos de 1,00 a 3,00 m', 'Lote mínimo de 100 peças']],
+        'haste_alta' => ['name' => 'Haste de Aterramento - Alta Camada', 'short' => 'Alta Camada · 254 µm', 'line' => 'haste', 'kind' => 'alta', 'img' => get_template_directory_uri() . '/assets/hastealta.png',
+            'summary' => 'Haste de aterramento de aço cobreado com camada de cobre de 254 µm.',
+            'specs' => ['Camada de cobre de 254 µm', 'Bitolas de 1/2”, 5/8” e 3/4”', 'Comprimentos de 2,40 m e 3,00 m', 'Lote mínimo de 30 peças']],
     ];
 }
 
 /** Formulário de cotação do HubSpot (o mesmo das páginas de produto). */
 function torcisao_app_form_id($line) {
+    if ($line === 'haste') return '8fdff701-c5a7-4684-9358-d557a70425a5';
     return $line === 'arame' ? '618563c8-4899-441b-965d-801a83009fdf' : '7032f62e-b2f6-486a-8db7-bd2822b5db93';
 }
 
@@ -59,6 +67,13 @@ function torcisao_app_checklist($line) {
         'Quantidade (kg ou toneladas) e frequência de compra',
         'Forma de fornecimento: rolo ou spider',
         'Exigências de resistência, dureza, acabamento ou documentação',
+    ];
+    if ($line === 'haste') return [
+        'Camada de cobre: baixa (até 20 µm) ou alta (254 µm)',
+        'Bitola e comprimento da haste',
+        'Quantidade de peças',
+        'Modelo de conector ou cabo, quando aplicável',
+        'Requisitos do desenho ou memorial do projeto',
     ];
     return [
         'Aço previsto (se já tiver)',
@@ -217,11 +232,67 @@ function torcisao_app_pages() {
             ],
             'related' => ['arame-molas', 'barra-autopecas'],
         ],
+        /* ---------------- HASTE DE ATERRAMENTO ---------------- */
+        'haste-spda' => [
+            'line' => 'haste', 'slug' => 'para-spda', 'app' => 'SPDA',
+            'title' => 'Haste de aterramento para SPDA',
+            'seo_title' => 'Haste de Aterramento para SPDA | Fabricante | Torcisão',
+            'meta' => 'Haste de aterramento cobreada para SPDA, em baixa camada (até 20 µm) e alta camada (254 µm), com conectores no mesmo pedido. Cote direto com a fábrica.',
+            'intro' => 'Projeta ou instala sistemas de proteção contra descargas atmosféricas? A Torcisão fabrica hastes de aterramento cobreadas de baixa e alta camada e fornece os conectores no mesmo pedido, com venda direta de fábrica.',
+            'why_title' => 'O que conferir na haste para SPDA',
+            'why' => 'Em SPDA, a especificação da haste vem do projeto: camada de cobre, bitola e comprimento são definidos pelo memorial e pelo responsável técnico, com base na ABNT NBR 5419:2026. Para hastes de aço cobreado, vale consultar também a ABNT NBR 13571. Na cotação, informe a camada exigida e o modelo de conector previsto, para que haste e conexão cheguem compatíveis.',
+            'products' => ['haste_alta', 'haste_baixa'],
+            'theo' => 'Oi! Eu sou o Theo. Pra SPDA, a camada da haste segue o que o projeto pede: baixa (até 20 µm) ou alta (254 µm). Você já sabe a bitola e o comprimento?',
+            'faq' => [
+                ['Qual haste de aterramento usar em SPDA?', 'A escolha segue o projeto. A Torcisão fabrica haste de baixa camada, de até 20 µm, e de alta camada, de 254 µm. Em SPDA, confirme a exigência normativa de camada, bitola e comprimento com o responsável técnico, com base na ABNT NBR 5419:2026.'],
+                ['Quais medidas de haste de alta camada a Torcisão fabrica?', 'Alta camada (254 µm) em 1/2”, 5/8” e 3/4”, com 2,40 m e 3,00 m. O comprimento de 2,00 m é sob consulta.'],
+                ['A Torcisão fornece os conectores junto com as hastes?', 'Sim. Os conectores Olhal e Grampo U, com referência publicada na ABNT NBR 5370, podem ser cotados e entregues no mesmo pedido das hastes.'],
+            ],
+            'related' => ['haste-construtoras', 'haste-distribuidores'],
+        ],
+        'haste-distribuidores' => [
+            'line' => 'haste', 'slug' => 'para-distribuidores-e-revendas', 'app' => 'distribuidores e revendas',
+            'title' => 'Haste de aterramento para distribuidores e revendas',
+            'seo_title' => 'Haste de Aterramento para Distribuidores e Revendas | Torcisão',
+            'meta' => 'Fabricante de haste de aterramento cobreada para distribuidores e revendas de material elétrico. Baixa e alta camada, pacotes com 10 unidades. Peça cotação.',
+            'intro' => 'Revende material elétrico e precisa de um fabricante de hastes de aterramento com fornecimento regular? A Torcisão vende direto da fábrica para distribuidores e atacadistas, com hastes de baixa e alta camada e conectores no mesmo pedido.',
+            'why_title' => 'O que pesa na compra para revenda',
+            'why' => 'Para quem revende, contam a regularidade do fornecimento, o mix de bitolas e comprimentos e a documentação do produto. A Torcisão fornece as hastes em pacotes com 10 unidades e confirma disponibilidade e prazo em cada proposta. Hastes e conectores podem seguir no mesmo pedido, o que simplifica a conferência e a logística.',
+            'products' => ['haste_baixa', 'haste_alta'],
+            'theo' => 'Oi! Eu sou o Theo. Pra revenda, a gente trabalha com haste de baixa camada (até 20 µm) e de alta camada (254 µm). Você já sabe quais bitolas e comprimentos quer cotar?',
+            'faq' => [
+                ['Quais medidas de haste de aterramento a Torcisão fabrica?', 'Alta camada (254 µm) em 1/2”, 5/8” e 3/4”, com 2,40 m e 3,00 m. Baixa camada (20 µm) de 9,00 a 15,40 mm, com comprimentos de 1,00 m a 3,00 m.'],
+                ['Como as hastes são embaladas?', 'As hastes são fornecidas em pacotes com 10 unidades.'],
+                ['Posso cotar hastes e conectores no mesmo pedido?', 'Sim. A Torcisão atende distribuidores, atacadistas, construtoras e instaladores de SPDA com venda direta de fábrica, e hastes e conectores podem ser cotados e entregues no mesmo pedido.'],
+            ],
+            'related' => ['haste-spda', 'haste-construtoras'],
+        ],
+        'haste-construtoras' => [
+            'line' => 'haste', 'slug' => 'para-construtoras-e-instaladores', 'app' => 'construtoras e instaladores',
+            'title' => 'Haste de aterramento para construtoras e instaladores',
+            'seo_title' => 'Haste de Aterramento para Construtoras e Instaladores | Torcisão',
+            'meta' => 'Haste de aterramento cobreada para obras e instalações de aterramento e SPDA. Baixa e alta camada, conectores no mesmo pedido. Cote direto com a Torcisão.',
+            'intro' => 'Executa obras ou instala sistemas de aterramento e SPDA? A Torcisão fabrica hastes de aterramento cobreadas e atende construtoras e instaladores com venda direta de fábrica.',
+            'why_title' => 'Como evitar retrabalho na compra da haste',
+            'why' => 'Em obra, o que evita retrabalho é comprar a haste exatamente como o memorial descreve: camada, bitola, comprimento e modelo de conector. Com esses dados na cotação, a equipe confirma disponibilidade e prazo, e hastes e conectores chegam no mesmo pedido.',
+            'products' => ['haste_alta', 'haste_baixa'],
+            'theo' => 'Oi! Eu sou o Theo. Pra obra, o melhor é cotar a haste como está no memorial: camada, bitola e comprimento. Você já tem esses dados?',
+            'faq' => [
+                ['O que informar para cotar hastes para uma obra?', 'Informe aplicação, camada, bitola, comprimento, modelo de conector ou cabo quando aplicável, quantidade e qualquer requisito técnico previsto no desenho ou memorial.'],
+                ['Qual a diferença entre baixa e alta camada?', 'A Torcisão trabalha com opções de baixa camada, de até 20 mícrons, e alta camada, de 254 mícrons. A escolha deve seguir a especificação técnica e a condição de instalação do projeto; em aplicações de SPDA, confirme a exigência normativa com o responsável técnico.'],
+                ['Qual o prazo de entrega das hastes?', 'O prazo é confirmado em cada proposta. Hastes em estoque têm o atendimento mais rápido; itens que dependem de trefilação ou banho de cobre seguem a programação da linha. Em caso de urgência, informe a data necessária na cotação.'],
+            ],
+            'related' => ['haste-spda', 'haste-distribuidores'],
+        ],
     ];
 }
 
 /** FAQ comum (vale para todas). */
 function torcisao_app_common_faq($line) {
+    if ($line === 'haste') return [
+        ['Qual é o lote mínimo?', '30 peças para a haste de alta camada (254 µm) e 100 peças para a haste de baixa camada (20 µm). Os conectores são cotados no mesmo pedido das hastes.'],
+        ['Como solicitar uma cotação?', 'Preencha o formulário de cotação nesta página, ou fale com o comercial pelo WhatsApp ou pelo Theo, informando camada, bitola, comprimento, quantidade e aplicação. Se houver requisito de norma, conector ou documentação, inclua esses dados.'],
+    ];
     return [
         ['Qual é o pedido mínimo?', 'O lote mínimo varia conforme o aço, a bitola, a condição de produção, o ' . ($line === 'arame' ? 'acondicionamento' : 'comprimento') . ' e a quantidade. A Torcisão confirma a condição comercial durante a cotação.'],
         ['Como solicitar uma cotação?', 'Preencha o formulário de cotação nesta página, ou fale com o comercial pelo WhatsApp ou pelo Theo, informando aço, bitola, quantidade e aplicação. Se houver exigência de resistência, dureza, acabamento, tolerância ou documentação, inclua esses dados.'],
@@ -246,7 +317,7 @@ function torcisao_app_current_key() {
 add_action('admin_init', function () {
     if (!current_user_can('publish_pages') || get_option('torcisao_app_pages_version') === TORCISAO_APP_PAGES_VERSION) return;
     $ids = (array) get_option('torcisao_app_page_ids', []);
-    $parents = ['arame' => get_page_by_path('arame-trefilado'), 'barra' => get_page_by_path('barra-trefilada')];
+    $parents = ['arame' => get_page_by_path('arame-trefilado'), 'barra' => get_page_by_path('barra-trefilada'), 'haste' => get_page_by_path('haste-de-aterramento')];
     $created = 0;
     foreach (torcisao_app_pages() as $key => $p) {
         if (array_key_exists($key, $ids)) continue;   // já criada antes (se foi apagada de propósito, não recria)

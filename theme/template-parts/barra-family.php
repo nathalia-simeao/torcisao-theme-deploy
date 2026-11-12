@@ -94,7 +94,7 @@ if ($bf_ssr) {
             <table class="hf-availability-table">
               <thead><tr><th>Liga</th><th>Bitolas</th></tr></thead>
               <tbody>
-                <tr><td>BTC · SAE 1006 a 1020</td><td>2,00 a 15,88 mm</td></tr>
+                <tr><td>BTC · SAE 1004 a 1020</td><td>2,00 a 15,88 mm</td></tr>
                 <tr><td>MTC · SAE 1035 a 1050</td><td>4,76 a 15,88 mm</td></tr>
                 <tr><td>ATC · SAE 1060 a 1090</td><td>4,76 a 15,88 mm</td></tr>
                 <tr><td>Aço ressulfurado 11SMn37</td><td>4,76 a 15,88 mm</td></tr>
