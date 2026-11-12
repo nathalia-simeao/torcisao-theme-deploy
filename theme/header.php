@@ -22,8 +22,13 @@
 
     <div class="tor-actions">
       <a class="tor-blog" href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a>
-      <?php if (!function_exists('torcisao_request_language') || torcisao_request_language() === 'pt') : ?>
-      <a class="tor-blog tor-contact-link" href="<?php echo esc_url(home_url('/contato/')); ?>">Contato</a>
+      <?php
+      /* Contato: em EN/ES só aparece quando a página traduzida existe */
+      $tor_contact_lang = function_exists('torcisao_request_language') ? torcisao_request_language() : 'pt';
+      $tor_contact_url = $tor_contact_lang === 'pt' ? home_url('/contato/') : (function_exists('torcisao_contact_url') ? torcisao_contact_url($tor_contact_lang) : '');
+      $tor_contact_label = ['pt' => 'Contato', 'en' => 'Contact', 'es' => 'Contacto'][$tor_contact_lang] ?? 'Contato';
+      if ($tor_contact_url) : ?>
+      <a class="tor-blog tor-contact-link" href="<?php echo esc_url($tor_contact_url); ?>"><?php echo esc_html($tor_contact_label); ?></a>
       <?php endif; ?>
       <div class="tor-control-pill" aria-label="Preferências do site">
         <button type="button" data-theme-toggle aria-label="Alternar modo claro e escuro"><i class="bi bi-circle-half"></i></button>
@@ -72,10 +77,10 @@
       <span>Blog</span>
       <span class="tor-mobile-link-arrow" aria-hidden="true">→</span>
     </a>
-    <?php if (!function_exists('torcisao_request_language') || torcisao_request_language() === 'pt') : ?>
-    <a href="<?php echo esc_url(home_url('/contato/')); ?>">
+    <?php if (!empty($tor_contact_url)) : ?>
+    <a href="<?php echo esc_url($tor_contact_url); ?>">
       <span class="tor-mobile-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 5.5h15a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17h-1A1.5 1.5 0 0 1 3 15.5V7a1.5 1.5 0 0 1 1.5-1.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7.5 10h9M7.5 13.2h5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-      <span>Contato</span>
+      <span><?php echo esc_html($tor_contact_label ?? 'Contato'); ?></span>
       <span class="tor-mobile-link-arrow" aria-hidden="true">→</span>
     </a>
     <?php endif; ?>

@@ -14,8 +14,10 @@ if (!$ta_key) {
 $ta = torcisao_app_pages()[$ta_key];
 $ta_products = torcisao_app_products();
 $ta_line = $ta['line'];
-$ta_line_name = $ta_line === 'arame' ? 'Arame trefilado' : 'Barra trefilada';
-$ta_line_url = home_url($ta_line === 'arame' ? '/arame-trefilado/' : '/barra-trefilada/');
+$ta_line_name = ['arame' => 'Arame trefilado', 'barra' => 'Barra trefilada', 'haste' => 'Haste de aterramento'][$ta_line] ?? 'Barra trefilada';
+$ta_line_url = home_url(['arame' => '/arame-trefilado/', 'barra' => '/barra-trefilada/', 'haste' => '/haste-de-aterramento/'][$ta_line] ?? '/barra-trefilada/');
+$ta_is_haste = $ta_line === 'haste';
+$ta_quote_fields = $ta_is_haste ? 'camada, bitola, comprimento, quantidade e aplicação' : 'aço, bitola, quantidade e aplicação';
 $ta_assets = get_template_directory_uri();
 $ta_wa = 'https://wa.me/551123349989?text=' . rawurlencode('Olá! Vim pela página "' . $ta['title'] . '" da Torcisão e gostaria de uma cotação.');
 $ta_faq = array_merge($ta['faq'], torcisao_app_common_faq($ta_line));
@@ -45,7 +47,7 @@ get_header();
     <div class="ta-hero-actions">
       <a class="hf-btn hf-btn-primary js-ta-form-link" href="#cotacao" data-analytics-origin="aplicacao_hero" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-clipboard-check"></i> Solicitar cotação</a>
       <a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_hero_whatsapp" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Falar no WhatsApp</a>
-      <button type="button" class="hf-btn hf-btn-secondary js-ta-calc" data-product="<?php echo esc_attr($ta_line); ?>"><i class="bi bi-calculator"></i> Calcular peso e metragem</button>
+      <?php if (!$ta_is_haste): ?><button type="button" class="hf-btn hf-btn-secondary js-ta-calc" data-product="<?php echo esc_attr($ta_line); ?>"><i class="bi bi-calculator"></i> Calcular peso e metragem</button><?php endif; ?>
     </div>
     <ul class="ta-trust">
       <li><i class="bi bi-buildings"></i> Direto da fábrica</li>
@@ -110,7 +112,7 @@ get_header();
     <div class="ta-form-copy">
       <span class="hf-section-kicker">Cotação</span>
       <h2 class="hf-section-title">Solicite sua cotação</h2>
-      <p>Preencha o formulário com aço, bitola, quantidade e aplicação. O time comercial valida a especificação e retorna com preço e prazo.</p>
+      <p>Preencha o formulário com <?php echo esc_html($ta_quote_fields); ?>. O time comercial valida a especificação e retorna com preço e prazo.</p>
       <ul class="ta-check">
         <li><i class="bi bi-check2-circle"></i>Atendimento direto com a fábrica</li>
         <li><i class="bi bi-check2-circle"></i>Validação técnica da especificação</li>
@@ -148,8 +150,8 @@ get_header();
 
   <section class="hf-cta"><div class="hf-wrap"><div class="hf-cta-box">
     <div class="hf-cta-copy"><span class="hf-section-kicker">Atendimento comercial</span>
-      <h2>Vamos cotar o seu <?php echo esc_html(mb_strtolower($ta_line_name)); ?> para <?php echo esc_html($ta['app']); ?>?</h2>
-      <p>Envie aço, bitola, quantidade e aplicação. O time Torcisão valida a especificação e retorna com preço e prazo.</p></div>
+      <h2>Vamos cotar <?php echo $ta_is_haste ? 'a sua' : 'o seu'; ?> <?php echo esc_html(mb_strtolower($ta_line_name)); ?> para <?php echo esc_html($ta['app']); ?>?</h2>
+      <p>Envie <?php echo esc_html($ta_quote_fields); ?>. O time Torcisão valida a especificação e retorna com preço e prazo.</p></div>
     <div class="hf-cta-side ta-cta-side">
       <a class="hf-btn hf-btn-primary js-ta-form-link" href="#cotacao" data-analytics-origin="aplicacao_cta" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-clipboard-check"></i> Preencher formulário</a>
       <a class="hf-btn hf-btn-secondary" href="<?php echo esc_url($ta_wa); ?>" target="_blank" rel="noopener" data-analytics-origin="aplicacao_cta_whatsapp" data-analytics-product="<?php echo esc_attr($ta_key); ?>"><i class="bi bi-whatsapp"></i> Falar no WhatsApp</a>
