@@ -57,7 +57,7 @@ add_action('template_redirect', function () {
         $head = substr($html, 0, $head_end);
         $rest = substr($html, $head_end);
         $head = str_replace($font, '', $head);
-        $head = preg_replace('#<link rel="preload" as="image" href="[^"]*torcisao-perf/img/2026-09-Hero-Torcisao-Barras-[^"]*"[^>]*>\s*#', '', $head, 1);
+        $head = preg_replace('#<link rel="preload" as="image" href="[^"]*Hero-Torcisao-Barras[^"]*"[^>]*>\s*#', '', $head, 1);
         return $head . $rest;
     });
 }, 1);
