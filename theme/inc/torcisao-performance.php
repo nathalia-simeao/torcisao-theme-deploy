@@ -80,7 +80,7 @@ function torcisao_closeout_assets(){
         'torcisao-closeout-v25',
         $uri.'/assets/torcisao-closeout-v25.js',
         ['torcisao-phase8'],
-        '20260907-1',
+        '20261113-1',
         true
     );
 }
