@@ -12,7 +12,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-const TORCISAO_APP_PAGES_VERSION = '2026.11.13.1';
+const TORCISAO_APP_PAGES_VERSION = '2026.11.13.2';
 const TORCISAO_APP_MEDIA = 'https://torcisao.com.br/wp-content/uploads/2026/09/';
 
 /** Linhas do catálogo (espelho do catálogo aprovado do Theo). */
@@ -167,6 +167,23 @@ function torcisao_app_pages() {
                 ['Quais bitolas de arame BTC a Torcisão fornece?', 'O arame de baixo teor de carbono vai de 2,00 a 15,88 mm e o de médio teor de carbono, de 4,76 a 15,88 mm, em perfil redondo, fornecidos em rolos ou spiders. A disponibilidade de cada bitola é confirmada na cotação.'],
             ],
             'related' => ['arame-gradil', 'barra-fixadores'],
+        ],
+
+        'arame-eletrodo' => [
+            'line' => 'arame', 'slug' => 'para-alma-de-eletrodo', 'app' => 'alma de eletrodo',
+            'title' => 'Arame trefilado para alma de eletrodo',
+            'seo_title' => 'Arame Trefilado para Alma de Eletrodo | Torcisão',
+            'meta' => 'Arame trefilado de baixo teor de carbono para alma de eletrodo de solda. Perfil redondo, em rolos ou spiders. Cote com a Torcisão, direto da fábrica.',
+            'intro' => 'Fabrica eletrodos de solda e procura um fornecedor de arame para a alma direto da fábrica? A Torcisão produz arame trefilado de baixo teor de carbono, em perfil redondo, em rolos ou spiders, com atendimento técnico para chegar ao aço e à bitola certos.',
+            'why_title' => 'Como escolher o arame para alma de eletrodo',
+            'why' => 'A alma do eletrodo precisa de um arame com composição controlada, bitola regular e superfície limpa e uniforme ao longo do rolo, porque isso afeta a trefilação final, o revestimento e a estabilidade da solda. Por isso, o aço, a bitola e as exigências do seu processo são validados com o nosso time técnico na cotação, e a Torcisão já atende clientes que usam o arame nessa aplicação.',
+            'products' => ['arame_btc'],
+            'theo' => 'Oi! Eu sou o Theo. Pra alma de eletrodo, a gente trabalha com arame de baixo teor de carbono, conforme a exigência do seu processo. Você já sabe a bitola que precisa?',
+            'faq' => [
+                ['A Torcisão fornece arame trefilado para alma de eletrodo?', 'Sim. A Torcisão fornece arame trefilado de baixo teor de carbono (arame BTC, aços SAE 1004 a 1020), em perfil redondo, em rolos ou spiders, para quem fabrica eletrodos de solda. Aço, bitola e requisitos do processo são validados com a equipe técnica na cotação.'],
+                ['Quais bitolas de arame a Torcisão fornece?', 'O arame de baixo teor de carbono vai de 2,00 a 15,88 mm. A disponibilidade de cada bitola para a sua aplicação é confirmada na cotação.'],
+            ],
+            'related' => ['arame-fixadores', 'arame-gradil'],
         ],
 
         /* ---------------- BARRA ---------------- */
