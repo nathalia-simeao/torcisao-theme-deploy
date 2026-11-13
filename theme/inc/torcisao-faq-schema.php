@@ -59,6 +59,18 @@ function torcisao_product_faq_schema_data(){
                 'answer' => 'Barra trefilada é um perfil de aço obtido por trefilação a frio. Nesse processo, o material passa por uma matriz para reduzir e controlar sua seção, melhorando precisão dimensional e acabamento superficial. A escolha do aço, da bitola, da tolerância e do acabamento deve seguir a aplicação da peça.',
             ],
             [
+                'question' => 'A Torcisão fabrica barra redonda trefilada?',
+                'answer' => 'Sim. Toda a linha de barras trefiladas da Torcisão é em perfil redondo: baixo teor de carbono (SAE 1004 a 1020), de 2,00 a 15,88 mm; médio (SAE 1035 a 1050), alto (SAE 1060 a 1090) e aço ressulfurado 11SMn37, de 4,76 a 15,88 mm. Tolerância e acabamento são confirmados na cotação.',
+            ],
+            [
+                'question' => 'A Torcisão fornece aço trefilado 1020 redondo?',
+                'answer' => 'Sim. O aço SAE 1020 faz parte da linha de baixo teor de carbono (SAE 1004 a 1020), fornecida como barra redonda trefilada em bitolas de 2,00 a 15,88 mm. Informe bitola, comprimento, quantidade e acabamento para confirmar disponibilidade e prazo.',
+            ],
+            [
+                'question' => 'Barra trefilada é o mesmo que ferro trefilado?',
+                'answer' => 'No dia a dia, muita gente chama a barra de aço trefilada de ferro trefilado ou ferro redondo trefilado. O material é aço-carbono trefilado a frio. Na cotação, o que define o produto é o aço, a bitola e o acabamento.',
+            ],
+            [
                 'question' => 'Quais as vantagens do aço 11SMn37 na usinagem?',
                 'answer' => 'O 11SMn37 é um aço ressulfurado de usinabilidade melhorada. O enxofre controlado favorece inclusões de sulfeto de manganês, que ajudam na formação e na quebra do cavaco durante operações de corte. Em usinagem seriada, isso pode contribuir para maior estabilidade do processo e produtividade. O resultado final também depende da peça, ferramenta, lubrificação, parâmetros de usinagem e condição de fornecimento.',
             ],
