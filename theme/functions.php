@@ -889,6 +889,10 @@ if (file_exists($torcisao_perf_bundle_file)) require_once $torcisao_perf_bundle_
 $torcisao_perf_delay_file = get_template_directory().'/inc/torcisao-perf-delay-images-2026.php';
 if (file_exists($torcisao_perf_delay_file)) require_once $torcisao_perf_delay_file;
 
+/* 2026-11 · Black Friday: reserva o espaço do banner (CLS) e pré-carrega a imagem (LCP). Apagar depois de 30/11 */
+$torcisao_bf2026_file = get_template_directory().'/inc/torcisao-black-friday-2026.php';
+if (file_exists($torcisao_bf2026_file)) require_once $torcisao_bf2026_file;
+
 /* Blog: a consulta principal da página de posts usa os mesmos 6 posts por página
    da listagem do tema (page-blog.php). Com 10 (padrão de Configurações > Leitura),
    /blog/page/2/ dava 404 mesmo com o link "Próxima" aparecendo. */
