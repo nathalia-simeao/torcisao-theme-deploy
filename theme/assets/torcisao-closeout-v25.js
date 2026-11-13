@@ -41,6 +41,7 @@ function initMobileMenuA11y(){
   let wasOpen=panel.classList.contains('is-open');
 
   panel.setAttribute('aria-hidden',wasOpen?'false':'true');
+  panel.inert=!wasOpen;
   openers.forEach(btn=>{
     btn.setAttribute('aria-controls','torMobilePanel');
     btn.setAttribute('aria-expanded',wasOpen?'true':'false');
@@ -50,6 +51,7 @@ function initMobileMenuA11y(){
   function sync(){
     const open=panel.classList.contains('is-open');
     panel.setAttribute('aria-hidden',open?'false':'true');
+    panel.inert=!open;
     openers.forEach(btn=>btn.setAttribute('aria-expanded',open?'true':'false'));
     if(open&&!wasOpen)setTimeout(()=>close?.focus(),0);
     if(!open&&wasOpen&&lastTrigger)setTimeout(()=>lastTrigger?.focus(),0);
