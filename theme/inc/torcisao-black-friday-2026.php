@@ -39,3 +39,25 @@ html.tbf-on body.home .th-hero>.th-hero-content{position:absolute!important;widt
 </style>
     <?php
 }, 1);
+
+/**
+ * Tira do HTML da home dois recursos que só atrapalham durante a campanha:
+ *  1) a segunda chamada à fonte Montserrat que o snippet #2054 faz como <link rel="stylesheet"> comum
+ *     (bloqueia o primeiro desenho; a fonte variável 400..900 já vem pelo tema e cobre os mesmos pesos);
+ *  2) o pré-carregamento da imagem do slider antigo, que o banner da campanha substitui
+ *     e que disputa banda com o banner (o LCP).
+ * Fora da campanha, ou sem o snippet ativo, nada é alterado.
+ */
+add_action('template_redirect', function () {
+    if (!torcisao_bf2026_active()) return;
+    ob_start(function ($html) {
+        if (!is_string($html) || strpos($html, '</head>') === false) return $html;
+        $font = '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">';
+        $head_end = strpos($html, '</head>');
+        $head = substr($html, 0, $head_end);
+        $rest = substr($html, $head_end);
+        $head = str_replace($font, '', $head);
+        $head = preg_replace('#<link rel="preload" as="image" href="[^"]*torcisao-perf/img/2026-09-Hero-Torcisao-Barras-[^"]*"[^>]*>\s*#', '', $head, 1);
+        return $head . $rest;
+    });
+}, 1);
