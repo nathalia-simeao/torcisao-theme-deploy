@@ -12,7 +12,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-const TORCISAO_APP_PAGES_VERSION = '2026.11.12.1';
+const TORCISAO_APP_PAGES_VERSION = '2026.11.13.1';
 const TORCISAO_APP_MEDIA = 'https://torcisao.com.br/wp-content/uploads/2026/09/';
 
 /** Linhas do catálogo (espelho do catálogo aprovado do Theo). */
@@ -151,6 +151,22 @@ function torcisao_app_pages() {
                 ['O arame de baixo carbono serve para displays, cestos e carrinhos?', 'Sim. Displays aramados, cestos aramados, racks metálicos, carrinhos de supermercado, utilidades domésticas e linha branca estão entre as aplicações da linha de baixo teor de carbono. A especificação final é validada na cotação.'],
             ],
             'related' => ['arame-telas', 'arame-cabos'],
+        ],
+        'arame-fixadores' => [
+            'line' => 'arame', 'slug' => 'para-parafusos-e-fixadores', 'app' => 'parafusos e fixadores',
+            'title' => 'Arame trefilado para parafusos e fixadores',
+            'seo_title' => 'Arame Trefilado para Parafusos e Fixadores | Torcisão',
+            'meta' => 'Arame trefilado BTC e de médio carbono para fabricação de parafusos e fixadores. Bitolas de 2,00 a 15,88 mm, em rolos ou spiders. Cote com a Torcisão.',
+            'intro' => 'Fabrica parafusos, porcas ou outros fixadores e procura um fornecedor de arame direto da fábrica? A Torcisão produz arame trefilado de baixo e de médio teor de carbono, em rolos ou spiders, com atendimento técnico para chegar ao aço e à bitola certos.',
+            'why_title' => 'Como escolher o arame para parafusos e fixadores',
+            'why' => 'O teor de carbono acompanha a exigência mecânica do fixador: o arame de baixo teor de carbono (BTC) atende peças em que a conformação pesa mais, e o de médio teor de carbono entra quando o fixador pede mais resistência. Regularidade de bitola e de acabamento ao longo do rolo também contam, porque afetam a alimentação da máquina. Aço, bitola e exigências do seu processo são validados com o nosso time técnico na cotação.',
+            'products' => ['arame_btc', 'arame_mtc'],
+            'theo' => 'Oi! Eu sou o Theo. Pra parafusos e fixadores, a gente trabalha com arame de baixo e de médio teor de carbono, conforme a exigência da peça. Você já sabe a bitola que precisa?',
+            'faq' => [
+                ['Qual arame trefilado usar para fabricar parafusos e fixadores?', 'A Torcisão fornece arame trefilado de baixo teor de carbono (arame BTC, aços SAE 1004 a 1020) e de médio teor de carbono (aços SAE 1035 a 1050) para parafusos e fixadores. A escolha depende da exigência mecânica da peça e do seu processo, e é validada com a equipe técnica na cotação.'],
+                ['Quais bitolas de arame BTC a Torcisão fornece?', 'O arame de baixo teor de carbono vai de 2,00 a 15,88 mm e o de médio teor de carbono, de 4,76 a 15,88 mm, em perfil redondo, fornecidos em rolos ou spiders. A disponibilidade de cada bitola é confirmada na cotação.'],
+            ],
+            'related' => ['arame-gradil', 'barra-fixadores'],
         ],
 
         /* ---------------- BARRA ---------------- */
