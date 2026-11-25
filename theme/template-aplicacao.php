@@ -135,6 +135,9 @@ get_header();
     </div>
   </div></section>
 
+  <?php /* Artigos técnicos da linha (mesmo bloco das páginas de produto): liga a aplicação aos posts do blog */ ?>
+  <?php if (function_exists('torcisao_seo_related_posts')) torcisao_seo_related_posts($ta_line); ?>
+
   <?php
   $ta_related = [];
   foreach ((array) $ta['related'] as $rk) {
